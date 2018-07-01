@@ -11,9 +11,11 @@ export class ShowServerPage {
 
   public server: ServerDto;
   public serverName: string;
+  public serverCountry: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
     this.server = navParams.get('server');
+    this.serverCountry = navParams.get('serverCountry');
     this.serverName = this.server.name;
   }
 
@@ -26,7 +28,7 @@ export class ShowServerPage {
   }
 
   showActions() {
-    let popover = this.popoverCtrl.create(ServerActionsPage, {},
+    let popover = this.popoverCtrl.create(ServerActionsPage, {serverCountry: this.serverCountry, server: this.server},
       {cssClass: 'custom-popover'});
     let ev = {
       target: {

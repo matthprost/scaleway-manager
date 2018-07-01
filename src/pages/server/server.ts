@@ -44,7 +44,7 @@ export class ServerPage {
   }
 
   showServer(server) {
-    this.navCtrl.push(ShowServerPage, {server: server});
+    this.navCtrl.push(ShowServerPage, {server: server, serverCountry: this.serverName});
   }
 
 }
