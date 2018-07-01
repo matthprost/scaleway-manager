@@ -15,7 +15,7 @@ export class ServersProvider {
 
     return new Promise((resolve, reject) => {
 
-      this.api.get<ServerDto>(ApiUrl + '/servers', token)
+      this.api.get<ServerDto[]>(ApiUrl + '/servers', token)
         .then(result => {
           resolve(result);
         })

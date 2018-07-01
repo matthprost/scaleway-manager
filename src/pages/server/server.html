@@ -8,6 +8,18 @@
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content>
+  <ion-list>
+    <ion-item *ngFor="let server of allServers">
+      <ion-thumbnail item-start>
+        <img src="/assets/imgs/ubuntu.svg">
+      </ion-thumbnail>
+      <h2>{{ server.name }}</h2>
+      <p>{{ server.state }}</p>
+      <button ion-button clear item-end>View</button>
+    </ion-item>
+    <p *ngIf="(allServers === undefined || allServers.length === 0 ) && !isLoading" text-center>
+      No server available
+    </p>
+  </ion-list>
 </ion-content>
