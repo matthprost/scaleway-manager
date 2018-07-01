@@ -1,3 +1,17 @@
 page-login {
 
+  .vertical-align-content > *
+  {
+    background-color: #653C87;
+    color: white;
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+  }
+
+  .background-transparent {
+    background: transparent;
+    color: white;
+  }
+
 }
