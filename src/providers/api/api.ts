@@ -6,6 +6,8 @@ import {PostService} from "./http/post-service";
 export class ApiProvider {
 
   private apiUrl: string = 'https://account.scaleway.com';
+  private paris1: string = 'https://cp-par1.scaleway.com';
+  private amsterdam1: string = 'https://cp-ams1.scaleway.com';
 
   constructor(private getService: GetService, private postService: PostService) {
   }
