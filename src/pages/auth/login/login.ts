@@ -7,8 +7,8 @@ import { NavController, NavParams, ToastController } from 'ionic-angular';
 })
 export class LoginPage {
 
-  email: string = null;
-  password: string = null;
+  private email: string = null;
+  private password: string = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
   }
