@@ -28,7 +28,12 @@ export class ServerPage {
 
     this.loader.present();
     this.storage.get('token').then((val: AuthTokenDto) => {
-      this.serversProvider.getAllServers(val.token.id, this.serverName);
+      this.serversProvider.getAllServers(this.serverName, val.token.id).then(result => {
+        console.log(result);
+        this.loader.dismiss();
+      }).catch(error => {
+        this.loader.dismiss();
+      });
     });
   }
 
