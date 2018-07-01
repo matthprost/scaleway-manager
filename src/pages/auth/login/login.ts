@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, ToastController } from 'ionic-angular';
+import {AuthProvider} from "../../../providers/auth/auth";
+import {HomePage} from "../../home/home";
 
 @Component({
   selector: 'page-login',
@@ -10,7 +12,8 @@ export class LoginPage {
   private email: string = null;
   private password: string = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController,
+              private auth: AuthProvider) {
   }
 
   ionViewDidLoad() {
@@ -30,6 +33,11 @@ export class LoginPage {
         position: 'top'
       });
       toast.present();
+    } else {
+        this.auth.login(this.email, this.password).then(result => {
+          console.log('logged yey');
+          this.navCtrl.setRoot(HomePage);
+        })
     }
   }
 

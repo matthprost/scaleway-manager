@@ -5,7 +5,7 @@ import {PostService} from "./http/post-service";
 @Injectable()
 export class ApiProvider {
 
-  private apiUrl: string = 'account.scaleway.com';
+  private apiUrl: string = 'https://account.scaleway.com';
 
   constructor(private getService: GetService, private postService: PostService) {
   }
