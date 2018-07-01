@@ -10,12 +10,14 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import {LoginPage} from "../pages/auth/login/login";
 import {ProvidersModule} from "../providers/providers.module";
 import {IonicStorageModule} from "@ionic/storage";
+import {ServerPage} from "../pages/server/server";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    ServerPage
   ],
   imports: [
     BrowserModule,
@@ -27,7 +29,8 @@ import {IonicStorageModule} from "@ionic/storage";
   entryComponents: [
     MyApp,
     HomePage,
-    LoginPage
+    LoginPage,
+    ServerPage
   ],
   providers: [
     StatusBar,

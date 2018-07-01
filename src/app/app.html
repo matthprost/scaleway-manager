@@ -8,6 +8,9 @@
   <ion-content>
     <ion-list>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
+        <ion-thumbnail item-start *ngIf="p.picture" no-margin>
+          <img src="{{ p.picture ? p.picture : null }}">
+        </ion-thumbnail>
         {{p.title}}
       </button>
       <button menuClose ion-item (click)="logout()">

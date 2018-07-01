@@ -6,8 +6,9 @@ import {SplashScreen} from '@ionic-native/splash-screen';
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/auth/login/login';
 import {AuthTokenDto} from "../providers/auth/auth-tokens.dto";
-import { Storage } from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 import {LogoutProvider} from "../providers/auth/logout/logout";
+import {ServerPage} from "../pages/server/server";
 
 
 @Component({
@@ -18,7 +19,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{ title: string, component: any }>;
+  pages: Array<{ title: string, component: any, picture?: string, parameters?: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, private logoutProvider: LogoutProvider, public menu: MenuController,
@@ -26,7 +27,9 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      {title: 'Home', component: HomePage}
+      {title: 'Home', component: HomePage},
+      {title: 'Paris', component: ServerPage, picture: '/assets/imgs/france.svg'},
+      {title: 'Amsterdam', component: ServerPage, picture: '/assets/imgs/netherlands.svg'}
     ];
 
   }
@@ -67,9 +70,8 @@ export class MyApp {
         {
           text: 'Yes',
           handler: () => {
-            this.logoutProvider.logout().then(value => {
-              this.nav.setRoot(LoginPage);
-            });
+            this.logoutProvider.logout();
+            this.nav.setRoot(LoginPage);
           }
         }
       ]

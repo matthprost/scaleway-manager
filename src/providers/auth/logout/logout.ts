@@ -9,7 +9,7 @@ export class LogoutProvider {
   constructor(private storage: Storage, public loadingCtrl: LoadingController, public menu: MenuController) {
   }
 
-  logout(): Promise<any> {
+  public logout(): Promise<any> {
 
     const loader = this.loadingCtrl.create({
       content: "Please wait...",
