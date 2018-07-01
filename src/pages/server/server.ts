@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {ServersProvider} from "../../providers/servers/servers";
 import {ServerDto} from "../../providers/servers/server.dto";
-import {ShowServerPage} from "../show-server/show-server";
+import {ShowServerPage} from "./show-server/show-server";
 
 @Component({
   selector: 'page-server',

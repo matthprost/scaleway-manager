@@ -11,7 +11,8 @@ import {LoginPage} from "../pages/auth/login/login";
 import {ProvidersModule} from "../providers/providers.module";
 import {IonicStorageModule} from "@ionic/storage";
 import {ServerPage} from "../pages/server/server";
-import {ShowServerPage} from "../pages/show-server/show-server";
+import {ShowServerPage} from "../pages/server/show-server/show-server";
+import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import {ShowServerPage} from "../pages/show-server/show-server";
     HomePage,
     LoginPage,
     ServerPage,
-    ShowServerPage
+    ShowServerPage,
+    ServerActionsPage
   ],
   imports: [
     BrowserModule,
@@ -33,7 +35,8 @@ import {ShowServerPage} from "../pages/show-server/show-server";
     HomePage,
     LoginPage,
     ServerPage,
-    ShowServerPage
+    ShowServerPage,
+    ServerActionsPage
   ],
   providers: [
     StatusBar,
