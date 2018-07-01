@@ -7,11 +7,16 @@ page-login {
     display: flex!important;
     align-content: center!important;
     align-items: center!important;
+    margin-top: -8rem;
   }
 
   .background-transparent {
     background: transparent;
     color: white;
+  }
+
+  ion-img {
+    background: transparent;
   }
 
 }
