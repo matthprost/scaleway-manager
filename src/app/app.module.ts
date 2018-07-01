@@ -11,13 +11,15 @@ import {LoginPage} from "../pages/auth/login/login";
 import {ProvidersModule} from "../providers/providers.module";
 import {IonicStorageModule} from "@ionic/storage";
 import {ServerPage} from "../pages/server/server";
+import {ShowServerPage} from "../pages/show-server/show-server";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
-    ServerPage
+    ServerPage,
+    ShowServerPage
   ],
   imports: [
     BrowserModule,
@@ -30,7 +32,8 @@ import {ServerPage} from "../pages/server/server";
     MyApp,
     HomePage,
     LoginPage,
-    ServerPage
+    ServerPage,
+    ShowServerPage
   ],
   providers: [
     StatusBar,

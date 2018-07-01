@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+
+    <ion-buttons end>
+      <button ion-button icon-only>
+        <ion-icon name="power"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-title>{{ serverName }}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding text-center>
+
+  <ion-row>
+    <ion-col>
+      <div class="login-header">
+        <ion-img width="80" height="80" src="/assets/imgs/ubuntu.svg"></ion-img>
+      </div>
+    </ion-col>
+  </ion-row>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="state"></div>
+        <span class="state-text vertical-align-content" text-center>{{ capitalize(server.state) }}</span>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

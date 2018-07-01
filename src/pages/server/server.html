@@ -16,10 +16,10 @@
       </ion-thumbnail>
       <h2>{{ server.name }}</h2>
       <p>{{ server.state }}</p>
-      <button ion-button clear item-end>View</button>
+      <button ion-button clear item-end (click)="showServer(server)">View</button>
     </ion-item>
     <p *ngIf="(allServers === undefined || allServers.length === 0 ) && !isLoading" text-center>
-      No server available
+      No available server
     </p>
   </ion-list>
 </ion-content>

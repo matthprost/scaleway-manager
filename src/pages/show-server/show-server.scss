@@ -1,0 +1,38 @@
+page-show-server {
+
+  .vertical-align-content > *
+  {
+    background-color: #653C87;
+    color: white;
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+    margin-top: -8rem;
+  }
+
+  .background-transparent {
+    background: transparent;
+    color: white;
+  }
+
+  ion-img {
+    background: transparent;
+    vertical-align: middle;
+    padding: 10px;
+  }
+
+  .state {
+    width: 12px;
+    height: 12px;
+    background-color: #27c295;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 10px;
+    margin-right: 5px;
+    &-text {
+      font-size: 2rem;
+      vertical-align: middle;
+    }
+  }
+
+}
