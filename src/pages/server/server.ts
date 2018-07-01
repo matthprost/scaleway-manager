@@ -1,5 +1,8 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
+import {ServersProvider} from "../../providers/servers/servers";
 
 @Component({
   selector: 'page-server',
@@ -8,13 +11,25 @@ import {NavController, NavParams} from 'ionic-angular';
 export class ServerPage {
 
   public serverName: string = null;
+  public loader = this.loadingCtrl.create({
+    content: "Please wait...",
+  });
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
+              private storage: Storage, private serversProvider: ServersProvider) {
     this.serverName = navParams.get('server');
   }
 
   ionViewDidLoad() {
-    //
+    this.getAllServers()
+  }
+
+  getAllServers() {
+
+    this.loader.present();
+    this.storage.get('token').then((val: AuthTokenDto) => {
+      this.serversProvider.getAllServers(val.token.id, this.serverName);
+    });
   }
 
 }

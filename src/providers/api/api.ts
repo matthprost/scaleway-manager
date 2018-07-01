@@ -16,8 +16,16 @@ export class ApiProvider {
     return (this.apiUrl);
   }
 
-  public get<T>(url: string, token?: string, body?: object): Promise<T> {
-    return (this.getService.submit(url, token, body));
+  public getParisApiUrl() {
+    return (this.paris1);
+  }
+
+  public getAmsterdamApiUrl() {
+    return (this.amsterdam1);
+  }
+
+  public get<T>(url: string, token?: string): Promise<T> {
+    return (this.getService.submit(url, token));
   }
 
   public post<T>(url: string, token?: string, body?: object): Promise<T> {
