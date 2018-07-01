@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform} from 'ionic-angular';
+import {Nav, Platform, MenuController, AlertController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
@@ -7,6 +7,7 @@ import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/auth/login/login';
 import {AuthTokenDto} from "../providers/auth/auth-tokens.dto";
 import { Storage } from '@ionic/storage';
+import {LogoutProvider} from "../providers/auth/logout/logout";
 
 
 @Component({
@@ -20,7 +21,8 @@ export class MyApp {
   pages: Array<{ title: string, component: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              private storage: Storage) {
+              private storage: Storage, private logoutProvider: LogoutProvider, public menu: MenuController,
+              public alertCtrl: AlertController) {
     this.initializeApp();
 
     this.pages = [
@@ -33,6 +35,8 @@ export class MyApp {
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
+
+      this.menu.swipeEnable(false);
 
       this.storage.get('token').then((val: AuthTokenDto) => {
         if (val) {
@@ -49,5 +53,27 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  logout() {
+
+    const confirm = this.alertCtrl.create({
+      title: 'Logout?',
+      message: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'No',
+        },
+        {
+          text: 'Yes',
+          handler: () => {
+            this.logoutProvider.logout().then(value => {
+              this.nav.setRoot(LoginPage);
+            });
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }

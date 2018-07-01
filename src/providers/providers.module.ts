@@ -1,6 +1,7 @@
 import {NgModule} from '@angular/core';
 import {ApiServiceModule} from "./api/api.module";
 import {AuthProvider} from "./auth/auth";
+import {LogoutProvider} from "./auth/logout/logout";
 
 @NgModule({
   declarations: [],
@@ -9,7 +10,8 @@ import {AuthProvider} from "./auth/auth";
   ],
   exports: [],
   providers: [
-    AuthProvider
+    AuthProvider,
+    LogoutProvider
   ]
 })
 
