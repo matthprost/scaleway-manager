@@ -12,6 +12,7 @@ export class ShowServerPage {
   public server: ServerDto;
   public serverName: string;
   public serverCountry: string;
+  public state: string;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
     this.server = navParams.get('server');
@@ -20,7 +21,15 @@ export class ShowServerPage {
   }
 
   ionViewDidLoad() {
-    //
+    if (this.server.state === 'stopped') {
+      this.state = 'red';
+    } else if (this.server.state === 'running') {
+      this.state = '#27c295';
+    } else if (this.server.state === 'stopping') {
+      this.state = 'orange';
+    } else if (this.server.state === 'starting') {
+      this.state = 'orange';
+    }
   }
 
   capitalize(value: string) {

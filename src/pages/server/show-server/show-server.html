@@ -24,7 +24,7 @@
   <ion-grid>
     <ion-row>
       <ion-col>
-        <div class="state"></div>
+        <div class="state" [style.background]="state"></div>
         <span class="state-text vertical-align-content" text-center>{{ capitalize(server.state) }}</span>
       </ion-col>
     </ion-row>

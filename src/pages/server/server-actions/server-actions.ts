@@ -29,13 +29,12 @@ export class ServerActionsPage {
       this.apiServer.getAllActionsServer(this.serverCountry, this.server.id, val.token.id).then(result => {
         this.serverActions = result;
         this.serverActions = this.serverActions.actions;
-        console.log(result);
-      })
+      });
     });
   }
 
   sendAction() {
-    console.log('kek');
+    //
   }
 
   searchForAction(action: string): string {
