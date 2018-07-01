@@ -7,7 +7,10 @@ import {NavController, NavParams} from 'ionic-angular';
 })
 export class ServerPage {
 
+  public serverName: string = null;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.serverName = navParams.get('server');
   }
 
   ionViewDidLoad() {

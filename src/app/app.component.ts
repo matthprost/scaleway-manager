@@ -27,9 +27,22 @@ export class MyApp {
     this.initializeApp();
 
     this.pages = [
-      {title: 'Home', component: HomePage},
-      {title: 'Paris', component: ServerPage, picture: '/assets/imgs/france.svg'},
-      {title: 'Amsterdam', component: ServerPage, picture: '/assets/imgs/netherlands.svg'}
+      {
+        title: 'Home',
+        component: HomePage
+      },
+      {
+        title: 'Paris',
+        component: ServerPage,
+        picture: '/assets/imgs/france.svg',
+        parameters: {country: 'Paris'}
+      },
+      {
+        title: 'Amsterdam',
+        component: ServerPage,
+        picture: '/assets/imgs/netherlands.svg',
+        parameters: {country: 'Amsterdam'}
+      }
     ];
 
   }
@@ -55,7 +68,11 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    this.nav.setRoot(page.component);
+    if (page.parameters) {
+      this.nav.setRoot(page.component, {server: page.parameters.country});
+    } else {
+      this.nav.setRoot(page.component);
+    }
   }
 
   logout() {
