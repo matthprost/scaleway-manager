@@ -47,4 +47,12 @@ export class ServerPage {
     this.navCtrl.push(ShowServerPage, {server: server, serverCountry: this.serverName});
   }
 
+  doRefresh(refresher) {
+
+    setTimeout(() => {
+      console.log('Async operation has ended');
+    }, 2000);
+    refresher.complete();
+  }
+
 }

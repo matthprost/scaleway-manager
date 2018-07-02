@@ -35,6 +35,10 @@ page-show-server {
     }
   }
 
+  .has-refresher  .scroll-content {
+    border-top: 0 !important;
+  }
+
 }
 
 .custom-popover .popover-content {
@@ -42,10 +46,5 @@ page-show-server {
   top: 70px;
   left: 20px;
   bottom: 150px;
-}
-
-.has-refresher  .scroll-content {
-  background-color: grey;
-  border-top: 0 !important;
 }
 

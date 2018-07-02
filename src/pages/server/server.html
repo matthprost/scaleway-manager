@@ -9,6 +9,11 @@
 
 
 <ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list>
     <ion-item *ngFor="let server of allServers">
       <ion-thumbnail item-start>
