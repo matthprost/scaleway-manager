@@ -11,7 +11,7 @@ export class GetService {
 
 
     return new Promise((resolve, reject) => {
-      this.http.get<T>(url, {headers: { 'x-auth-token': token }}).subscribe(
+      this.http.get<T>(url, {headers: token ? { 'x-auth-token': token } : {}}).subscribe(
         data => {
           resolve(data);
         },

@@ -6,10 +6,10 @@
 <ion-content text-center no-bounce class="vertical-align-content">
 
   <ion-grid>
-    <ion-row margin-bottom>
+    <ion-row>
       <ion-col>
         <div class="login-header">
-          <ion-img width="80" height="80" src="/assets/imgs/github.svg"></ion-img>
+          <ion-img width="40" height="50" src="/assets/imgs/scaleway.svg"></ion-img>
         </div>
       </ion-col>
     </ion-row>
@@ -17,8 +17,7 @@
     <ion-row>
       <ion-col>
         <ion-list padding>
-          <h3>Open Scaleway</h3>
-          <small>An open source application</small>
+          <h3>Scaleway Manager</h3>
 
           <ion-item class="background-transparent" margin-top>
             <ion-label floating>Email</ion-label>
@@ -30,8 +29,8 @@
             <ion-input type="password" [(ngModel)]="password"></ion-input>
           </ion-item>
 
-          <ion-item class="background-transparent" margin-top margin-left no-lines>
-            <button default ion-button item-right color="secondary" (click)="login()">Log in</button>
+          <ion-item class="background-transparent" margin-top no-lines>
+            <button default full ion-button item-right color="secondary" (click)="login()">Log in</button>
           </ion-item>
 
         </ion-list>

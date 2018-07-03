@@ -10,11 +10,12 @@ export class PostService {
   public submit<T>(url: string, token?: string, body?: object): Promise<T> {
 
     return new Promise((resolve, reject) => {
-      this.http.post<T>(url, body, {headers: { 'x-auth-token': token }}).subscribe(
+      this.http.post<T>(url, body, {headers: token ? { 'x-auth-token': token } : {}}).subscribe(
         data => {
           resolve(data);
         },
         result => {
+          console.log(result);
           reject(result);
         });
     })
