@@ -8,7 +8,7 @@
 
 
 <ion-content>
-  <ion-list radio-group>
+  <ion-list radio-group [(ngModel)]="actionSelected">
 
     <ion-item *ngFor="let action of serverActions">
       <ion-label>{{ searchForAction(action) }}</ion-label>

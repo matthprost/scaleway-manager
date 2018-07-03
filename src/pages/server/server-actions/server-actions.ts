@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {ServersProvider} from "../../../providers/servers/servers";
 import {AuthTokenDto} from "../../../providers/auth/auth-tokens.dto";
 import {Storage} from "@ionic/storage";
-import {NavParams} from "ionic-angular";
+import {NavParams, ToastController, ViewController} from "ionic-angular";
 import {ServerDto} from "../../../providers/servers/server.dto";
 
 @Component({
@@ -14,8 +14,10 @@ export class ServerActionsPage {
   private serverCountry: string;
   private server: ServerDto;
   public serverActions;
+  public actionSelected;
 
-  constructor(public navParams: NavParams, private apiServer: ServersProvider, private storage: Storage) {
+  constructor(public navParams: NavParams, private apiServer: ServersProvider, private storage: Storage,
+              public viewCtrl: ViewController, private toastCtrl: ToastController) {
     this.serverCountry = navParams.get('serverCountry');
     this.server = navParams.get('server');
   }
@@ -34,7 +36,16 @@ export class ServerActionsPage {
   }
 
   sendAction() {
-    //
+    if (this.actionSelected) {
+      this.viewCtrl.dismiss({action: this.actionSelected});
+    } else {
+      let toast = this.toastCtrl.create({
+        message: 'Error: Please select an action',
+        duration: 3000,
+        position: 'top'
+      });
+      toast.present();
+    }
   }
 
   searchForAction(action: string): string {

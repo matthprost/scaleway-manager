@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams, PopoverController} from 'ionic-angular';
+import {NavParams, PopoverController} from 'ionic-angular';
 import {ServerDto} from "../../../providers/servers/server.dto";
 import {ServerActionsPage} from "../server-actions/server-actions";
 import {ServersProvider} from "../../../providers/servers/servers";
@@ -16,8 +16,9 @@ export class ShowServerPage {
   public serverName: string;
   public serverCountry: string;
   public state: string;
+  public serverLoading: boolean;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
+  constructor(public navParams: NavParams, public popoverCtrl: PopoverController,
               private serversProvider: ServersProvider, private storage: Storage,) {
     this.server = navParams.get('server');
     this.serverCountry = navParams.get('serverCountry');
@@ -25,14 +26,30 @@ export class ShowServerPage {
   }
 
   ionViewDidLoad() {
-    if (this.server.state === 'stopped') {
-      this.state = 'red';
-    } else if (this.server.state === 'running') {
-      this.state = '#27c295';
-    } else if (this.server.state === 'stopping') {
-      this.state = 'orange';
-    } else if (this.server.state === 'starting') {
-      this.state = 'orange';
+    this.setState();
+  }
+
+  private setState() {
+    switch (this.server.state) {
+      case 'stopped':
+        this.state = 'red';
+        this.serverLoading = false;
+        break;
+      case 'running':
+        this.state = '#27c295';
+        this.serverLoading = false;
+        break;
+      case 'stopping':
+        this.state = 'orange';
+        this.serverLoading = true;
+        break;
+      case 'starting':
+        this.state = 'orange';
+        this.serverLoading = true;
+        break;
+      default:
+        this.state = 'gray';
+        this.serverLoading = true;
     }
   }
 
@@ -43,6 +60,7 @@ export class ShowServerPage {
         this.serversProvider.getSpecificServer(this.serverCountry, token.token.id, this.server.id).then(result => {
           this.server = result.server;
           this.serverName = result.server.name;
+          this.setState();
           resolve('ok');
         }).catch(error => {
           reject(error)
@@ -70,6 +88,18 @@ export class ShowServerPage {
       }
     };
     popover.present({ev});
+    popover.onDidDismiss(result => {
+      if (result && result.action) {
+        this.storage.get('token').then(token => {
+          this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, result.action)
+            .then(() => {
+              this.refreshServer();
+            }).catch(error => {
+              console.log(error);
+          })
+        });
+      }
+    })
   }
 
   doRefresh(refresher) {
