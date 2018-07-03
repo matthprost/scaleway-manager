@@ -3,7 +3,11 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title><img class="logo" src="/assets/imgs/scaleway.svg"> <div class="logo-title">Scaleway</div></ion-title>
+    <ion-title><img class="logo" src="/assets/imgs/scaleway.svg">
+      <div class="logo-text">
+        <div class="logo-title">Manager</div>
+      </div>
+    </ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -63,7 +67,8 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-list class="chat-sliding-demo" *ngIf="allServers !== undefined && countServersByState(allServers, 'stopped') > 0">
+  <ion-list class="chat-sliding-demo"
+            *ngIf="allServers !== undefined && countServersByState(allServers, 'stopped') > 0">
     <ion-list-header>
       Offline
     </ion-list-header>
@@ -90,8 +95,10 @@
     </ion-item-sliding>
   </ion-list>
 
-  <p *ngIf="!isLoading && (allServers === undefined || allServers.length === 0)" text-center>
-    No available server
+  <p class="no-server" margin-top text-center
+        *ngIf="!isLoading && (allServers === undefined || allServers.length === 0)"
+        text-center>
+    No server available
   </p>
 
 </ion-content>

@@ -50,9 +50,19 @@ ion-header {
     height: 30px;
     width: 40px;
   }
+  &-text {
+    display: inline-block;
+    vertical-align: middle;
+  }
   &-title {
     vertical-align: middle;
-    display: inline-block;
+    color: color($colors, primary);
+  }
+  &-subtitle {
+    display: block;
+    vertical-align: middle;
+    font-size: 1rem;
+    float: right;
     color: color($colors, primary);
   }
 }
