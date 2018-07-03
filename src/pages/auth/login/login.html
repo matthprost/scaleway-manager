@@ -3,39 +3,40 @@
 </ion-header>
 
 
-<ion-content ion-fixed text-center no-bounce class="vertical-align-content">
+<ion-content no-bounce>
+  <div class="content" padding ion-fixed text-center>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="login-header">
+            <ion-img width="40" height="50" src="/assets/imgs/scaleway.svg"></ion-img>
+          </div>
+        </ion-col>
+      </ion-row>
 
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <div class="login-header">
-          <ion-img width="40" height="50" src="/assets/imgs/scaleway.svg"></ion-img>
-        </div>
-      </ion-col>
-    </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-list padding>
+            <h3>Scaleway Manager</h3>
 
-    <ion-row>
-      <ion-col>
-        <ion-list padding>
-          <h3>Scaleway Manager</h3>
+            <ion-item class="background-transparent" margin-top>
+              <ion-label floating>Email</ion-label>
+              <ion-input type="email" [(ngModel)]="email"></ion-input>
+            </ion-item>
 
-          <ion-item class="background-transparent" margin-top>
-            <ion-label floating>Email</ion-label>
-            <ion-input type="email" [(ngModel)]="email"></ion-input>
-          </ion-item>
+            <ion-item class="background-transparent">
+              <ion-label floating>Password</ion-label>
+              <ion-input type="password" [(ngModel)]="password"></ion-input>
+            </ion-item>
 
-          <ion-item class="background-transparent">
-            <ion-label floating>Password</ion-label>
-            <ion-input type="password" [(ngModel)]="password"></ion-input>
-          </ion-item>
+            <ion-item class="background-transparent" margin-top no-lines>
+              <button default full ion-button item-right color="light" (click)="register()">Sign up</button>
+              <button default full ion-button item-right color="secondary" (click)="login()">Log in</button>
+            </ion-item>
 
-          <ion-item class="background-transparent" margin-top no-lines>
-            <button default full ion-button item-right color="secondary" (click)="login()">Log in</button>
-          </ion-item>
-
-        </ion-list>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>

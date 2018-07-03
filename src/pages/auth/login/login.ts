@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
+import {AlertController, LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 
@@ -13,7 +13,8 @@ export class LoginPage {
   private password: string = null;
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController,
-              private auth: AuthProvider, public menu: MenuController, public loadingCtrl: LoadingController) {
+              private auth: AuthProvider, public menu: MenuController, public loadingCtrl: LoadingController,
+              public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -63,6 +64,25 @@ export class LoginPage {
         }
       });
     }
+  }
+
+  register() {
+    const confirm = this.alertCtrl.create({
+      title: 'Warning',
+      message: 'It will open your web browser, are you sure ?',
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            window.open('https://cloud.scaleway.com/#/signup', '_system', 'location=yes');
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 
 }

@@ -21,7 +21,7 @@ import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
     LoginPage,
     ServerPage,
     ShowServerPage,
-    ServerActionsPage
+    ServerActionsPage,
   ],
   imports: [
     BrowserModule,
@@ -36,7 +36,7 @@ import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
     LoginPage,
     ServerPage,
     ShowServerPage,
-    ServerActionsPage
+    ServerActionsPage,
   ],
   providers: [
     StatusBar,
