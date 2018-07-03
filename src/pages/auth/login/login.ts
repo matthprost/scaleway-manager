@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, MenuController, NavController, NavParams, ToastController} from 'ionic-angular';
+import {LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 
@@ -12,7 +12,7 @@ export class LoginPage {
   private email: string = null;
   private password: string = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public toastCtrl: ToastController,
+  constructor(public navCtrl: NavController, public toastCtrl: ToastController,
               private auth: AuthProvider, public menu: MenuController, public loadingCtrl: LoadingController) {
   }
 

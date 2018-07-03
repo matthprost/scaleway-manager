@@ -27,3 +27,11 @@
 .item-ios ion-avatar[item-left], .item-ios ion-thumbnail[item-left], .item-ios ion-avatar[item-start], .item-ios ion-thumbnail[item-start] {
   margin: 0 16px 0 0;
 }
+
+ion-spinner.center {
+  position: fixed;
+  display: flex;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+}

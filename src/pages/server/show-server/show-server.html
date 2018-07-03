@@ -2,7 +2,7 @@
   <ion-navbar>
 
     <ion-buttons end>
-      <button [attr.disabled]="serverLoading" ion-button icon-only (click)="showActions()">
+      <button [attr.disabled]="serverLoading ? '' : null" ion-button icon-only (click)="showActions()">
         <ion-icon name="power"></ion-icon>
       </button>
     </ion-buttons>

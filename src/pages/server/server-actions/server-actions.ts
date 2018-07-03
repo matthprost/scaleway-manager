@@ -15,6 +15,7 @@ export class ServerActionsPage {
   private server: ServerDto;
   public serverActions;
   public actionSelected;
+  public isLoading: boolean = true;
 
   constructor(public navParams: NavParams, private apiServer: ServersProvider, private storage: Storage,
               public viewCtrl: ViewController, private toastCtrl: ToastController) {
@@ -27,10 +28,13 @@ export class ServerActionsPage {
   }
 
   private getAllActions() {
+
+    this.isLoading = true;
     this.storage.get('token').then((val: AuthTokenDto) => {
       this.apiServer.getAllActionsServer(this.serverCountry, this.server.id, val.token.id).then(result => {
         this.serverActions = result;
         this.serverActions = this.serverActions.actions;
+        this.isLoading = false;
       });
     });
   }
@@ -40,7 +44,7 @@ export class ServerActionsPage {
       this.viewCtrl.dismiss({action: this.actionSelected});
     } else {
       let toast = this.toastCtrl.create({
-        message: 'Error: Please select an action',
+        message: 'Please select an action',
         duration: 3000,
         position: 'top'
       });

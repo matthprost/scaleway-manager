@@ -8,16 +8,17 @@
 
 
 <ion-content>
+  <ion-spinner class="center" *ngIf="isLoading"></ion-spinner>
   <ion-list radio-group [(ngModel)]="actionSelected">
 
-    <ion-item *ngFor="let action of serverActions">
+    <!--<ion-item *ngFor="let action of serverActions">
       <ion-label>{{ searchForAction(action) }}</ion-label>
       <ion-radio value="{{ action }}"></ion-radio>
-    </ion-item>
+    </ion-item>-->
 
   </ion-list>
 </ion-content>
 
-<ion-footer no-shadow>
+<ion-footer no-shadow *ngIf="!isLoading">
   <button ion-button full (click)="sendAction()">Send</button>
 </ion-footer>
