@@ -57,10 +57,10 @@ export class ServerActionsPage {
 
     switch (action) {
       case 'poweron':
-        value = 'Power On';
+        value = 'Start';
         break;
       case 'poweroff':
-        value = 'Power Off (Archive)';
+        value = 'Stop (Archive)';
         break;
       case 'reboot':
         value = 'Reboot';

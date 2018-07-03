@@ -12,7 +12,7 @@ import {ShowServerPage} from "./show-server/show-server";
 })
 export class ServerPage {
 
-  public serverName: string = null;
+  public serverCountry: string = null;
   public loader = this.loadingCtrl.create({
     content: "Please wait...",
   });
@@ -21,7 +21,7 @@ export class ServerPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
               private storage: Storage, private serversProvider: ServersProvider) {
-    this.serverName = navParams.get('server');
+    this.serverCountry = navParams.get('server');
   }
 
   ionViewDidLoad() {
@@ -35,12 +35,12 @@ export class ServerPage {
 
   getAllServers() {
     this.storage.get('token').then((val: AuthTokenDto) => {
-      this.serversProvider.getAllServers(this.serverName, val.token.id).then(result => {
+      this.serversProvider.getAllServers(this.serverCountry, val.token.id).then(result => {
         this.allServers = result.servers;
-        this.loader.dismiss();
+        this.loader.dismissAll();
         this.isLoading = false;
       }).catch(error => {
-        this.loader.dismiss();
+        this.loader.dismissAll();
         this.isLoading = false;
       });
     });
@@ -51,7 +51,7 @@ export class ServerPage {
     return new Promise((resolve, reject) => {
       this.isLoading = true;
       this.storage.get('token').then((token: AuthTokenDto) => {
-        this.serversProvider.getAllServers(this.serverName, token.token.id).then(result => {
+        this.serversProvider.getAllServers(this.serverCountry, token.token.id).then(result => {
           this.allServers = result.servers;
           this.isLoading = false;
           resolve('ok');
@@ -63,7 +63,7 @@ export class ServerPage {
   }
 
   showServer(server) {
-    this.navCtrl.push(ShowServerPage, {server: server, serverCountry: this.serverName});
+    this.navCtrl.push(ShowServerPage, {server: server, serverCountry: this.serverCountry});
   }
 
   doRefresh(refresher) {
@@ -72,6 +72,28 @@ export class ServerPage {
     }).catch(error => {
       console.log(error);
       refresher.complete();
+    });
+  }
+
+  stopServer(server) {
+    this.storage.get('token').then(token => {
+      this.serversProvider.sendServerAction(this.serverCountry, server.id, token.token.id, 'poweroff')
+        .then(() => {
+          this.refreshAllServers();
+        }).catch(error => {
+        console.log(error);
+      })
+    });
+  }
+
+  startServer(server) {
+    this.storage.get('token').then(token => {
+      this.serversProvider.sendServerAction(this.serverCountry, server.id, token.token.id, 'poweron')
+        .then(() => {
+          this.refreshAllServers();
+        }).catch(error => {
+        console.log(error);
+      })
     });
   }
 

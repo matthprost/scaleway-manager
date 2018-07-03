@@ -14,17 +14,34 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list>
-    <ion-item *ngFor="let server of allServers">
-      <ion-thumbnail item-start>
-        <img src="/assets/imgs/ubuntu.svg">
-      </ion-thumbnail>
-      <h2>{{ server.name }}</h2>
-      <p>{{ server.state }}</p>
-      <button ion-button clear item-end (click)="showServer(server)">View</button>
-    </ion-item>
-    <p *ngIf="(allServers === undefined || allServers.length === 0 ) && !isLoading" text-center>
-      No available server
-    </p>
+  <ion-list class="chat-sliding-demo" *ngIf="!isLoading">
+    <ion-list-header>
+      Online
+    </ion-list-header>
+
+    <ion-item-sliding *ngFor="let server of allServers" #item (click)="showServer(server)">
+      <ion-item>
+        <ion-avatar item-start>
+          <img class="img-os" src="/assets/imgs/ubuntu.svg">
+        </ion-avatar>
+        <h2>{{ server.name }}</h2>
+        <p>{{ server.state }}</p>
+        <ion-note item-end>
+          <ion-icon name="arrow-forward"></ion-icon>
+        </ion-note>
+      </ion-item>
+
+      <ion-item-options *ngIf="server.state === 'stopped' || server.state === 'running'">
+        <button ion-button color="secondary" (click)="startServer(server)" *ngIf="server.state === 'stopped'">
+          <ion-icon name="power"></ion-icon>
+          Start
+        </button>
+        <button ion-button color="danger" (click)="stopServer(server)" *ngIf="server.state === 'running'">
+          <ion-icon name="power"></ion-icon>
+          Stop
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
+
 </ion-content>
