@@ -14,7 +14,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list *ngIf="!isLoading && countServersByState(allServers, 'running') > 0">
+  <ion-list *ngIf="allServers !== undefined && countServersByState(allServers, 'running') > 0">
     <ion-list-header>
       Online
     </ion-list-header>
@@ -24,8 +24,9 @@
         <ion-avatar item-start>
           <img class="img-os" src="/assets/imgs/ubuntu.svg">
         </ion-avatar>
+        <div class="state" [style.background]="'#27c295'"></div>
         <h2>{{ server.name }}</h2>
-        <p>{{ server.state }}</p>
+        <p>{{ server.commercial_type }}</p>
         <ion-note item-end>
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-note>
@@ -41,7 +42,7 @@
   </ion-list>
 
   <ion-list class="chat-sliding-demo"
-            *ngIf="!isLoading && (countServersByState(allServers, 'starting') > 0 || countServersByState(allServers, 'stopping') > 0)">
+            *ngIf="allServers !== undefined && (countServersByState(allServers, 'starting') > 0 || countServersByState(allServers, 'stopping') > 0)">
     <ion-list-header>
       Pending
     </ion-list-header>
@@ -51,8 +52,9 @@
         <ion-avatar item-start>
           <img class="img-os" src="/assets/imgs/ubuntu.svg">
         </ion-avatar>
+        <div class="state" [style.background]="'orange'"></div>
         <h2>{{ server.name }}</h2>
-        <p>{{ server.state }}</p>
+        <p>{{ server.commercial_type }}</p>
         <ion-note item-end>
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-note>
@@ -61,7 +63,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-list class="chat-sliding-demo" *ngIf="!isLoading && countServersByState(allServers, 'stopped') > 0">
+  <ion-list class="chat-sliding-demo" *ngIf="allServers !== undefined && countServersByState(allServers, 'stopped') > 0">
     <ion-list-header>
       Offline
     </ion-list-header>
@@ -71,8 +73,9 @@
         <ion-avatar item-start>
           <img class="img-os" src="/assets/imgs/ubuntu.svg">
         </ion-avatar>
+        <div class="state" [style.background]="'red'"></div>
         <h2>{{ server.name }}</h2>
-        <p>{{ server.state }}</p>
+        <p>{{ server.commercial_type }}</p>
         <ion-note item-end>
           <ion-icon name="arrow-forward"></ion-icon>
         </ion-note>
@@ -87,7 +90,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <p *ngIf="(allServers === undefined || allServers.length === 0 ) && !isLoading" text-center>
+  <p *ngIf="allServers === undefined || allServers.length === 0" text-center>
     No available server
   </p>
 

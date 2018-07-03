@@ -26,34 +26,23 @@ export class ServerPage {
 
   ionViewDidLoad() {
     this.loader.present();
-    this.getAllServers()
+    this.refreshAllServers().then(() => {
+      this.loader.dismiss();
+    });
   }
 
   ionViewDidEnter() {
-    this.getAllServers();
-  }
-
-  getAllServers() {
-    this.storage.get('token').then((val: AuthTokenDto) => {
-      this.serversProvider.getAllServers(this.serverCountry, val.token.id).then(result => {
-        this.allServers = result.servers;
-        this.loader.dismissAll();
-        this.isLoading = false;
-      }).catch(error => {
-        this.loader.dismissAll();
-        this.isLoading = false;
-      });
-    });
+    this.refreshAllServers();
   }
 
   private refreshAllServers(): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      this.isLoading = true;
       this.storage.get('token').then((token: AuthTokenDto) => {
         this.serversProvider.getAllServers(this.serverCountry, token.token.id).then(result => {
-          this.allServers = result.servers;
-          this.isLoading = false;
+          if (result.servers !== this.allServers) {
+            this.allServers = result.servers;
+          }
           resolve('ok');
         }).catch(error => {
           reject(error);
