@@ -10,7 +10,17 @@ export class PostService {
   public submit<T>(url: string, token?: string, body?: object): Promise<T> {
 
     return new Promise((resolve, reject) => {
-      this.http.post<T>(url, body, {headers: token ? { 'x-auth-token': token } : {}}).subscribe(
+      this.http.post<T>(url, body,
+        {
+          headers: token ?
+            {
+              'x-auth-token': token,
+              'Access-Control-Allow-Origin': '*'
+            } :
+            {
+              'Access-Control-Allow-Origin': '*'
+            }
+        }).subscribe(
         data => {
           resolve(data);
         },
