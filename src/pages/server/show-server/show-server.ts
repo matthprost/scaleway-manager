@@ -1,7 +1,10 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {NavController, NavParams, PopoverController} from 'ionic-angular';
 import {ServerDto} from "../../../providers/servers/server.dto";
 import {ServerActionsPage} from "../server-actions/server-actions";
+import {ServersProvider} from "../../../providers/servers/servers";
+import {AuthTokenDto} from "../../../providers/auth/auth-tokens.dto";
+import {Storage} from "@ionic/storage";
 
 @Component({
   selector: 'page-show-server',
@@ -14,7 +17,8 @@ export class ShowServerPage {
   public serverCountry: string;
   public state: string;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, public popoverCtrl: PopoverController,
+              private serversProvider: ServersProvider, private storage: Storage,) {
     this.server = navParams.get('server');
     this.serverCountry = navParams.get('serverCountry');
     this.serverName = this.server.name;
@@ -30,6 +34,21 @@ export class ShowServerPage {
     } else if (this.server.state === 'starting') {
       this.state = 'orange';
     }
+  }
+
+  private refreshServer(): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+      this.storage.get('token').then((token: AuthTokenDto) => {
+        this.serversProvider.getSpecificServer(this.serverCountry, token.token.id, this.server.id).then(result => {
+          this.server = result.server;
+          this.serverName = result.server.name;
+          resolve('ok');
+        }).catch(error => {
+          reject(error)
+        });
+      });
+    });
   }
 
   capitalize(value: string) {
@@ -54,12 +73,12 @@ export class ShowServerPage {
   }
 
   doRefresh(refresher) {
-    console.log('Begin async operation', refresher);
-
-    setTimeout(() => {
-      console.log('Async operation has ended');
+    this.refreshServer().then(() => {
       refresher.complete();
-    }, 2000);
+    }).catch(error => {
+      console.log(error);
+      refresher.complete();
+    })
   }
 
 }
