@@ -27,6 +27,7 @@ export class ShowServerPage {
 
   ionViewDidLoad() {
     this.setState();
+    this.refreshServer();
   }
 
   private setState() {

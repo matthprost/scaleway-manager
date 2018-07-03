@@ -1,4 +1,5 @@
-<ion-header>
+<!--
+<ion-header *ngIf="!isLoading">
   <ion-navbar>
     <ion-title>
       Actions
@@ -6,15 +7,20 @@
   </ion-navbar>
 </ion-header>
 
+-->
 
 <ion-content>
-  <ion-spinner class="center" *ngIf="isLoading"></ion-spinner>
   <ion-list radio-group [(ngModel)]="actionSelected">
 
-    <!--<ion-item *ngFor="let action of serverActions">
+    <ion-item *ngIf="isLoading">
+      <ion-label>Loading...</ion-label>
+      <ion-radio disabled value="loading"></ion-radio>
+    </ion-item>
+
+    <ion-item *ngFor="let action of serverActions">
       <ion-label>{{ searchForAction(action) }}</ion-label>
       <ion-radio value="{{ action }}"></ion-radio>
-    </ion-item>-->
+    </ion-item>
 
   </ion-list>
 </ion-content>

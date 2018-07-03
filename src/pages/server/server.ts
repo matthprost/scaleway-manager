@@ -25,11 +25,15 @@ export class ServerPage {
   }
 
   ionViewDidLoad() {
+    this.loader.present();
     this.getAllServers()
   }
 
+  ionViewDidEnter() {
+    this.getAllServers();
+  }
+
   getAllServers() {
-    this.loader.present();
     this.storage.get('token').then((val: AuthTokenDto) => {
       this.serversProvider.getAllServers(this.serverName, val.token.id).then(result => {
         this.allServers = result.servers;
