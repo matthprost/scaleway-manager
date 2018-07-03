@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, NavController, NavParams} from 'ionic-angular';
+import {ItemSliding, LoadingController, NavController, NavParams} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
 import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {ServersProvider} from "../../providers/servers/servers";
@@ -75,9 +75,10 @@ export class ServerPage {
     });
   }
 
-  stopServer(server) {
+  actionServer(server, action, slidingItem: ItemSliding) {
+    slidingItem.close();
     this.storage.get('token').then(token => {
-      this.serversProvider.sendServerAction(this.serverCountry, server.id, token.token.id, 'poweroff')
+      this.serversProvider.sendServerAction(this.serverCountry, server.id, token.token.id, action)
         .then(() => {
           this.refreshAllServers();
         }).catch(error => {
@@ -86,15 +87,17 @@ export class ServerPage {
     });
   }
 
-  startServer(server) {
-    this.storage.get('token').then(token => {
-      this.serversProvider.sendServerAction(this.serverCountry, server.id, token.token.id, 'poweron')
-        .then(() => {
-          this.refreshAllServers();
-        }).catch(error => {
-        console.log(error);
-      })
-    });
+  countServersByState(servers: Array<ServerDto>, state: string): number {
+    let i: number = -1;
+    let counter: number = 0;
+
+    while (servers[++i]) {
+      if (servers[i].state === state) {
+        counter++;
+      }
+    }
+
+    return (counter);
   }
 
 }
