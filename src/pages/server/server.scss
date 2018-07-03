@@ -14,4 +14,14 @@ page-server {
     display: inline-block;
     vertical-align: middle;
   }
+
+  .img-os {
+    width: 100%;
+    height: auto;
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
 }

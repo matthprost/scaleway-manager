@@ -1,9 +1,9 @@
-<ion-header>
+<ion-header no-border>
   <ion-navbar>
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>{{ serverCountry }}</ion-title>
+    <ion-title><img class="logo" src="/assets/imgs/scaleway.svg"> <div class="logo-title">Scaleway</div></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -22,7 +22,7 @@
     <ion-item-sliding *ngFor="let server of allServers" #item>
       <ion-item *ngIf="server.state === 'running'" (click)="showServer(server)">
         <ion-avatar item-start>
-          <img class="img-os" src="/assets/imgs/ubuntu.svg">
+          <img class="img-os" src="{{ findOSPicture(server.image.name) }}">
         </ion-avatar>
         <div class="state" [style.background]="'#27c295'"></div>
         <h2>{{ server.name }}</h2>
@@ -50,7 +50,7 @@
     <ion-item-sliding *ngFor="let server of allServers" #item>
       <ion-item *ngIf="server.state === 'stopping' || server.state === 'starting'" (click)="showServer(server)">
         <ion-avatar item-start>
-          <img class="img-os" src="/assets/imgs/ubuntu.svg">
+          <img class="img-os" src="{{ findOSPicture(server.image.name) }}">
         </ion-avatar>
         <div class="state" [style.background]="'orange'"></div>
         <h2>{{ server.name }}</h2>
@@ -71,7 +71,7 @@
     <ion-item-sliding *ngFor="let server of allServers" #item>
       <ion-item *ngIf="server.state === 'stopped'" (click)="showServer(server)">
         <ion-avatar item-start>
-          <img class="img-os" src="/assets/imgs/ubuntu.svg">
+          <img class="img-os" src="{{ findOSPicture(server.image.name) }}">
         </ion-avatar>
         <div class="state" [style.background]="'red'"></div>
         <h2>{{ server.name }}</h2>
@@ -90,7 +90,7 @@
     </ion-item-sliding>
   </ion-list>
 
-  <p *ngIf="allServers === undefined || allServers.length === 0" text-center>
+  <p *ngIf="!isLoading && (allServers === undefined || allServers.length === 0)" text-center>
     No available server
   </p>
 
