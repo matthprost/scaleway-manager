@@ -41,6 +41,15 @@ page-show-server {
 
 }
 
+.information {
+  &-title {
+    font-size: 1.35rem;
+    font-weight: bold;
+    color: #868686;
+    text-transform: uppercase;
+  }
+}
+
 .custom-popover .popover-content {
   width: 90%;
   top: 70px;
@@ -49,5 +58,11 @@ page-show-server {
 
 .custom-popover .popover-arrow {
   display: none;
+}
+
+.is-round {
+  border: 5px solid white;
+  border-radius: 50%;
+  background: white;
 }
 

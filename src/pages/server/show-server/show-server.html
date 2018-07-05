@@ -12,26 +12,46 @@
 </ion-header>
 
 
-<ion-content padding text-center>
+<ion-content>
 
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-row>
+  <ion-row margin-top>
     <ion-col>
-      <div class="login-header">
-        <ion-img width="80" height="80" src="{{ server.image.name | serverIcon }}"></ion-img>
+      <div text-center class="login-header">
+        <ion-img class="is-round" width="85" height="85" src="{{ server.image.name | serverIcon }}"></ion-img>
       </div>
     </ion-col>
   </ion-row>
-  <ion-grid>
-    <ion-row>
-      <ion-col>
+  <ion-row>
+    <ion-col>
+      <div margin-bottom text-center class="login-header">
         <div class="state" [style.background]="state"></div>
-        <span class="state-text vertical-align-content" text-center>{{ capitalize(server.state) }}</span>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+        <span class="state-text vertical-align-content">{{ capitalize(server.state) }}</span>
+      </div>
+    </ion-col>
+  </ion-row>
+
+  <ion-item-group margin-top>
+    <ion-item-divider color="light">Basic Informations</ion-item-divider>
+    <ion-item>
+      <div class="information-title">
+        Public IP
+      </div>
+      <div class="information-content" item-end>
+        {{ server.public_ip.address }}
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="information-title">
+        Private IP
+      </div>
+      <div class="information-content" item-end>
+        {{ server.private_ip ? server.private_ip : '-' }}
+      </div>
+    </ion-item>
+  </ion-item-group>
 
 </ion-content>
