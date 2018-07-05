@@ -23,10 +23,10 @@
       Online
     </ion-list-header>
 
-    <ion-item-sliding *ngFor="let server of allServers" #item>
-      <ion-item *ngIf="server.state === 'running'" (click)="showServer(server)">
+    <ion-item-sliding *ngFor="let server of getServerByState(['running'])" #item>
+      <ion-item (click)="showServer(server)">
         <ion-avatar item-start>
-          <img class="img-os" src="{{ findOSPicture(server.image.name) }}">
+          <img class="img-os" src="{{ server.image.name | serverIcon }}">
         </ion-avatar>
         <div class="state" [style.background]="'#27c295'"></div>
         <h2>{{ server.name }}</h2>
@@ -45,16 +45,16 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-list class="chat-sliding-demo"
-            *ngIf="allServers !== undefined && (countServersByState(allServers, 'starting') > 0 || countServersByState(allServers, 'stopping') > 0)">
+  <ion-list
+    *ngIf="allServers !== undefined && (countServersByState(allServers, 'starting') > 0 || countServersByState(allServers, 'stopping') > 0)">
     <ion-list-header>
       Pending
     </ion-list-header>
 
-    <ion-item-sliding *ngFor="let server of allServers" #item>
-      <ion-item *ngIf="server.state === 'stopping' || server.state === 'starting'" (click)="showServer(server)">
+    <ion-item-sliding *ngFor="let server of getServerByState(['stopping', 'starting'])" #item>
+      <ion-item (click)="showServer(server)">
         <ion-avatar item-start>
-          <img class="img-os" src="{{ findOSPicture(server.image.name) }}">
+          <img class="img-os" src="{{ server.image.name | serverIcon }}">
         </ion-avatar>
         <div class="state" [style.background]="'orange'"></div>
         <h2>{{ server.name }}</h2>
@@ -67,16 +67,16 @@
     </ion-item-sliding>
   </ion-list>
 
-  <ion-list class="chat-sliding-demo"
-            *ngIf="allServers !== undefined && countServersByState(allServers, 'stopped') > 0">
+  <ion-list
+    *ngIf="allServers !== undefined && countServersByState(allServers, 'stopped') > 0">
     <ion-list-header>
       Offline
     </ion-list-header>
 
-    <ion-item-sliding *ngFor="let server of allServers" #item>
+    <ion-item-sliding *ngFor="let server of getServerByState(['stopped'])" #item>
       <ion-item *ngIf="server.state === 'stopped'" (click)="showServer(server)">
         <ion-avatar item-start>
-          <img class="img-os" src="{{ findOSPicture(server.image.name) }}">
+          <img class="img-os" src="{{ server.image.name | serverIcon }}">
         </ion-avatar>
         <div class="state" [style.background]="'red'"></div>
         <h2>{{ server.name }}</h2>
@@ -96,8 +96,8 @@
   </ion-list>
 
   <p class="no-server" margin-top text-center
-        *ngIf="!isLoading && (allServers === undefined || allServers.length === 0)"
-        text-center>
+     *ngIf="!isLoading && (allServers === undefined || allServers.length === 0)"
+     text-center>
     No server available
   </p>
 

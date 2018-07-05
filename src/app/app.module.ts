@@ -13,6 +13,7 @@ import {IonicStorageModule} from "@ionic/storage";
 import {ServerPage} from "../pages/server/server";
 import {ShowServerPage} from "../pages/server/show-server/show-server";
 import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
+import {PipesModule} from "../pipes/pipes.module";
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
     IonicModule.forRoot(MyApp),
     ProvidersModule,
     IonicStorageModule.forRoot(),
+    PipesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
