@@ -40,7 +40,8 @@
       <div class="information-title">
         Public IP
       </div>
-      <div id="cpyBtn" data-clipboard-target="#copyTarget" class="information-content" item-end>
+      <div id="cpyBtn" data-clipboard-target="#copyTarget" class="information-content" item-end
+           (click)="copyToClipBoard(server.public_ip.address)">
         {{ server.public_ip.address }}
       </div>
     </ion-item>
@@ -48,7 +49,7 @@
       <div class="information-title">
         Private IP
       </div>
-      <div class="information-content" item-end>
+      <div class="information-content" item-end (click)="copyToClipBoard(server.public_ip.address)">
         {{ server.private_ip ? server.private_ip : '-' }}
       </div>
     </ion-item>

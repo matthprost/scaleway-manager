@@ -5,6 +5,7 @@ import {ServerActionsPage} from "../server-actions/server-actions";
 import {ServersProvider} from "../../../providers/servers/servers";
 import {AuthTokenDto} from "../../../providers/auth/auth-tokens.dto";
 import {Storage} from "@ionic/storage";
+import {Clipboard} from "@ionic-native/clipboard";
 
 @Component({
   selector: 'page-show-server',
@@ -20,7 +21,7 @@ export class ShowServerPage {
 
   constructor(public navParams: NavParams, public popoverCtrl: PopoverController,
               private serversProvider: ServersProvider, private storage: Storage,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController, private clipboard: Clipboard) {
     this.server = navParams.get('server');
     this.serverCountry = navParams.get('serverCountry');
     this.serverName = this.server.name;
@@ -97,7 +98,7 @@ export class ShowServerPage {
             .then(() => {
               this.refreshServer();
             }).catch(error => {
-              console.log(error);
+            console.log(error);
           })
         });
       }
@@ -113,4 +114,13 @@ export class ShowServerPage {
     })
   }
 
+  copyToClipBoard(text: string) {
+    this.clipboard.copy(text);
+    const toast = this.toastCtrl.create({
+      message: 'Address as been copied into your clipboard!',
+      duration: 3000,
+      position: 'top'
+    });
+    toast.present();
+  }
 }

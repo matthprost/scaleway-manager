@@ -14,6 +14,7 @@ import {ServerPage} from "../pages/server/server";
 import {ShowServerPage} from "../pages/server/show-server/show-server";
 import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
 import {PipesModule} from "../pipes/pipes.module";
+import {Clipboard} from "@ionic-native/clipboard";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,7 @@ import {PipesModule} from "../pipes/pipes.module";
     IonicModule.forRoot(MyApp),
     ProvidersModule,
     IonicStorageModule.forRoot(),
-    PipesModule
+    PipesModule,
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -43,6 +44,7 @@ import {PipesModule} from "../pipes/pipes.module";
   providers: [
     StatusBar,
     SplashScreen,
+    Clipboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
   ]
 })
