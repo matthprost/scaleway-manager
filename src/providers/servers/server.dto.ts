@@ -12,7 +12,7 @@ export interface ServerDto {
   hostname: string;
   state: string;
   location: any;
-  ipv6: any;
+  ipv6: PublicIp;
   commercial_type: string;
   arch: string;
   name: string;

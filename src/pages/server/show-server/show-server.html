@@ -40,7 +40,7 @@
       <div class="information-title">
         Public IP
       </div>
-      <div class="information-content" item-end>
+      <div id="cpyBtn" data-clipboard-target="#copyTarget" class="information-content" item-end>
         {{ server.public_ip.address }}
       </div>
     </ion-item>
@@ -50,6 +50,57 @@
       </div>
       <div class="information-content" item-end>
         {{ server.private_ip ? server.private_ip : '-' }}
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="information-title">
+        Instance type
+      </div>
+      <div class="information-content" item-end>
+        {{ server.commercial_type }}
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="information-title">
+        From image
+      </div>
+      <div class="information-content" item-end>
+        {{ server.image.name }}
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="information-title">
+        Volumes
+      </div>
+      <div class="information-content" item-end>
+        {{ server.volumes | totalVolumesSpace }}
+      </div>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider color="light">Advanced Informations</ion-item-divider>
+    <ion-item>
+      <div class="information-title">
+        IPV6
+      </div>
+      <div class="information-content" item-end>
+        {{ server.ipv6 ? server.ipv6.address : '-' }}
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="information-title">
+        Creation date
+      </div>
+      <div class="information-content" item-end>
+        {{ server.creation_date | date:'dd/MM/yy, H:mm' }}
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="information-title">
+        Modification date
+      </div>
+      <div class="information-content" item-end>
+        {{ server.modification_date | date:'dd/MM/yy, H:mm' }}
       </div>
     </ion-item>
   </ion-item-group>

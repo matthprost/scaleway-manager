@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NavParams, PopoverController} from 'ionic-angular';
+import {NavParams, PopoverController, ToastController} from 'ionic-angular';
 import {ServerDto} from "../../../providers/servers/server.dto";
 import {ServerActionsPage} from "../server-actions/server-actions";
 import {ServersProvider} from "../../../providers/servers/servers";
@@ -19,7 +19,8 @@ export class ShowServerPage {
   public serverLoading: boolean;
 
   constructor(public navParams: NavParams, public popoverCtrl: PopoverController,
-              private serversProvider: ServersProvider, private storage: Storage,) {
+              private serversProvider: ServersProvider, private storage: Storage,
+              private toastCtrl: ToastController) {
     this.server = navParams.get('server');
     this.serverCountry = navParams.get('serverCountry');
     this.serverName = this.server.name;
