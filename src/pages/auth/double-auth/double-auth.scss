@@ -1,0 +1,32 @@
+page-double-auth {
+
+  background: white;
+  .vertical-align-content > *
+  {
+    background-color: white;
+    display: flex!important;
+    align-content: center!important;
+    align-items: center!important;
+    margin-top: -8rem;
+    color: color($colors, primary);
+  }
+
+  .background-transparent {
+    background: transparent;
+    //color: white;
+    padding: 0;
+  }
+
+  ion-img {
+    background: transparent;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .login-header {
+    margin-top: 10%;
+  }
+
+}

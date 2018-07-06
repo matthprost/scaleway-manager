@@ -15,12 +15,14 @@ import {ShowServerPage} from "../pages/server/show-server/show-server";
 import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
 import {PipesModule} from "../pipes/pipes.module";
 import {Clipboard} from "@ionic-native/clipboard";
+import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
 
 @NgModule({
   declarations: [
     MyApp,
     HomePage,
     LoginPage,
+    DoubleAuthPage,
     ServerPage,
     ShowServerPage,
     ServerActionsPage,
@@ -37,6 +39,7 @@ import {Clipboard} from "@ionic-native/clipboard";
     MyApp,
     HomePage,
     LoginPage,
+    DoubleAuthPage,
     ServerPage,
     ShowServerPage,
     ServerActionsPage,

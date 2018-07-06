@@ -2,6 +2,7 @@ import {Component} from '@angular/core';
 import {AlertController, LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
+import {DoubleAuthPage} from "../double-auth/double-auth";
 
 @Component({
   selector: 'page-login',
@@ -44,25 +45,28 @@ export class LoginPage {
       this.auth.login(this.email, this.password)
 
         .then(result => {
-        this.menu.swipeEnable(true);
-        loader.dismissAll();
+          this.menu.swipeEnable(true);
+          loader.dismissAll();
 
-        this.navCtrl.setRoot(HomePage);
-      })
+          this.navCtrl.setRoot(HomePage);
+        })
 
         .catch(error => {
-        loader.dismissAll();
+          loader.dismissAll();
 
-        if (error.status === 401) {
-          const toast = this.toastCtrl.create({
-            message: 'Error: email or password is incorrect, please check values',
-            duration: 3000,
-            position: 'top'
-          });
+          if (error.status === 401) {
+            const toast = this.toastCtrl.create({
+              message: 'Error: email or password is incorrect, please check values',
+              duration: 3000,
+              position: 'top'
+            });
 
-          toast.present();
-        }
-      });
+            toast.present();
+          }
+          if (error.status === 403 && error.error.type === '2FA_error') {
+            this.navCtrl.push(DoubleAuthPage, { email: this.email, password: this.password })
+          }
+        });
     }
   }
 

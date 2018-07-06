@@ -9,14 +9,15 @@ export class AuthProvider {
   constructor(private api: ApiProvider, private storage: Storage) {
   }
 
-  public login(email: string, password: string): Promise<any> {
+  public login(email: string, password: string, code?: string): Promise<any> {
 
     return new Promise((resolve, reject) => {
 
       this.api.post<AuthTokenDto>(this.api.getApiUrl() + '/tokens', null, {
         "email": email,
         "password": password,
-        "expires": false
+        "expires": false,
+        "2FA_token": code,
       })
         .then(result => {
         this.storage.set('token', result);

@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-navbar>
+  </ion-navbar>
+</ion-header>
+
+<ion-header>
+
+</ion-header>
+
+
+<ion-content no-bounce>
+  <div class="content" padding ion-fixed text-center>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="login-header">
+            <ion-img width="40" height="50" src="/assets/imgs/scaleway.svg"></ion-img>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-list padding>
+            <h3>Two-Factor Authentication</h3>
+
+            <ion-item class="background-transparent" margin-top>
+              <ion-label floating>Code</ion-label>
+              <ion-input type="number" [(ngModel)]="code"></ion-input>
+            </ion-item>
+
+            <ion-item class="background-transparent" margin-top no-lines>
+              <button default full ion-button item-right color="secondary" (click)="login()">Log in</button>
+            </ion-item>
+
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>
