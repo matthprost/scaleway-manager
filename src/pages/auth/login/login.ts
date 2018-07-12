@@ -3,6 +3,7 @@ import {AlertController, LoadingController, MenuController, NavController, Toast
 import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'page-login',
@@ -22,7 +23,7 @@ export class LoginPage {
     //
   }
 
-  login() {
+  login(loginForm: NgForm) {
     if (!this.email || !this.password) {
       let message: Array<string> = [];
 

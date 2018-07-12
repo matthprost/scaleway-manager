@@ -19,21 +19,28 @@
           <ion-list padding>
             <h3>Scaleway Manager</h3>
 
-            <ion-item class="background-transparent" margin-top>
-              <ion-label floating>Email</ion-label>
-              <ion-input type="email" [(ngModel)]="email"></ion-input>
-            </ion-item>
-
-            <ion-item class="background-transparent">
-              <ion-label floating>Password</ion-label>
-              <ion-input type="password" [(ngModel)]="password"></ion-input>
-            </ion-item>
-
-            <ion-item class="background-transparent" margin-top no-lines>
-              <button default full ion-button item-right color="light" (click)="register()">Sign up</button>
-              <button default full ion-button item-right color="secondary" (click)="login()">Log in</button>
-            </ion-item>
-
+            <form (ngSubmit)="login(loginForm)" #loginForm="ngForm">
+              <ion-row>
+                <ion-item class="background-transparent" margin-top>
+                  <ion-label floating>Email</ion-label>
+                  <ion-input type="email" name="email" [(ngModel)]="email"></ion-input>
+                </ion-item>
+              </ion-row>
+              <ion-row>
+                <ion-item class="background-transparent">
+                  <ion-label floating>Password</ion-label>
+                  <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+                </ion-item>
+              </ion-row>
+              <ion-item class="background-transparent" margin-top no-lines>
+                <button default full ion-button item-right color="light" type="button" (click)="register()">
+                  Sign up
+                </button>
+                <button default full ion-button item-right color="secondary" type="submit">
+                  Log in
+                </button>
+              </ion-item>
+            </form>
           </ion-list>
         </ion-col>
       </ion-row>

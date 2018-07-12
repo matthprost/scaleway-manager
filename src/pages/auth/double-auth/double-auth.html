@@ -24,15 +24,23 @@
           <ion-list padding>
             <h3>Two-Factor Authentication</h3>
 
-            <ion-item class="background-transparent" margin-top>
-              <ion-label floating>Code</ion-label>
-              <ion-input type="number" [(ngModel)]="code"></ion-input>
-            </ion-item>
+            <form (ngSubmit)="login(loginForm)" #loginForm="ngForm">
+              <ion-row>
+                <ion-item class="background-transparent" margin-top>
+                  <ion-label floating>Code</ion-label>
+                  <ion-input type="number" name="number" [(ngModel)]="code"></ion-input>
+                </ion-item>
+              </ion-row>
 
-            <ion-item class="background-transparent" margin-top no-lines>
-              <button default full ion-button item-right color="secondary" (click)="login()">Log in</button>
-            </ion-item>
+              <ion-row>
+                <ion-item class="background-transparent" margin-top no-lines>
+                  <button default full ion-button item-right color="secondary" (click)="login()" type="submit">
+                    Log in
+                  </button>
+                </ion-item>
+              </ion-row>
 
+            </form>
           </ion-list>
         </ion-col>
       </ion-row>
