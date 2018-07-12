@@ -38,10 +38,12 @@ export class ShowServerPage {
       case 'stopped':
         this.state = 'red';
         this.serverLoading = false;
+        this.stateClass = 'state';
         break;
       case 'running':
         this.state = '#27c295';
         this.serverLoading = false;
+        this.stateClass = 'state';
         break;
       case 'stopping':
         this.state = 'orange';
@@ -56,6 +58,7 @@ export class ShowServerPage {
       default:
         this.state = 'gray';
         this.serverLoading = true;
+        this.stateClass = 'state';
     }
   }
 
