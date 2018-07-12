@@ -28,7 +28,7 @@
   <ion-row>
     <ion-col>
       <div margin-bottom text-center class="login-header">
-        <div class="state" [style.background]="state"></div>
+        <div [style.background]="state" [class]="stateClass"></div>
         <span class="state-text vertical-align-content">{{ capitalize(server.state) }}</span>
       </div>
     </ion-col>

@@ -18,6 +18,7 @@ export class ShowServerPage {
   public serverCountry: string;
   public state: string;
   public serverLoading: boolean;
+  public stateClass: string = 'state';
 
   constructor(public navParams: NavParams, public popoverCtrl: PopoverController,
               private serversProvider: ServersProvider, private storage: Storage,
@@ -45,10 +46,12 @@ export class ShowServerPage {
       case 'stopping':
         this.state = 'orange';
         this.serverLoading = true;
+        this.stateClass = 'blinker';
         break;
       case 'starting':
         this.state = 'orange';
         this.serverLoading = true;
+        this.stateClass = 'blinker';
         break;
       default:
         this.state = 'gray';

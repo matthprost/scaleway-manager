@@ -39,6 +39,23 @@ page-show-server {
     border-top: 0 !important;
   }
 
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .blinker {
+    animation: blinker 1.60s linear infinite;
+    width: 12px;
+    height: 12px;
+    background-color: gray;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 10px;
+    margin-right: 5px;
+  }
+
 }
 
 .information {
