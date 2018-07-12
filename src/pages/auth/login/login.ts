@@ -47,13 +47,13 @@ export class LoginPage {
 
         .then(result => {
           this.menu.swipeEnable(true);
-          loader.dismissAll();
+          loader.dismiss();
 
           this.navCtrl.setRoot(HomePage);
         })
 
         .catch(error => {
-          loader.dismissAll();
+          loader.dismiss();
 
           if (error.status === 401) {
             const toast = this.toastCtrl.create({
@@ -63,9 +63,16 @@ export class LoginPage {
             });
 
             toast.present();
-          }
-          if (error.status === 403 && error.error.type === '2FA_error') {
+          } else if (error.status === 403 && error.error.type === '2FA_error') {
             this.navCtrl.push(DoubleAuthPage, { email: this.email, password: this.password })
+          } else if (error.status === 403 && error.error.type === 'invalid_request_error') {
+            const toast = this.toastCtrl.create({
+              message: 'Error: you have made too many attempts, please try again later',
+              duration: 3000,
+              position: 'top'
+            });
+
+            toast.present();
           }
         });
     }

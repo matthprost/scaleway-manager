@@ -16,6 +16,7 @@ import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
 import {PipesModule} from "../pipes/pipes.module";
 import {Clipboard} from "@ionic-native/clipboard";
 import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
+import {AccountPopoverPage} from "../pages/home/account-popover/account-popover";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
     ServerPage,
     ShowServerPage,
     ServerActionsPage,
+    AccountPopoverPage
   ],
   imports: [
     BrowserModule,
@@ -43,6 +45,7 @@ import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
     ServerPage,
     ShowServerPage,
     ServerActionsPage,
+    AccountPopoverPage
   ],
   providers: [
     StatusBar,
