@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import {LoginPage} from "../../auth/login/login";
-import {AlertController, NavController} from "ionic-angular";
-import {LogoutProvider} from "../../../providers/auth/logout/logout";
+import {Component} from '@angular/core';
+import {AlertController, ViewController} from "ionic-angular";
 
 @Component({
   selector: 'page-account-popover',
@@ -9,8 +7,7 @@ import {LogoutProvider} from "../../../providers/auth/logout/logout";
 })
 export class AccountPopoverPage {
 
-  constructor(private alertCtrl: AlertController, private logoutProvider: LogoutProvider,
-              public navCtrl: NavController) {
+  constructor(private alertCtrl: AlertController, public viewCtrl: ViewController) {
   }
 
   ionViewDidLoad() {
@@ -25,13 +22,14 @@ export class AccountPopoverPage {
       buttons: [
         {
           text: 'No',
+          handler: () => {
+            this.viewCtrl.dismiss({logout: false});
+          }
         },
         {
           text: 'Yes',
           handler: () => {
-            this.logoutProvider.logout().then(() => {
-              this.navCtrl.setRoot(LoginPage);
-            });
+            this.viewCtrl.dismiss({logout: true});
           }
         }
       ]

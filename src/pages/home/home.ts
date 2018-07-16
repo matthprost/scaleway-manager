@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import {NavController, PopoverController} from 'ionic-angular';
+import {Component} from '@angular/core';
+import {LoadingController, NavController, PopoverController} from 'ionic-angular';
 import {AccountPopoverPage} from "./account-popover/account-popover";
+import {LogoutProvider} from "../../providers/auth/logout/logout";
+import {LoginPage} from "../auth/login/login";
 
 @Component({
   selector: 'page-home',
@@ -8,7 +10,8 @@ import {AccountPopoverPage} from "./account-popover/account-popover";
 })
 export class HomePage {
 
-  constructor(public navCtrl: NavController, private popoverCtrl: PopoverController) {
+  constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
+              private logoutService: LogoutProvider, private loadingCtrl: LoadingController) {
   }
 
   account(ev: UIEvent) {
@@ -16,6 +19,19 @@ export class HomePage {
 
     popover.present({
       ev: ev
+    });
+    popover.onDidDismiss(result => {
+      if (result && result.logout) {
+        const loader = this.loadingCtrl.create({
+          content: "Please wait...",
+        });
+
+        loader.present();
+        this.logoutService.logout().then(() => {
+          loader.dismiss();
+          this.navCtrl.setRoot(LoginPage);
+        });
+      }
     });
   }
 

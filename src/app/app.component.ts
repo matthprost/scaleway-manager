@@ -22,8 +22,7 @@ export class MyApp {
   pages: Array<{ title: string, component: any, picture?: string, parameters?: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              private storage: Storage, private logoutProvider: LogoutProvider, public menu: MenuController,
-              public alertCtrl: AlertController) {
+              private storage: Storage, public menu: MenuController) {
     this.initializeApp();
 
     this.pages = [
@@ -73,26 +72,5 @@ export class MyApp {
     } else {
       this.nav.setRoot(page.component);
     }
-  }
-
-  logout() {
-
-    const confirm = this.alertCtrl.create({
-      title: 'Logout?',
-      message: 'Are you sure you want to logout?',
-      buttons: [
-        {
-          text: 'No',
-        },
-        {
-          text: 'Yes',
-          handler: () => {
-            this.logoutProvider.logout();
-            this.nav.setRoot(LoginPage);
-          }
-        }
-      ]
-    });
-    confirm.present();
   }
 }

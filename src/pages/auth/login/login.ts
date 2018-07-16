@@ -24,7 +24,6 @@ export class LoginPage {
   }
 
   login(loginForm: NgForm) {
-    console.log('kekkekek');
     if (!this.email || !this.password) {
       let message: Array<string> = [];
 
