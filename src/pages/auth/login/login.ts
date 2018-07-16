@@ -24,6 +24,7 @@ export class LoginPage {
   }
 
   login(loginForm: NgForm) {
+    console.log('kekkekek');
     if (!this.email || !this.password) {
       let message: Array<string> = [];
 
@@ -44,14 +45,12 @@ export class LoginPage {
       loader.present();
 
       this.auth.login(this.email, this.password)
-
         .then(result => {
           this.menu.swipeEnable(true);
           loader.dismiss();
 
           this.navCtrl.setRoot(HomePage);
         })
-
         .catch(error => {
           loader.dismiss();
 
@@ -64,10 +63,10 @@ export class LoginPage {
 
             toast.present();
           } else if (error.status === 403 && error.error.type === '2FA_error') {
-            this.navCtrl.push(DoubleAuthPage, { email: this.email, password: this.password })
+            this.navCtrl.push(DoubleAuthPage, { email: this.email, password: this.password });
           } else if (error.status === 403 && error.error.type === 'invalid_request_error') {
             const toast = this.toastCtrl.create({
-              message: 'Error: you have made too many attempts, please try again later',
+              message: 'Error: too many tokens are registered into your Scaleway account.',
               duration: 3000,
               position: 'top'
             });
