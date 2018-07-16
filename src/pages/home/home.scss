@@ -1,3 +1,23 @@
 page-home {
-
+  .background {
+    &-rect1 {
+      left: -300px;
+      height: 60px;
+      width: 600px;
+      background: color($colors, primary);
+      position: absolute;
+      z-index: -1;
+      transform: rotate(45deg);
+    }
+    &-rect2 {
+      top: 438px;
+      left: -260px;
+      height: 60px;
+      width: 600px;
+      background: color($colors, primary);
+      position: absolute;
+      z-index: -1;
+      transform: rotate(135deg);
+    }
+  }
 }

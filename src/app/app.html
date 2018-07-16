@@ -1,9 +1,9 @@
 <ion-menu [content]="content">
   <ion-content>
-    <ion-list>
+    <ion-list no-lines>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
-        <ion-thumbnail item-start *ngIf="p.picture" no-margin>
-          <img src="{{ p.picture ? p.picture : null }}">
+        <ion-thumbnail item-start no-margin>
+          <img *ngIf="p.picture" src="{{ p.picture ? p.picture : null }}">
         </ion-thumbnail>
         {{p.title}}
       </button>

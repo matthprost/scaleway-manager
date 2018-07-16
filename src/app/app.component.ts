@@ -7,7 +7,6 @@ import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/auth/login/login';
 import {AuthTokenDto} from "../providers/auth/auth-tokens.dto";
 import {Storage} from '@ionic/storage';
-import {LogoutProvider} from "../providers/auth/logout/logout";
 import {ServerPage} from "../pages/server/server";
 
 
@@ -19,7 +18,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{ title: string, component: any, picture?: string, parameters?: any }>;
+  pages: Array<{ title: string, component: any, picture?: string, icon?: string, parameters?: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, public menu: MenuController) {
@@ -28,7 +27,8 @@ export class MyApp {
     this.pages = [
       {
         title: 'Home',
-        component: HomePage
+        component: HomePage,
+        picture: ''
       },
       {
         title: 'Paris',
