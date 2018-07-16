@@ -1,5 +1,8 @@
 page-home {
   .background {
+    margin: auto;
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
     &-rect1 {
       left: -300px;
       height: 60px;
@@ -10,7 +13,7 @@ page-home {
       transform: rotate(45deg);
     }
     &-rect2 {
-      top: 438px;
+      top: 422px;
       left: -260px;
       height: 60px;
       width: 600px;
