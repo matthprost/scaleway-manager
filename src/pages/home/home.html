@@ -16,7 +16,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content margin-top no-bounce>
+<ion-content no-bounce>
   <div class="background">
     <div [class]="rect" class=""></div>
   </div>
@@ -30,7 +30,8 @@
           </ion-card-header>
 
           <ion-card-content>
-            Here you can manage all your VPS from Scaleway
+            Here you can manage all your VPS from Scaleway.
+            This is not an official Scaleway Application.
           </ion-card-content>
 
         </ion-card>
@@ -45,7 +46,7 @@
           </ion-card-header>
 
           <ion-card-content class="card-stat" text-center>
-            0
+            {{ nbrServParis }}
           </ion-card-content>
 
         </ion-card>
@@ -58,7 +59,7 @@
           </ion-card-header>
 
           <ion-card-content class="card-stat" text-center>
-            2
+            {{ nbrServNetherlands }}
           </ion-card-content>
 
         </ion-card>
@@ -69,11 +70,14 @@
         <ion-card>
 
           <ion-card-header text-center>
-            Older
+            Oldest
           </ion-card-header>
 
-          <ion-card-content text-center>
-            VPN
+          <ion-card-content class="card-stat2" *ngIf="oldestServer" text-center>
+            {{ oldestServer.name }}
+            <small class="small-card">
+              {{ oldestServer.creation_date | date:'dd/MM/yy, H:mm' }}
+            </small>
           </ion-card-content>
 
         </ion-card>
@@ -85,8 +89,11 @@
             Powerfull
           </ion-card-header>
 
-          <ion-card-content text-center>
-            VPN
+          <ion-card-content class="card-stat2" *ngIf="powerfulServer" text-center>
+            {{ powerfulServer.name }}
+            <small class="small-card">
+              {{ powerfulServer.commercial_type }}
+            </small>
           </ion-card-content>
 
         </ion-card>

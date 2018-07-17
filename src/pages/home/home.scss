@@ -1,8 +1,8 @@
 page-home {
   .background {
     &-rect {
-      left: -200px;
-      top: 55vh;
+      left: -210px;
+      top: 60vh;
       height: 400px;
       width: 400px;
       background: transparent;
@@ -39,7 +39,7 @@ page-home {
   }
 
   .card-appear {
-    animation: card-appear .5s ease-in-out;
+    animation: card-appear .35s ease-in-out;
   }
 
   .card-cont {
@@ -59,5 +59,17 @@ page-home {
       font-weight: lighter;
       color: color($colors, dark);
     }
+    &-stat2 {
+      font-size: 1.8rem;
+      font-weight: lighter;
+      color: color($colors, dark);
+    }
+  }
+
+  .small-card {
+    display: block;
+    color: dimgray;
+    font-size: 1.4rem;
+    margin-top: .5rem;
   }
 }

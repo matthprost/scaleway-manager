@@ -17,6 +17,7 @@ import {PipesModule} from "../pipes/pipes.module";
 import {Clipboard} from "@ionic-native/clipboard";
 import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
 import {AccountPopoverPage} from "../pages/home/account-popover/account-popover";
+import {DirectivesModule} from "../directives/directives.module";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import {AccountPopoverPage} from "../pages/home/account-popover/account-popover"
     ProvidersModule,
     IonicStorageModule.forRoot(),
     PipesModule,
+    DirectivesModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
