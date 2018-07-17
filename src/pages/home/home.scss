@@ -26,16 +26,21 @@ page-home {
   }
 
   .rect-scale {
-    animation: rect-scale .75s ease-in-out;
+    animation: rect-scale .8s ease-in-out;
   }
 
   .card {
     margin: 3px;
     width: auto;
     img {
-      height: 27px;
-      width: 27px;
+      height: 20px;
+      width: 20px;
       margin: 0 auto;
+    }
+    &-stat {
+      font-size: 3.6rem;
+      font-weight: lighter;
+      color: color($colors, dark);
     }
   }
 }
