@@ -16,14 +16,66 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding margin-top>
+<ion-content margin-top no-bounce>
   <div class="background">
-    <div class="background-rect1"></div>
-    <div class="background-rect2"></div>
+    <div class="background-rect rect-scale"></div>
   </div>
-  <h3 text-center>Welcome!</h3>
+  <ion-grid>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card>
 
-  <p>
-    Here you can start manage your Scaleway server. First open the menu on left and choose your server country.
-  </p>
+          <ion-card-header text-center>
+            <img src="/assets/imgs/france.svg">
+          </ion-card-header>
+
+          <ion-card-content>
+            <!-- Add card content here! -->
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card>
+
+          <ion-card-header text-center>
+            Card Header
+          </ion-card-header>
+
+          <ion-card-content>
+            2
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col col-6>
+        <ion-card>
+
+          <ion-card-header>
+            Card Header
+          </ion-card-header>
+
+          <ion-card-content>
+            <!-- Add card content here! -->
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+      <ion-col col-6>
+        <ion-card>
+
+          <ion-card-header>
+            Card Header
+          </ion-card-header>
+
+          <ion-card-content>
+            <!-- Add card content here! -->
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>

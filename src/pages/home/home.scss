@@ -1,23 +1,41 @@
 page-home {
   .background {
-    &-rect1 {
-      left: -300px;
-      height: 60px;
-      width: 600px;
-      background: color($colors, primary);
+    &-rect {
+      left: -200px;
+      top: 55vh;
+      height: 400px;
+      width: 400px;
+      background: transparent;
+      border-right: 65px solid color($colors, primary);
+      border-top: 65px solid color($colors, primary);
       position: absolute;
       z-index: -1;
-      transform: rotate(45deg);
+      transform: rotate(45deg) translateX(-50%) translateY(-50%);
     }
-    &-rect2 {
-      top: 438px;
-      left: -260px;
-      height: 60px;
-      width: 600px;
-      background: color($colors, primary);
-      position: absolute;
-      z-index: -1;
-      transform: rotate(135deg);
+  }
+
+  @keyframes rect-scale {
+    0% {
+      border-right: 0px solid color($colors, primary);
+      border-top: 0px solid color($colors, primary);
+    }
+    100% {
+      border-right: 65px solid color($colors, primary);
+      border-top: 65px solid color($colors, primary);
+    }
+  }
+
+  .rect-scale {
+    animation: rect-scale .75s ease-in-out;
+  }
+
+  .card {
+    margin: 3px;
+    width: auto;
+    img {
+      height: 27px;
+      width: 27px;
+      margin: 0 auto;
     }
   }
 }
