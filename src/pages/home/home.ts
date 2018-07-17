@@ -10,8 +10,16 @@ import {LoginPage} from "../auth/login/login";
 })
 export class HomePage {
 
+  public classAppear: string = 'card-cont';
+  public rect: string = '';
+
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController) {
+
+    this.rect = 'background-rect rect-scale';
+    setTimeout(() => {
+      this.classAppear = 'card-appear';
+    }, 600);
   }
 
   account(ev: UIEvent) {

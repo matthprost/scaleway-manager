@@ -18,11 +18,11 @@
 
 <ion-content margin-top no-bounce>
   <div class="background">
-    <div class="background-rect rect-scale"></div>
+    <div [class]="rect" class=""></div>
   </div>
   <ion-grid>
     <ion-row>
-      <ion-col col-12>
+      <ion-col [class]="classAppear" col-12>
         <ion-card>
 
           <ion-card-header text-center>
@@ -37,7 +37,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-6>
+      <ion-col [class]="classAppear" col-6>
         <ion-card>
 
           <ion-card-header>
@@ -50,7 +50,7 @@
 
         </ion-card>
       </ion-col>
-      <ion-col col-6>
+      <ion-col [class]="classAppear" col-6>
         <ion-card>
 
           <ion-card-header>
@@ -65,7 +65,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col col-6>
+      <ion-col [class]="classAppear" col-6>
         <ion-card>
 
           <ion-card-header text-center>
@@ -78,7 +78,7 @@
 
         </ion-card>
       </ion-col>
-      <ion-col col-6>
+      <ion-col [class]="classAppear" col-6>
         <ion-card>
 
           <ion-card-header text-center>

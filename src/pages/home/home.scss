@@ -25,8 +25,25 @@ page-home {
     }
   }
 
+  @keyframes card-appear {
+    0% {
+      transform: scale(0);
+    }
+    100% {
+      transform: scale(1);
+    }
+  }
+
   .rect-scale {
-    animation: rect-scale .8s ease-in-out;
+    animation: rect-scale .6s ease-in-out;
+  }
+
+  .card-appear {
+    animation: card-appear .6s ease-in-out;
+  }
+
+  .card-cont {
+    opacity: 0;
   }
 
   .card {
