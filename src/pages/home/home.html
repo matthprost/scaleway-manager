@@ -37,7 +37,7 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col [class]="classAppear" col-6>
+      <ion-col [class]="classAppear" (click)="navigate('paris')" col-6>
         <ion-card>
 
           <ion-card-header>
@@ -50,7 +50,7 @@
 
         </ion-card>
       </ion-col>
-      <ion-col [class]="classAppear" col-6>
+      <ion-col [class]="classAppear" (click)="navigate('netherlands')" col-6>
         <ion-card>
 
           <ion-card-header>

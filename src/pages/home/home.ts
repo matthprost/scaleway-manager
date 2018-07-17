@@ -3,6 +3,7 @@ import {LoadingController, NavController, PopoverController} from 'ionic-angular
 import {AccountPopoverPage} from "./account-popover/account-popover";
 import {LogoutProvider} from "../../providers/auth/logout/logout";
 import {LoginPage} from "../auth/login/login";
+import {ServerPage} from "../server/server";
 
 @Component({
   selector: 'page-home',
@@ -15,11 +16,13 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController) {
+  }
 
+  ionViewDidLoad() {
     this.rect = 'background-rect rect-scale';
     setTimeout(() => {
       this.classAppear = 'card-appear';
-    }, 600);
+    }, 500);
   }
 
   account(ev: UIEvent) {
@@ -41,6 +44,17 @@ export class HomePage {
         });
       }
     });
+  }
+
+  navigate(location: string) {
+    switch (location) {
+      case 'paris' :
+        this.navCtrl.setRoot(ServerPage, {server: 'Paris'});
+        break;
+      case 'netherlands' :
+        this.navCtrl.setRoot(ServerPage, {server: 'Netherlands'});
+        break;
+    }
   }
 
 }
