@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, NavController, PopoverController} from 'ionic-angular';
+import {AlertController, LoadingController, NavController, PopoverController} from 'ionic-angular';
 import {AccountPopoverPage} from "./account-popover/account-popover";
 import {LogoutProvider} from "../../providers/auth/logout/logout";
 import {LoginPage} from "../auth/login/login";
@@ -29,7 +29,7 @@ export class HomePage {
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController,
               private storage: Storage, private serversProvider: ServersProvider,
-              private stats: HomeStatsDirective) {
+              private stats: HomeStatsDirective, public alertCtrl: AlertController) {
   }
 
   ionViewDidLoad() {
@@ -126,5 +126,25 @@ export class HomePage {
   public navigateServ(serverInfo: { server: ServerDto, country: string }) {
     this.navCtrl.push(ShowServerPage, {server: serverInfo.server, serverCountry: serverInfo.country});
   }
+
+  openWebSite() {
+    const confirm = this.alertCtrl.create({
+      title: 'Warning',
+      message: 'It will open your web browser, are you sure ?',
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            window.open('https://matthias-prost.com', '_system', 'location=yes');
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
 
 }
