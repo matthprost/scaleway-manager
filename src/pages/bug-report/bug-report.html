@@ -3,9 +3,9 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title><ion-icon name="mail" color="primary"></ion-icon>
+    <ion-title><ion-icon name="bug" color="primary"></ion-icon>
       <div class="logo-text">
-        <div class="logo-title"> Contact</div>
+        <div class="logo-title"> Bug Report</div>
       </div>
     </ion-title>
   </ion-navbar>
@@ -19,7 +19,7 @@
 
           <ion-card-content text-center>
             <div class="message">This is not an official Scaleway Application</div>
-            If you have questions about Scaleway or your VPS please directly use Scaleway support.
+            Make sure to report only bugs liked to the application and only the application.
           </ion-card-content>
 
         </ion-card>
@@ -30,14 +30,6 @@
       <ion-col>
         <ion-list>
           <form (ngSubmit)="sendMail(mailForm)" #mailForm="ngForm">
-            <ion-item class="background-transparent">
-              <ion-label>Subject</ion-label>
-              <ion-select name="subject" [(ngModel)]="subject">
-                <ion-option value="Improvement">Improvement</ion-option>
-                <ion-option value="Question">Question</ion-option>
-                <ion-option value="Other">Other</ion-option>
-              </ion-select>
-            </ion-item>
             <ion-row>
               <ion-item class="background-transparent" margin-top>
                 <ion-textarea placeholder="Enter your message" name="message" [(ngModel)]="message"></ion-textarea>

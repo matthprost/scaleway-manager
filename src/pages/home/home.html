@@ -108,9 +108,9 @@
   <ion-fab right bottom #fab>
     <button ion-fab color="primary"><ion-icon name="help-buoy"></ion-icon></button>
     <ion-fab-list side="left">
-      <button ion-fab color="grey"><ion-icon name="bug"></ion-icon></button>
+      <button ion-fab color="grey" (click)="navigate('bug', fab)"><ion-icon name="bug"></ion-icon></button>
       <button ion-fab color="grey" (click)="navigate('contact', fab)"><ion-icon name="mail"></ion-icon></button>
-      <button ion-fab color="grey" (click)="openWebSite()"><ion-icon name="globe"></ion-icon></button>
+      <button ion-fab color="grey" (click)="openWebSite(fab)"><ion-icon name="globe"></ion-icon></button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

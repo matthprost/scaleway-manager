@@ -22,6 +22,7 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import {AboutPage} from "../pages/about/about";
 import {ContactPage} from "../pages/contact/contact";
 import {EmailComposer} from "@ionic-native/email-composer";
+import {BugReportPage} from "../pages/bug-report/bug-report";
 
 @NgModule({
   declarations: [
@@ -34,7 +35,8 @@ import {EmailComposer} from "@ionic-native/email-composer";
     ServerActionsPage,
     AccountPopoverPage,
     AboutPage,
-    ContactPage
+    ContactPage,
+    BugReportPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +57,8 @@ import {EmailComposer} from "@ionic-native/email-composer";
     ServerActionsPage,
     AccountPopoverPage,
     AboutPage,
-    ContactPage
+    ContactPage,
+    BugReportPage
   ],
   providers: [
     StatusBar,

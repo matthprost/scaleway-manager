@@ -11,6 +11,7 @@ import {ServerDto} from "../../providers/servers/server.dto";
 import {HomeStatsDirective} from "../../directives/home-stats/home-stats";
 import {ShowServerPage} from "../server/show-server/show-server";
 import {ContactPage} from "../contact/contact";
+import {BugReportPage} from "../bug-report/bug-report";
 
 @Component({
   selector: 'page-home',
@@ -125,6 +126,10 @@ export class HomePage {
         fab.close();
         this.navCtrl.push(ContactPage);
         break;
+      case 'bug' :
+        fab.close();
+        this.navCtrl.push(BugReportPage);
+        break;
     }
   }
 
@@ -132,7 +137,7 @@ export class HomePage {
     this.navCtrl.push(ShowServerPage, {server: serverInfo.server, serverCountry: serverInfo.country});
   }
 
-  openWebSite() {
+  openWebSite(fab: FabContainer) {
     const confirm = this.alertCtrl.create({
       title: 'Warning',
       message: 'It will open your web browser, are you sure ?',
@@ -143,6 +148,7 @@ export class HomePage {
         {
           text: 'Ok',
           handler: () => {
+            fab.close();
             window.open('https://matthias-prost.com', '_system', 'location=yes');
           }
         }

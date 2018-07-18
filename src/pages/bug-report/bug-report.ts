@@ -1,15 +1,14 @@
-import {Component} from '@angular/core';
+import { Component } from '@angular/core';
 import {LoadingController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
 import {NgForm} from "@angular/forms";
 import {EmailComposer} from "@ionic-native/email-composer";
 
 @Component({
-  selector: 'page-contact',
-  templateUrl: 'contact.html',
+  selector: 'page-bug-report',
+  templateUrl: 'bug-report.html',
 })
-export class ContactPage {
+export class BugReportPage {
 
-  public subject: string = null;
   public message: string = null;
 
   constructor(public platform: Platform, public navCtrl: NavController,
@@ -26,13 +25,13 @@ export class ContactPage {
       content: "Please wait...",
     });
 
-    if (this.subject && this.message) {
+    if (this.message) {
       if (this.platform.is('cordova')) {
         loader.present();
 
         let email = {
-          to: 'contact@matthias-prost.com',
-          subject: '[Scaleway Manager][CONTACT]: ' + this.subject,
+          to: 'bug-report@matthias-prost.com',
+          subject: '[Scaleway Manager][BUG]: I found a bug',
           body: this.message,
           isHtml: true
         };
@@ -53,7 +52,7 @@ export class ContactPage {
       }
     } else {
       const toast = this.toastCtrl.create({
-        message: 'Error: subject or message is empty, please try again',
+        message: 'Error: message is empty, please try again',
         duration: 3000,
         position: 'top'
       });
