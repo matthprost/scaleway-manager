@@ -70,3 +70,15 @@ ion-header {
 .refresher-active {
   background: white;
 }
+
+.menu {
+  background: white;
+  &-list {
+    margin-top: 44px;
+  }
+}
+
+.menu-content-open {
+  filter: blur(.5px);
+  transition: all .3s linear;
+}
