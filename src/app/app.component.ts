@@ -8,6 +8,7 @@ import {LoginPage} from '../pages/auth/login/login';
 import {AuthTokenDto} from "../providers/auth/auth-tokens.dto";
 import {Storage} from '@ionic/storage';
 import {ServerPage} from "../pages/server/server";
+import {ScreenOrientation} from "@ionic-native/screen-orientation";
 
 
 
@@ -22,7 +23,7 @@ export class MyApp {
   pages: Array<{ title: string, component: any, picture?: string, icon?: string, parameters?: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              private storage: Storage, public menu: MenuController) {
+              private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation) {
     this.initializeApp();
 
     this.pages = [
@@ -53,6 +54,7 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
 
       this.menu.swipeEnable(false);
+      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
 
       this.storage.get('token').then((val: AuthTokenDto) => {
         if (val) {

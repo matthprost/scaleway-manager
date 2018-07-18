@@ -18,6 +18,7 @@ import {Clipboard} from "@ionic-native/clipboard";
 import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
 import {AccountPopoverPage} from "../pages/home/account-popover/account-popover";
 import {DirectivesModule} from "../directives/directives.module";
+import { ScreenOrientation } from '@ionic-native/screen-orientation';
 
 @NgModule({
   declarations: [
@@ -54,6 +55,7 @@ import {DirectivesModule} from "../directives/directives.module";
     SplashScreen,
     Clipboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
+    ScreenOrientation
   ]
 })
 export class AppModule {}
