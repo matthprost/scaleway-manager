@@ -20,6 +20,8 @@ import {AccountPopoverPage} from "../pages/home/account-popover/account-popover"
 import {DirectivesModule} from "../directives/directives.module";
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
 import {AboutPage} from "../pages/about/about";
+import {ContactPage} from "../pages/contact/contact";
+import {EmailComposer} from "@ionic-native/email-composer";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,8 @@ import {AboutPage} from "../pages/about/about";
     ShowServerPage,
     ServerActionsPage,
     AccountPopoverPage,
-    AboutPage
+    AboutPage,
+    ContactPage
   ],
   imports: [
     BrowserModule,
@@ -51,14 +54,16 @@ import {AboutPage} from "../pages/about/about";
     ShowServerPage,
     ServerActionsPage,
     AccountPopoverPage,
-    AboutPage
+    AboutPage,
+    ContactPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
     Clipboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
-    ScreenOrientation
+    ScreenOrientation,
+    EmailComposer
   ]
 })
 export class AppModule {}

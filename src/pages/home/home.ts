@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, LoadingController, NavController, PopoverController} from 'ionic-angular';
+import {AlertController, FabContainer, LoadingController, NavController, PopoverController} from 'ionic-angular';
 import {AccountPopoverPage} from "./account-popover/account-popover";
 import {LogoutProvider} from "../../providers/auth/logout/logout";
 import {LoginPage} from "../auth/login/login";
@@ -10,6 +10,7 @@ import {ServersProvider} from "../../providers/servers/servers";
 import {ServerDto} from "../../providers/servers/server.dto";
 import {HomeStatsDirective} from "../../directives/home-stats/home-stats";
 import {ShowServerPage} from "../server/show-server/show-server";
+import {ContactPage} from "../contact/contact";
 
 @Component({
   selector: 'page-home',
@@ -112,13 +113,17 @@ export class HomePage {
     });
   }
 
-  public navigate(location: string) {
+  public navigate(location: string, fab?: FabContainer) {
     switch (location) {
       case 'paris' :
         this.navCtrl.setRoot(ServerPage, {server: 'Paris'});
         break;
       case 'netherlands' :
         this.navCtrl.setRoot(ServerPage, {server: 'Netherlands'});
+        break;
+      case 'contact' :
+        fab.close();
+        this.navCtrl.push(ContactPage);
         break;
     }
   }

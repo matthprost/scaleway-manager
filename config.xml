@@ -94,4 +94,5 @@
     <plugin name="cordova-clipboard" spec="^1.2.1" />
     <engine name="browser" spec="~5.0.3" />
     <plugin name="cordova-plugin-screen-orientation" spec="^3.0.1" />
+    <plugin name="cordova-plugin-email-composer" spec="^0.8.15" />
 </widget>
