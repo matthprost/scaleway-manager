@@ -109,7 +109,6 @@ export class HomeStatsDirective {
       if (!powerfulServer) {
         powerfulServer = server;
       } else {
-        console.log(this.commercialTypeValue(server.commercial_type));
           if (this.commercialTypeValue(server.commercial_type) > this.commercialTypeValue(powerfulServer.commercial_type)) {
             powerfulServer = server;
           }

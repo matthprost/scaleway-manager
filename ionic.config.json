@@ -4,5 +4,19 @@
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
-  }
+  },
+  "proxies": [
+    {
+      "path": "/account",
+      "proxyUrl": "https://account.scaleway.com"
+    },
+    {
+      "path": "/paris",
+      "proxyUrl": "https://cp-par1.scaleway.com"
+    },
+    {
+      "path": "/netherlands",
+      "proxyUrl": "https://cp-ams1.scaleway.com"
+    }
+  ]
 }

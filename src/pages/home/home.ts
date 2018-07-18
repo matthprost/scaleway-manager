@@ -46,7 +46,6 @@ export class HomePage {
         this.allServers = this.allServers.concat(result.servers);
         this.oldestServer = this.stats.whatIsTheOldest(this.allServers);
         this.powerfulServer = this.stats.whatIsThePowerfull(this.allServers);
-        console.log(this.powerfulServer);
         this.classAppear = 'card-appear';
       }).catch(error => {
         console.log(error);
