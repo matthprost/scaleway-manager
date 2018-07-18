@@ -19,6 +19,7 @@ import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
 import {AccountPopoverPage} from "../pages/home/account-popover/account-popover";
 import {DirectivesModule} from "../directives/directives.module";
 import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import {AboutPage} from "../pages/about/about";
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     ServerPage,
     ShowServerPage,
     ServerActionsPage,
-    AccountPopoverPage
+    AccountPopoverPage,
+    AboutPage
   ],
   imports: [
     BrowserModule,
@@ -48,7 +50,8 @@ import { ScreenOrientation } from '@ionic-native/screen-orientation';
     ServerPage,
     ShowServerPage,
     ServerActionsPage,
-    AccountPopoverPage
+    AccountPopoverPage,
+    AboutPage
   ],
   providers: [
     StatusBar,

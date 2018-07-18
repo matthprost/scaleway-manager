@@ -9,6 +9,7 @@ import {AuthTokenDto} from "../providers/auth/auth-tokens.dto";
 import {Storage} from '@ionic/storage';
 import {ServerPage} from "../pages/server/server";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {AboutPage} from "../pages/about/about";
 
 
 
@@ -43,6 +44,11 @@ export class MyApp {
         component: ServerPage,
         picture: '/assets/imgs/netherlands.svg',
         parameters: {country: 'Amsterdam'}
+      },
+      {
+        title: 'About',
+        component: AboutPage,
+        picture: '',
       }
     ];
 
