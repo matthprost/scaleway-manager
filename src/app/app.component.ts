@@ -54,7 +54,9 @@ export class MyApp {
       // Here you can do any higher level native things you might need.
 
       this.menu.swipeEnable(false);
-      this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      if (this.platform.is('cordova')) {
+        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      }
 
       this.storage.get('token').then((val: AuthTokenDto) => {
         if (val) {

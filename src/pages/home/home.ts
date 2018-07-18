@@ -23,6 +23,8 @@ export class HomePage {
   private allServers: Array<ServerDto> = [];
   public oldestServer: ServerDto;
   public powerfulServer: ServerDto;
+  public oldestServerState: string;
+  public powerfulServerState: string;
 
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController,
@@ -52,6 +54,36 @@ export class HomePage {
       });
 
     });
+  }
+
+  public setState(server: ServerDto): string {
+    switch (server.state) {
+      case 'stopped':
+        return 'red';
+      case 'running':
+        return '#27c295';
+      case 'stopping':
+        return 'orange';
+      case 'starting':
+        return 'orange';
+      default:
+        return 'gray';
+    }
+  }
+
+  public setClass(server: ServerDto): string {
+    switch (server.state) {
+      case 'stopped':
+        return 'state';
+      case 'running':
+        return 'state';
+      case 'stopping':
+        return 'blinker';
+      case 'starting':
+        return 'blinker';
+      default:
+        return 'state';
+    }
   }
 
   account(ev: UIEvent) {

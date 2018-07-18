@@ -74,6 +74,8 @@
           </ion-card-header>
 
           <ion-card-content class="card-stat2" *ngIf="oldestServer" text-center>
+            <img src="{{ oldestServer.image.name | serverIcon }}" margin-bottom>
+            <div [class]='setClass(oldestServer)' [style.background]="setState(oldestServer)"></div>
             {{ oldestServer.name }}
             <small class="small-card">
               {{ oldestServer.creation_date | date:'dd/MM/yy, H:mm' }}
@@ -90,6 +92,8 @@
           </ion-card-header>
 
           <ion-card-content class="card-stat2" *ngIf="powerfulServer" text-center>
+            <img src="{{ powerfulServer.image.name | serverIcon }}" margin-bottom>
+            <div [class]='setClass(powerfulServer)' [style.background]="setState(powerfulServer)"></div>
             {{ powerfulServer.name }}
             <small class="small-card">
               {{ powerfulServer.commercial_type }}
