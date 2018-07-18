@@ -38,8 +38,8 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col [class]="classAppear" (click)="navigate('paris')" col-6>
-        <ion-card>
+      <ion-col [class]="classAppear" col-6>
+        <ion-card (click)="navigate('paris')">
 
           <ion-card-header>
             <img src="/assets/imgs/france.svg">
@@ -51,8 +51,8 @@
 
         </ion-card>
       </ion-col>
-      <ion-col [class]="classAppear" (click)="navigate('netherlands')" col-6>
-        <ion-card>
+      <ion-col [class]="classAppear" col-6>
+        <ion-card (click)="navigate('netherlands')">
 
           <ion-card-header>
             <img src="/assets/imgs/netherlands.svg">
@@ -66,37 +66,37 @@
       </ion-col>
     </ion-row>
     <ion-row>
-      <ion-col [class]="classAppear" col-6>
-        <ion-card>
+      <ion-col [class]="classAppear" *ngIf="oldestServer && oldestServer.server" col-6>
+        <ion-card (click)="navigateServ(oldestServer)">
 
           <ion-card-header text-center>
             Oldest
           </ion-card-header>
 
-          <ion-card-content class="card-stat2" *ngIf="oldestServer" text-center>
-            <img src="{{ oldestServer.image.name | serverIcon }}" margin-bottom>
-            <div [class]='setClass(oldestServer)' [style.background]="setState(oldestServer)"></div>
-            {{ oldestServer.name }}
+          <ion-card-content class="card-stat2" text-center>
+            <img src="{{ oldestServer.server.image.name | serverIcon }}" margin-bottom>
+            <div [class]='setClass(oldestServer.server)' [style.background]="setState(oldestServer.server)"></div>
+            {{ oldestServer.server.name }}
             <small class="small-card">
-              {{ oldestServer.creation_date | date:'dd/MM/yy, H:mm' }}
+              {{ oldestServer.server.creation_date | date:'dd/MM/yy, H:mm' }}
             </small>
           </ion-card-content>
 
         </ion-card>
       </ion-col>
-      <ion-col [class]="classAppear" col-6>
-        <ion-card>
+      <ion-col [class]="classAppear" *ngIf="powerfulServer && powerfulServer.server" col-6>
+        <ion-card (click)="navigateServ(powerfulServer)">
 
           <ion-card-header text-center>
             Powerfull
           </ion-card-header>
 
-          <ion-card-content class="card-stat2" *ngIf="powerfulServer" text-center>
-            <img src="{{ powerfulServer.image.name | serverIcon }}" margin-bottom>
-            <div [class]='setClass(powerfulServer)' [style.background]="setState(powerfulServer)"></div>
-            {{ powerfulServer.name }}
+          <ion-card-content class="card-stat2" text-center>
+            <img src="{{ powerfulServer.server.image.name | serverIcon }}" margin-bottom>
+            <div [class]='setClass(powerfulServer.server)' [style.background]="setState(powerfulServer.server)"></div>
+            {{ powerfulServer.server.name }}
             <small class="small-card">
-              {{ powerfulServer.commercial_type }}
+              {{ powerfulServer.server.commercial_type }}
             </small>
           </ion-card-content>
 

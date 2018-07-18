@@ -9,6 +9,7 @@ import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {ServersProvider} from "../../providers/servers/servers";
 import {ServerDto} from "../../providers/servers/server.dto";
 import {HomeStatsDirective} from "../../directives/home-stats/home-stats";
+import {ShowServerPage} from "../server/show-server/show-server";
 
 @Component({
   selector: 'page-home',
@@ -20,11 +21,10 @@ export class HomePage {
   public rect: string = '';
   public nbrServParis: number = 0;
   public nbrServNetherlands: number = 0;
-  private allServers: Array<ServerDto> = [];
-  public oldestServer: ServerDto;
-  public powerfulServer: ServerDto;
-  public oldestServerState: string;
-  public powerfulServerState: string;
+  private parisServers: Array<ServerDto> = [];
+  private netherlandsServers: Array<ServerDto> = [];
+  public oldestServer: { server: ServerDto, country: string };
+  public powerfulServer: { server: ServerDto, country: string };
 
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController,
@@ -38,16 +38,16 @@ export class HomePage {
 
       this.serversProvider.getAllServers('Paris', token.token.id).then(result => {
         this.nbrServParis = result.servers.length;
-        this.allServers = this.allServers.concat(result.servers);
+        this.parisServers = result.servers;
       }).catch(error => {
         console.log(error);
       });
 
       this.serversProvider.getAllServers('Netherlands', token.token.id).then(result => {
         this.nbrServNetherlands = result.servers.length;
-        this.allServers = this.allServers.concat(result.servers);
-        this.oldestServer = this.stats.whatIsTheOldest(this.allServers);
-        this.powerfulServer = this.stats.whatIsThePowerfull(this.allServers);
+        this.netherlandsServers = result.servers;
+        this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
+        this.powerfulServer = this.stats.whatIsThePowerfull(this.parisServers, this.netherlandsServers);
         this.classAppear = 'card-appear';
       }).catch(error => {
         console.log(error);
@@ -110,7 +110,7 @@ export class HomePage {
     });
   }
 
-  navigate(location: string) {
+  public navigate(location: string) {
     switch (location) {
       case 'paris' :
         this.navCtrl.setRoot(ServerPage, {server: 'Paris'});
@@ -119,6 +119,10 @@ export class HomePage {
         this.navCtrl.setRoot(ServerPage, {server: 'Netherlands'});
         break;
     }
+  }
+
+  public navigateServ(serverInfo: { server: ServerDto, country: string }) {
+    this.navCtrl.push(ShowServerPage, {server: serverInfo.server, serverCountry: serverInfo.country});
   }
 
 }

@@ -10,24 +10,6 @@ export class HomeStatsDirective {
     //
   }
 
-  public whatIsTheOldest(servers: Array<ServerDto>): ServerDto {
-    let olderServer: ServerDto = null;
-
-    servers.forEach(server => {
-      if (!olderServer) {
-        olderServer = server;
-      } else {
-        const d1 = new Date(olderServer.creation_date);
-        const d2 = new Date(server.creation_date);
-        if (d2 < d1) {
-          olderServer = server;
-        }
-      }
-    });
-
-    return (olderServer);
-  }
-
   private commercialTypeValue(commercialType: string) {
     let value = 0;
 
@@ -102,20 +84,71 @@ export class HomeStatsDirective {
     return (value);
   }
 
-  public whatIsThePowerfull(servers: Array<ServerDto>): ServerDto {
-    let powerfulServer: ServerDto = null;
+  public whatIsTheOldest(paris: Array<ServerDto>, netherlands: Array<ServerDto>): { server: ServerDto, country: string } {
+    let oldestServer: ServerDto = null;
+    let country: string = null;
 
-    servers.forEach(server => {
-      if (!powerfulServer) {
-        powerfulServer = server;
+    paris.forEach(server => {
+      if (!oldestServer) {
+        oldestServer = server;
+        country = 'Paris';
       } else {
-          if (this.commercialTypeValue(server.commercial_type) > this.commercialTypeValue(powerfulServer.commercial_type)) {
-            powerfulServer = server;
-          }
+        const d1 = new Date(oldestServer.creation_date);
+        const d2 = new Date(server.creation_date);
+        if (d2 < d1) {
+          oldestServer = server;
+          country = 'Paris';
+        }
       }
     });
 
-    return (powerfulServer);
+    netherlands.forEach(server => {
+      if (!oldestServer) {
+        oldestServer = server;
+        country = 'Netherlands';
+      } else {
+        const d1 = new Date(oldestServer.creation_date);
+        const d2 = new Date(server.creation_date);
+        if (d2 < d1) {
+          oldestServer = server;
+          country = 'Netherlands';
+        }
+      }
+    });
+
+    console.log('country (oldest)', country);
+    return ({server: oldestServer, country: country});
+  }
+
+  public whatIsThePowerfull(paris: Array<ServerDto>, netherlands: Array<ServerDto>): { server: ServerDto, country: string } {
+    let powerfulServer: ServerDto = null;
+    let country: string = null;
+
+    paris.forEach(server => {
+      if (!powerfulServer) {
+        powerfulServer = server;
+        country = 'Paris';
+      } else {
+        if (this.commercialTypeValue(server.commercial_type) > this.commercialTypeValue(powerfulServer.commercial_type)) {
+          powerfulServer = server;
+          country = 'Paris';
+        }
+      }
+    });
+
+    netherlands.forEach(server => {
+      if (!powerfulServer) {
+        powerfulServer = server;
+        country = 'Netherlands';
+      } else {
+        if (this.commercialTypeValue(server.commercial_type) > this.commercialTypeValue(powerfulServer.commercial_type)) {
+          powerfulServer = server;
+          country = 'Netherlands';
+        }
+      }
+    });
+    
+    return ({server: powerfulServer, country: country});
   }
 
 }
