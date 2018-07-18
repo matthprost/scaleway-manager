@@ -27,9 +27,15 @@ export class LogoutProvider {
 
               reject(error);
             })
-        }).catch(error => {
-          console.log(error);
+        }).catch(() => {
+          this.storage.remove('token').then(result => {
+            resolve(result);
+          }).catch(error => {
+            reject(error);
+          });
         });
+      }).catch(error => {
+        reject(error);
       })
     });
   }

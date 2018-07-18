@@ -70,6 +70,9 @@ export class HomePage {
         this.logoutService.logout().then(() => {
           loader.dismiss();
           this.navCtrl.setRoot(LoginPage);
+        }).catch(error => {
+          loader.dismiss();
+          console.log(error);
         });
       }
     });
