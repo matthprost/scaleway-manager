@@ -21,8 +21,8 @@ export class HomePage {
   public rect: string = '';
   public nbrServParis: number = 0;
   public nbrServNetherlands: number = 0;
-  private parisServers: Array<ServerDto> = [];
-  private netherlandsServers: Array<ServerDto> = [];
+  private parisServers: Array<ServerDto> = null;
+  private netherlandsServers: Array<ServerDto> = null;
   public oldestServer: { server: ServerDto, country: string };
   public powerfulServer: { server: ServerDto, country: string };
 
@@ -36,23 +36,25 @@ export class HomePage {
     this.rect = 'background-rect rect-scale';
     this.storage.get('token').then((token: AuthTokenDto) => {
 
-      this.serversProvider.getAllServers('Paris', token.token.id).then(result => {
+      const paris = this.serversProvider.getAllServers('Paris', token.token.id).then(result => {
         this.nbrServParis = result.servers.length;
         this.parisServers = result.servers;
       }).catch(error => {
         console.log(error);
       });
 
-      this.serversProvider.getAllServers('Netherlands', token.token.id).then(result => {
+      const netherlands = this.serversProvider.getAllServers('Netherlands', token.token.id).then(result => {
         this.nbrServNetherlands = result.servers.length;
         this.netherlandsServers = result.servers;
-        this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
-        this.powerfulServer = this.stats.whatIsThePowerfull(this.parisServers, this.netherlandsServers);
-        this.classAppear = 'card-appear';
       }).catch(error => {
         console.log(error);
       });
 
+      Promise.all([paris, netherlands]).then(() => {
+        this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
+        this.powerfulServer = this.stats.whatIsThePowerfull(this.parisServers, this.netherlandsServers);
+        this.classAppear = 'card-appear';
+      })
     });
   }
 

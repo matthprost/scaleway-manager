@@ -116,7 +116,6 @@ export class HomeStatsDirective {
       }
     });
 
-    console.log('country (oldest)', country);
     return ({server: oldestServer, country: country});
   }
 
@@ -147,7 +146,7 @@ export class HomeStatsDirective {
         }
       }
     });
-    
+
     return ({server: powerfulServer, country: country});
   }
 
