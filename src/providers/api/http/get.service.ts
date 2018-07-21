@@ -14,12 +14,8 @@ export class GetService {
       this.http.get<T>(url, {
         headers: token ?
           {
-            'x-auth-token': token,
-            'Access-Control-Allow-Origin': '*'
-          } :
-          {
-            'Access-Control-Allow-Origin': '*'
-          }
+            'x-auth-token': token
+          } : {}
       }).subscribe(
         data => {
           resolve(data);
