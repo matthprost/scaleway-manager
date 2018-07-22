@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {GetService} from "./http/get.service";
 import {PostService} from "./http/post.service";
 import {DeleteService} from "./http/delete.service";
@@ -13,11 +13,12 @@ export class ApiProvider {
 
   constructor(private platform: Platform, private getService: GetService,
               private postService: PostService, private deleteService: DeleteService) {
-    if (this.platform.is('core') == false){
-     this.apiUrl = 'https://account.scaleway.com';
-     this.paris1 = 'https://cp-par1.scaleway.com';
-     this.amsterdam1 = 'https://cp-ams1.scaleway.com';
+    if (this.platform.is('cordova') == true) {
+      this.apiUrl = 'https://account.scaleway.com';
+      this.paris1 = 'https://cp-par1.scaleway.com';
+      this.amsterdam1 = 'https://cp-ams1.scaleway.com';
     }
+
   }
 
   public getApiUrl() {
