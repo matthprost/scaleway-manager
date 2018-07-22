@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import {GetService} from "./http/get.service";
 import {PostService} from "./http/post.service";
 import {DeleteService} from "./http/delete.service";
+import {Platform} from "ionic-angular";
 
 @Injectable()
 export class ApiProvider {
@@ -10,7 +11,13 @@ export class ApiProvider {
   private paris1: string = '/paris';
   private amsterdam1: string = '/netherlands';
 
-  constructor(private getService: GetService, private postService: PostService, private deleteService: DeleteService) {
+  constructor(private platform: Platform, private getService: GetService,
+              private postService: PostService, private deleteService: DeleteService) {
+    if (this.platform.is('core') == false){
+     this.apiUrl = 'https://account.scaleway.com';
+     this.paris1 = 'https://cp-par1.scaleway.com';
+     this.amsterdam1 = 'https://cp-ams1.scaleway.com';
+    }
   }
 
   public getApiUrl() {
