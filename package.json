@@ -25,6 +25,7 @@
     "@ionic-native/core": "4.8.0",
     "@ionic-native/email-composer": "^4.9.2",
     "@ionic-native/http": "^4.10.0",
+    "@ionic-native/keyboard": "^4.10.0",
     "@ionic-native/screen-orientation": "^4.9.2",
     "@ionic-native/splash-screen": "4.8.0",
     "@ionic-native/status-bar": "4.8.0",
@@ -39,7 +40,7 @@
     "cordova-plugin-file": "^6.0.1",
     "cordova-plugin-ionic": "^4.1.7",
     "cordova-plugin-ionic-keyboard": "^2.1.2",
-    "cordova-plugin-ionic-webview": "^2.0.0-beta.2",
+    "cordova-plugin-ionic-webview": "^1.2.1",
     "cordova-plugin-screen-orientation": "^3.0.1",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
@@ -47,6 +48,7 @@
     "es6-promise-plugin": "^4.2.2",
     "ionic-angular": "3.9.2",
     "ionic-native-http-connection-backend": "^4.0.7",
+    "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
     "rxjs": "5.5.11",
     "sw-toolbox": "3.6.0",
@@ -76,6 +78,7 @@
       "cordova-plugin-email-composer": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-ionic-webview": {},
+      "ionic-plugin-keyboard": {},
       "cordova-plugin-advanced-http": {}
     },
     "platforms": [
