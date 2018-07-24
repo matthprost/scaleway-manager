@@ -12,7 +12,6 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation";
 import {AboutPage} from "../pages/about/about";
 
 
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -36,13 +35,13 @@ export class MyApp {
       {
         title: 'Paris',
         component: ServerPage,
-        picture: '/assets/imgs/france.svg',
+        picture: 'assets/imgs/france.svg',
         parameters: {country: 'Paris'}
       },
       {
         title: 'Amsterdam',
         component: ServerPage,
-        picture: '/assets/imgs/netherlands.svg',
+        picture: 'assets/imgs/netherlands.svg',
         parameters: {country: 'Amsterdam'}
       },
       {
@@ -66,12 +65,18 @@ export class MyApp {
 
       this.storage.get('token').then((val: AuthTokenDto) => {
         if (val) {
-          this.nav.setRoot(HomePage);
+          this.nav.setRoot(HomePage).then(() => {
+            this.statusBar.styleDefault();
+            this.splashScreen.hide();
+          });
+        } else {
+          this.statusBar.styleDefault();
+          this.splashScreen.hide();
         }
+      }).catch(() => {
+        this.statusBar.styleDefault();
+        this.splashScreen.hide();
       });
-
-      this.statusBar.styleDefault();
-      this.splashScreen.hide();
     });
   }
 

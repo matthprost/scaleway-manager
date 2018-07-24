@@ -87,7 +87,7 @@ export class LoginPage {
         {
           text: 'Ok',
           handler: () => {
-            window.open('https://cloud.scaleway.com/#/signup', '_system', 'location=yes');
+            window.open('https://cloud.scaleway.com/#/signup', '_system');
           }
         }
       ]
