@@ -12,6 +12,7 @@ import {HomeStatsDirective} from "../../directives/home-stats/home-stats";
 import {ShowServerPage} from "../server/show-server/show-server";
 import {ContactPage} from "../contact/contact";
 import {BugReportPage} from "../bug-report/bug-report";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 @Component({
   selector: 'page-home',
@@ -31,7 +32,8 @@ export class HomePage {
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController,
               private storage: Storage, private serversProvider: ServersProvider,
-              private stats: HomeStatsDirective, public alertCtrl: AlertController) {
+              private stats: HomeStatsDirective, public alertCtrl: AlertController,
+              private iab: InAppBrowser) {
   }
 
   ionViewDidLoad() {
@@ -149,7 +151,8 @@ export class HomePage {
           text: 'Ok',
           handler: () => {
             fab.close();
-            window.open('https://matthias-prost.com', '_system', 'location=yes');
+            const ref = this.iab.create('https://matthias-prost.com', '_system');
+            ref.close();
           }
         }
       ]

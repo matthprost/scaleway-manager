@@ -4,6 +4,7 @@ import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
 import {NgForm} from '@angular/forms';
+import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @Component({
   selector: 'page-login',
@@ -16,7 +17,7 @@ export class LoginPage {
 
   constructor(public navCtrl: NavController, public toastCtrl: ToastController,
               private auth: AuthProvider, public menu: MenuController, public loadingCtrl: LoadingController,
-              public alertCtrl: AlertController) {
+              public alertCtrl: AlertController, private iab: InAppBrowser) {
   }
 
   ionViewDidLoad() {
@@ -87,7 +88,9 @@ export class LoginPage {
         {
           text: 'Ok',
           handler: () => {
-            window.open('https://cloud.scaleway.com/#/signup', '_system');
+            const ref = this.iab.create('https://cloud.scaleway.com/#/signup', '_system');
+            ref.show();
+            ref.close();
           }
         }
       ]

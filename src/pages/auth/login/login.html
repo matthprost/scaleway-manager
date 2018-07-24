@@ -9,39 +9,41 @@
       <ion-row>
         <ion-col>
           <div class="login-header">
-            <ion-img width="50" height="60" src="assets/imgs/scaleway.png"></ion-img>
+            <ion-img width="50" height="65" src="assets/imgs/scaleway.png"></ion-img>
           </div>
         </ion-col>
       </ion-row>
 
       <ion-row>
         <ion-col>
-          <ion-list padding>
-            <h3>Scaleway Manager</h3>
+          <div class="login">
+            <ion-list>
+              <h3>Scaleway Manager</h3>
 
-            <form (ngSubmit)="login(loginForm)" #loginForm="ngForm">
-              <ion-row>
-                <ion-item class="background-transparent" margin-top>
-                  <ion-label floating>Email</ion-label>
-                  <ion-input type="email" name="email" [(ngModel)]="email"></ion-input>
+              <form (ngSubmit)="login(loginForm)" #loginForm="ngForm">
+                <ion-row>
+                  <ion-item class="background-transparent" margin-top>
+                    <ion-label floating>Email</ion-label>
+                    <ion-input type="email" name="email" [(ngModel)]="email"></ion-input>
+                  </ion-item>
+                </ion-row>
+                <ion-row>
+                  <ion-item class="background-transparent">
+                    <ion-label floating>Password</ion-label>
+                    <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+                  </ion-item>
+                </ion-row>
+                <ion-item class="background-transparent" margin-top no-lines>
+                  <button default full ion-button item-right color="light" type="button" (click)="register()">
+                    Sign up
+                  </button>
+                  <button default full ion-button item-right color="secondary" type="submit">
+                    Log in
+                  </button>
                 </ion-item>
-              </ion-row>
-              <ion-row>
-                <ion-item class="background-transparent">
-                  <ion-label floating>Password</ion-label>
-                  <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
-                </ion-item>
-              </ion-row>
-              <ion-item class="background-transparent" margin-top no-lines>
-                <button default full ion-button item-right color="light" type="button" (click)="register()">
-                  Sign up
-                </button>
-                <button default full ion-button item-right color="secondary" type="submit">
-                  Log in
-                </button>
-              </ion-item>
-            </form>
-          </ion-list>
+              </form>
+            </ion-list>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>

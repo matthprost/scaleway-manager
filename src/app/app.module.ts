@@ -23,6 +23,7 @@ import {AboutPage} from "../pages/about/about";
 import {ContactPage} from "../pages/contact/contact";
 import {EmailComposer} from "@ionic-native/email-composer";
 import {BugReportPage} from "../pages/bug-report/bug-report";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 @NgModule({
   declarations: [
@@ -66,7 +67,8 @@ import {BugReportPage} from "../pages/bug-report/bug-report";
     Clipboard,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ScreenOrientation,
-    EmailComposer
+    EmailComposer,
+    InAppBrowser
   ]
 })
 export class AppModule {}

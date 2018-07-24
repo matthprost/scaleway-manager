@@ -30,4 +30,18 @@ page-login {
     margin-top: 10%;
   }
 
+  .login {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 0 5px 10px;
+    border-radius: 3px;
+    opacity: 1;
+    position: relative;
+    top: 10px;
+
+    @media (max-height: 400px) {
+      padding: 15px 5px 10px;
+    }
+  }
+
 }
