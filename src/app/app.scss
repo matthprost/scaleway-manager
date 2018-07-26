@@ -16,11 +16,11 @@
 // automatically applied to the <body> element in the app.
 
 .item ion-thumbnail {
-  min-width: 20px;
-  min-height: 20px;
+  min-width: auto;
+  min-height: auto;
   img {
-    max-width: 20px;
-    min-width: 20px;
+    height: 30px;
+    width: auto;
   }
 }
 

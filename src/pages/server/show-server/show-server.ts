@@ -123,7 +123,7 @@ export class ShowServerPage {
   copyToClipBoard(text: string) {
     this.clipboard.copy(text);
     const toast = this.toastCtrl.create({
-      message: 'Address as been copied into your clipboard!',
+      message: 'Address has been copied into your clipboard!',
       duration: 3000,
       position: 'top'
     });
