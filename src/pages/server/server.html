@@ -18,6 +18,8 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
+  <loader *ngIf="isLoading"></loader>
+
   <ion-list *ngIf="allServers !== undefined && countServersByState(allServers, 'running') > 0">
     <ion-list-header>
       Online

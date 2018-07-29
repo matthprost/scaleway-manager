@@ -24,6 +24,7 @@ import {ContactPage} from "../pages/contact/contact";
 import {EmailComposer} from "@ionic-native/email-composer";
 import {BugReportPage} from "../pages/bug-report/bug-report";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {ComponentsModule} from "../components/components.module";
 
 @NgModule({
   declarations: [
@@ -45,7 +46,8 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
     ProvidersModule,
     IonicStorageModule.forRoot(),
     PipesModule,
-    DirectivesModule
+    DirectivesModule,
+    ComponentsModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

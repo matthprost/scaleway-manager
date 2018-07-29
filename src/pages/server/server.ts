@@ -25,9 +25,9 @@ export class ServerPage {
   }
 
   ionViewDidLoad() {
-    this.loader.present();
+    this.isLoading = true;
     this.refreshAllServers().then(() => {
-      this.loader.dismiss();
+      this.isLoading = false;
     });
   }
 

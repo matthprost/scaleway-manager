@@ -1,13 +1,13 @@
 page-home {
   .background {
     &-rect {
-      left: -215px;
+      left: -205px;
       top: 60vh;
-      height: 400px;
+      height: 405px;
       width: 400px;
       background: transparent;
-      border-right: 65px solid color($colors, primary);
-      border-top: 65px solid color($colors, primary);
+      border-right: 70px solid color($colors, primary);
+      border-top: 70px solid color($colors, primary);
       position: absolute;
       z-index: -1;
       transform: rotate(45deg) translateX(-50%) translateY(-50%);
@@ -114,5 +114,12 @@ page-home {
   .message {
     font-weight: bold;
     margin-top: .5rem;
+  }
+
+  .card-header-stats {
+    margin-bottom: 2rem;
+    color: white;
+    background: color($colors, secondary);
+    padding: 10px;
   }
 }

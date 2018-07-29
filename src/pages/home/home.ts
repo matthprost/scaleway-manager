@@ -28,6 +28,7 @@ export class HomePage {
   private netherlandsServers: Array<ServerDto> = null;
   public oldestServer: { server: ServerDto, country: string };
   public powerfulServer: { server: ServerDto, country: string };
+  public isLoading: boolean = true;
 
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController,
@@ -58,6 +59,7 @@ export class HomePage {
         this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
         this.powerfulServer = this.stats.whatIsThePowerfull(this.parisServers, this.netherlandsServers);
         this.classAppear = 'card-appear';
+        this.isLoading = false;
       })
     });
   }

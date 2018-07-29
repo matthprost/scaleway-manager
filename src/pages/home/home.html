@@ -17,7 +17,8 @@
 </ion-header>
 
 <ion-content no-bounce>
-  <div class="background">
+  <loader *ngIf="isLoading"></loader>
+  <div class="background" *ngIf="!isLoading">
     <div [class]="rect" class=""></div>
   </div>
   <ion-grid>
@@ -68,7 +69,7 @@
       <ion-col [class]="classAppear" *ngIf="oldestServer && oldestServer.server" col-6>
         <ion-card (click)="navigateServ(oldestServer)">
 
-          <ion-card-header text-center>
+          <ion-card-header class="card-header-stats" text-center>
             Oldest
           </ion-card-header>
 
@@ -86,7 +87,7 @@
       <ion-col [class]="classAppear" *ngIf="powerfulServer && powerfulServer.server" col-6>
         <ion-card (click)="navigateServ(powerfulServer)">
 
-          <ion-card-header text-center>
+          <ion-card-header class="card-header-stats" text-center>
             Powerfull
           </ion-card-header>
 
