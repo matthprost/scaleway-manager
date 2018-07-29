@@ -15,29 +15,19 @@ export class ServerActionsPage {
   private server: ServerDto;
   public serverActions;
   public actionSelected;
-  public isLoading: boolean = true;
 
   constructor(public navParams: NavParams, private apiServer: ServersProvider, private storage: Storage,
               public viewCtrl: ViewController, private toastCtrl: ToastController) {
     this.serverCountry = navParams.get('serverCountry');
     this.server = navParams.get('server');
+    this.serverActions = navParams.get('actions');
   }
 
   ionViewDidLoad() {
-    this.getAllActions()
+    //
   }
 
-  private getAllActions() {
 
-    this.isLoading = true;
-    this.storage.get('token').then((val: AuthTokenDto) => {
-      this.apiServer.getAllActionsServer(this.serverCountry, this.server.id, val.token.id).then(result => {
-        this.serverActions = result;
-        this.serverActions = this.serverActions.actions;
-        this.isLoading = false;
-      });
-    });
-  }
 
   sendAction() {
     if (this.actionSelected) {

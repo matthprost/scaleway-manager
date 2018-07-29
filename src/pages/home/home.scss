@@ -1,7 +1,7 @@
 page-home {
   .background {
     &-rect {
-      left: -210px;
+      left: -215px;
       top: 60vh;
       height: 400px;
       width: 400px;
@@ -46,9 +46,19 @@ page-home {
     opacity: 0;
   }
 
+  [col-12] {
+    padding: 2px;
+  }
+
+  [col-6] {
+    padding: 2px;
+  }
+
   .card {
     margin: 3px;
     width: auto;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+    border-radius: 0;
     img {
       height: 30px;
       width: 30px;

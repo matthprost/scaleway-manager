@@ -1,11 +1,6 @@
 <ion-content>
   <ion-list radio-group [(ngModel)]="actionSelected">
 
-    <ion-item *ngIf="isLoading">
-      <ion-label>Loading...</ion-label>
-      <ion-radio disabled value="loading"></ion-radio>
-    </ion-item>
-
     <ion-item *ngFor="let action of serverActions">
       <ion-label>{{ searchForAction(action) }}</ion-label>
       <ion-radio value="{{ action }}"></ion-radio>
@@ -14,6 +9,6 @@
   </ion-list>
 </ion-content>
 
-<ion-footer no-shadow *ngIf="!isLoading">
+<ion-footer no-shadow>
   <button ion-button full (click)="sendAction()">Send</button>
 </ion-footer>

@@ -18,6 +18,7 @@ export class ShowServerPage {
   public serverCountry: string;
   public state: string;
   public serverLoading: boolean;
+  private serverActions;
   public stateClass: string = 'state';
 
   constructor(public navParams: NavParams, public popoverCtrl: PopoverController,
@@ -30,6 +31,7 @@ export class ShowServerPage {
 
   ionViewDidLoad() {
     this.setState();
+    this.getAllActions();
     this.refreshServer();
   }
 
@@ -82,8 +84,22 @@ export class ShowServerPage {
     return (value.charAt(0).toUpperCase() + value.slice(1));
   }
 
+  private getAllActions() {
+    this.serverLoading = true;
+    this.storage.get('token').then((val: AuthTokenDto) => {
+      this.serversProvider.getAllActionsServer(this.serverCountry, this.server.id, val.token.id).then(result => {
+        this.serverActions = result.actions;
+        this.serverLoading = false;
+      });
+    });
+  }
+
   showActions() {
-    let popover = this.popoverCtrl.create(ServerActionsPage, {serverCountry: this.serverCountry, server: this.server},
+    let popover = this.popoverCtrl.create(ServerActionsPage, {
+        serverCountry: this.serverCountry,
+        server: this.server,
+        actions: this.serverActions
+      },
       {cssClass: 'custom-popover'});
     let ev = {
       target: {
