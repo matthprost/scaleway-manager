@@ -95,11 +95,7 @@ export class ShowServerPage {
   }
 
   showActions() {
-    let popover = this.popoverCtrl.create(ServerActionsPage, {
-        serverCountry: this.serverCountry,
-        server: this.server,
-        actions: this.serverActions
-      },
+    let popover = this.popoverCtrl.create(ServerActionsPage, { actions: this.serverActions },
       {cssClass: 'custom-popover'});
     let ev = {
       target: {
