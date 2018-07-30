@@ -69,8 +69,10 @@ page-show-server {
 
 .custom-popover .popover-content {
   width: 90%;
-  top: 70px;
+  top: 20%;
   left: 5%;
+  border-radius: 0 0 4px 4px;
+  margin: 0;
 }
 
 .custom-popover .popover-arrow {

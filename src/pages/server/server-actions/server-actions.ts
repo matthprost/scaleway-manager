@@ -7,19 +7,22 @@ import {NavParams, ToastController, ViewController} from "ionic-angular";
 })
 export class ServerActionsPage {
 
-  public serverActions;
+  public serverActions: Array<string> = [];
   public actionSelected;
 
   constructor(public navParams: NavParams, public viewCtrl: ViewController,
               private toastCtrl: ToastController) {
-    this.serverActions = navParams.get('actions');
+    const state = this.navParams.get('serverState');
+    if (state === 'stopped') {
+      this.serverActions = ['poweron', 'backup'];
+    } else if (state === 'running') {
+      this.serverActions = ['poweroff', 'reboot', 'stop_in_place', 'terminate', 'backup']
+    }
   }
 
   ionViewDidLoad() {
     //
   }
-
-
 
   sendAction() {
     if (this.actionSelected) {
@@ -56,10 +59,8 @@ export class ServerActionsPage {
       case 'backup':
         value = 'Backup';
         break;
-      default:
-        value = 'Unknown action - Don\' select this one!'
-
     }
+
     return (value);
   }
 }

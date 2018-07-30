@@ -16,11 +16,8 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content no-bounce>
+<ion-content>
   <loader *ngIf="isLoading"></loader>
-  <div class="background" *ngIf="!isLoading">
-    <div [class]="rect" class=""></div>
-  </div>
   <ion-grid>
     <ion-row>
       <ion-col [class]="classAppear" col-12>

@@ -36,20 +36,19 @@
 
   <ion-item-group margin-top>
     <ion-item-divider color="light">Basic Informations</ion-item-divider>
-    <ion-item>
+    <ion-item (click)="copyToClipBoard(server.public_ip.address)">
       <div class="information-title">
         Public IP
       </div>
-      <div id="cpyBtn" data-clipboard-target="#copyTarget" class="information-content" item-end
-           (click)="copyToClipBoard(server.public_ip.address)">
+      <div id="cpyBtn" data-clipboard-target="#copyTarget" class="information-content" item-end>
         {{ server.public_ip.address }}
       </div>
     </ion-item>
-    <ion-item>
+    <ion-item (click)="copyToClipBoard(server.public_ip.address)">
       <div class="information-title">
         Private IP
       </div>
-      <div class="information-content" item-end (click)="copyToClipBoard(server.public_ip.address)">
+      <div class="information-content" item-end >
         {{ server.private_ip ? server.private_ip : '-' }}
       </div>
     </ion-item>
@@ -80,7 +79,7 @@
   </ion-item-group>
   <ion-item-group>
     <ion-item-divider color="light">Advanced Informations</ion-item-divider>
-    <ion-item>
+    <ion-item (click)="server.ipv6 ? copyToClipBoard(server.ipv6.address) : ''">
       <div class="information-title">
         IPV6
       </div>

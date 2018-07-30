@@ -1,5 +1,5 @@
-<ion-content>
-  <ion-list radio-group [(ngModel)]="actionSelected">
+<ion-content no-bounce>
+  <ion-list radio-group [(ngModel)]="actionSelected" no-lines style="margin: 0">
 
     <ion-item *ngFor="let action of serverActions">
       <ion-label>{{ searchForAction(action) }}</ion-label>

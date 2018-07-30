@@ -37,7 +37,11 @@ export class HomePage {
               private iab: InAppBrowser) {
   }
 
-  ionViewDidLoad() {
+  ionViewDidEnter() {
+    this.refresh();
+  }
+
+  private refresh() {
     this.rect = 'background-rect rect-scale';
     this.storage.get('token').then((token: AuthTokenDto) => {
 
