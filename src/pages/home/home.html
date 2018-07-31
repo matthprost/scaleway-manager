@@ -17,6 +17,10 @@
 </ion-header>
 
 <ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <loader *ngIf="isLoading"></loader>
   <ion-grid>
     <ion-row>
@@ -94,6 +98,42 @@
             {{ powerfulServer.server.name }}
             <small class="small-card">
               {{ powerfulServer.server.commercial_type }}
+            </small>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col [class]="classAppear" *ngIf="lastInvoice" col-6>
+        <ion-card>
+
+          <ion-card-header class="card-header-stats" text-center>
+            Current Invoice
+          </ion-card-header>
+
+          <ion-card-content class="card-invoices" text-center>
+            {{ lastInvoice.total_taxed }} {{ lastInvoice.currency }}
+            <small class="card-invoices-small">
+              <ion-icon name="{{ lastInvoice.state | billingStateIcon }}" style="vertical-align: middle;"></ion-icon>&nbsp;
+              {{ lastInvoice.state }}
+            </small>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+      <ion-col [class]="classAppear" *ngIf="secondLastInvoice" col-6>
+        <ion-card>
+
+          <ion-card-header class="card-header-stats" text-center>
+            Last Month Invoice
+          </ion-card-header>
+
+          <ion-card-content class="card-invoices" text-center>
+            {{ secondLastInvoice.total_taxed }} {{ secondLastInvoice.currency }}
+            <small class="card-invoices-small">
+              <ion-icon name="{{ secondLastInvoice.state | billingStateIcon }}" style="vertical-align: middle"></ion-icon>&nbsp;
+              {{ secondLastInvoice.state }}
             </small>
           </ion-card-content>
 

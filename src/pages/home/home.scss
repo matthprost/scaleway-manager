@@ -74,6 +74,18 @@ page-home {
       font-weight: lighter;
       color: color($colors, dark);
     }
+    &-invoices {
+      font-size: 1.9rem;
+      font-weight: lighter;
+      color: color($colors, dark);
+      &-small {
+        display: block;
+        color: dimgray;
+        font-size: 1.4rem;
+        margin-top: .5rem;
+        text-transform: capitalize;
+      }
+    }
   }
 
   .small-card {

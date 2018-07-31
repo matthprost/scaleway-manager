@@ -10,7 +10,6 @@ export class ServersProvider {
   }
 
   getAllServers(country: string, token: string): Promise<any> {
-
     let ApiUrl: string = null;
     country === 'Paris' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
 

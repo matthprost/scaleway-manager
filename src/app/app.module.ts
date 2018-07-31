@@ -25,6 +25,7 @@ import {EmailComposer} from "@ionic-native/email-composer";
 import {BugReportPage} from "../pages/bug-report/bug-report";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {ComponentsModule} from "../components/components.module";
+import { BillingProvider } from '../providers/billing/billing';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import {ComponentsModule} from "../components/components.module";
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     ScreenOrientation,
     EmailComposer,
-    InAppBrowser
+    InAppBrowser,
+    BillingProvider
   ]
 })
 export class AppModule {}

@@ -7,14 +7,16 @@ import {Platform} from "ionic-angular";
 @Injectable()
 export class ApiProvider {
 
-  private apiUrl: string = '/account';
-  private paris1: string = '/paris';
-  private amsterdam1: string = '/netherlands';
+  private readonly apiUrl: string = '/account';
+  private readonly billing: string = '/billing';
+  private readonly paris1: string = '/paris';
+  private readonly amsterdam1: string = '/netherlands';
 
   constructor(private platform: Platform, private getService: GetService,
               private postService: PostService, private deleteService: DeleteService) {
     if (this.platform.is('cordova') == true) {
       this.apiUrl = 'https://account.scaleway.com';
+      this.billing = 'https://billing.scaleway.com';
       this.paris1 = 'https://cp-par1.scaleway.com';
       this.amsterdam1 = 'https://cp-ams1.scaleway.com';
     }
@@ -31,6 +33,10 @@ export class ApiProvider {
 
   public getAmsterdamApiUrl() {
     return (this.amsterdam1);
+  }
+
+  public getBillingApiUrl() {
+    return (this.billing);
   }
 
   public get<T>(url: string, token?: string): Promise<T> {

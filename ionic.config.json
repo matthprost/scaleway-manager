@@ -10,6 +10,10 @@
       "proxyUrl": "https://account.scaleway.com"
     },
     {
+      "path": "/billing",
+      "proxyUrl": "https://billing.scaleway.com"
+    },
+    {
       "path": "/paris",
       "proxyUrl": "https://cp-par1.scaleway.com"
     },

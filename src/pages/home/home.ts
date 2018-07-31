@@ -1,5 +1,12 @@
 import {Component} from '@angular/core';
-import {AlertController, FabContainer, LoadingController, NavController, PopoverController} from 'ionic-angular';
+import {
+  AlertController,
+  FabContainer,
+  LoadingController,
+  MenuController,
+  NavController,
+  PopoverController
+} from 'ionic-angular';
 import {AccountPopoverPage} from "./account-popover/account-popover";
 import {LogoutProvider} from "../../providers/auth/logout/logout";
 import {LoginPage} from "../auth/login/login";
@@ -13,6 +20,8 @@ import {ShowServerPage} from "../server/show-server/show-server";
 import {ContactPage} from "../contact/contact";
 import {BugReportPage} from "../bug-report/bug-report";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {BillingProvider} from "../../providers/billing/billing";
+import {InvoicesDto} from "../../providers/billing/billing.dto";
 
 @Component({
   selector: 'page-home',
@@ -22,49 +31,78 @@ export class HomePage {
 
   public classAppear: string = 'card-cont';
   public rect: string = '';
+
   public nbrServParis: number = 0;
   public nbrServNetherlands: number = 0;
+
   private parisServers: Array<ServerDto> = null;
   private netherlandsServers: Array<ServerDto> = null;
+
   public oldestServer: { server: ServerDto, country: string };
   public powerfulServer: { server: ServerDto, country: string };
+  public lastInvoice: InvoicesDto = null;
+  public secondLastInvoice: InvoicesDto = null;
+
   public isLoading: boolean = true;
 
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController,
               private storage: Storage, private serversProvider: ServersProvider,
               private stats: HomeStatsDirective, public alertCtrl: AlertController,
-              private iab: InAppBrowser) {
+              private iab: InAppBrowser, private billingProvider: BillingProvider, public menu: MenuController) {
+    this.menu.swipeEnable(true);
   }
 
   ionViewDidEnter() {
     this.refresh();
   }
 
-  private refresh() {
-    this.rect = 'background-rect rect-scale';
-    this.storage.get('token').then((token: AuthTokenDto) => {
+  public doRefresh(refresher) {
+    this.refresh().then(() => {
+      refresher.complete();
+    }).catch(error => {
+      console.log(error);
+      refresher.complete();
+    });
+  }
 
-      const paris = this.serversProvider.getAllServers('Paris', token.token.id).then(result => {
-        this.nbrServParis = result.servers.length;
-        this.parisServers = result.servers;
-      }).catch(error => {
-        console.log(error);
+  private refresh(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.rect = 'background-rect rect-scale';
+      this.storage.get('token').then((token: AuthTokenDto) => {
+
+        const paris = this.serversProvider.getAllServers('Paris', token.token.id).then(result => {
+          this.nbrServParis = result.servers.length;
+          this.parisServers = result.servers;
+        }).catch(error => {
+          console.log(error);
+          reject(error);
+        });
+
+        const netherlands = this.serversProvider.getAllServers('Netherlands', token.token.id).then(result => {
+          this.nbrServNetherlands = result.servers.length;
+          this.netherlandsServers = result.servers;
+        }).catch(error => {
+          console.log(error);
+          reject(error);
+        });
+
+        const billing = this.billingProvider.getTwoLastBilling(token.token.id).then(result => {
+          this.lastInvoice = result[0];
+          this.secondLastInvoice = result[1];
+        }).catch(error => {
+          console.log(error);
+          reject(error);
+        });
+
+        Promise.all([paris, netherlands, billing]).then(() => {
+          this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
+          this.powerfulServer = this.stats.whatIsThePowerfull(this.parisServers, this.netherlandsServers);
+          this.classAppear = 'card-appear';
+          this.isLoading = false;
+          resolve('ok');
+        });
       });
-
-      const netherlands = this.serversProvider.getAllServers('Netherlands', token.token.id).then(result => {
-        this.nbrServNetherlands = result.servers.length;
-        this.netherlandsServers = result.servers;
-      }).catch(error => {
-        console.log(error);
-      });
-
-      Promise.all([paris, netherlands]).then(() => {
-        this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
-        this.powerfulServer = this.stats.whatIsThePowerfull(this.parisServers, this.netherlandsServers);
-        this.classAppear = 'card-appear';
-        this.isLoading = false;
-      })
     });
   }
 
