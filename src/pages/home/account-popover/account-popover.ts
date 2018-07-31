@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import {AlertController, ViewController} from "ionic-angular";
+import {AlertController, App, NavController, ViewController} from "ionic-angular";
+import {BillingPage} from "../../billing/billing";
 
 @Component({
   selector: 'page-account-popover',
@@ -7,7 +8,7 @@ import {AlertController, ViewController} from "ionic-angular";
 })
 export class AccountPopoverPage {
 
-  constructor(private alertCtrl: AlertController, public viewCtrl: ViewController) {
+  constructor(private alertCtrl: AlertController, public viewCtrl: ViewController, public navCtrl: NavController, public app: App) {
   }
 
   ionViewDidLoad() {
@@ -35,6 +36,16 @@ export class AccountPopoverPage {
       ]
     });
     confirm.present();
+  }
+
+  navigate(location: string) {
+    switch (location) {
+      case 'billing' :
+        this.viewCtrl.dismiss();
+        this.app.getRootNav().push(BillingPage).then(() => {
+        });
+        break;
+    }
   }
 
 }

@@ -1,8 +1,8 @@
 <ion-list no-lines>
-  <button menuClose ion-item>
-    <ion-icon name="logo-usd" style="vertical-align: bottom"></ion-icon> &nbsp;&nbsp;Billing
+  <button menuClose ion-item (click)="navigate('billing')">
+    <ion-icon name="logo-usd" style="vertical-align: bottom; min-width: 22px; text-align:center"></ion-icon> &nbsp;Billing
   </button>
   <button menuClose ion-item (click)="logout()">
-    <ion-icon name="power" style="vertical-align: bottom"></ion-icon> &nbsp;&nbsp;Logout
+    <ion-icon name="md-power" style="vertical-align: bottom; min-width: 22px; text-align:center"></ion-icon> &nbsp;Logout
   </button>
 </ion-list>

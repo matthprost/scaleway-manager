@@ -22,6 +22,7 @@ import {BugReportPage} from "../bug-report/bug-report";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {BillingProvider} from "../../providers/billing/billing";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
+import {BillingPage} from "../billing/billing";
 
 @Component({
   selector: 'page-home',
@@ -50,7 +51,6 @@ export class HomePage {
               private storage: Storage, private serversProvider: ServersProvider,
               private stats: HomeStatsDirective, public alertCtrl: AlertController,
               private iab: InAppBrowser, private billingProvider: BillingProvider, public menu: MenuController) {
-    this.menu.swipeEnable(true);
   }
 
   ionViewDidEnter() {
@@ -175,6 +175,9 @@ export class HomePage {
       case 'bug' :
         fab.close();
         this.navCtrl.push(BugReportPage);
+        break;
+      case 'billing' :
+        this.navCtrl.push(BillingPage);
         break;
     }
   }

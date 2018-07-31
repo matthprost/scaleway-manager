@@ -39,4 +39,19 @@ export class BillingProvider {
     });
   }
 
+  getBilling(token: string, value: number): Promise<any> {
+    const ApiUrl = this.api.getBillingApiUrl();
+
+    return new Promise((resolve, reject) => {
+
+      this.api.get<BillingDto>(ApiUrl + '/invoices?page=1&per_page=' + value, token)
+        .then(result => {
+          resolve(result.invoices);
+        })
+        .catch(error => {
+          reject(error);
+        })
+    });
+  }
+
 }

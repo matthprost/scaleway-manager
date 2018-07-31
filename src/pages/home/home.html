@@ -106,7 +106,7 @@
     </ion-row>
     <ion-row>
       <ion-col [class]="classAppear" *ngIf="lastInvoice" col-6>
-        <ion-card>
+        <ion-card (click)="navigate('billing')">
 
           <ion-card-header class="card-header-stats" text-center>
             Current Invoice
@@ -123,7 +123,7 @@
         </ion-card>
       </ion-col>
       <ion-col [class]="classAppear" *ngIf="secondLastInvoice" col-6>
-        <ion-card>
+        <ion-card (click)="navigate('billing')">
 
           <ion-card-header class="card-header-stats" text-center>
             Last Month Invoice

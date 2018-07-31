@@ -1,0 +1,57 @@
+<ion-header no-border>
+  <ion-navbar>
+    <ion-title>Billing</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+  <loader *ngIf="isLoading"></loader>
+
+  <ion-item-group *ngIf="!isLoading">
+    <ion-item-divider color="light">Current Invoice</ion-item-divider>
+    <ion-item>
+      <div class="information-title">
+        <div class="state" [style.color]="changeStateColor(currentInvoice.state)">
+          <ion-icon name="{{ currentInvoice.state | billingStateIcon }}"></ion-icon>
+          {{ currentInvoice.state }}
+        </div>
+        <div class="date">
+          {{ currentInvoice.start_date | date:'MMMM y' }}
+        </div>
+      </div>
+      <div data-clipboard-target="#copyTarget" class="information-content" item-end text-right>
+        <div class="price">
+        {{ currentInvoice.total_taxed }} {{ currentInvoice.currency }}
+        </div>
+        <div class="price-ht">
+          {{ currentInvoice.total_untaxed }} HT
+        </div>
+      </div>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group *ngIf="!isLoading">
+    <ion-item-divider color="light">Older Invoices</ion-item-divider>
+    <ion-item *ngFor="let invoice of invoices">
+      <div class="information-title">
+        <div class="state" [style.color]="changeStateColor(invoice.state)">
+          <ion-icon name="{{ invoice.state | billingStateIcon }}"></ion-icon>
+          {{ invoice.state }}
+        </div>
+        <div class="date">
+          {{ invoice.start_date | date:'MMMM y' }}
+        </div>
+      </div>
+      <div data-clipboard-target="#copyTarget" class="information-content" item-end text-right>
+        <div class="price">
+          {{ invoice.total_taxed }} {{ invoice.currency }}
+        </div>
+        <div class="price-ht">
+          {{ invoice.total_untaxed }} HT
+        </div>
+      </div>
+    </ion-item>
+  </ion-item-group>
+</ion-content>

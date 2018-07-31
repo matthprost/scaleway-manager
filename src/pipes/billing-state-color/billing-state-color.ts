@@ -1,39 +1,39 @@
 import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
-  name: 'billingStateIcon',
+  name: 'billingStateColor',
 })
-export class BillingStateIconPipe implements PipeTransform {
+export class BillingStateColorPipe implements PipeTransform {
 
   transform(state: string) {
     state = state.toLowerCase();
 
-    let icon = 'help';
+    let color = 'dimgray';
     const value: boolean = true;
 
     switch (value) {
       case state.indexOf('paid') !== -1:
-        icon = 'md-checkmark';
+        color = 'darkgreen';
         break;
       case state.indexOf('draft') !== -1:
-        icon = 'md-time';
+        color = 'darkorange';
         break;
       case state.indexOf('stopped') !== -1:
-        icon = 'md-time';
+        color = 'darkorange';
         break;
       case state.indexOf('Outdated') !== -1:
-        icon = 'md-time';
+        color = 'darkorange';
         break;
       case state.indexOf('Incomplete') !== -1:
-        icon = 'close';
+        color = '';
         break;
       case state.indexOf('Issued') !== -1:
-        icon = 'md-time';
+        color = 'md-time';
         break;
       default:
-        icon = 'help';
+        color = 'dimgray';
     }
 
-    return (icon);
+    return (color);
   }
 }

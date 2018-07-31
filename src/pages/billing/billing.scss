@@ -1,0 +1,38 @@
+page-billing {
+  .information-title {
+    ion-icon {
+      vertical-align: middle;
+      font-size: 2rem;
+    }
+  }
+
+  .information-content {
+    text-align: right;
+  }
+
+  span {
+    display: block;
+  }
+
+  .price-ht {
+    font-size: 1.3rem;
+    margin-top: .2rem;
+    color: dimgray;
+    font-weight: lighter;
+
+  }
+
+  .date {
+    font-size: 1.3rem;
+    font-weight: lighter;
+    margin-top: .2rem;
+  }
+
+  .price {
+    font-size: 1.5rem;
+  }
+
+  .state {
+    font-size: 1.5rem;
+  }
+}

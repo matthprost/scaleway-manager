@@ -26,6 +26,7 @@ import {BugReportPage} from "../pages/bug-report/bug-report";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {ComponentsModule} from "../components/components.module";
 import { BillingProvider } from '../providers/billing/billing';
+import {BillingPage} from "../pages/billing/billing";
 
 @NgModule({
   declarations: [
@@ -39,7 +40,8 @@ import { BillingProvider } from '../providers/billing/billing';
     AccountPopoverPage,
     AboutPage,
     ContactPage,
-    BugReportPage
+    BugReportPage,
+    BillingPage
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,8 @@ import { BillingProvider } from '../providers/billing/billing';
     AccountPopoverPage,
     AboutPage,
     ContactPage,
-    BugReportPage
+    BugReportPage,
+    BillingPage
   ],
   providers: [
     StatusBar,
