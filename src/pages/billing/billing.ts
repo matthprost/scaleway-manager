@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
 import {BillingProvider} from "../../providers/billing/billing";
 import {Storage} from "@ionic/storage";
 import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
@@ -15,8 +14,7 @@ export class BillingPage {
   public invoices: Array<InvoicesDto>;
   public currentInvoice: InvoicesDto = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private billingProvider: BillingProvider,
-              private storage: Storage) {
+  constructor(private billingProvider: BillingProvider, private storage: Storage) {
   }
 
   ionViewDidLoad() {
@@ -33,7 +31,7 @@ export class BillingPage {
     });
   }
 
-  changeStateColor(state) {
+  public changeStateColor(state) {
     state = state.toLowerCase();
 
     let color = 'dimgray';

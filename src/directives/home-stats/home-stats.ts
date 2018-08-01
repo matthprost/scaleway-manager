@@ -119,7 +119,7 @@ export class HomeStatsDirective {
     return ({server: oldestServer, country: country});
   }
 
-  public whatIsThePowerfull(paris: Array<ServerDto>, netherlands: Array<ServerDto>): { server: ServerDto, country: string } {
+  public whatIsThePowerful(paris: Array<ServerDto>, netherlands: Array<ServerDto>): { server: ServerDto, country: string } {
     let powerfulServer: ServerDto = null;
     let country: string = null;
 

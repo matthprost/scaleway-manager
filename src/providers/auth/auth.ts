@@ -12,7 +12,6 @@ export class AuthProvider {
   public login(email: string, password: string, code?: string): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      
       this.api.post<AuthTokenDto>(this.api.getApiUrl() + '/tokens', null, {
         "email": email,
         "password": password,
@@ -26,7 +25,6 @@ export class AuthProvider {
         .catch(error => {
         reject(error);
       });
-
     });
   }
 

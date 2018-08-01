@@ -78,11 +78,16 @@ export class ShowServerPage {
     });
   }
 
-  capitalize(value: string) {
-    return (value.charAt(0).toUpperCase() + value.slice(1));
+  public doRefresh(refresher) {
+    this.refreshServer().then(() => {
+      refresher.complete();
+    }).catch(error => {
+      console.log(error);
+      refresher.complete();
+    })
   }
 
-  showActions() {
+  public showActions() {
     let popover = this.popoverCtrl.create(ServerActionsPage, {serverState: this.server.state},
       {cssClass: 'custom-popover'});
     let ev = {
@@ -111,16 +116,7 @@ export class ShowServerPage {
     })
   }
 
-  doRefresh(refresher) {
-    this.refreshServer().then(() => {
-      refresher.complete();
-    }).catch(error => {
-      console.log(error);
-      refresher.complete();
-    })
-  }
-
-  copyToClipBoard(text: string) {
+  public copyToClipBoard(text: string) {
     this.clipboard.copy(text);
     const toast = this.toastCtrl.create({
       message: 'Address has been copied into your clipboard!',

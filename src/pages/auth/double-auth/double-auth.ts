@@ -13,10 +13,14 @@ export class DoubleAuthPage {
   private email: string = null;
   private password: string = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private auth: AuthProvider,
+  constructor(private navCtrl: NavController, private navParams: NavParams, private auth: AuthProvider,
               private menu: MenuController, private loadingCtrl: LoadingController, private toastCtrl: ToastController) {
-    this.email = navParams.get('email');
-    this.password = navParams.get('password');
+    this.email = this.navParams.get('email');
+    this.password = this.navParams.get('password');
+  }
+
+  ionViewDidLoad() {
+    //
   }
 
   public login() {
@@ -42,10 +46,6 @@ export class DoubleAuthPage {
         });
         toast.present();
     });
-  }
-
-  ionViewDidLoad() {
-    //
   }
 
 }

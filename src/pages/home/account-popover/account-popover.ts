@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, App, NavController, ViewController} from "ionic-angular";
+import {AlertController, App, ViewController} from "ionic-angular";
 import {BillingPage} from "../../billing/billing";
 
 @Component({
@@ -8,15 +8,14 @@ import {BillingPage} from "../../billing/billing";
 })
 export class AccountPopoverPage {
 
-  constructor(private alertCtrl: AlertController, public viewCtrl: ViewController, public navCtrl: NavController, public app: App) {
+  constructor(private alertCtrl: AlertController, private viewCtrl: ViewController, private app: App) {
   }
 
   ionViewDidLoad() {
     //
   }
 
-  logout() {
-
+  public logout() {
     const confirm = this.alertCtrl.create({
       title: 'Logout?',
       message: 'Are you sure you want to logout?',
@@ -38,11 +37,11 @@ export class AccountPopoverPage {
     confirm.present();
   }
 
-  navigate(location: string) {
+  public navigate(location: string) {
     switch (location) {
       case 'billing' :
         this.viewCtrl.dismiss();
-        this.app.getRootNav().push(BillingPage).then(() => {
+        this.app.getRootNavs()[0].push(BillingPage).then(() => {
         });
         break;
     }

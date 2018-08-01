@@ -29,7 +29,7 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <form (ngSubmit)="sendMail(mailForm)" #mailForm="ngForm">
+          <form (ngSubmit)="sendMail()" #mailForm="ngForm">
             <ion-item class="background-transparent">
               <ion-label>Subject</ion-label>
               <ion-select name="subject" [(ngModel)]="subject">

@@ -13,22 +13,17 @@ import {ShowServerPage} from "./show-server/show-server";
 export class ServerPage {
 
   public serverCountry: string = null;
+  public allServers: Array<ServerDto>;
+
   public loader = this.loadingCtrl.create({
     content: "Please wait...",
   });
-  public allServers: Array<ServerDto>;
+
   public isLoading: boolean = true;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
               private storage: Storage, private serversProvider: ServersProvider) {
     this.serverCountry = navParams.get('server');
-  }
-
-  ionViewDidLoad() {
-    this.isLoading = true;
-    this.refreshAllServers().then(() => {
-      this.isLoading = false;
-    });
   }
 
   ionViewDidEnter() {
@@ -53,11 +48,7 @@ export class ServerPage {
     });
   }
 
-  showServer(server) {
-    this.navCtrl.push(ShowServerPage, {server: server, serverCountry: this.serverCountry});
-  }
-
-  doRefresh(refresher) {
+  public doRefresh(refresher) {
     this.refreshAllServers().then(() => {
       refresher.complete();
     }).catch(error => {
@@ -66,19 +57,26 @@ export class ServerPage {
     });
   }
 
-  actionServer(server, action, slidingItem: ItemSliding) {
+  public showServer(server) {
+    this.navCtrl.push(ShowServerPage, {server: server, serverCountry: this.serverCountry});
+  }
+
+  // This function is for fast action on servers like start/stop
+  public serverAction(server, action, slidingItem: ItemSliding) {
     slidingItem.close();
     this.storage.get('token').then(token => {
       this.serversProvider.sendServerAction(this.serverCountry, server.id, token.token.id, action)
         .then(() => {
           this.refreshAllServers();
-        }).catch(error => {
+        })
+        .catch(error => {
         console.log(error);
       })
     });
   }
 
-  countServersByState(servers: Array<ServerDto>, state: string): number {
+  // It counts how many server in a state (ex: 2 servers are running)
+  public countServersByState(servers: Array<ServerDto>, state: string): number {
     let i: number = -1;
     let counter: number = 0;
 
@@ -91,8 +89,10 @@ export class ServerPage {
     return (counter);
   }
 
-  getServerByState(state: Array<string>): ServerDto[] {
+  // It get all servers by a specific state (ex: all servers that are running)
+  public getServerByState(state: Array<string>): ServerDto[] {
     let newServers: ServerDto[] = [];
+
     this.allServers.forEach(server => {
       state.forEach(result => {
         if (result === server.state) {

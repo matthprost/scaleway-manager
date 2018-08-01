@@ -6,10 +6,9 @@ import {BillingDto} from "./billing.dto";
 export class BillingProvider {
 
   constructor(private api: ApiProvider) {
-    //
   }
 
-  getAllBilling(token: string): Promise<any> {
+  public getAllBilling(token: string): Promise<any> {
     const ApiUrl = this.api.getBillingApiUrl();
 
     return new Promise((resolve, reject) => {
@@ -24,7 +23,7 @@ export class BillingProvider {
     });
   }
 
-  getTwoLastBilling(token: string): Promise<any> {
+  public getTwoLastBilling(token: string): Promise<any> {
     const ApiUrl = this.api.getBillingApiUrl();
 
     return new Promise((resolve, reject) => {
@@ -39,7 +38,7 @@ export class BillingProvider {
     });
   }
 
-  getBilling(token: string, value: number): Promise<any> {
+  public getBilling(token: string, value: number): Promise<any> {
     const ApiUrl = this.api.getBillingApiUrl();
 
     return new Promise((resolve, reject) => {

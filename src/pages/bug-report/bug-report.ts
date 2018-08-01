@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, NavController, NavParams, Platform, ToastController} from 'ionic-angular';
-import {NgForm} from "@angular/forms";
+import {LoadingController, NavController, Platform, ToastController} from 'ionic-angular';
 import {EmailComposer} from "@ionic-native/email-composer";
 
 @Component({
@@ -12,15 +11,15 @@ export class BugReportPage {
   public message: string = null;
 
   constructor(public platform: Platform, public navCtrl: NavController,
-              public navParams: NavParams, private emailComposer: EmailComposer,
-              public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
+              private emailComposer: EmailComposer, public loadingCtrl: LoadingController,
+              public toastCtrl: ToastController) {
   }
 
   ionViewDidLoad() {
     //
   }
 
-  sendMail(loginForm: NgForm) {
+  public sendMail() {
     const loader = this.loadingCtrl.create({
       content: "Please wait...",
     });

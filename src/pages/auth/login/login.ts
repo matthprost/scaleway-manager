@@ -3,7 +3,6 @@ import {AlertController, LoadingController, MenuController, NavController, Toast
 import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
-import {NgForm} from '@angular/forms';
 import {InAppBrowser} from '@ionic-native/in-app-browser';
 
 @Component({
@@ -15,16 +14,18 @@ export class LoginPage {
   private email: string = null;
   private password: string = null;
 
-  constructor(public navCtrl: NavController, public toastCtrl: ToastController,
-              private auth: AuthProvider, public menu: MenuController, public loadingCtrl: LoadingController,
-              public alertCtrl: AlertController, private iab: InAppBrowser) {
+  constructor(private navCtrl: NavController, private toastCtrl: ToastController,
+              private auth: AuthProvider, private menu: MenuController, private loadingCtrl: LoadingController,
+              private alertCtrl: AlertController, private iab: InAppBrowser) {
   }
 
   ionViewDidLoad() {
     //
   }
 
-  login(loginForm: NgForm) {
+  public login() {
+
+    // Check if EMAIL and PASSWORD are valid
     if (!this.email || !this.password) {
       let message: Array<string> = [];
 
@@ -37,20 +38,22 @@ export class LoginPage {
         position: 'top'
       });
       toast.present();
-    } else {
+    }
+
+    // If verification passed we do the HTTP request
+    else {
       const loader = this.loadingCtrl.create({
         content: "Please wait...",
       });
 
       loader.present();
 
-      this.auth.login(this.email, this.password)
-        .then(result => {
-          this.menu.swipeEnable(true);
-          loader.dismiss();
+      this.auth.login(this.email, this.password).then(result => {
+        this.menu.swipeEnable(true);
+        loader.dismiss();
 
-          this.navCtrl.setRoot(HomePage);
-        })
+        this.navCtrl.setRoot(HomePage);
+      })
         .catch(error => {
           loader.dismiss();
 
@@ -62,9 +65,16 @@ export class LoginPage {
             });
 
             toast.present();
-          } else if (error.status === 403 && error.error.type === '2FA_error') {
-            this.navCtrl.push(DoubleAuthPage, { email: this.email, password: this.password });
-          } else if (error.status === 403 && error.error.type === 'invalid_request_error') {
+          }
+
+          // We check if 2FA is activated, in case we redirect to 2AF page
+          else if (error.status === 403 && error.error.type === '2FA_error') {
+            this.navCtrl.push(DoubleAuthPage, {email: this.email, password: this.password});
+          }
+
+          // This appends when user logged in too many times without logged out. In that case client need to contact
+          // Scaleway support to delete all of his tokens
+          else if (error.status === 403 && error.error.type === 'invalid_request_error') {
             const toast = this.toastCtrl.create({
               message: 'Error: too many tokens are registered into your Scaleway account.',
               duration: 3000,
@@ -77,7 +87,7 @@ export class LoginPage {
     }
   }
 
-  register() {
+  public register() {
     const confirm = this.alertCtrl.create({
       title: 'Warning',
       message: 'It will open your web browser, are you sure ?',

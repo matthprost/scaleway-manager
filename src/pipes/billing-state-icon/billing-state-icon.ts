@@ -19,7 +19,7 @@ export class BillingStateIconPipe implements PipeTransform {
         icon = 'md-time';
         break;
       case state.indexOf('stopped') !== -1:
-        icon = 'md-time';
+        icon = 'stopwatch';
         break;
       case state.indexOf('Outdated') !== -1:
         icon = 'md-time';

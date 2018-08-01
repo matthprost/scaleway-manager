@@ -29,7 +29,7 @@
     <ion-col>
       <div margin-bottom text-center class="login-header">
         <div [style.background]="state" [class]="stateClass"></div>
-        <span class="state-text vertical-align-content">{{ capitalize(server.state) }}</span>
+        <span class="state-text vertical-align-content">{{ server.state }}</span>
       </div>
     </ion-col>
   </ion-row>
@@ -44,7 +44,7 @@
         {{ server.public_ip.address }}
       </div>
     </ion-item>
-    <ion-item (click)="copyToClipBoard(server.public_ip.address)">
+    <ion-item (click)="server.private_ip ? copyToClipBoard(server.private_ip.address): ''">
       <div class="information-title">
         Private IP
       </div>

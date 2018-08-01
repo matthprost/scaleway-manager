@@ -50,7 +50,8 @@ export class HomePage {
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController,
               private storage: Storage, private serversProvider: ServersProvider,
               private stats: HomeStatsDirective, public alertCtrl: AlertController,
-              private iab: InAppBrowser, private billingProvider: BillingProvider, public menu: MenuController) {
+              private iab: InAppBrowser, private billingProvider: BillingProvider,
+              public menu: MenuController) {
   }
 
   ionViewDidEnter() {
@@ -67,10 +68,12 @@ export class HomePage {
   }
 
   private refresh(): Promise<any> {
+
     return new Promise((resolve, reject) => {
       this.rect = 'background-rect rect-scale';
       this.storage.get('token').then((token: AuthTokenDto) => {
 
+        // Get all servers from PARIS
         const paris = this.serversProvider.getAllServers('Paris', token.token.id).then(result => {
           this.nbrServParis = result.servers.length;
           this.parisServers = result.servers;
@@ -79,6 +82,7 @@ export class HomePage {
           reject(error);
         });
 
+        // Get all servers from NETHERLANDS
         const netherlands = this.serversProvider.getAllServers('Netherlands', token.token.id).then(result => {
           this.nbrServNetherlands = result.servers.length;
           this.netherlandsServers = result.servers;
@@ -87,6 +91,7 @@ export class HomePage {
           reject(error);
         });
 
+        // Get two last billing
         const billing = this.billingProvider.getTwoLastBilling(token.token.id).then(result => {
           this.lastInvoice = result[0];
           this.secondLastInvoice = result[1];
@@ -95,9 +100,10 @@ export class HomePage {
           reject(error);
         });
 
+        // Sync all promises, when they all finished, we display the information
         Promise.all([paris, netherlands, billing]).then(() => {
           this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
-          this.powerfulServer = this.stats.whatIsThePowerfull(this.parisServers, this.netherlandsServers);
+          this.powerfulServer = this.stats.whatIsThePowerful(this.parisServers, this.netherlandsServers);
           this.classAppear = 'card-appear';
           this.isLoading = false;
           resolve('ok');
@@ -136,7 +142,7 @@ export class HomePage {
     }
   }
 
-  account(ev: UIEvent) {
+  public account(ev: UIEvent) {
     let popover = this.popoverCtrl.create(AccountPopoverPage);
 
     popover.present({
@@ -186,7 +192,7 @@ export class HomePage {
     this.navCtrl.push(ShowServerPage, {server: serverInfo.server, serverCountry: serverInfo.country});
   }
 
-  openWebSite(fab: FabContainer) {
+  public openWebSite(fab: FabContainer) {
     const confirm = this.alertCtrl.create({
       title: 'Warning',
       message: 'It will open your web browser, are you sure ?',

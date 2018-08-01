@@ -13,10 +13,11 @@ export class ServerActionsPage {
   constructor(public navParams: NavParams, public viewCtrl: ViewController,
               private toastCtrl: ToastController) {
     const state = this.navParams.get('serverState');
+
     if (state === 'stopped') {
       this.serverActions = ['poweron', 'backup'];
     } else if (state === 'running') {
-      this.serverActions = ['poweroff', 'reboot', 'stop_in_place', 'terminate', 'backup']
+      this.serverActions = ['poweroff', 'reboot', 'stop_in_place', 'terminate', 'backup'];
     }
   }
 
@@ -24,7 +25,7 @@ export class ServerActionsPage {
     //
   }
 
-  sendAction() {
+  public sendAction() {
     if (this.actionSelected) {
       this.viewCtrl.dismiss({action: this.actionSelected});
     } else {
@@ -37,7 +38,7 @@ export class ServerActionsPage {
     }
   }
 
-  searchForAction(action: string): string {
+  public searchForAction(action: string): string {
     let value: string = null;
 
     switch (action) {

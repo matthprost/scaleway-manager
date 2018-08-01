@@ -29,7 +29,7 @@
     <ion-row>
       <ion-col>
         <ion-list>
-          <form (ngSubmit)="sendMail(mailForm)" #mailForm="ngForm">
+          <form (ngSubmit)="sendMail()" #mailForm="ngForm">
             <ion-row>
               <ion-item class="background-transparent" margin-top>
                 <ion-textarea placeholder="Enter your message" name="message" [(ngModel)]="message"></ion-textarea>
