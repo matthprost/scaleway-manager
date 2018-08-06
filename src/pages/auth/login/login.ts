@@ -99,7 +99,6 @@ export class LoginPage {
           text: 'Ok',
           handler: () => {
             const ref = this.iab.create('https://cloud.scaleway.com/#/signup', '_system');
-            ref.show();
             ref.close();
           }
         }
