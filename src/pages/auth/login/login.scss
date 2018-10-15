@@ -1,12 +1,20 @@
 page-login {
 
   background: white;
-  .vertical-align-content > *
-  {
+
+  @-webkit-keyframes slide {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: -400px 0;
+    }
+  }
+  .vertical-align-content > * {
     background-color: white;
-    display: flex!important;
-    align-content: center!important;
-    align-items: center!important;
+    display: flex !important;
+    align-content: center !important;
+    align-items: center !important;
     margin-top: -8rem;
     color: color($colors, primary);
   }
@@ -22,8 +30,14 @@ page-login {
   }
 
   .content {
+    background: gray url(/assets/imgs/background.png) repeat 0 0;
     width: 100%;
-    background: white;
+    margin: 0;
+    text-align: center;
+    height: 100%;
+    padding-top: 120px;
+    box-sizing: border-box;
+    -webkit-animation: slide 20s linear infinite;
   }
 
   .login-header {
