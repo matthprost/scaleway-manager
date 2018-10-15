@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ApiProvider} from "../api/api";
 import {AuthTokenDto} from "./auth-tokens.dto";
-import { Storage } from '@ionic/storage';
+import {Storage} from '@ionic/storage';
 
 @Injectable()
 export class AuthProvider {
@@ -19,12 +19,25 @@ export class AuthProvider {
         "2FA_token": code,
       })
         .then(result => {
-        this.storage.set('token', result);
-        resolve('ok');
-      })
+          this.storage.set('token', result);
+          resolve('ok');
+        })
         .catch(error => {
-        reject(error);
-      });
+          reject(error);
+        });
+    });
+  }
+
+  public getToken(token: string): Promise<any> {
+
+    return new Promise((resolve, reject) => {
+      this.api.get<AuthTokenDto>(this.api.getApiUrl() + '/tokens/' + token, token)
+        .then(result => {
+          resolve(result);
+        })
+        .catch(error => {
+          reject(error);
+        });
     });
   }
 

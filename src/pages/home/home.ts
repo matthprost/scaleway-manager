@@ -20,8 +20,8 @@ import {ShowServerPage} from "../server/show-server/show-server";
 import {ContactPage} from "../contact/contact";
 import {BugReportPage} from "../bug-report/bug-report";
 import {InAppBrowser} from "@ionic-native/in-app-browser";
-import {BillingProvider} from "../../providers/billing/billing";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
+import {BillingProvider} from "../../providers/billing/billing";
 import {BillingPage} from "../billing/billing";
 
 @Component({

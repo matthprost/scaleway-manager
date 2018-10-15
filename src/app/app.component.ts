@@ -10,6 +10,7 @@ import {Storage} from '@ionic/storage';
 import {ServerPage} from "../pages/server/server";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
 import {AboutPage} from "../pages/about/about";
+import {AuthProvider} from "../providers/auth/auth";
 
 
 @Component({
@@ -23,7 +24,8 @@ export class MyApp {
   pages: Array<{ title: string, component: any, picture?: string, icon?: string, parameters?: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
-              private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation) {
+              private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation,
+              private authprovider: AuthProvider) {
     this.initializeApp();
 
     this.pages = [
@@ -65,10 +67,20 @@ export class MyApp {
 
       this.storage.get('token').then((val: AuthTokenDto) => {
         if (val) {
-          this.nav.setRoot(HomePage).then(() => {
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
-          });
+          this.authprovider.getToken(val.token.id).then(() => {
+            this.nav.setRoot(HomePage).then(() => {
+              this.statusBar.styleDefault();
+              this.splashScreen.hide();
+            });
+          })
+            .catch(() => {
+              this.storage.remove('token').then(() => {
+                this.nav.setRoot(LoginPage).then(() => {
+                  this.statusBar.styleDefault();
+                  this.splashScreen.hide();
+                })
+              });
+            });
         } else {
           this.statusBar.styleDefault();
           this.splashScreen.hide();
