@@ -78,7 +78,6 @@ export class HomePage {
           this.nbrServParis = result.servers.length;
           this.parisServers = result.servers;
         }).catch(error => {
-          console.log(error);
           reject(error);
         });
 
@@ -87,7 +86,6 @@ export class HomePage {
           this.nbrServNetherlands = result.servers.length;
           this.netherlandsServers = result.servers;
         }).catch(error => {
-          console.log(error);
           reject(error);
         });
 
@@ -96,7 +94,6 @@ export class HomePage {
           this.lastInvoice = result[0];
           this.secondLastInvoice = result[1];
         }).catch(error => {
-          console.log(error);
           reject(error);
         });
 

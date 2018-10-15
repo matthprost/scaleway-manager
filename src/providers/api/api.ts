@@ -40,15 +40,15 @@ export class ApiProvider {
   }
 
   public get<T>(url: string, token?: string): Promise<T> {
-    return (this.getService.submit(url, token));
+    return this.getService.submit(url, token);
   }
 
   public post<T>(url: string, token?: string, body?: object): Promise<T> {
-    return (this.postService.submit(url, token, body));
+    return this.postService.submit(url, token, body);
   }
 
   public delete<T>(url: string, token?: string): Promise<T> {
-    return (this.deleteService.submit(url, token));
+    return this.deleteService.submit(url, token);
   }
 
 }

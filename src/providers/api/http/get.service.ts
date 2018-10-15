@@ -20,8 +20,9 @@ export class GetService {
         data => {
           resolve(data);
         },
-        result => {
-          reject(result);
+        error => {
+          console.log(error);
+          reject(error);
         });
     })
   }

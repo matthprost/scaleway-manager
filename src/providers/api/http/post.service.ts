@@ -20,9 +20,10 @@ export class PostService {
         data => {
           resolve(data);
         },
-        result => {
-          console.log(result);
-          reject(result);
+        error => {
+          console.log(error);
+
+          reject(error);
         });
     })
   }
