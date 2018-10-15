@@ -19,8 +19,9 @@ export class AuthProvider {
         "2FA_token": code,
       })
         .then(result => {
-          this.storage.set('token', result);
-          resolve('ok');
+          this.storage.set('token', result).then(() => {
+            resolve('ok');
+          });
         })
         .catch(error => {
           reject(error);

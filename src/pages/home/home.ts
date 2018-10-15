@@ -99,11 +99,17 @@ export class HomePage {
 
         // Sync all promises, when they all finished, we display the information
         Promise.all([paris, netherlands, billing]).then(() => {
-          this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
-          this.powerfulServer = this.stats.whatIsThePowerful(this.parisServers, this.netherlandsServers);
-          this.classAppear = 'card-appear';
-          this.isLoading = false;
-          resolve('ok');
+          if (this.parisServers && this.netherlandsServers) {
+            this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
+            this.powerfulServer = this.stats.whatIsThePowerful(this.parisServers, this.netherlandsServers);
+            this.classAppear = 'card-appear';
+            this.isLoading = false;
+            resolve('ok');
+          } else {
+            reject('error');
+          }
+        }).catch(error => {
+          reject(error);
         });
       });
     });

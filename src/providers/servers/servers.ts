@@ -2,11 +2,12 @@ import {Injectable} from '@angular/core';
 import {ApiProvider} from "../api/api";
 import {ServerDto} from "./server.dto";
 import {ActionDto} from "./action.dto";
+import {ErrorsProvider} from "../errors/errors";
 
 @Injectable()
 export class ServersProvider {
 
-  constructor(private api: ApiProvider) {
+  constructor(private api: ApiProvider, private errorsProvider: ErrorsProvider) {
   }
 
   public getAllServers(country: string, token: string): Promise<any> {
@@ -19,6 +20,7 @@ export class ServersProvider {
           resolve(result);
         })
         .catch(error => {
+          this.errorsProvider.apiError(error);
           reject(error);
         })
     });
@@ -34,6 +36,7 @@ export class ServersProvider {
           resolve(result);
         })
         .catch(error => {
+          this.errorsProvider.apiError(error);
           reject(error);
         })
     });
@@ -51,6 +54,7 @@ export class ServersProvider {
           resolve(result);
         })
         .catch(error => {
+          this.errorsProvider.apiError(error);
           reject(error);
         })
     });

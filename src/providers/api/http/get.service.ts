@@ -1,10 +1,11 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
+import {App} from "ionic-angular";
 
 @Injectable()
 export class GetService {
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private app: App) {
   }
 
   public submit<T>(url: string, token?: string): Promise<T> {

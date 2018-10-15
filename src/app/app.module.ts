@@ -27,6 +27,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {ComponentsModule} from "../components/components.module";
 import { BillingProvider } from '../providers/billing/billing';
 import {BillingPage} from "../pages/billing/billing";
+import { ErrorsProvider } from '../providers/errors/errors';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import {BillingPage} from "../pages/billing/billing";
     ScreenOrientation,
     EmailComposer,
     InAppBrowser,
-    BillingProvider
+    BillingProvider,
+    ErrorsProvider
   ]
 })
 export class AppModule {}

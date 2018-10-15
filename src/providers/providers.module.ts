@@ -4,6 +4,7 @@ import {AuthProvider} from "./auth/auth";
 import {LogoutProvider} from "./auth/logout/logout";
 import {ServersProvider} from "./servers/servers";
 import {BillingProvider} from "./billing/billing";
+import {ErrorsProvider} from "./errors/errors";
 
 @NgModule({
   declarations: [],
@@ -15,7 +16,8 @@ import {BillingProvider} from "./billing/billing";
     AuthProvider,
     LogoutProvider,
     ServersProvider,
-    BillingProvider
+    BillingProvider,
+    ErrorsProvider
   ]
 })
 

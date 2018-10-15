@@ -1,11 +1,13 @@
 import { Injectable } from '@angular/core';
 import {ApiProvider} from "../api/api";
 import {BillingDto} from "./billing.dto";
+import {LoginPage} from "../../pages/auth/login/login";
+import {ErrorsProvider} from "../errors/errors";
 
 @Injectable()
 export class BillingProvider {
 
-  constructor(private api: ApiProvider) {
+  constructor(private api: ApiProvider, private errorsProvider: ErrorsProvider) {
   }
 
   public getAllBilling(token: string): Promise<any> {
@@ -18,6 +20,7 @@ export class BillingProvider {
           resolve(result);
         })
         .catch(error => {
+          this.errorsProvider.apiError(error);
           reject(error);
         })
     });
@@ -33,6 +36,7 @@ export class BillingProvider {
           resolve(result.invoices);
         })
         .catch(error => {
+          this.errorsProvider.apiError(error);
           reject(error);
         })
     });
@@ -48,6 +52,7 @@ export class BillingProvider {
           resolve(result.invoices);
         })
         .catch(error => {
+          this.errorsProvider.apiError(error);
           reject(error);
         })
     });
