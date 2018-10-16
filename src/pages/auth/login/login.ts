@@ -107,4 +107,24 @@ export class LoginPage {
     confirm.present();
   }
 
+  public github() {
+    const confirm = this.alertCtrl.create({
+      title: 'Warning',
+      message: 'It will open your web browser, are you sure ?',
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            const ref = this.iab.create('https://github.com/F4OST/Scaleway-Manager', '_system');
+            ref.close();
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
+
 }

@@ -9,9 +9,9 @@ Scaleway-Manager use Scaleway API to get informations about your account and to 
 ## Download
 The application is available on Apple Store and Play store for free!
 
-Apple Store: https://itunes.apple.com/us/app/scaleway-manager/id1415090286?mt=8
+**Apple Store**: https://itunes.apple.com/us/app/scaleway-manager/id1415090286?mt=8
 
-Play Store: https://play.google.com/store/apps/details?id=com.matthiasprost.scalewaymanager
+**Play Store**: https://play.google.com/store/apps/details?id=com.matthiasprost.scalewaymanager
 
 ---
 

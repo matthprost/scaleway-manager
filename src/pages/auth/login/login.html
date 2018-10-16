@@ -28,9 +28,9 @@
                   </ion-item>
                 </ion-row>
                 <ion-row>
-                  <ion-item class="background-transparent" margin-bottom no-lines>
+                  <ion-item class="background-transparent" no-lines>
                     <ion-label floating>Password</ion-label>
-                    <ion-input class="login-input" type="password" name="password" [(ngModel)]="password"></ion-input>
+                    <ion-input class="login-input" type="password" name="password" [(ngModel)]="password" no-lines></ion-input>
                   </ion-item>
                 </ion-row>
                 <ion-item class="background-transparent" margin-top no-lines>
@@ -50,8 +50,8 @@
     <ion-grid>
       <ion-row>
         <ion-col>
-          <div class="github">
-            <ion-img height="25" width="25" src="assets/imgs/GitHub.png"></ion-img>
+          <div class="github" (click)="github()">
+            <ion-img height="25" width="25" src="assets/imgs/GitHub.png" style="vertical-align: middle"></ion-img>
             <div class="github-text">
               View on GitHub
             </div>

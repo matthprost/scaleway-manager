@@ -1,3 +1,5 @@
+This file is a personal reminder for deploy, don't mind about it :)
+
 ## iOS
 
 #### Requirements

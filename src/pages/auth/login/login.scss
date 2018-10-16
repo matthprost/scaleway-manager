@@ -1,5 +1,13 @@
 page-login {
 
+  .list-md .item-input:last-child {
+    border: none;
+  }
+
+  .label-md[stacked], .label-md[floating] {
+    margin-left: 1rem;
+  }
+
   background: white;
 
   @-webkit-keyframes slide {
@@ -38,6 +46,10 @@ page-login {
   }
 
   .label {
+    margin-left: 1rem;
+  }
+
+  .label-md {
     margin-left: 1rem;
   }
 
@@ -87,6 +99,7 @@ page-login {
     display: inline-block;
     padding: 1rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.10);
+    margin-top: 1rem;
     img {
       vertical-align: middle;
       display: inline-block;
