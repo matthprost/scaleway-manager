@@ -15,22 +15,22 @@
       </ion-row>
 
       <ion-row>
-        <ion-col>
+        <ion-col class="col-12">
           <div class="login">
-            <ion-list>
+            <ion-list no-margin>
               <h3>Scaleway Manager</h3>
 
-              <form (ngSubmit)="login()" #loginForm="ngForm">
+              <form (ngSubmit)="login()" #loginForm="ngForm" class="form">
                 <ion-row>
-                  <ion-item class="background-transparent" margin-top>
+                  <ion-item class="background-transparent" no-lines>
                     <ion-label floating>Email</ion-label>
-                    <ion-input type="email" name="email" [(ngModel)]="email"></ion-input>
+                    <ion-input class="login-input" type="email" name="email" [(ngModel)]="email"></ion-input>
                   </ion-item>
                 </ion-row>
                 <ion-row>
-                  <ion-item class="background-transparent">
+                  <ion-item class="background-transparent" margin-bottom no-lines>
                     <ion-label floating>Password</ion-label>
-                    <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
+                    <ion-input class="login-input" type="password" name="password" [(ngModel)]="password"></ion-input>
                   </ion-item>
                 </ion-row>
                 <ion-item class="background-transparent" margin-top no-lines>
@@ -43,6 +43,18 @@
                 </ion-item>
               </form>
             </ion-list>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="github">
+            <ion-img height="25" width="25" src="assets/imgs/GitHub.png"></ion-img>
+            <div class="github-text">
+              View on GitHub
+            </div>
           </div>
         </ion-col>
       </ion-row>

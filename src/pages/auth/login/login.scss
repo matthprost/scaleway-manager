@@ -25,12 +25,28 @@ page-login {
     padding: 0;
   }
 
+  .login-input {
+    background: white;
+    padding: .5rem .5rem .5rem 1rem;
+  }
+
+  form {
+    background-color: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.10);
+    padding: 1rem;
+    margin-top: 3rem;
+  }
+
+  .label {
+    margin-left: 1rem;
+  }
+
   ion-img {
     background: transparent;
   }
 
   .content {
-    background: gray url(/assets/imgs/background.png) repeat 0 0;
+    background: #F9F9F9 url(/assets/imgs/background.png) repeat 0 0;
     width: 100%;
     margin: 0;
     text-align: center;
@@ -41,13 +57,12 @@ page-login {
   }
 
   .login-header {
-    margin-top: 10%;
+    margin-top: 5%;
   }
 
   .login {
-    max-width: 90%;
+    max-width: 100%;
     margin: 0 auto;
-    padding: 0 5px 10px;
     border-radius: 3px;
     opacity: 1;
     position: relative;
@@ -58,4 +73,28 @@ page-login {
     }
   }
 
+  .item-inner {
+    padding-right: 0px!important;
+  }
+
+  .text-input {
+    padding: .5rem 0;
+    border-bottom: 2px #894cb2 solid;
+  }
+
+  .github {
+    background-color: white;
+    display: inline-block;
+    padding: 1rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.10);
+    img {
+      vertical-align: middle;
+      display: inline-block;
+    }
+    &-text {
+      display: inline-block;
+      vertical-align: middle;
+      margin-left: .5rem;
+    }
+  }
 }
