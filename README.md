@@ -1,13 +1,13 @@
 # Scaleway-Manager
 
 Scaleway-Manager is an IONIC application that allow you to start/stop your Scaleway servers.
-You can also see other informationsabout your servers and you invoices. 
+You can also see other informations about your servers and you invoices. 
 
 Scaleway-Manager use Scaleway API to get informations about your account and to start/stop your servers.
 
 
 ## Download
-The application is available on Apple Store and Play store for free!
+The application is available on Apple Store and Play Store for free!
 
 **Apple Store**: https://itunes.apple.com/us/app/scaleway-manager/id1415090286?mt=8
 
