@@ -1,0 +1,28 @@
+<ion-content no-bounce>
+  <ion-slides pager>
+    <ion-slide *ngFor="let slide of slides">
+      <ion-toolbar>
+        <ion-buttons end>
+          <button ion-button color="primary" (click)="navigate()">Skip</button>
+        </ion-buttons>
+      </ion-toolbar>
+      <img [src]="slide.image" class="slide-image"/>
+      <h2 class="slide-title" [innerHTML]="slide.title"></h2>
+      <p [innerHTML]="slide.description"></p>
+    </ion-slide>
+    <ion-slide>
+      <ion-toolbar>
+        <ion-buttons end>
+          <button ion-button color="primary" (click)="navigate()">Exit ></button>
+        </ion-buttons>
+      </ion-toolbar>
+      <img src="assets/imgs/code.svg" class="slide-image"/>
+      <h2 class="slide-title">Join the project</h2>
+      <p>Participate to the project by adding your own code or ask for new features directly on GitHub!</p>
+      <button ion-button large clear icon-end color="dark" (click)="github()">
+        <ion-icon name="logo-github"></ion-icon>
+        View on GitHub
+      </button>
+    </ion-slide>
+  </ion-slides>
+</ion-content>

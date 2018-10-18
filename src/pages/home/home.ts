@@ -23,6 +23,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {BillingProvider} from "../../providers/billing/billing";
 import {BillingPage} from "../billing/billing";
+import {SliderPage} from "../slider/slider";
 
 @Component({
   selector: 'page-home',
@@ -52,6 +53,15 @@ export class HomePage {
               private stats: HomeStatsDirective, public alertCtrl: AlertController,
               private iab: InAppBrowser, private billingProvider: BillingProvider,
               public menu: MenuController) {
+    this.storage.get('slider')
+      .then(value => {
+       if(!value) {
+         this.navCtrl.setRoot(SliderPage);
+       }
+    })
+      .catch(error => {
+        console.log(error);
+      })
   }
 
   ionViewDidEnter() {

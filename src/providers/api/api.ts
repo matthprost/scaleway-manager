@@ -3,7 +3,6 @@ import {GetService} from "./http/get.service";
 import {PostService} from "./http/post.service";
 import {DeleteService} from "./http/delete.service";
 import {Platform} from "ionic-angular";
-import {LoginPage} from "../../pages/auth/login/login";
 
 @Injectable()
 export class ApiProvider {

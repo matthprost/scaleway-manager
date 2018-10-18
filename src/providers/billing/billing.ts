@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import {ApiProvider} from "../api/api";
 import {BillingDto} from "./billing.dto";
-import {LoginPage} from "../../pages/auth/login/login";
 import {ErrorsProvider} from "../errors/errors";
 
 @Injectable()
