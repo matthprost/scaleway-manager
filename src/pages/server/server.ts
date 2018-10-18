@@ -27,8 +27,12 @@ export class ServerPage {
   }
 
   ionViewDidEnter() {
-    this.refreshAllServers().then(() => {
+    this.refreshAllServers()
+      .then(() => {
       this.isLoading = false;
+    })
+      .catch(error => {
+      console.log(error);
     });
   }
 
@@ -44,7 +48,10 @@ export class ServerPage {
         }).catch(error => {
           reject(error);
         });
-      });
+      })
+        .catch(error => {
+          console.log(error);
+        });
     });
   }
 
