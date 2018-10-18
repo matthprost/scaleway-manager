@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform, MenuController} from 'ionic-angular';
+import {Nav, Platform, MenuController, AlertController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 
@@ -11,6 +11,7 @@ import {ServerPage} from "../pages/server/server";
 import {ScreenOrientation} from "@ionic-native/screen-orientation";
 import {AboutPage} from "../pages/about/about";
 import {AuthProvider} from "../providers/auth/auth";
+import {InAppBrowser} from "@ionic-native/in-app-browser";
 
 
 @Component({
@@ -25,7 +26,7 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation,
-              private authprovider: AuthProvider) {
+              private authprovider: AuthProvider, private alertCtrl: AlertController, private iab: InAppBrowser) {
     this.initializeApp();
 
     this.pages = [
@@ -100,5 +101,25 @@ export class MyApp {
     } else {
       this.nav.setRoot(page.component);
     }
+  }
+
+  public github() {
+    const confirm = this.alertCtrl.create({
+      title: 'Warning',
+      message: 'It will open your web browser, are you sure ?',
+      buttons: [
+        {
+          text: 'Cancel',
+        },
+        {
+          text: 'Ok',
+          handler: () => {
+            const ref = this.iab.create('https://github.com/F4OST/Scaleway-Manager', '_system');
+            ref.close();
+          }
+        }
+      ]
+    });
+    confirm.present();
   }
 }
