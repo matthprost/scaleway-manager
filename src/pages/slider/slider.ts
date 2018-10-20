@@ -32,8 +32,13 @@ export class SliderPage {
   }
 
   public navigate() {
-    this.storage.set('slider', 'seen');
-    this.navCtrl.setRoot(HomePage);
+    this.storage.set('slider', 'seen').then(() => {
+      this.navCtrl.setRoot(HomePage);
+    })
+      .catch(error => {
+        console.log(error);
+        this.navCtrl.setRoot(HomePage);
+      });
   }
 
   public github() {
