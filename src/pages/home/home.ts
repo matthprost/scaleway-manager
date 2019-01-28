@@ -53,15 +53,7 @@ export class HomePage {
               private stats: HomeStatsDirective, public alertCtrl: AlertController,
               private iab: InAppBrowser, private billingProvider: BillingProvider,
               public menu: MenuController) {
-    this.storage.get('slider')
-      .then(value => {
-       if(!value) {
-         this.navCtrl.setRoot(SliderPage);
-       }
-    })
-      .catch(error => {
-        console.log(error);
-      })
+    this.storage.remove('slider');
   }
 
   ionViewDidEnter() {
