@@ -28,7 +28,6 @@ import {ComponentsModule} from "../components/components.module";
 import { BillingProvider } from '../providers/billing/billing';
 import {BillingPage} from "../pages/billing/billing";
 import { ErrorsProvider } from '../providers/errors/errors';
-import {SliderPage} from "../pages/slider/slider";
 
 @NgModule({
   declarations: [
@@ -43,8 +42,7 @@ import {SliderPage} from "../pages/slider/slider";
     AboutPage,
     ContactPage,
     BugReportPage,
-    BillingPage,
-    SliderPage
+    BillingPage
   ],
   imports: [
     BrowserModule,
@@ -68,8 +66,7 @@ import {SliderPage} from "../pages/slider/slider";
     AboutPage,
     ContactPage,
     BugReportPage,
-    BillingPage,
-    SliderPage
+    BillingPage
   ],
   providers: [
     StatusBar,

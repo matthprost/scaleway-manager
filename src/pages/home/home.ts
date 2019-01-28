@@ -23,7 +23,6 @@ import {InAppBrowser} from "@ionic-native/in-app-browser";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {BillingProvider} from "../../providers/billing/billing";
 import {BillingPage} from "../billing/billing";
-import {SliderPage} from "../slider/slider";
 
 @Component({
   selector: 'page-home',
