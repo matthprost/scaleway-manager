@@ -57,13 +57,19 @@ page-login {
     background: transparent;
   }
 
+  ion-list {
+    h3 {
+      margin-top: 0;
+    }
+  }
+
   .content {
     background: #F9F9F9 url(../assets/imgs/background.png) repeat 0 0;
     width: 100%;
     margin: 0;
     text-align: center;
     height: 100%;
-    padding-top: 120px;
+    padding-top: 6vh;
     box-sizing: border-box;
     -webkit-animation: slide 20s linear infinite;
   }
@@ -91,7 +97,7 @@ page-login {
 
   .text-input {
     padding: .5rem 0;
-    border-bottom: 2px #894cb2 solid;
+    border-bottom: 1px lightgrey solid;
   }
 
   .github {
@@ -109,5 +115,9 @@ page-login {
       vertical-align: middle;
       margin-left: .5rem;
     }
+  }
+
+  ion-label {
+    color: grey;
   }
 }
