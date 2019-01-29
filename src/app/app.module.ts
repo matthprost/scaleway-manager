@@ -5,8 +5,8 @@ import { IonicApp, IonicErrorHandler, IonicModule } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import {LoginPage} from "../pages/auth/login/login";
 import {ProvidersModule} from "../providers/providers.module";
 import {IonicStorageModule} from "@ionic/storage";
@@ -14,20 +14,21 @@ import {ServerPage} from "../pages/server/server";
 import {ShowServerPage} from "../pages/server/show-server/show-server";
 import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
 import {PipesModule} from "../pipes/pipes.module";
-import {Clipboard} from "@ionic-native/clipboard";
+import {Clipboard} from "@ionic-native/clipboard/ngx";
 import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
 import {AccountPopoverPage} from "../pages/home/account-popover/account-popover";
 import {DirectivesModule} from "../directives/directives.module";
-import { ScreenOrientation } from '@ionic-native/screen-orientation';
+import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import {AboutPage} from "../pages/about/about";
 import {ContactPage} from "../pages/contact/contact";
-import {EmailComposer} from "@ionic-native/email-composer";
+import {EmailComposer} from "@ionic-native/email-composer/ngx";
 import {BugReportPage} from "../pages/bug-report/bug-report";
-import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {ComponentsModule} from "../components/components.module";
 import { BillingProvider } from '../providers/billing/billing';
 import {BillingPage} from "../pages/billing/billing";
 import { ErrorsProvider } from '../providers/errors/errors';
+import {AdMobFree} from "@ionic-native/admob-free/ngx";
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { ErrorsProvider } from '../providers/errors/errors';
     IonicStorageModule.forRoot(),
     PipesModule,
     DirectivesModule,
-    ComponentsModule
+    ComponentsModule,
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -77,7 +79,8 @@ import { ErrorsProvider } from '../providers/errors/errors';
     EmailComposer,
     InAppBrowser,
     BillingProvider,
-    ErrorsProvider
+    ErrorsProvider,
+    AdMobFree
   ]
 })
 export class AppModule {}

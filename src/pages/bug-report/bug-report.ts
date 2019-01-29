@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import {LoadingController, NavController, Platform, ToastController} from 'ionic-angular';
-import {EmailComposer} from "@ionic-native/email-composer";
+import {EmailComposer} from "@ionic-native/email-composer/ngx";
 
 @Component({
   selector: 'page-bug-report',

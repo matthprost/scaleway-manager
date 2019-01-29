@@ -5,7 +5,7 @@ import {ServerActionsPage} from "../server-actions/server-actions";
 import {ServersProvider} from "../../../providers/servers/servers";
 import {AuthTokenDto} from "../../../providers/auth/auth-tokens.dto";
 import {Storage} from "@ionic/storage";
-import {Clipboard} from "@ionic-native/clipboard";
+import {Clipboard} from "@ionic-native/clipboard/ngx";
 
 @Component({
   selector: 'page-show-server',

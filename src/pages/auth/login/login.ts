@@ -3,7 +3,7 @@ import {AlertController, LoadingController, MenuController, NavController, Toast
 import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
-import {InAppBrowser} from '@ionic-native/in-app-browser';
+import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'page-login',

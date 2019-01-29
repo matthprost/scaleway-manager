@@ -19,10 +19,11 @@ import {HomeStatsDirective} from "../../directives/home-stats/home-stats";
 import {ShowServerPage} from "../server/show-server/show-server";
 import {ContactPage} from "../contact/contact";
 import {BugReportPage} from "../bug-report/bug-report";
-import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {BillingProvider} from "../../providers/billing/billing";
 import {BillingPage} from "../billing/billing";
+import { AdMobFree, AdMobFreeBannerConfig } from '@ionic-native/admob-free/ngx';
 
 @Component({
   selector: 'page-home',
@@ -51,8 +52,23 @@ export class HomePage {
               private storage: Storage, private serversProvider: ServersProvider,
               private stats: HomeStatsDirective, public alertCtrl: AlertController,
               private iab: InAppBrowser, private billingProvider: BillingProvider,
-              public menu: MenuController) {
-    this.storage.remove('slider');
+              public menu: MenuController, private admobFree: AdMobFree) {
+  }
+
+  ionViewDidLoad() {
+    const bannerConfig: AdMobFreeBannerConfig = {
+      id: 'ca-app-pub-4378794561722809~9221055147',
+      isTesting: true,
+      autoShow: true
+    };
+
+    this.admobFree.banner.config(bannerConfig);
+
+    this.admobFree.banner.prepare()
+      .then(() => {
+        console.log('ok');
+      })
+      .catch(e => console.log(e));
   }
 
   ionViewDidEnter() {

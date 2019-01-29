@@ -1,17 +1,17 @@
 import {Component, ViewChild} from '@angular/core';
 import {Nav, Platform, MenuController, AlertController} from 'ionic-angular';
-import {StatusBar} from '@ionic-native/status-bar';
-import {SplashScreen} from '@ionic-native/splash-screen';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/auth/login/login';
 import {AuthTokenDto} from "../providers/auth/auth-tokens.dto";
 import {Storage} from '@ionic/storage';
 import {ServerPage} from "../pages/server/server";
-import {ScreenOrientation} from "@ionic-native/screen-orientation";
+import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
 import {AboutPage} from "../pages/about/about";
 import {AuthProvider} from "../providers/auth/auth";
-import {InAppBrowser} from "@ionic-native/in-app-browser";
+import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 
 
 @Component({
