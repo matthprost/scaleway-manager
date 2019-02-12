@@ -3,11 +3,6 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title><img class="logo" src="assets/imgs/scaleway.png">
-      <div class="logo-text">
-        <div class="logo-title">Manager</div>
-      </div>
-    </ion-title>
     <ion-buttons end>
       <button ion-button icon-only (click)="account($event)">
         <ion-icon name="contact"></ion-icon>
@@ -23,21 +18,6 @@
 
   <loader *ngIf="isLoading"></loader>
   <ion-grid>
-    <ion-row>
-      <ion-col [class]="classAppear" col-12>
-        <ion-card>
-
-          <ion-card-header text-center>
-            Welcome !
-          </ion-card-header>
-
-          <ion-card-content text-center>
-            Here you can manage all your VPS from Scaleway
-          </ion-card-content>
-
-        </ion-card>
-      </ion-col>
-    </ion-row>
     <ion-row>
       <ion-col [class]="classAppear" col-6>
         <ion-card (click)="navigate('paris')">

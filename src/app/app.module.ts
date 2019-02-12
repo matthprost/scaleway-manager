@@ -28,7 +28,8 @@ import {ComponentsModule} from "../components/components.module";
 import { BillingProvider } from '../providers/billing/billing';
 import {BillingPage} from "../pages/billing/billing";
 import { ErrorsProvider } from '../providers/errors/errors';
-import {AdMobFree} from "@ionic-native/admob-free/ngx";
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 @NgModule({
   declarations: [
@@ -53,7 +54,7 @@ import {AdMobFree} from "@ionic-native/admob-free/ngx";
     PipesModule,
     DirectivesModule,
     ComponentsModule,
-
+    FontAwesomeModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -79,8 +80,7 @@ import {AdMobFree} from "@ionic-native/admob-free/ngx";
     EmailComposer,
     InAppBrowser,
     BillingProvider,
-    ErrorsProvider,
-    AdMobFree
+    ErrorsProvider
   ]
 })
 export class AppModule {}

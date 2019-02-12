@@ -3,19 +3,25 @@
     <ion-list class="menu-list" no-lines>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
         <ion-thumbnail item-start no-margin>
-          <img *ngIf="p.picture" src="{{ p.picture ? p.picture : null }}">
+          <fa-icon *ngIf="p.picture" [icon]="p.picture ? p.picture : null"></fa-icon>
         </ion-thumbnail>
-        {{p.title}}
+        <div class="menu-text">
+          {{p.title}}
+        </div>
       </button>
     </ion-list>
   </ion-content>
   <ion-footer>
-    <button menuClose ion-item (click)="github()">
-      <ion-thumbnail item-start no-margin>
-        <img src="assets/imgs/github.svg">
-      </ion-thumbnail>
-      Visit on GitHub
-    </button>
+    <ion-list class="menu-list" no-lines no-margin>
+      <button menuClose ion-item *ngFor="let p of pagesBottom" (click)="openPage(p)">
+        <ion-thumbnail item-start no-margin>
+          <fa-icon *ngIf="p.picture" [icon]="p.picture ? p.picture : null"></fa-icon>
+        </ion-thumbnail>
+        <div class="menu-text">
+          {{p.title}}
+        </div>
+      </button>
+    </ion-list>
   </ion-footer>
 
 </ion-menu>

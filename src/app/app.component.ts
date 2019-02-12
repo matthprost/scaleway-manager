@@ -12,6 +12,7 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
 import {AboutPage} from "../pages/about/about";
 import {AuthProvider} from "../providers/auth/auth";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
+import { faHome, faServer, faQuestion, faSignOutAlt, faCog } from '@fortawesome/free-solid-svg-icons';
 
 
 @Component({
@@ -22,7 +23,8 @@ export class MyApp {
 
   rootPage: any = LoginPage;
 
-  pages: Array<{ title: string, component: any, picture?: string, icon?: string, parameters?: any }>;
+  pages: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
+  pagesBottom: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation,
@@ -31,26 +33,34 @@ export class MyApp {
 
     this.pages = [
       {
-        title: 'Home',
+        title: 'Dashboard',
         component: HomePage,
-        picture: ''
+        picture: faHome
       },
       {
-        title: 'Paris',
+        title: 'Servers',
         component: ServerPage,
-        picture: 'assets/imgs/france.svg',
+        picture: faServer,
         parameters: {country: 'Paris'}
       },
       {
-        title: 'Amsterdam',
-        component: ServerPage,
-        picture: 'assets/imgs/netherlands.svg',
-        parameters: {country: 'Amsterdam'}
+        title: 'Settings',
+        component: null,
+        picture: faCog,
       },
+
+    ];
+
+    this.pagesBottom = [
       {
         title: 'About',
         component: AboutPage,
-        picture: '',
+        picture: faQuestion,
+      },
+      {
+        title: 'Logout',
+        component: null,
+        picture: faSignOutAlt,
       }
     ];
 
