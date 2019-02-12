@@ -15,22 +15,25 @@
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
-.item {
-  margin: 1rem 0;
+.menu-app {
+  .item {
+    margin: 1rem 0;
 
-  ion-thumbnail {
-    min-width: auto;
-    min-height: auto;
+    ion-thumbnail {
+      min-width: auto;
+      min-height: auto;
 
-    fa-icon {
-      width: 25px;
-      height: 25px;
-      font-size: 1.85rem;
-      list-style: none;
-      padding-left: 0;
-      float: left;
-      margin-top: 5px;
-      color: color($colors, primary);
+      fa-icon {
+        width: 25px;
+        height: 25px;
+        font-size: 1.85rem;
+        list-style: none;
+        padding-left: 0;
+        float: left;
+        margin-top: 5px;
+        color: color($colors, primary);
+        text-align: center;
+      }
     }
   }
 }
@@ -51,6 +54,7 @@ ion-header {
   .toolbar-background {
     background-color: white;
   }
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
 }
 
 .logo {
@@ -84,7 +88,11 @@ ion-header {
 }
 
 .refresher-active {
-  background: white;
+  background: #f9f9f9;
+}
+
+.has-refresher  .scroll-content {
+  border-top: 0 !important;
 }
 
 .menu {

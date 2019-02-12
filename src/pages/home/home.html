@@ -3,11 +3,6 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-buttons end>
-      <button ion-button icon-only (click)="account($event)">
-        <ion-icon name="contact"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -19,7 +14,7 @@
   <loader *ngIf="isLoading"></loader>
   <ion-grid>
     <ion-row>
-      <ion-col [class]="classAppear" col-6>
+      <ion-col [class]="classAppear" col-12>
         <ion-card (click)="navigate('paris')">
 
           <ion-card-header>
@@ -27,20 +22,7 @@
           </ion-card-header>
 
           <ion-card-content class="card-stat" text-center>
-            {{ nbrServParis }}
-          </ion-card-content>
-
-        </ion-card>
-      </ion-col>
-      <ion-col [class]="classAppear" col-6>
-        <ion-card (click)="navigate('netherlands')">
-
-          <ion-card-header>
-            <img src="assets/imgs/netherlands.svg">
-          </ion-card-header>
-
-          <ion-card-content class="card-stat" text-center>
-            {{ nbrServNetherlands }}
+            {{ nbrServParis + nbrServNetherlands }}
           </ion-card-content>
 
         </ion-card>

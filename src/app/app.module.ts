@@ -16,7 +16,6 @@ import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
 import {PipesModule} from "../pipes/pipes.module";
 import {Clipboard} from "@ionic-native/clipboard/ngx";
 import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
-import {AccountPopoverPage} from "../pages/home/account-popover/account-popover";
 import {DirectivesModule} from "../directives/directives.module";
 import { ScreenOrientation } from '@ionic-native/screen-orientation/ngx';
 import {AboutPage} from "../pages/about/about";
@@ -40,7 +39,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ServerPage,
     ShowServerPage,
     ServerActionsPage,
-    AccountPopoverPage,
     AboutPage,
     ContactPage,
     BugReportPage,
@@ -65,7 +63,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     ServerPage,
     ShowServerPage,
     ServerActionsPage,
-    AccountPopoverPage,
     AboutPage,
     ContactPage,
     BugReportPage,

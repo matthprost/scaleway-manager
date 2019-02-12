@@ -1,5 +1,5 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform, MenuController, AlertController} from 'ionic-angular';
+import {Nav, Platform, MenuController, AlertController, LoadingController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 
@@ -12,7 +12,9 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
 import {AboutPage} from "../pages/about/about";
 import {AuthProvider} from "../providers/auth/auth";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
-import { faHome, faServer, faQuestion, faSignOutAlt, faCog } from '@fortawesome/free-solid-svg-icons';
+import {BillingPage} from "../pages/billing/billing";
+import {faHome, faServer, faQuestion, faSignOutAlt, faCog, faMoneyCheckAlt} from '@fortawesome/free-solid-svg-icons';
+import {LogoutProvider} from "../providers/auth/logout/logout";
 
 
 @Component({
@@ -22,13 +24,15 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   rootPage: any = LoginPage;
+  faSignOutAlt = faSignOutAlt;
 
   pages: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
   pagesBottom: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation,
-              private authprovider: AuthProvider, private alertCtrl: AlertController, private iab: InAppBrowser) {
+              private authprovider: AuthProvider, private alertCtrl: AlertController, private iab: InAppBrowser,
+              private loadingCtrl: LoadingController, private logoutService: LogoutProvider) {
     this.initializeApp();
 
     this.pages = [
@@ -44,6 +48,11 @@ export class MyApp {
         parameters: {country: 'Paris'}
       },
       {
+        title: 'Billing',
+        component: BillingPage,
+        picture: faMoneyCheckAlt,
+      },
+      {
         title: 'Settings',
         component: null,
         picture: faCog,
@@ -56,11 +65,6 @@ export class MyApp {
         title: 'About',
         component: AboutPage,
         picture: faQuestion,
-      },
-      {
-        title: 'Logout',
-        component: null,
-        picture: faSignOutAlt,
       }
     ];
 
@@ -113,7 +117,7 @@ export class MyApp {
     }
   }
 
-  public github() {
+  /*public github() {
     const confirm = this.alertCtrl.create({
       title: 'Warning',
       message: 'It will open your web browser, are you sure ?',
@@ -131,5 +135,22 @@ export class MyApp {
       ]
     });
     confirm.present();
+  }*/
+
+  private logout() {
+    const loader = this.loadingCtrl.create({
+      content: "Please wait...",
+    });
+
+    loader.present();
+
+    this.logoutService.logout().then(() => {
+      loader.dismiss();
+      this.nav.setRoot(LoginPage);
+    })
+      .catch(error => {
+      loader.dismiss();
+      console.log(error);
+    });
   }
 }

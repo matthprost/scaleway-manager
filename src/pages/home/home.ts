@@ -7,9 +7,7 @@ import {
   NavController,
   PopoverController
 } from 'ionic-angular';
-import {AccountPopoverPage} from "./account-popover/account-popover";
 import {LogoutProvider} from "../../providers/auth/logout/logout";
-import {LoginPage} from "../auth/login/login";
 import {ServerPage} from "../server/server";
 import {Storage} from "@ionic/storage";
 import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
@@ -147,30 +145,6 @@ export class HomePage {
       default:
         return 'state';
     }
-  }
-
-  public account(ev: UIEvent) {
-    let popover = this.popoverCtrl.create(AccountPopoverPage);
-
-    popover.present({
-      ev: ev
-    });
-    popover.onDidDismiss(result => {
-      if (result && result.logout) {
-        const loader = this.loadingCtrl.create({
-          content: "Please wait...",
-        });
-
-        loader.present();
-        this.logoutService.logout().then(() => {
-          loader.dismiss();
-          this.navCtrl.setRoot(LoginPage);
-        }).catch(error => {
-          loader.dismiss();
-          console.log(error);
-        });
-      }
-    });
   }
 
   public navigate(location: string, fab?: FabContainer) {
