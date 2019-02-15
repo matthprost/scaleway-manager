@@ -16,13 +16,20 @@
     <ion-row>
       <ion-col [class]="classAppear" col-12>
         <ion-card (click)="navigate('paris')">
-
-          <ion-card-header>
-            <img src="assets/imgs/france.svg">
-          </ion-card-header>
-
-          <ion-card-content class="card-stat" text-center>
-            {{ nbrServParis + nbrServNetherlands }}
+          <ion-card-content class="servers" text-center no-padding>
+            <ion-row>
+              <ion-col col-9 no-padding>
+                <div class="servers-left">
+                  My Servers
+                  <ion-badge color="primary" *ngIf="nbrServParis + nbrServNetherlands !== 0">{{ nbrServParis + nbrServNetherlands }}</ion-badge>
+                </div>
+              </ion-col>
+              <ion-col col-3 no-padding>
+                <div class="servers-right">
+                  <fa-icon [icon]="faRight"></fa-icon>
+                </div>
+              </ion-col>
+            </ion-row>
           </ion-card-content>
 
         </ion-card>
@@ -94,7 +101,8 @@
           <ion-card-content class="card-invoices" text-center>
             {{ secondLastInvoice.total_taxed }} {{ secondLastInvoice.currency }}
             <small class="card-invoices-small">
-              <ion-icon name="{{ secondLastInvoice.state | billingStateIcon }}" style="vertical-align: middle"></ion-icon>&nbsp;
+              <ion-icon name="{{ secondLastInvoice.state | billingStateIcon }}"
+                        style="vertical-align: middle"></ion-icon>&nbsp;
               {{ secondLastInvoice.state }}
             </small>
           </ion-card-content>
@@ -105,11 +113,19 @@
   </ion-grid>
 
   <ion-fab right bottom #fab>
-    <button ion-fab color="primary"><ion-icon name="help-buoy"></ion-icon></button>
+    <button ion-fab color="primary">
+      <ion-icon name="help-buoy"></ion-icon>
+    </button>
     <ion-fab-list side="left">
-      <button ion-fab color="grey" (click)="navigate('bug', fab)"><ion-icon name="bug"></ion-icon></button>
-      <button ion-fab color="grey" (click)="navigate('contact', fab)"><ion-icon name="mail"></ion-icon></button>
-      <button ion-fab color="grey" (click)="openWebSite(fab)"><ion-icon name="globe"></ion-icon></button>
+      <button ion-fab color="grey" (click)="navigate('bug', fab)">
+        <ion-icon name="bug"></ion-icon>
+      </button>
+      <button ion-fab color="grey" (click)="navigate('contact', fab)">
+        <ion-icon name="mail"></ion-icon>
+      </button>
+      <button ion-fab color="grey" (click)="openWebSite(fab)">
+        <ion-icon name="globe"></ion-icon>
+      </button>
     </ion-fab-list>
   </ion-fab>
 </ion-content>

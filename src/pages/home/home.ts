@@ -21,6 +21,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {BillingProvider} from "../../providers/billing/billing";
 import {BillingPage} from "../billing/billing";
+import {faServer, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'page-home',
@@ -43,6 +44,9 @@ export class HomePage {
   public secondLastInvoice: InvoicesDto = null;
 
   public isLoading: boolean = true;
+
+  faServer = faServer;
+  faRight = faChevronRight;
 
   constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
               private logoutService: LogoutProvider, private loadingCtrl: LoadingController,
