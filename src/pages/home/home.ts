@@ -20,7 +20,6 @@ import {BugReportPage} from "../bug-report/bug-report";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {BillingProvider} from "../../providers/billing/billing";
-import {BillingPage} from "../billing/billing";
 import {faServer, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
@@ -80,7 +79,7 @@ export class HomePage {
       this.storage.get('token').then((token: AuthTokenDto) => {
 
         // Get all servers from PARIS
-        const paris = this.serversProvider.getAllServers('Paris', token.token.id).then(result => {
+        const paris = this.serversProvider.getAllServerByCountry('Paris', token.token.id).then(result => {
           this.nbrServParis = result.servers.length;
           this.parisServers = result.servers;
         }).catch(error => {
@@ -88,7 +87,7 @@ export class HomePage {
         });
 
         // Get all servers from NETHERLANDS
-        const netherlands = this.serversProvider.getAllServers('Netherlands', token.token.id).then(result => {
+        const netherlands = this.serversProvider.getAllServerByCountry('Netherlands', token.token.id).then(result => {
           this.nbrServNetherlands = result.servers.length;
           this.netherlandsServers = result.servers;
         }).catch(error => {
@@ -153,11 +152,8 @@ export class HomePage {
 
   public navigate(location: string, fab?: FabContainer) {
     switch (location) {
-      case 'paris' :
-        this.navCtrl.setRoot(ServerPage, {server: 'Paris'});
-        break;
-      case 'netherlands' :
-        this.navCtrl.setRoot(ServerPage, {server: 'Netherlands'});
+      case 'servers' :
+        this.navCtrl.setRoot(ServerPage);
         break;
       case 'contact' :
         fab.close();
@@ -166,9 +162,6 @@ export class HomePage {
       case 'bug' :
         fab.close();
         this.navCtrl.push(BugReportPage);
-        break;
-      case 'billing' :
-        this.navCtrl.push(BillingPage);
         break;
     }
   }

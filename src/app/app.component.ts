@@ -16,7 +16,6 @@ import {BillingPage} from "../pages/billing/billing";
 import {faHome, faServer, faQuestion, faSignOutAlt, faCog, faMoneyCheckAlt} from '@fortawesome/free-solid-svg-icons';
 import {LogoutProvider} from "../providers/auth/logout/logout";
 
-
 @Component({
   templateUrl: 'app.html'
 })
@@ -34,7 +33,6 @@ export class MyApp {
               private authprovider: AuthProvider, private alertCtrl: AlertController, private iab: InAppBrowser,
               private loadingCtrl: LoadingController, private logoutService: LogoutProvider) {
     this.initializeApp();
-
     this.pages = [
       {
         title: 'Dashboard',
@@ -45,7 +43,6 @@ export class MyApp {
         title: 'Servers',
         component: ServerPage,
         picture: faServer,
-        parameters: {country: 'Paris'}
       },
       {
         title: 'Billing',

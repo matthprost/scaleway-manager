@@ -5,7 +5,7 @@
     </button>
     <ion-title>
       <div class="logo-text">
-        <div class="logo-title">{{ serverCountry }}</div>
+        <div class="logo-title">Servers</div>
       </div>
     </ion-title>
   </ion-navbar>
@@ -20,86 +20,74 @@
 
   <loader *ngIf="isLoading"></loader>
 
-  <ion-list *ngIf="allServers !== undefined && countServersByState(allServers, 'running') > 0">
-    <ion-list-header>
-      Online
-    </ion-list-header>
+  <div *ngIf="!isLoading">
+    <ion-list *ngIf="serverParis.servers !== undefined && serverParis.servers.length !== 0">
+      <ion-list-header>
+        <img class="country-flag" src="assets/imgs/france.svg"> Paris
+      </ion-list-header>
 
-    <ion-item-sliding *ngFor="let server of getServerByState(['running'])" #item>
-      <ion-item (click)="showServer(server)">
-        <ion-avatar item-start>
-          <img class="img-os" src="{{ server.image.name | serverIcon }}">
-        </ion-avatar>
-        <div class="state" [style.background]="'#27c295'"></div>
-        <h2>{{ server.name }}</h2>
-        <p>{{ server.commercial_type }}</p>
-        <ion-note item-end>
-          <ion-icon name="arrow-forward"></ion-icon>
-        </ion-note>
-      </ion-item>
+      <ion-item-sliding *ngFor="let server of serverParis.servers" #item>
+        <ion-item (click)="showServer(server, serverParis.country)">
+          <ion-avatar item-start>
+            <img class="img-os" src="{{ server.image.name | serverIcon }}">
+          </ion-avatar>
+          <div class="state" [style.background]="setState(server)"></div>
+          <h2>{{ server.name }}</h2>
+          <p>{{ server.commercial_type }}</p>
+          <ion-note item-end>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </ion-item>
 
-      <ion-item-options *ngIf="server.state === 'stopped' || server.state === 'running'">
-        <button ion-button color="danger" (click)="serverAction(server, 'poweroff', item)">
-          OFF
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+        <ion-item-options *ngIf="server.state === 'running'">
+          <button ion-button color="danger" (click)="serverAction(server, 'poweroff', item, serverParis.country)">
+            OFF
+          </button>
+        </ion-item-options>
+        <ion-item-options *ngIf="server.state === 'stopped'">
+          <button ion-button color="secondary" (click)="serverAction(server, 'poweron', item, serverParis.country)">
+            ON
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
 
-  <ion-list
-    *ngIf="allServers !== undefined && (countServersByState(allServers, 'starting') > 0 || countServersByState(allServers, 'stopping') > 0)">
-    <ion-list-header>
-      Pending
-    </ion-list-header>
+    <ion-list *ngIf="serverNetherlands.servers !== undefined && serverNetherlands.servers.length !== 0">
+      <ion-list-header>
+        <img class="country-flag" src="assets/imgs/netherlands.svg"> Netherlands
+      </ion-list-header>
 
-    <ion-item-sliding *ngFor="let server of getServerByState(['stopping', 'starting'])" #item>
-      <ion-item (click)="showServer(server)">
-        <ion-avatar item-start>
-          <img class="img-os" src="{{ server.image.name | serverIcon }}">
-        </ion-avatar>
-        <div class="state blinker" [style.background]="'orange'"></div>
-        <h2>{{ server.name }}</h2>
-        <p>{{ server.commercial_type }}</p>
-        <ion-note item-end>
-          <ion-icon name="arrow-forward"></ion-icon>
-        </ion-note>
-      </ion-item>
+      <ion-item-sliding *ngFor="let server of serverNetherlands.servers" #item>
+        <ion-item (click)="showServer(server, serverNetherlands.country)">
+          <ion-avatar item-start>
+            <img class="img-os" src="{{ server.image.name | serverIcon }}">
+          </ion-avatar>
+          <div class="state" [style.background]="setState(server)"></div>
+          <h2>{{ server.name }}</h2>
+          <p>{{ server.commercial_type }}</p>
+          <ion-note item-end>
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </ion-item>
 
-    </ion-item-sliding>
-  </ion-list>
-
-  <ion-list
-    *ngIf="allServers !== undefined && countServersByState(allServers, 'stopped') > 0">
-    <ion-list-header>
-      Offline
-    </ion-list-header>
-
-    <ion-item-sliding *ngFor="let server of getServerByState(['stopped'])" #item>
-      <ion-item *ngIf="server.state === 'stopped'" (click)="showServer(server)">
-        <ion-avatar item-start>
-          <img class="img-os" src="{{ server.image.name | serverIcon }}">
-        </ion-avatar>
-        <div class="state" [style.background]="'red'"></div>
-        <h2>{{ server.name }}</h2>
-        <p>{{ server.commercial_type }}</p>
-        <ion-note item-end>
-          <ion-icon name="arrow-forward"></ion-icon>
-        </ion-note>
-      </ion-item>
-
-      <ion-item-options *ngIf="server.state === 'stopped' || server.state === 'running'">
-        <button ion-button color="secondary" (click)="serverAction(server, 'poweron', item)">
-          ON
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
-
-  <p class="no-server" margin-top text-center
-     *ngIf="!isLoading && (allServers === undefined || allServers.length === 0)"
-     text-center>
-    <img src="assets/imgs/server.svg">
-    No server available
-  </p>
-
+        <ion-item-options *ngIf="server.state === 'running'">
+          <button ion-button color="danger" (click)="serverAction(server, 'poweroff', item, serverNetherlands.country)">
+            OFF
+          </button>
+        </ion-item-options>
+        <ion-item-options *ngIf="server.state === 'stopped'">
+          <button ion-button color="secondary" (click)="serverAction(server, 'poweron', item, serverNetherlands.country)">
+            ON
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <p class="no-server" margin-top text-center
+       *ngIf="!isLoading && ((serverNetherlands.servers === undefined && serverParis.servers === undefined)
+     || (serverParis.servers.lenght === 0 && serverParis.servers.length === 0))"
+       text-center>
+      <img src="assets/imgs/server.svg">
+      No server available
+    </p>
+  </div>
 </ion-content>

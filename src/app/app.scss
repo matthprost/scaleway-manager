@@ -54,7 +54,7 @@ ion-header {
   .toolbar-background {
     background-color: white;
   }
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
 }
 
 .logo {
@@ -98,10 +98,6 @@ ion-header {
 .menu {
   background: white;
 
-  &-list {
-    margin-top: 44px;
-  }
-
   &-text {
     text-transform: uppercase;
     font-size: 1.5rem;
@@ -109,23 +105,19 @@ ion-header {
   }
 }
 
+.menu-inner .header {
+  box-shadow: none !important;
+}
+
 .menu-content-open {
   filter: blur(.5px);
   transition: all .3s linear;
-}
-
-.list {
-  margin: 0;
 }
 
 ion-title {
   padding-left: 0 !important;
   padding-right: 0 !important;
   border: 0 !important;
-}
-
-.header {
-  box-shadow: none !important;
 }
 
 .toolbar-title {

@@ -59,4 +59,13 @@ page-server {
     margin-right: 5px;
   }
 
+  .label {
+    font-size: 1.4rem;
+    vert-align: middle;
+    .country-flag {
+      height: 15px;
+      vertical-align: top;
+    }
+  }
+
 }

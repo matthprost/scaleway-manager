@@ -12,8 +12,8 @@ import {ShowServerPage} from "./show-server/show-server";
 })
 export class ServerPage {
 
-  public serverCountry: string = null;
-  public allServers: Array<ServerDto>;
+  public serverNetherlands: { servers: Array<ServerDto>, country: 'Netherlands' };
+  public serverParis: { servers: Array<ServerDto>, country: 'Paris' };
 
   public loader = this.loadingCtrl.create({
     content: "Please wait...",
@@ -23,7 +23,6 @@ export class ServerPage {
 
   constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
               private storage: Storage, private serversProvider: ServersProvider) {
-    this.serverCountry = navParams.get('server');
   }
 
   ionViewDidEnter() {
@@ -40,13 +39,10 @@ export class ServerPage {
 
     return new Promise((resolve, reject) => {
       this.storage.get('token').then((token: AuthTokenDto) => {
-        this.serversProvider.getAllServers(this.serverCountry, token.token.id).then(result => {
-          if (result.servers !== this.allServers) {
-            this.allServers = result.servers;
-          }
+        this.serversProvider.getAllServer(token.token.id).then(result => {
+          this.serverParis = { 'servers': result.paris.servers, 'country': 'Paris' };
+          this.serverNetherlands = { 'servers': result.netherlands.servers, 'country': 'Netherlands' };
           resolve('ok');
-        }).catch(error => {
-          reject(error);
         });
       })
         .catch(error => {
@@ -64,15 +60,15 @@ export class ServerPage {
     });
   }
 
-  public showServer(server) {
-    this.navCtrl.push(ShowServerPage, {server: server, serverCountry: this.serverCountry});
+  public showServer(server: any, country: string) {
+    this.navCtrl.push(ShowServerPage, {server: server, serverCountry: country});
   }
 
   // This function is for fast action on servers like start/stop
-  public serverAction(server, action, slidingItem: ItemSliding) {
+  public serverAction(server, action, slidingItem: ItemSliding, country: string) {
     slidingItem.close();
     this.storage.get('token').then(token => {
-      this.serversProvider.sendServerAction(this.serverCountry, server.id, token.token.id, action)
+      this.serversProvider.sendServerAction(country, server.id, token.token.id, action)
         .then(() => {
           this.refreshAllServers();
         })
@@ -82,8 +78,23 @@ export class ServerPage {
     });
   }
 
+  public setState(server: ServerDto): string {
+    switch (server.state) {
+      case 'stopped':
+        return 'red';
+      case 'running':
+        return '#27c295';
+      case 'stopping':
+        return 'orange';
+      case 'starting':
+        return 'orange';
+      default:
+        return 'gray';
+    }
+  }
+
   // It counts how many server in a state (ex: 2 servers are running)
-  public countServersByState(servers: Array<ServerDto>, state: string): number {
+/*  public countServersByState(servers: Array<ServerDto>, state: string): number {
     let i: number = -1;
     let counter: number = 0;
 
@@ -94,10 +105,10 @@ export class ServerPage {
     }
 
     return (counter);
-  }
+  }*/
 
   // It get all servers by a specific state (ex: all servers that are running)
-  public getServerByState(state: Array<string>): ServerDto[] {
+ /* public getServerByState(state: Array<string>): ServerDto[] {
     let newServers: ServerDto[] = [];
 
     this.allServers.forEach(server => {
@@ -109,6 +120,6 @@ export class ServerPage {
     });
 
     return (newServers);
-  }
+  }*/
 
 }

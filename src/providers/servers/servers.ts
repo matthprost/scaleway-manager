@@ -7,10 +7,42 @@ import {ErrorsProvider} from "../errors/errors";
 @Injectable()
 export class ServersProvider {
 
+  private parisServers: Array<ServerDto> = null;
+  private netherlandsServers: Array<ServerDto> = null;
+
   constructor(private api: ApiProvider, private errorsProvider: ErrorsProvider) {
   }
 
-  public getAllServers(country: string, token: string): Promise<any> {
+  public getAllServer(token: string): Promise<any> {
+    return new Promise((resolve, reject) => {
+      // Get all servers from PARIS
+      const paris = this.getAllServerByCountry('Paris', token).then(result => {
+        this.parisServers = result;
+      }).catch(error => {
+        reject(error);
+      });
+
+      // Get all servers from NETHERLANDS
+      const netherlands = this.getAllServerByCountry('Netherlands', token).then(result => {
+        this.netherlandsServers = result;
+      }).catch(error => {
+        reject(error);
+      });
+
+      // Sync all promises, when they all finished, we display the information
+      Promise.all([paris, netherlands]).then(() => {
+        if (this.parisServers && this.netherlandsServers) {
+          resolve({'paris': this.parisServers, 'netherlands': this.netherlandsServers});
+        } else {
+          reject('error');
+        }
+      }).catch(error => {
+        reject(error);
+      });
+    });
+  }
+
+  public getAllServerByCountry(country: string, token: string): Promise<any> {
     let ApiUrl: string = null;
     country === 'Paris' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
 
