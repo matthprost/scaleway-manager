@@ -1,11 +1,5 @@
 <ion-header no-border>
   <ion-navbar>
-
-    <ion-buttons end>
-      <button [attr.disabled]="serverLoading ? '' : null" ion-button icon-only (click)="showActions()">
-        <ion-icon name="power"></ion-icon>
-      </button>
-    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -26,11 +20,19 @@
             <div [style.background]="state" [class]="stateClass"></div>
             <span class="state-text vertical-align-content">{{ server.state }}</span>
           </div>
+          <div class="server-actions">
+            <span class="server-toggle-off">OFF</span>
+            <ion-toggle [(ngModel)]="power" (ngModelChange)="update($event)" [disabled]="isDisabled('power')"
+                        color="secondary"></ion-toggle>
+            <span class="server-toggle-on">ON</span>
+            <button default ion-button item-right color="dark" type="submit" [disabled]="isDisabled('reboot')"
+                    (click)="reboot()">Reboot
+            </button>
+          </div>
         </div>
       </div>
     </ion-col>
   </ion-row>
-
   <ion-item-group margin-top>
     <ion-item-divider class="information-header" color="secondary">Basic Informations</ion-item-divider>
     <ion-item (click)="copyToClipBoard(server.public_ip.address)">
@@ -98,6 +100,29 @@
       </div>
       <div class="information-content" item-end>
         {{ server.modification_date | date:'dd/MM/yy, H:mm' }}
+      </div>
+    </ion-item>
+  </ion-item-group>
+  <ion-item-group>
+    <ion-item-divider class="information-header" color="dark">Server actions</ion-item-divider>
+    <ion-item>
+      <div class="information-title" col-8>
+        Archive server
+      </div>
+      <div class="information-content" col-4 item-end>
+        <button default ion-button item-right color="dark" type="submit" [disabled]="isDisabled('archive')"
+                (click)="archive()">Archive
+        </button>
+      </div>
+    </ion-item>
+    <ion-item>
+      <div class="information-title" col-8>
+        Delete server
+      </div>
+      <div class="information-content" col-4 item-end>
+        <button default ion-button item-right color="danger" type="submit" [disabled]="isDisabled('delete')"
+                (click)="delete()">Delete
+        </button>
       </div>
     </ion-item>
   </ion-item-group>

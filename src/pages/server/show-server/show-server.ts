@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {NavParams, PopoverController, ToastController} from 'ionic-angular';
+import {AlertController, NavParams, PopoverController, ToastController} from 'ionic-angular';
 import {ServerDto} from "../../../providers/servers/server.dto";
-import {ServerActionsPage} from "../server-actions/server-actions";
 import {ServersProvider} from "../../../providers/servers/servers";
 import {AuthTokenDto} from "../../../providers/auth/auth-tokens.dto";
 import {Storage} from "@ionic/storage";
@@ -19,10 +18,11 @@ export class ShowServerPage {
   public state: string;
   public serverLoading: boolean;
   public stateClass: string = 'state';
+  public power: boolean = false;
 
   constructor(public navParams: NavParams, public popoverCtrl: PopoverController,
               private serversProvider: ServersProvider, private storage: Storage,
-              private toastCtrl: ToastController, private clipboard: Clipboard) {
+              private toastCtrl: ToastController, private clipboard: Clipboard, private alertController: AlertController) {
     this.server = navParams.get('server');
     this.serverCountry = navParams.get('serverCountry');
     this.serverName = this.server.name;
@@ -44,6 +44,7 @@ export class ShowServerPage {
         this.state = '#30D1AD';
         this.serverLoading = false;
         this.stateClass = 'state';
+        this.power = true;
         break;
       case 'stopping':
         this.state = '#3F6ED8';
@@ -59,6 +60,70 @@ export class ShowServerPage {
         this.state = '#B2B6C3';
         this.serverLoading = true;
         this.stateClass = 'state';
+    }
+  }
+
+  public isDisabled(value) {
+    if (value === 'power') {
+      switch (this.server.state) {
+        case 'stopped in place':
+          return false;
+        case 'stopped':
+          return false;
+        case 'running':
+          return false;
+        case 'stopping':
+          return true;
+        case 'starting':
+          return true;
+        default:
+          return true;
+      }
+    } else if (value === 'reboot') {
+      switch (this.server.state) {
+        case 'stopped in place':
+          return true;
+        case 'stopped':
+          return true;
+        case 'running':
+          return false;
+        case 'stopping':
+          return true;
+        case 'starting':
+          return true;
+        default:
+          return true;
+      }
+    } else if (value === 'archive') {
+      switch (this.server.state) {
+        case 'stopped in place':
+          return true;
+        case 'stopped':
+          return true;
+        case 'running':
+          return false;
+        case 'stopping':
+          return true;
+        case 'starting':
+          return true;
+        default:
+          return true;
+      }
+    } else if (value === 'delete') {
+      switch (this.server.state) {
+        case 'stopped in place':
+          return true;
+        case 'stopped':
+          return true;
+        case 'running':
+          return false;
+        case 'stopping':
+          return true;
+        case 'starting':
+          return true;
+        default:
+          return true;
+      }
     }
   }
 
@@ -87,33 +152,94 @@ export class ShowServerPage {
     })
   }
 
-  public showActions() {
-    let popover = this.popoverCtrl.create(ServerActionsPage, {serverState: this.server.state},
-      {cssClass: 'custom-popover'});
-    let ev = {
-      target: {
-        getBoundingClientRect: () => {
-          return {
-            left: '20px',
-            top: '10%',
-            width: '90%',
-          };
+  public update(event) {
+    this.power = event;
+    if (this.power === true) {
+      this.storage.get('token').then(token => {
+        this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'poweron')
+          .then(() => {
+            this.refreshServer();
+          }).catch(error => {
+          console.log(error);
+        })
+      });
+    } else {
+      this.storage.get('token').then(token => {
+        this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'stop_in_place')
+          .then(() => {
+            this.refreshServer();
+          }).catch(error => {
+          console.log(error);
+        })
+      });
+    }
+  }
+
+  public reboot() {
+    const alert = this.alertController.create({
+      title: 'Reboot ?',
+      message: 'Are you sure you want to reboot this server ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Reboot',
+          handler: () => {
+            this.storage.get('token').then(token => {
+              this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'reboot')
+                .then(() => {
+                  this.refreshServer();
+                }).catch(error => {
+                console.log(error);
+              })
+            });
+          }
         }
-      }
-    };
-    popover.present({ev});
-    popover.onDidDismiss(result => {
-      if (result && result.action) {
-        this.storage.get('token').then(token => {
-          this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, result.action)
-            .then(() => {
-              this.refreshServer();
-            }).catch(error => {
-            console.log(error);
-          })
-        });
-      }
-    })
+      ]
+    });
+
+    alert.present();
+  }
+
+  public archive() {
+    this.storage.get('token').then(token => {
+      this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'poweroff')
+        .then(() => {
+          this.refreshServer();
+        }).catch(error => {
+        console.log(error);
+      })
+    });
+  }
+
+  public delete() {
+    const alert = this.alertController.create({
+      title: 'Delete ?',
+      message: 'Are you sure you want to delete this server ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'danger'
+        }, {
+          text: 'Delete',
+          handler: () => {
+            this.storage.get('token').then(token => {
+              this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'terminate')
+                .then(() => {
+                  this.refreshServer();
+                }).catch(error => {
+                console.log(error);
+              })
+            });
+          }
+        }
+      ]
+    });
+
+    alert.present();
   }
 
   public copyToClipBoard(text: string) {

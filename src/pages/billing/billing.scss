@@ -2,7 +2,11 @@ page-billing {
   .information-title {
     ion-icon {
       vertical-align: middle;
-      font-size: 2rem;
+      font-size: 1.9rem;
+    }
+    &-content {
+      text-transform: uppercase;
+      font-weight: 500;
     }
   }
 

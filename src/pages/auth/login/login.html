@@ -7,18 +7,12 @@
   <div class="content" ion-fixed text-center>
     <ion-grid>
       <ion-row>
-        <ion-col>
-          <div class="login-header">
-            <ion-img width="50" height="65" src="assets/imgs/scaleway.png"></ion-img>
-          </div>
-        </ion-col>
-      </ion-row>
-
-      <ion-row>
         <ion-col class="col-12">
           <div class="login">
             <ion-list no-margin>
-              <h3>Scaleway Manager</h3>
+              <div class="login-header">
+                <img width="50" height="65" src="assets/imgs/scaleway.png">
+              </div>
 
               <form (ngSubmit)="login()" #loginForm="ngForm" class="form">
                 <ion-row>
@@ -30,7 +24,8 @@
                 <ion-row>
                   <ion-item class="background-transparent" no-lines>
                     <ion-label floating>Password</ion-label>
-                    <ion-input class="login-input" type="password" name="password" [(ngModel)]="password" no-lines></ion-input>
+                    <ion-input class="login-input" type="password" name="password" [(ngModel)]="password"
+                               no-lines></ion-input>
                   </ion-item>
                 </ion-row>
                 <ion-item class="background-transparent" margin-top no-lines>

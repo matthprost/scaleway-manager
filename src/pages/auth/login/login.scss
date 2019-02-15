@@ -89,6 +89,16 @@ page-login {
     @media (max-height: 400px) {
       padding: 15px 5px 10px;
     }
+    &-header {
+      display: flex;
+      position: relative;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      img {
+        margin-bottom: 2rem;
+      }
+    }
   }
 
   .item-inner {

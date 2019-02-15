@@ -12,7 +12,6 @@ import {ProvidersModule} from "../providers/providers.module";
 import {IonicStorageModule} from "@ionic/storage";
 import {ServerPage} from "../pages/server/server";
 import {ShowServerPage} from "../pages/server/show-server/show-server";
-import {ServerActionsPage} from "../pages/server/server-actions/server-actions";
 import {PipesModule} from "../pipes/pipes.module";
 import {Clipboard} from "@ionic-native/clipboard/ngx";
 import {DoubleAuthPage} from "../pages/auth/double-auth/double-auth";
@@ -38,7 +37,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     DoubleAuthPage,
     ServerPage,
     ShowServerPage,
-    ServerActionsPage,
     AboutPage,
     ContactPage,
     BugReportPage,
@@ -62,7 +60,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     DoubleAuthPage,
     ServerPage,
     ShowServerPage,
-    ServerActionsPage,
     AboutPage,
     ContactPage,
     BugReportPage,
