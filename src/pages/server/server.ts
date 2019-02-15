@@ -81,15 +81,30 @@ export class ServerPage {
   public setState(server: ServerDto): string {
     switch (server.state) {
       case 'stopped':
-        return 'red';
+        return '#B2B6C3';
       case 'running':
-        return '#27c295';
+        return '#30D1AD';
       case 'stopping':
-        return 'orange';
+        return '#3F6ED8';
       case 'starting':
-        return 'orange';
+        return '#3F6ED8';
       default:
-        return 'gray';
+        return '#B2B6C3';
+    }
+  }
+
+  public setClass(server: ServerDto): string {
+    switch (server.state) {
+      case 'stopped':
+        return 'state';
+      case 'running':
+        return 'state';
+      case 'stopping':
+        return 'blinker';
+      case 'starting':
+        return 'blinker';
+      default:
+        return 'state';
     }
   }
 

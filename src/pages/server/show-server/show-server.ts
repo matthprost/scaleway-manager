@@ -36,27 +36,27 @@ export class ShowServerPage {
   private setState() {
     switch (this.server.state) {
       case 'stopped':
-        this.state = 'red';
+        this.state = '#B2B6C3';
         this.serverLoading = false;
         this.stateClass = 'state';
         break;
       case 'running':
-        this.state = '#27c295';
+        this.state = '#30D1AD';
         this.serverLoading = false;
         this.stateClass = 'state';
         break;
       case 'stopping':
-        this.state = 'orange';
+        this.state = '#3F6ED8';
         this.serverLoading = true;
         this.stateClass = 'blinker';
         break;
       case 'starting':
-        this.state = 'orange';
+        this.state = '#3F6ED8';
         this.serverLoading = true;
         this.stateClass = 'blinker';
         break;
       default:
-        this.state = 'gray';
+        this.state = '#B2B6C3';
         this.serverLoading = true;
         this.stateClass = 'state';
     }

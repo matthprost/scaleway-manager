@@ -77,4 +77,32 @@ page-server {
     vertical-align: middle;
   }
 
+  .state {
+    width: 12px;
+    height: 12px;
+    background-color: gray;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 10px;
+    margin-right: 5px;
+    margin-bottom: 1px;
+  }
+
+  @keyframes blinker {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  .blinker {
+    animation: blinker 1.60s linear infinite;
+    width: 12px;
+    height: 12px;
+    background-color: gray;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 10px;
+    margin-right: 5px;
+  }
+
 }

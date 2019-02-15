@@ -33,7 +33,7 @@
           <ion-avatar item-start>
             <img class="img-os" src="{{ server.image.name | serverIcon }}">
           </ion-avatar>
-          <div class="state" [style.background]="setState(server)"></div>
+          <div [class]='setClass(server)' [style.background]="setState(server)"></div>
           <h2>{{ server.name }}</h2>
           <p>{{ server.commercial_type }}</p>
           <ion-note item-end>
@@ -56,7 +56,7 @@
 
     <ion-list *ngIf="serverNetherlands.servers !== undefined && serverNetherlands.servers.length !== 0">
       <ion-list-header>
-        <img class="country-flag" src="assets/imgs/netherlands.svg"><span style="vertical-align: middle">Netherlands</span>
+        <img class="country-flag" src="assets/imgs/netherlands.svg"><span style="vertical-align: middle">Amsterdam</span>
         <span class="header-right">{{ serverNetherlands.servers.length }}
           server{{ serverParis.servers.length > 1 ? 's' : ''}}</span>
       </ion-list-header>
@@ -66,7 +66,7 @@
           <ion-avatar item-start>
             <img class="img-os" src="{{ server.image.name | serverIcon }}">
           </ion-avatar>
-          <div class="state" [style.background]="setState(server)"></div>
+          <div [class]='setClass(server)' [style.background]="setState(server)"></div>
           <h2>{{ server.name }}</h2>
           <p>{{ server.commercial_type }}</p>
           <ion-note item-end>
