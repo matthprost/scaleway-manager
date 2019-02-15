@@ -6,36 +6,33 @@
         <ion-icon name="power"></ion-icon>
       </button>
     </ion-buttons>
-
-    <ion-title>{{ serverName }}</ion-title>
   </ion-navbar>
 </ion-header>
 
-
 <ion-content>
-
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
   <ion-row margin-top>
     <ion-col>
-      <div text-center class="login-header">
+      <div class="server-header">
         <ion-img class="is-round" width="85" height="85" src="{{ server.image.name | serverIcon }}"></ion-img>
-      </div>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col>
-      <div margin-bottom text-center class="login-header">
-        <div [style.background]="state" [class]="stateClass"></div>
-        <span class="state-text vertical-align-content">{{ server.state }}</span>
+        <div class="server">
+          <div class="server-name">
+            {{ serverName }}
+          </div>
+          <div class="server-state">
+            <div [style.background]="state" [class]="stateClass"></div>
+            <span class="state-text vertical-align-content">{{ server.state }}</span>
+          </div>
+        </div>
       </div>
     </ion-col>
   </ion-row>
 
   <ion-item-group margin-top>
-    <ion-item-divider color="light">Basic Informations</ion-item-divider>
+    <ion-item-divider class="information-header" color="secondary">Basic Informations</ion-item-divider>
     <ion-item (click)="copyToClipBoard(server.public_ip.address)">
       <div class="information-title">
         Public IP
@@ -48,7 +45,7 @@
       <div class="information-title">
         Private IP
       </div>
-      <div class="information-content" item-end >
+      <div class="information-content" item-end>
         {{ server.private_ip ? server.private_ip : '-' }}
       </div>
     </ion-item>
@@ -78,7 +75,7 @@
     </ion-item>
   </ion-item-group>
   <ion-item-group>
-    <ion-item-divider color="light">Advanced Informations</ion-item-divider>
+    <ion-item-divider class="information-header" color="secondary">Advanced Informations</ion-item-divider>
     <ion-item (click)="server.ipv6 ? copyToClipBoard(server.ipv6.address) : ''">
       <div class="information-title">
         IPV6

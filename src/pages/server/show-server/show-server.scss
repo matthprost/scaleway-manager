@@ -22,18 +22,13 @@ page-show-server {
   }
 
   .state {
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background-color: gray;
     display: inline-block;
     vertical-align: middle;
     border-radius: 10px;
     margin-right: 5px;
-    &-text {
-      font-size: 2rem;
-      vertical-align: middle;
-      text-transform: capitalize;
-    }
   }
 
   .has-refresher  .scroll-content {
@@ -48,8 +43,8 @@ page-show-server {
 
   .blinker {
     animation: blinker 1.60s linear infinite;
-    width: 12px;
-    height: 12px;
+    width: 10px;
+    height: 10px;
     background-color: gray;
     display: inline-block;
     vertical-align: middle;
@@ -57,14 +52,35 @@ page-show-server {
     margin-right: 5px;
   }
 
+  .server {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 1rem;
+    &-name {
+      font-size: 2.4rem;
+    }
+    &-state {
+      text-transform: uppercase;
+      text-align: left;
+      color: darkgrey;
+    }
+    &-header {
+      text-align: center;
+    }
+  }
+
 }
 
 .information {
   &-title {
-    font-size: 1.35rem;
+    font-size: 1.2rem;
     font-weight: bold;
     color: #868686;
     text-transform: uppercase;
+  }
+  &-header {
+    text-transform: uppercase;
+    font-size: 1.5rem;
   }
 }
 
