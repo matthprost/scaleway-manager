@@ -85,6 +85,7 @@ export class MyApp {
           this.authprovider.getToken(val.token.id).then(() => {
             this.nav.setRoot(HomePage).then(() => {
               this.statusBar.styleDefault();
+              this.menu.swipeEnable(true);
               this.splashScreen.hide();
             });
           })

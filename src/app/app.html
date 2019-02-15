@@ -1,4 +1,11 @@
 <ion-menu class="menu-app" [content]="content">
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>
+        <img class="logo" src="assets/imgs/scaleway.png"> Scaleway Manager
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
   <ion-content class="menu" no-bounce>
     <ion-list class="menu-list" no-lines>
       <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">
