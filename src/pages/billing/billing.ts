@@ -18,16 +18,32 @@ export class BillingPage {
   }
 
   ionViewDidLoad() {
-    this.storage.get('token').then((token: AuthTokenDto) => {
-      this.billingProvider.getBilling(token.token.id, 15).then(result => {
-        this.invoices = result;
-        this.invoices = this.invoices.slice(1, this.invoices.length);
-        this.currentInvoice = result[0];
-        this.isLoading = false;
-      }).catch(error => {
-        console.log(error);
-      });
+    this.refresh().then(() => {
+      this.isLoading = false;
+    });
+  }
 
+  public doRefresh(refresher) {
+    this.refresh().then(() => {
+      refresher.complete();
+    }).catch(error => {
+      console.log(error);
+      refresher.complete();
+    });
+  }
+
+  private refresh(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.storage.get('token').then((token: AuthTokenDto) => {
+        this.billingProvider.getBilling(token.token.id, 15).then(result => {
+          this.invoices = result;
+          this.invoices = this.invoices.slice(1, this.invoices.length);
+          this.currentInvoice = result[0];
+          resolve('ok');
+        }).catch(error => {
+          reject(error);
+        });
+      });
     });
   }
 

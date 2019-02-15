@@ -32,7 +32,15 @@ page-billing {
     font-size: 1.5rem;
   }
 
-  .state {
-    font-size: 1.5rem;
+  .title {
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: 1.4rem;
+  }
+
+  .last-update {
+    float: right;
+    font-size: 1.1rem;
+    margin-top: .15rem;
   }
 }

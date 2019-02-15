@@ -14,13 +14,20 @@
 
 <ion-content>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <loader *ngIf="isLoading"></loader>
 
   <ion-item-group *ngIf="!isLoading">
-    <ion-item-divider color="light">Current Invoice</ion-item-divider>
+    <ion-item-divider class="title" color="secondary">
+      Current Invoice
+      <span class="last-update">Updated at {{ currentInvoice.last_update | date:'h:mm a, dd/MM/yy' }}</span>
+    </ion-item-divider>
     <ion-item>
       <div class="information-title">
-        <div class="state" [style.color]="changeStateColor(currentInvoice.state)">
+        <div [style.color]="changeStateColor(currentInvoice.state)">
           <ion-icon name="{{ currentInvoice.state | billingStateIcon }}"></ion-icon>&nbsp;
           {{ currentInvoice.state }}
         </div>
@@ -40,10 +47,10 @@
   </ion-item-group>
 
   <ion-item-group *ngIf="!isLoading">
-    <ion-item-divider color="light">Older Invoices</ion-item-divider>
+    <ion-item-divider class="title" color="secondary">Older Invoices</ion-item-divider>
     <ion-item *ngFor="let invoice of invoices">
       <div class="information-title">
-        <div class="state" [style.color]="changeStateColor(invoice.state)">
+        <div [style.color]="changeStateColor(invoice.state)">
           <ion-icon name="{{ invoice.state | billingStateIcon }}"></ion-icon>&nbsp;
           {{ invoice.state }}
         </div>

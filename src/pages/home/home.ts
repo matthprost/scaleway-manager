@@ -21,6 +21,7 @@ import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {BillingProvider} from "../../providers/billing/billing";
 import {faServer, faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {BillingPage} from "../billing/billing";
 
 @Component({
   selector: 'page-home',
@@ -162,6 +163,9 @@ export class HomePage {
       case 'bug' :
         fab.close();
         this.navCtrl.push(BugReportPage);
+        break;
+      case 'billing' :
+        this.navCtrl.push(BillingPage);
         break;
     }
   }
