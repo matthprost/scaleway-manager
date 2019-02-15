@@ -23,7 +23,9 @@
   <div *ngIf="!isLoading">
     <ion-list *ngIf="serverParis.servers !== undefined && serverParis.servers.length !== 0">
       <ion-list-header>
-        <img class="country-flag" src="assets/imgs/france.svg"> Paris
+        <img class="country-flag" src="assets/imgs/france.svg"><span style="vertical-align: middle">Paris</span>
+        <span class="header-right">{{ serverParis.servers.length }}
+          server{{ serverParis.servers.length > 1 ? 's' : ''}}</span>
       </ion-list-header>
 
       <ion-item-sliding *ngFor="let server of serverParis.servers" #item>
@@ -54,7 +56,9 @@
 
     <ion-list *ngIf="serverNetherlands.servers !== undefined && serverNetherlands.servers.length !== 0">
       <ion-list-header>
-        <img class="country-flag" src="assets/imgs/netherlands.svg"> Netherlands
+        <img class="country-flag" src="assets/imgs/netherlands.svg"><span style="vertical-align: middle">Netherlands</span>
+        <span class="header-right">{{ serverNetherlands.servers.length }}
+          server{{ serverParis.servers.length > 1 ? 's' : ''}}</span>
       </ion-list-header>
 
       <ion-item-sliding *ngFor="let server of serverNetherlands.servers" #item>
@@ -76,7 +80,8 @@
           </button>
         </ion-item-options>
         <ion-item-options *ngIf="server.state === 'stopped'">
-          <button ion-button color="secondary" (click)="serverAction(server, 'poweron', item, serverNetherlands.country)">
+          <button ion-button color="secondary"
+                  (click)="serverAction(server, 'poweron', item, serverNetherlands.country)">
             ON
           </button>
         </ion-item-options>

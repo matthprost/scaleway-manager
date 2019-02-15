@@ -64,8 +64,17 @@ page-server {
     vert-align: middle;
     .country-flag {
       height: 15px;
-      vertical-align: top;
+      vertical-align: middle;
+      margin-right: .75rem;
     }
+  }
+
+  .header-right {
+    float: right;
+    color: darkgrey;
+    font-size: 1.2rem;
+    margin-top: .1rem;
+    vertical-align: middle;
   }
 
 }
