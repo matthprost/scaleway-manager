@@ -27,6 +27,7 @@ import { BillingProvider } from '../providers/billing/billing';
 import {BillingPage} from "../pages/billing/billing";
 import { ErrorsProvider } from '../providers/errors/errors';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import {AccountPageModule} from "../pages/account/account.module";
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
     PipesModule,
     DirectivesModule,
     ComponentsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    AccountPageModule
   ],
   bootstrap: [IonicApp],
   entryComponents: [

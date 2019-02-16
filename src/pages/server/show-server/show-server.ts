@@ -5,6 +5,7 @@ import {ServersProvider} from "../../../providers/servers/servers";
 import {AuthTokenDto} from "../../../providers/auth/auth-tokens.dto";
 import {Storage} from "@ionic/storage";
 import {Clipboard} from "@ionic-native/clipboard/ngx";
+import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 @Component({
   selector: 'page-show-server',
@@ -22,10 +23,15 @@ export class ShowServerPage {
 
   constructor(public navParams: NavParams, public popoverCtrl: PopoverController,
               private serversProvider: ServersProvider, private storage: Storage,
-              private toastCtrl: ToastController, private clipboard: Clipboard, private alertController: AlertController) {
+              private toastCtrl: ToastController, private clipboard: Clipboard, private alertController: AlertController,
+              public statusBar: StatusBar) {
     this.server = navParams.get('server');
     this.serverCountry = navParams.get('serverCountry');
     this.serverName = this.server.name;
+  }
+
+  ionViewDidEnter() {
+    this.statusBar.styleDefault();
   }
 
   ionViewDidLoad() {

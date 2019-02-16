@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {AlertController} from "ionic-angular";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
+import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 @Component({
   selector: 'page-about',
@@ -8,11 +9,15 @@ import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 })
 export class AboutPage {
 
-  constructor(public alertCtrl: AlertController, private iab: InAppBrowser) {
+  constructor(public alertCtrl: AlertController, private iab: InAppBrowser, public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
     //
+  }
+
+  ionViewDidEnter() {
+    this.statusBar.styleDefault();
   }
 
   public openWebSite() {

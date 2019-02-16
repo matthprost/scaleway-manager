@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
 import {LoadingController, NavController, Platform, ToastController} from 'ionic-angular';
 import {EmailComposer} from "@ionic-native/email-composer/ngx";
+import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 @Component({
   selector: 'page-contact',
@@ -13,11 +14,15 @@ export class ContactPage {
 
   constructor(public platform: Platform, public navCtrl: NavController,
               private emailComposer: EmailComposer, public loadingCtrl: LoadingController,
-              public toastCtrl: ToastController) {
+              public toastCtrl: ToastController, public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
     //
+  }
+
+  ionViewDidEnter() {
+    this.statusBar.styleDefault();
   }
 
   public sendMail() {

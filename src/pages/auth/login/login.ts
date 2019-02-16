@@ -4,6 +4,7 @@ import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
+import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 @Component({
   selector: 'page-login',
@@ -16,11 +17,15 @@ export class LoginPage {
 
   constructor(private navCtrl: NavController, private toastCtrl: ToastController,
               private auth: AuthProvider, private menu: MenuController, private loadingCtrl: LoadingController,
-              private alertCtrl: AlertController, private iab: InAppBrowser) {
+              private alertCtrl: AlertController, private iab: InAppBrowser, public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
     //
+  }
+
+  ionViewDidEnter() {
+    this.statusBar.styleDefault();
   }
 
   public login() {

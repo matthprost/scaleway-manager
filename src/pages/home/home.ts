@@ -2,12 +2,9 @@ import {Component} from '@angular/core';
 import {
   AlertController,
   FabContainer,
-  LoadingController,
   MenuController,
-  NavController,
-  PopoverController
+  NavController
 } from 'ionic-angular';
-import {LogoutProvider} from "../../providers/auth/logout/logout";
 import {ServerPage} from "../server/server";
 import {Storage} from "@ionic/storage";
 import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
@@ -22,6 +19,7 @@ import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {BillingProvider} from "../../providers/billing/billing";
 import {faServer, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {BillingPage} from "../billing/billing";
+import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 @Component({
   selector: 'page-home',
@@ -48,12 +46,10 @@ export class HomePage {
   faServer = faServer;
   faRight = faChevronRight;
 
-  constructor(public navCtrl: NavController, private popoverCtrl: PopoverController,
-              private logoutService: LogoutProvider, private loadingCtrl: LoadingController,
-              private storage: Storage, private serversProvider: ServersProvider,
-              private stats: HomeStatsDirective, public alertCtrl: AlertController,
-              private iab: InAppBrowser, private billingProvider: BillingProvider,
-              public menu: MenuController) {
+  constructor(public navCtrl: NavController, private storage: Storage,
+              private serversProvider: ServersProvider, private stats: HomeStatsDirective,
+              public alertCtrl: AlertController, private iab: InAppBrowser,
+              private billingProvider: BillingProvider, public menu: MenuController, public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
@@ -61,6 +57,7 @@ export class HomePage {
   }
 
   ionViewDidEnter() {
+    this.statusBar.styleDefault();
     this.refresh();
   }
 

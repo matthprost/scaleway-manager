@@ -1,8 +1,7 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform, MenuController, AlertController, LoadingController} from 'ionic-angular';
+import {Nav, Platform, MenuController, LoadingController} from 'ionic-angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/auth/login/login';
 import {AuthTokenDto} from "../providers/auth/auth-tokens.dto";
@@ -11,10 +10,10 @@ import {ServerPage} from "../pages/server/server";
 import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
 import {AboutPage} from "../pages/about/about";
 import {AuthProvider} from "../providers/auth/auth";
-import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {BillingPage} from "../pages/billing/billing";
-import {faHome, faServer, faQuestion, faSignOutAlt, faCog, faMoneyCheckAlt} from '@fortawesome/free-solid-svg-icons';
+import {faHome, faServer, faQuestion, faSignOutAlt, faUser, faMoneyCheckAlt} from '@fortawesome/free-solid-svg-icons';
 import {LogoutProvider} from "../providers/auth/logout/logout";
+import {AccountPage} from "../pages/account/account";
 
 @Component({
   templateUrl: 'app.html'
@@ -30,8 +29,8 @@ export class MyApp {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation,
-              private authprovider: AuthProvider, private alertCtrl: AlertController, private iab: InAppBrowser,
-              private loadingCtrl: LoadingController, private logoutService: LogoutProvider) {
+              private authprovider: AuthProvider, private loadingCtrl: LoadingController,
+              private logoutService: LogoutProvider) {
     this.initializeApp();
     this.pages = [
       {
@@ -45,14 +44,14 @@ export class MyApp {
         picture: faServer,
       },
       {
+        title: 'Account',
+        component: AccountPage,
+        picture: faUser,
+      },
+      {
         title: 'Billing',
         component: BillingPage,
         picture: faMoneyCheckAlt,
-      },
-      {
-        title: 'Settings',
-        component: null,
-        picture: faCog,
       },
 
     ];
@@ -115,27 +114,7 @@ export class MyApp {
     }
   }
 
-  /*public github() {
-    const confirm = this.alertCtrl.create({
-      title: 'Warning',
-      message: 'It will open your web browser, are you sure ?',
-      buttons: [
-        {
-          text: 'Cancel',
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            const ref = this.iab.create('https://github.com/F4OST/Scaleway-Manager', '_system');
-            ref.close();
-          }
-        }
-      ]
-    });
-    confirm.present();
-  }*/
-
-  private logout() {
+  public logout() {
     const loader = this.loadingCtrl.create({
       content: "Please wait...",
     });
