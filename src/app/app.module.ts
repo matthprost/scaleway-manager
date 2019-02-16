@@ -28,6 +28,7 @@ import {BillingPage} from "../pages/billing/billing";
 import { ErrorsProvider } from '../providers/errors/errors';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {AccountPageModule} from "../pages/account/account.module";
+import { AccountProvider } from '../providers/account/account';
 
 
 @NgModule({
@@ -76,7 +77,8 @@ import {AccountPageModule} from "../pages/account/account.module";
     EmailComposer,
     InAppBrowser,
     BillingProvider,
-    ErrorsProvider
+    ErrorsProvider,
+    AccountProvider
   ]
 })
 export class AppModule {}
