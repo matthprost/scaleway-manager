@@ -19,6 +19,7 @@ export class ServersProvider {
       const paris = this.getAllServerByCountry('Paris', token).then(result => {
         this.parisServers = result;
       }).catch(error => {
+        this.errorsProvider.apiError(error);
         reject(error);
       });
 
@@ -26,6 +27,7 @@ export class ServersProvider {
       const netherlands = this.getAllServerByCountry('Netherlands', token).then(result => {
         this.netherlandsServers = result;
       }).catch(error => {
+        this.errorsProvider.apiError(error);
         reject(error);
       });
 
@@ -37,6 +39,7 @@ export class ServersProvider {
           reject('error');
         }
       }).catch(error => {
+        this.errorsProvider.apiError(error);
         reject(error);
       });
     });
