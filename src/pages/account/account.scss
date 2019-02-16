@@ -12,7 +12,7 @@ page-account {
   .background {
     height: 45vh;
     width: 100%;
-    background-image: radial-gradient(#4f0599,#120124);
+    background-image: radial-gradient(#4f0599, #120124);
   }
 
   .profile {
@@ -23,12 +23,13 @@ page-account {
   .name {
     text-align: center;
     font-size: 1.8rem;
-    margin: 1rem 0;
+    margin: .5rem 0;
   }
 
   .date {
     text-align: center;
     margin-bottom: 2rem;
+    margin-top: 1rem;
 
     &-content {
       text-align: center;
@@ -38,6 +39,40 @@ page-account {
       display: inline-block;
       padding: .5rem 1rem;
       font-size: 1.2rem;
+    }
+  }
+
+  .two-auth-enabled {
+    margin-right: .25rem;
+    .chip {
+      background: color($colors, secondary);
+      height: 30px;
+      line-height: 30px;
+    }
+    fa-icon {
+      color: white;
+      font-size: 1.5rem;
+    }
+    ion-label {
+      font-size: 1.4rem;
+      font-weight: 500;
+    }
+  }
+
+  .two-auth-disabled {
+    margin-right: .25rem;
+    .chip {
+      background: color($colors, danger);
+      height: 30px;
+      line-height: 30px;
+    }
+    fa-icon {
+      color: white;
+      font-size: 1.5rem;
+    }
+    ion-label {
+      font-size: 1.4rem;
+      font-weight: 500;
     }
   }
 }
