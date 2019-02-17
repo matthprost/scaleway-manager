@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import {NavController, NavParams} from 'ionic-angular';
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {AccountProvider} from "../../providers/account/account";
 import {UserDto} from "../../providers/account/account.dto";
 import {faShieldAlt, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
+import {SshKeysPage} from "./ssh-keys/ssh-keys";
 
 @Component({
   selector: 'page-account',
@@ -28,11 +29,18 @@ export class AccountPage {
     this.accountProvider.getUserData().then(userData => {
       this.user = userData;
       this.isLoading = false;
-      console.log(userData);
     })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  public navigate(location: string) {
+    switch (location) {
+      case 'ssh-keys' :
+        this.navCtrl.push(SshKeysPage);
+        break;
+    }
   }
 
 }

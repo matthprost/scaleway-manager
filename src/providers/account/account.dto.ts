@@ -14,5 +14,17 @@ export interface UserDto {
   organizations: any,
   phone_number: string,
   roles: any,
-  ssh_public_keys: any
+  ssh_public_keys: Array<SshKeysDto>
+}
+
+export interface SshKeysDto {
+  creation_date: string
+  description: string
+  email: string
+  fingerprint: string
+  id: string
+  ip: string
+  key: string
+  modification_date: string
+  port: number
 }
