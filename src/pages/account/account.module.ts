@@ -8,15 +8,15 @@ import {SshKeysPage} from "./ssh-keys/ssh-keys";
 @NgModule({
   declarations: [
     AccountPage,
-    SshKeysPage
+    SshKeysPage,
   ],
   imports: [
     IonicPageModule.forChild(AccountPage),
     ComponentsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   entryComponents: [
-    SshKeysPage
+    SshKeysPage,
   ]
 })
 export class AccountPageModule {

@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>NEW SSH KEY</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="close($event)">
+        Close
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-list>
+          <form (ngSubmit)="addSshKey()">
+            <ion-row>
+              <ion-item class="background-transparent" margin-top>
+                <ion-textarea placeholder="Paste the SSH Key here..." name="message" [(ngModel)]="key"></ion-textarea>
+              </ion-item>
+            </ion-row>
+            <ion-item class="background-transparent" margin-top no-lines>
+              <button default full ion-button item-right color="secondary" type="submit">
+                Add ssh key
+              </button>
+            </ion-item>
+          </form>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -160,3 +160,12 @@ ion-title {
   margin-right: 5px;
 }
 
+.toastDanger {
+  .toast-container {
+    background: color($colors, danger);;
+
+    .toast-message {
+      color: white;
+    }
+  }
+}

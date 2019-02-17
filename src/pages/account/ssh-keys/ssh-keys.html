@@ -1,6 +1,11 @@
 <ion-header no-border>
   <ion-navbar>
     <ion-title>SSH KEYS</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="addSshKey($event)">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

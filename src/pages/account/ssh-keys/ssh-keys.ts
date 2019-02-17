@@ -1,10 +1,10 @@
 import {Component} from '@angular/core';
-import {ItemSliding, NavController, NavParams, ToastController} from 'ionic-angular';
+import {ItemSliding, ModalController, NavController, NavParams, ToastController} from 'ionic-angular';
 import {AccountProvider} from "../../../providers/account/account";
 import {SshKeysDto} from "../../../providers/account/account.dto";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {Clipboard} from "@ionic-native/clipboard/ngx";
-import {forEach} from "@angular-devkit/schematics";
+import {AddSshKeyPage} from "./add-ssh-key/add-ssh-key";
 
 @Component({
   selector: 'page-ssh-keys',
@@ -16,7 +16,8 @@ export class SshKeysPage {
   public sshKeys: Array<SshKeysDto>;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private accountProvider: AccountProvider,
-              public statusBar: StatusBar, private clipboard: Clipboard, private toastCtrl: ToastController) {
+              public statusBar: StatusBar, private clipboard: Clipboard, private toastCtrl: ToastController,
+              public modalController: ModalController) {
   }
 
   ionViewDidEnter() {
@@ -85,6 +86,14 @@ export class SshKeysPage {
       .catch(error => {
         console.log(error);
       })
+  }
+
+  async addSshKey(event) {
+    const modal = await this.modalController.create(AddSshKeyPage, {"keys" : this.sshKeys});
+    await modal.onDidDismiss(() => {
+      this.refresh();
+    });
+    return await modal.present();
   }
 
 }
