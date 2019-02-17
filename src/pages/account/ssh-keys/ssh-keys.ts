@@ -4,6 +4,7 @@ import {AccountProvider} from "../../../providers/account/account";
 import {SshKeysDto} from "../../../providers/account/account.dto";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {Clipboard} from "@ionic-native/clipboard/ngx";
+import {forEach} from "@angular-devkit/schematics";
 
 @Component({
   selector: 'page-ssh-keys',
@@ -70,6 +71,20 @@ export class SshKeysPage {
 
   public deleteSshKey(SshKey: SshKeysDto, slidingItem: ItemSliding) {
     slidingItem.close();
+
+    let finalSshKeysArray: Array<{"key": string}> = [];
+    for (let sshkey of this.sshKeys) {
+      if (sshkey !== SshKey) {
+        finalSshKeysArray.push({"key": sshkey.key });
+      }
+    }
+
+    this.accountProvider.patchSshKeys(finalSshKeysArray).then(result => {
+      this.sshKeys = result.ssh_public_keys;
+    })
+      .catch(error => {
+        console.log(error);
+      })
   }
 
 }

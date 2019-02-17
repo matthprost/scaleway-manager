@@ -42,8 +42,7 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
-  <p class="no-ssh-keys" margin-top text-center
-     *ngIf="!isLoading && (sshKeys === undefined || sshKeys.length === 0)"
+  <p class="no-ssh-keys" margin-top text-center *ngIf="!isLoading && (sshKeys === undefined || sshKeys.length === 0)"
      text-center>
     <img src="assets/imgs/key.svg">
     No SSH Key found

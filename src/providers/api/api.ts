@@ -3,6 +3,7 @@ import {GetService} from "./http/get.service";
 import {PostService} from "./http/post.service";
 import {DeleteService} from "./http/delete.service";
 import {Platform} from "ionic-angular";
+import {PatchService} from "./http/patch.service";
 
 @Injectable()
 export class ApiProvider {
@@ -13,7 +14,8 @@ export class ApiProvider {
   private readonly amsterdam1: string = '/netherlands';
 
   constructor(private platform: Platform, private getService: GetService,
-              private postService: PostService, private deleteService: DeleteService) {
+              private postService: PostService, private deleteService: DeleteService,
+              private patchService: PatchService) {
 
     if (this.platform.is('cordova') == true) {
       this.apiUrl = 'https://account.scaleway.com';
@@ -45,6 +47,10 @@ export class ApiProvider {
 
   public post<T>(url: string, token?: string, body?: object): Promise<T> {
     return this.postService.submit(url, token, body);
+  }
+
+  public patch<T>(url: string, token?: string, body?: object): Promise<T> {
+    return this.patchService.submit(url, token, body);
   }
 
   public delete<T>(url: string, token?: string): Promise<T> {

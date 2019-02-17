@@ -26,4 +26,20 @@ export class AccountProvider {
     });
   }
 
+  public patchSshKeys(keys: Array<{"key": string}>): Promise<UserDto> {
+    return new Promise((resolve, reject) => {
+      this.storage.get('token').then(result => {
+        this.api.patch<UsersDto>(this.api.getApiUrl() + '/users/' + result.token.user_id, result.token.id, {
+          "ssh_public_keys": keys
+        })
+          .then(result => {
+            resolve(result.user);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
+    });
+  }
+
 }
