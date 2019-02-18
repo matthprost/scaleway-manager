@@ -1,6 +1,7 @@
 page-about {
   .content {
-    background: white;
+    background: color($colors, dark);
+    color: white;
   }
 
   .button {
@@ -9,5 +10,21 @@ page-about {
     align-items: center;
     justify-content: center;
     text-align: center;
+  }
+
+  .toolbar-background {
+    background: transparent;
+  }
+
+  .logo-title {
+    color: white;
+  }
+
+  .back-button {
+    color: white;
+  }
+
+  .bar-button-default {
+    color: white;
   }
 }

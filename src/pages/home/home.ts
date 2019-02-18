@@ -21,6 +21,7 @@ import {faServer, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {BillingPage} from "../billing/billing";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {AboutPage} from "../about/about";
+import {DonatePage} from "../donate/donate";
 
 @Component({
   selector: 'page-home',
@@ -167,6 +168,9 @@ export class HomePage {
         break;
       case 'about' :
         this.navCtrl.push(AboutPage);
+        break;
+      case 'donate' :
+        this.navCtrl.setRoot(DonatePage);
         break;
     }
   }

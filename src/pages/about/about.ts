@@ -17,7 +17,7 @@ export class AboutPage {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
+    this.statusBar.styleLightContent();
   }
 
   public openWebSite() {
