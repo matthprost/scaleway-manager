@@ -170,7 +170,7 @@ export class HomePage {
         this.navCtrl.push(AboutPage);
         break;
       case 'donate' :
-        this.navCtrl.setRoot(DonatePage);
+        this.navCtrl.push(DonatePage);
         break;
     }
   }
