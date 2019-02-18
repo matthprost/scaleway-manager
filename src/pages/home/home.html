@@ -21,7 +21,8 @@
               <ion-col col-9 no-padding>
                 <div class="servers-left">
                   My Servers
-                  <ion-badge color="primary" *ngIf="nbrServParis + nbrServNetherlands !== 0">{{ nbrServParis + nbrServNetherlands }}</ion-badge>
+                  <ion-badge color="primary"
+                             *ngIf="nbrServParis + nbrServNetherlands !== 0">{{ nbrServParis + nbrServNetherlands }}</ion-badge>
                 </div>
               </ion-col>
               <ion-col col-3 no-padding>
@@ -109,6 +110,25 @@
         </ion-card>
       </ion-col>
     </ion-row>
+    <div class="button" *ngIf="!isLoading">
+      <ion-row>
+        <ion-col col-12 text-center>
+          <div class="button-separator" (click)="navigate('about')"></div>
+          <button class="button-donate">
+            <div class="button-donate-text">
+              <ion-icon name="heart"></ion-icon>
+              Donate
+            </div>
+          </button>
+          <button class="button-about" (click)="navigate('about')">
+            <div class="button-about-text">
+              <ion-icon name="heart"></ion-icon>
+              About
+            </div>
+          </button>
+        </ion-col>
+      </ion-row>
+    </div>
   </ion-grid>
 
   <ion-fab right bottom #fab>

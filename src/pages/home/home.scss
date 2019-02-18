@@ -118,6 +118,7 @@ page-home {
       font-weight: 300;
       text-transform: uppercase;
       padding: 2.75rem 2rem;
+
       ion-badge {
         vertical-align: top;
       }
@@ -129,6 +130,111 @@ page-home {
       padding: 2.75rem 2rem;
       background: color($colors, secondary);
       color: white;
+    }
+  }
+
+  .button {
+
+    margin: 4.8px 2px;
+    overflow: hidden;
+
+    ion-col {
+      overflow: hidden;
+      padding: 0;
+    }
+
+    &-separator {
+      background: #F9F9F9;
+      height: 25vh;
+      width: 10px;
+      padding: 2.4px;
+      border-right: 17vw solid #222;
+      overflow: hidden;
+      position: absolute;
+      right: 32vw;
+      top: -25%;
+      z-index: 100;
+      transform: rotate(35deg) translateZ(0px);
+    }
+
+    &-donate {
+      width: 60% !important;
+      height: 14vh;
+      display: inline-block;
+      margin: 0;
+      border-radius: 0;
+      margin-right: -2.4px;
+      text-transform: uppercase;
+      font-weight: 500;
+      padding-right: 17vw;
+      background: linear-gradient(-45deg, #EE7752, #E73C7E, #23A6D5, #23D5AB);
+      background-size: 400% 400%;
+      -webkit-animation: Gradient 15s ease infinite;
+      -moz-animation: Gradient 15s ease infinite;
+      animation: Gradient 15s ease infinite;
+      &-text {
+        color: white;
+        font-size: 1.5rem;
+        ion-icon {
+          vertical-align: middle;
+        }
+      }
+    }
+
+    &-about {
+      height: 14vh;
+      width:40% !important;
+      display: inline-block;
+      margin: 0;
+      border-radius: 0;
+      text-transform: uppercase;
+      font-weight: 500;
+      background: #222;
+
+      &-text {
+        color: white;
+        font-size: 1.5rem;
+        ion-icon {
+          vertical-align: middle;
+          visibility: hidden;
+        }
+      }
+    }
+  }
+
+  @-webkit-keyframes Gradient {
+    0% {
+      background-position: 0% 50%
+    }
+    50% {
+      background-position: 100% 50%
+    }
+    100% {
+      background-position: 0% 50%
+    }
+  }
+
+  @-moz-keyframes Gradient {
+    0% {
+      background-position: 0% 50%
+    }
+    50% {
+      background-position: 100% 50%
+    }
+    100% {
+      background-position: 0% 50%
+    }
+  }
+
+  @keyframes Gradient {
+    0% {
+      background-position: 0% 50%
+    }
+    50% {
+      background-position: 100% 50%
+    }
+    100% {
+      background-position: 0% 50%
     }
   }
 }

@@ -20,6 +20,7 @@ import {BillingProvider} from "../../providers/billing/billing";
 import {faServer, faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {BillingPage} from "../billing/billing";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
+import {AboutPage} from "../about/about";
 
 @Component({
   selector: 'page-home',
@@ -163,6 +164,9 @@ export class HomePage {
         break;
       case 'billing' :
         this.navCtrl.push(BillingPage);
+        break;
+      case 'about' :
+        this.navCtrl.push(AboutPage);
         break;
     }
   }
