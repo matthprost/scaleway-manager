@@ -3,6 +3,7 @@ import {ItemSliding, NavController, NavParams} from 'ionic-angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {TokenDto} from "../../../providers/auth/auth-tokens.dto";
 import {Storage} from "@ionic/storage";
+import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 @Component({
   selector: 'page-tokens',
@@ -15,7 +16,11 @@ export class TokensPage {
   public currentSession  = null;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authProvide: AuthProvider,
-              private storage: Storage) {
+              private storage: Storage, public statusBar: StatusBar) {
+  }
+
+  ionViewDidEnter() {
+    this.statusBar.styleDefault();
   }
 
   ionViewDidLoad() {
