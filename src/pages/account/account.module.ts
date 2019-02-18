@@ -4,11 +4,13 @@ import {AccountPage} from './account';
 import {ComponentsModule} from "../../components/components.module";
 import {FontAwesomeModule} from "@fortawesome/angular-fontawesome";
 import {SshKeysPage} from "./ssh-keys/ssh-keys";
+import {TokensPage} from "./tokens/tokens";
 
 @NgModule({
   declarations: [
     AccountPage,
     SshKeysPage,
+    TokensPage
   ],
   imports: [
     IonicPageModule.forChild(AccountPage),
@@ -17,6 +19,7 @@ import {SshKeysPage} from "./ssh-keys/ssh-keys";
   ],
   entryComponents: [
     SshKeysPage,
+    TokensPage
   ]
 })
 export class AccountPageModule {

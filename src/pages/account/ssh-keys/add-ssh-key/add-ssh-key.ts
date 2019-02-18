@@ -27,7 +27,6 @@ export class AddSshKeyPage {
   }
 
   public addSshKey() {
-    console.log(this.key);
     let finalSshKeysArray: Array<{"key": string}> = [];
 
     for (let value of this.keys) {

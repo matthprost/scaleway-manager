@@ -5,6 +5,7 @@ import {AccountProvider} from "../../providers/account/account";
 import {UserDto} from "../../providers/account/account.dto";
 import {faShieldAlt, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import {SshKeysPage} from "./ssh-keys/ssh-keys";
+import {TokensPage} from "./tokens/tokens";
 
 @Component({
   selector: 'page-account',
@@ -39,6 +40,9 @@ export class AccountPage {
     switch (location) {
       case 'ssh-keys' :
         this.navCtrl.push(SshKeysPage);
+        break;
+      case 'tokens' :
+        this.navCtrl.push(TokensPage);
         break;
     }
   }
