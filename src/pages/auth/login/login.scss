@@ -10,14 +10,6 @@ page-login {
 
   background: white;
 
-  @-webkit-keyframes slide {
-    from {
-      background-position: 0 0;
-    }
-    to {
-      background-position: -400px 0;
-    }
-  }
   .vertical-align-content > * {
     background-color: white;
     display: flex !important;
@@ -43,6 +35,7 @@ page-login {
     box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.10);
     padding: 1rem;
     margin-top: 3rem;
+    border-radius: 2px;
   }
 
   .label {
@@ -64,14 +57,23 @@ page-login {
   }
 
   .content {
-    background: #F9F9F9 url(../assets/imgs/background.png) repeat 0 0;
+    background: url('../assets/imgs/background.svg') repeat 0 0, color($colors, primary);
     width: 100%;
     margin: 0;
     text-align: center;
     height: 100%;
     padding-top: 6vh;
     box-sizing: border-box;
-    -webkit-animation: slide 20s linear infinite;
+    -webkit-animation: slide 15s linear infinite;
+  }
+
+  @-webkit-keyframes slide {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: -700px 0px;
+    }
   }
 
   .login-header {
@@ -111,11 +113,12 @@ page-login {
   }
 
   .github {
-    background-color: white;
+    background-color: color($colors, dark);
     display: inline-block;
     padding: 1rem;
     box-shadow: 0 1px 3px rgba(0,0,0,0.07), 0 1px 3px rgba(0,0,0,0.10);
     margin-top: 1rem;
+    border-radius: 3px;
     img {
       vertical-align: middle;
       display: inline-block;
@@ -123,7 +126,10 @@ page-login {
     &-text {
       display: inline-block;
       vertical-align: middle;
-      margin-left: .5rem;
+      margin-left: 1rem;
+      color: white;
+      text-transform: uppercase;
+      font-weight: 400;
     }
   }
 

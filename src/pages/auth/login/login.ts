@@ -25,7 +25,7 @@ export class LoginPage {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
+    this.statusBar.styleLightContent();
   }
 
   public login() {
