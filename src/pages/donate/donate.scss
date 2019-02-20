@@ -63,6 +63,14 @@ page-donate {
     box-shadow: none;
   }
 
+  .donate-content {
+    position: absolute;
+    top: 40%;
+    right: 0;
+    padding: 16px;
+    transform: translate(0, -50%);
+  }
+
   .text {
     font-weight: 500;
     color: white;
@@ -79,5 +87,9 @@ page-donate {
       font-weight: 700;
       margin-bottom: 4rem;
     }
+  }
+
+  .donate {
+    margin-top: 4rem;
   }
 }
