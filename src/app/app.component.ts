@@ -11,9 +11,10 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
 import {AboutPage} from "../pages/about/about";
 import {AuthProvider} from "../providers/auth/auth";
 import {BillingPage} from "../pages/billing/billing";
-import {faHome, faServer, faQuestion, faSignOutAlt, faUser, faMoneyCheckAlt} from '@fortawesome/free-solid-svg-icons';
+import {faHome, faServer, faQuestion, faSignOutAlt, faUser, faMoneyCheckAlt, faHeart} from '@fortawesome/free-solid-svg-icons';
 import {LogoutProvider} from "../providers/auth/logout/logout";
 import {AccountPage} from "../pages/account/account";
+import {DonatePage} from "../pages/donate/donate";
 
 @Component({
   templateUrl: 'app.html'
@@ -23,6 +24,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
   faSignOutAlt = faSignOutAlt;
+  faHeart = faHeart;
 
   pages: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
   pagesBottom: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
@@ -107,10 +109,15 @@ export class MyApp {
   openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
-    if (page.parameters) {
-      this.nav.setRoot(page.component, {server: page.parameters.country});
+
+    if (page === 'donate') {
+      this.nav.setRoot(DonatePage);
     } else {
-      this.nav.setRoot(page.component);
+      if (page.parameters) {
+        this.nav.setRoot(page.component, {server: page.parameters.country});
+      } else {
+        this.nav.setRoot(page.component);
+      }
     }
   }
 
@@ -126,8 +133,8 @@ export class MyApp {
       this.nav.setRoot(LoginPage);
     })
       .catch(error => {
-      loader.dismiss();
-      console.log(error);
-    });
+        loader.dismiss();
+        console.log(error);
+      });
   }
 }

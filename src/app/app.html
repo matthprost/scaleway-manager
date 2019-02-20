@@ -20,6 +20,14 @@
   </ion-content>
   <ion-footer>
     <ion-list class="menu-list" no-lines no-margin>
+      <button menuClose ion-item (click)="openPage('donate')" class="donate-button-menu">
+        <ion-thumbnail item-start no-margin>
+          <fa-icon [icon]="faHeart"></fa-icon>
+        </ion-thumbnail>
+        <div class="menu-text">
+          Donate
+        </div>
+      </button>
       <button menuClose ion-item *ngFor="let p of pagesBottom" (click)="openPage(p)">
         <ion-thumbnail item-start no-margin>
           <fa-icon *ngIf="p.picture" [icon]="p.picture ? p.picture : null"></fa-icon>

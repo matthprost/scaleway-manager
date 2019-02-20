@@ -88,8 +88,7 @@
       </ion-item-sliding>
     </ion-list>
     <p class="no-server" margin-top text-center
-       *ngIf="!isLoading && ((serverNetherlands.servers === undefined && serverParis.servers === undefined)
-     || (serverParis.servers.lenght === 0 && serverParis.servers.length === 0))"
+       *ngIf="!isLoading && serverParis.servers.length === 0 && serverNetherlands.servers.length === 0"
        text-center>
       <img src="assets/imgs/server.svg">
       No server available
