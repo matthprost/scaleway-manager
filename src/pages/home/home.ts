@@ -22,6 +22,7 @@ import {BillingPage} from "../billing/billing";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {AboutPage} from "../about/about";
 import {DonatePage} from "../donate/donate";
+import {InAppBrowserOptions} from "@ionic-native/in-app-browser";
 
 @Component({
   selector: 'page-home',
@@ -180,24 +181,13 @@ export class HomePage {
   }
 
   public openWebSite(fab: FabContainer) {
-    const confirm = this.alertCtrl.create({
-      title: 'Warning',
-      message: 'It will open your web browser, are you sure ?',
-      buttons: [
-        {
-          text: 'Cancel',
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            fab.close();
-            const ref = this.iab.create('https://matthias-prost.com', '_system');
-            ref.close();
-          }
-        }
-      ]
-    });
-    confirm.present();
+
+    const options: InAppBrowserOptions = {
+      zoom: 'no'
+    };
+
+    const browser = this.iab.create('https://matthias-prost.com',
+      '_self', options);
   }
 
 

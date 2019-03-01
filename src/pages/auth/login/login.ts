@@ -5,6 +5,7 @@ import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {StatusBar} from "@ionic-native/status-bar/ngx";
+import {InAppBrowserOptions} from "@ionic-native/in-app-browser";
 
 @Component({
   selector: 'page-login',
@@ -93,43 +94,20 @@ export class LoginPage {
   }
 
   public register() {
-    const confirm = this.alertCtrl.create({
-      title: 'Warning',
-      message: 'It will open your web browser, are you sure ?',
-      buttons: [
-        {
-          text: 'Cancel',
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            const ref = this.iab.create('https://cloud.scaleway.com/#/signup', '_system');
-            ref.close();
-          }
-        }
-      ]
-    });
-    confirm.present();
+    const options: InAppBrowserOptions = {
+      zoom: 'no'
+    };
+
+    const browser = this.iab.create('https://cloud.scaleway.com/#/signup', '_self', options);
   }
 
   public github() {
-    const confirm = this.alertCtrl.create({
-      title: 'Warning',
-      message: 'It will open your web browser, are you sure ?',
-      buttons: [
-        {
-          text: 'Cancel',
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            const ref = this.iab.create('https://github.com/F4OST/Scaleway-Manager', '_system');
-            ref.close();
-          }
-        }
-      ]
-    });
-    confirm.present();
+    const options: InAppBrowserOptions = {
+      zoom: 'no'
+    };
+
+    const browser = this.iab.create('https://github.com/F4OST/Scaleway-Manager',
+      '_self', options);
   }
 
 }

@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {AlertController} from "ionic-angular";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
+import {InAppBrowserOptions} from "@ionic-native/in-app-browser";
 
 @Component({
   selector: 'page-about',
@@ -21,22 +22,11 @@ export class AboutPage {
   }
 
   public openWebSite() {
-    const confirm = this.alertCtrl.create({
-      title: 'Warning',
-      message: 'It will open your web browser, are you sure ?',
-      buttons: [
-        {
-          text: 'Cancel',
-        },
-        {
-          text: 'Ok',
-          handler: () => {
-            const ref = this.iab.create('https://github.com/F4OST/Scaleway-Manager', '_system');
-            ref.close();
-          }
-        }
-      ]
-    });
-    confirm.present();
+    const options: InAppBrowserOptions = {
+      zoom: 'no'
+    };
+
+    const browser = this.iab.create('https://github.com/F4OST/Scaleway-Manager',
+      '_self', options);
   }
 }
