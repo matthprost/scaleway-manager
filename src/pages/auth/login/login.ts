@@ -95,19 +95,23 @@ export class LoginPage {
 
   public register() {
     const options: InAppBrowserOptions = {
-      zoom: 'no'
+      zoom: 'no',
+      location: 'no',
+      toolbarposition: 'top'
     };
 
-    const browser = this.iab.create('https://cloud.scaleway.com/#/signup', '_self', options);
+    const browser = this.iab.create('https://cloud.scaleway.com/#/signup', '_blank', options);
   }
 
   public github() {
     const options: InAppBrowserOptions = {
-      zoom: 'no'
+      zoom: 'no',
+      location: 'no',
+      toolbarposition: 'top'
     };
 
     const browser = this.iab.create('https://github.com/F4OST/Scaleway-Manager',
-      '_self', options);
+      '_blank', options);
   }
 
 }

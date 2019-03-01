@@ -183,11 +183,13 @@ export class HomePage {
   public openWebSite(fab: FabContainer) {
 
     const options: InAppBrowserOptions = {
-      zoom: 'no'
+      zoom: 'no',
+      location: 'no',
+      toolbarposition: 'top'
     };
 
     const browser = this.iab.create('https://matthias-prost.com',
-      '_self', options);
+      '_blank', options);
   }
 
 

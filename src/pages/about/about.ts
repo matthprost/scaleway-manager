@@ -23,10 +23,12 @@ export class AboutPage {
 
   public openWebSite() {
     const options: InAppBrowserOptions = {
-      zoom: 'no'
+      zoom: 'no',
+      location: 'no',
+      toolbarposition: 'top'
     };
 
     const browser = this.iab.create('https://github.com/F4OST/Scaleway-Manager',
-      '_self', options);
+      '_blank', options);
   }
 }
