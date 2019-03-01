@@ -85,7 +85,11 @@ export class MyApp {
               this.statusBar.styleDefault();
               this.menu.swipeEnable(true);
               this.splashScreen.hide();
-            });
+            })
+              .catch(error => {
+                console.log(error);
+                this.splashScreen.hide();
+              });
           })
             .catch(() => {
               this.storage.remove('token').then(() => {
