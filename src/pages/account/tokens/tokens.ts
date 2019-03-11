@@ -11,7 +11,7 @@ import {StatusBar} from "@ionic-native/status-bar/ngx";
 })
 export class TokensPage {
 
-  private isLoading: boolean = true;
+  public isLoading: boolean = true;
   public tokens: Array<TokenDto> = null;
   public currentSession  = null;
 

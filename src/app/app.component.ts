@@ -122,7 +122,7 @@ export class MyApp {
         toolbarposition: 'top'
       };
 
-      const browser = this.iab.create('https://github.com/F4OST/Scaleway-Manager',
+      this.iab.create('https://github.com/F4OST/Scaleway-Manager',
         '_blank', options);
     } else {
       if (page.parameters) {
