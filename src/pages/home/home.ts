@@ -17,11 +17,10 @@ import {BugReportPage} from "../bug-report/bug-report";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {BillingProvider} from "../../providers/billing/billing";
-import {faServer, faChevronRight} from '@fortawesome/free-solid-svg-icons';
+import {faServer, faChevronRight, faCode} from '@fortawesome/free-solid-svg-icons';
 import {BillingPage} from "../billing/billing";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {AboutPage} from "../about/about";
-import {DonatePage} from "../donate/donate";
 import {InAppBrowserOptions} from "@ionic-native/in-app-browser";
 
 @Component({
@@ -48,6 +47,7 @@ export class HomePage {
 
   faServer = faServer;
   faRight = faChevronRight;
+  faCode = faCode;
 
   constructor(public navCtrl: NavController, private storage: Storage,
               private serversProvider: ServersProvider, private stats: HomeStatsDirective,
@@ -170,9 +170,6 @@ export class HomePage {
       case 'about' :
         this.navCtrl.push(AboutPage);
         break;
-      case 'donate' :
-        this.navCtrl.push(DonatePage);
-        break;
     }
   }
 
@@ -188,7 +185,18 @@ export class HomePage {
       toolbarposition: 'top'
     };
 
-    const browser = this.iab.create('https://matthias-prost.com',
+    this.iab.create('https://matthias-prost.com',
+      '_blank', options);
+  }
+
+  public openGitHub() {
+    const options: InAppBrowserOptions = {
+      zoom: 'no',
+      location: 'no',
+      toolbarposition: 'top'
+    };
+
+    this.iab.create('https://github.com/F4OST/Scaleway-Manager',
       '_blank', options);
   }
 

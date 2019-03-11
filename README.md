@@ -1,3 +1,5 @@
+[![paypal](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=ZYSVPKAYSM2QC&source=url)
+
 # Scaleway-Manager
 
 Scaleway-Manager is an IONIC application that allow you to start/stop your Scaleway servers.

@@ -11,10 +11,11 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
 import {AboutPage} from "../pages/about/about";
 import {AuthProvider} from "../providers/auth/auth";
 import {BillingPage} from "../pages/billing/billing";
-import {faHome, faServer, faQuestion, faSignOutAlt, faUser, faMoneyCheckAlt, faHeart} from '@fortawesome/free-solid-svg-icons';
+import {faHome, faServer, faQuestion, faSignOutAlt, faUser, faMoneyCheckAlt, faCode} from '@fortawesome/free-solid-svg-icons';
 import {LogoutProvider} from "../providers/auth/logout/logout";
 import {AccountPage} from "../pages/account/account";
-import {DonatePage} from "../pages/donate/donate";
+import {InAppBrowserOptions} from "@ionic-native/in-app-browser";
+import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 
 @Component({
   templateUrl: 'app.html'
@@ -24,7 +25,7 @@ export class MyApp {
 
   rootPage: any = LoginPage;
   faSignOutAlt = faSignOutAlt;
-  faHeart = faHeart;
+  faCode = faCode;
 
   pages: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
   pagesBottom: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
@@ -32,7 +33,7 @@ export class MyApp {
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation,
               private authprovider: AuthProvider, private loadingCtrl: LoadingController,
-              private logoutService: LogoutProvider) {
+              private logoutService: LogoutProvider, private iab: InAppBrowser) {
     this.initializeApp();
     this.pages = [
       {
@@ -114,8 +115,15 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
 
-    if (page === 'donate') {
-      this.nav.setRoot(DonatePage);
+    if (page === 'github') {
+      const options: InAppBrowserOptions = {
+        zoom: 'no',
+        location: 'no',
+        toolbarposition: 'top'
+      };
+
+      const browser = this.iab.create('https://github.com/F4OST/Scaleway-Manager',
+        '_blank', options);
     } else {
       if (page.parameters) {
         this.nav.setRoot(page.component, {server: page.parameters.country});

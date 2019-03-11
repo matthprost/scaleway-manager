@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
+import {LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
@@ -18,7 +18,7 @@ export class LoginPage {
 
   constructor(private navCtrl: NavController, private toastCtrl: ToastController,
               private auth: AuthProvider, private menu: MenuController, private loadingCtrl: LoadingController,
-              private alertCtrl: AlertController, private iab: InAppBrowser, public statusBar: StatusBar) {
+              private iab: InAppBrowser, public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
@@ -100,7 +100,7 @@ export class LoginPage {
       toolbarposition: 'top'
     };
 
-    const browser = this.iab.create('https://github.com/F4OST/Scaleway-Manager',
+    this.iab.create('https://github.com/F4OST/Scaleway-Manager',
       '_blank', options);
   }
 

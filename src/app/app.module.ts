@@ -30,7 +30,6 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {AccountPageModule} from "../pages/account/account.module";
 import { AccountProvider } from '../providers/account/account';
 import {AddSshKeyPage} from "../pages/account/ssh-keys/add-ssh-key/add-ssh-key";
-import {DonatePage} from "../pages/donate/donate";
 
 
 @NgModule({
@@ -45,8 +44,7 @@ import {DonatePage} from "../pages/donate/donate";
     ContactPage,
     BugReportPage,
     BillingPage,
-    AddSshKeyPage,
-    DonatePage
+    AddSshKeyPage
   ],
   imports: [
     BrowserModule,
@@ -71,8 +69,7 @@ import {DonatePage} from "../pages/donate/donate";
     ContactPage,
     BugReportPage,
     BillingPage,
-    AddSshKeyPage,
-    DonatePage
+    AddSshKeyPage
   ],
   providers: [
     StatusBar,
