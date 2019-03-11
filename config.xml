@@ -96,4 +96,5 @@
     <engine name="browser" spec="^5.0.4" />
     <engine name="android" spec="^7.1.4" />
     <engine name="ios" spec="^5.0.0" />
+    <plugin name="cordova-plugin-inapppurchase" spec="1.2.0" />
 </widget>

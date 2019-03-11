@@ -93,16 +93,6 @@ export class LoginPage {
     }
   }
 
-  public register() {
-    const options: InAppBrowserOptions = {
-      zoom: 'no',
-      location: 'no',
-      toolbarposition: 'top'
-    };
-
-    const browser = this.iab.create('https://cloud.scaleway.com/#/signup', '_blank', options);
-  }
-
   public github() {
     const options: InAppBrowserOptions = {
       zoom: 'no',

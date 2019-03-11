@@ -45,23 +45,5 @@
   <!-- The main bundle js is generated during the build process -->
   <script src="build/main.js"></script>
 
-<script>
-  document.addEventListener('focusout', function (event) {
-  const targetNode = event.target
-
-  if (targetNode) {
-    const tagName = targetNode.tagName.toLowerCase()
-
-    if (targetNode.type != 'submit' && (tagName == 'input' || tagName == 'textarea')) {
-      htmlNode.style.height = '100.1vh'
-
-      setTimeout(function () {
-        htmlNode.style.height = '100vh'
-      }, 50)
-    }
-  }
-})
-</script>
-
 </body>
 </html>

@@ -17,10 +17,18 @@
       <p>As I'm an independent all of this work has been done during my free time.</p>
       <p>If you want, you can now make a donation to support me and my work.</p>
 
-      <div class="donate" text-center>
+      <div *ngIf="!isIos" class="donate" text-center>
         <button ion-button large color="light" (click)="openPayPal()">
           <img src="assets/imgs/PayPal.svg" width="100px">
         </button>
+      </div>
+
+      <div *ngIf="isIos" class="donate-ios" text-center>
+        <div *ngFor="let product of products">
+          <button ion-button large color="light" (click)="donate(product.productId)">
+            Donate me a Baguette - {{ product.price }}
+          </button>
+        </div>
       </div>
     </div>
   </div>
