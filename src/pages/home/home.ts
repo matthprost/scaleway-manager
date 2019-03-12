@@ -21,7 +21,7 @@ import {faServer, faChevronRight, faCode} from '@fortawesome/free-solid-svg-icon
 import {BillingPage} from "../billing/billing";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {AboutPage} from "../about/about";
-import {InAppBrowserOptions} from "@ionic-native/in-app-browser";
+import {InAppBrowserOptions} from "@ionic-native/in-app-browser/ngx";
 
 @Component({
   selector: 'page-home',

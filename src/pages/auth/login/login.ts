@@ -5,7 +5,7 @@ import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
 import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {StatusBar} from "@ionic-native/status-bar/ngx";
-import {InAppBrowserOptions} from "@ionic-native/in-app-browser";
+import {InAppBrowserOptions} from "@ionic-native/in-app-browser/ngx";
 
 @Component({
   selector: 'page-login',

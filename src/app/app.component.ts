@@ -14,7 +14,7 @@ import {BillingPage} from "../pages/billing/billing";
 import {faHome, faServer, faQuestion, faSignOutAlt, faUser, faMoneyCheckAlt, faCode} from '@fortawesome/free-solid-svg-icons';
 import {LogoutProvider} from "../providers/auth/logout/logout";
 import {AccountPage} from "../pages/account/account";
-import {InAppBrowserOptions} from "@ionic-native/in-app-browser";
+import {InAppBrowserOptions} from "@ionic-native/in-app-browser/ngx";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 
 @Component({
