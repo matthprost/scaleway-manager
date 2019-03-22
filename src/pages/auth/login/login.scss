@@ -64,18 +64,8 @@ page-login {
     height: 100%;
     padding-top: 6vh;
     box-sizing: border-box;
-    -webkit-animation: slide 17s linear infinite;
   }
-
-  @-webkit-keyframes slide {
-    from {
-      background-position: 0 0;
-    }
-    to {
-      background-position: -700px 0px;
-    }
-  }
-
+  
   .login-header {
     margin-top: 5%;
   }

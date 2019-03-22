@@ -23,7 +23,7 @@
   </ion-content>
   <ion-footer>
     <ion-list class="menu-list" no-lines no-margin>
-      <button menuClose ion-item (click)="openPage('github')" class="donate-button-menu">
+      <button menuClose ion-item (click)="openPage('github')" class="donate-button-menu" *ngIf="!ios">
         <ion-thumbnail item-start no-margin>
           <fa-icon [icon]="faCode"></fa-icon>
         </ion-thumbnail>

@@ -39,7 +39,7 @@
         </ion-col>
       </ion-row>
     </ion-grid>
-    <ion-grid>
+    <ion-grid *ngIf="!ios">
       <ion-row>
         <ion-col>
           <div class="github" (click)="github()">

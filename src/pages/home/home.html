@@ -110,7 +110,7 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <div class="button" *ngIf="!isLoading">
+    <div class="button" *ngIf="!isLoading && !ios">
       <ion-row>
         <ion-col col-12 text-center>
           <div class="button-separator" (click)="navigate('about')"></div>

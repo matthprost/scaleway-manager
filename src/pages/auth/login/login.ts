@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
+import {LoadingController, MenuController, NavController, Platform, ToastController} from 'ionic-angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
@@ -15,10 +15,14 @@ export class LoginPage {
 
   private email: string = null;
   private password: string = null;
+  private ios: boolean = false;
 
   constructor(private navCtrl: NavController, private toastCtrl: ToastController,
               private auth: AuthProvider, private menu: MenuController, private loadingCtrl: LoadingController,
-              private iab: InAppBrowser, public statusBar: StatusBar) {
+              private iab: InAppBrowser, public statusBar: StatusBar, private platform: Platform) {
+    if (this.platform.is('ios')) {
+      this.ios = true;
+    }
   }
 
   ionViewDidLoad() {

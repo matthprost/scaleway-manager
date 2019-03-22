@@ -3,7 +3,7 @@ import {
   AlertController,
   FabContainer,
   MenuController,
-  NavController
+  NavController, Platform
 } from 'ionic-angular';
 import {ServerPage} from "../server/server";
 import {Storage} from "@ionic/storage";
@@ -49,10 +49,16 @@ export class HomePage {
   faRight = faChevronRight;
   faCode = faCode;
 
+  public ios: boolean = false;
+
   constructor(public navCtrl: NavController, private storage: Storage,
               private serversProvider: ServersProvider, private stats: HomeStatsDirective,
               public alertCtrl: AlertController, private iab: InAppBrowser,
-              private billingProvider: BillingProvider, public menu: MenuController, public statusBar: StatusBar) {
+              private billingProvider: BillingProvider, public menu: MenuController, public statusBar: StatusBar,
+              private platform: Platform) {
+    if (this.platform.is('ios')) {
+      this.ios = true;
+    }
   }
 
   ionViewDidLoad() {

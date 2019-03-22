@@ -30,6 +30,8 @@ export class MyApp {
   pages: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
   pagesBottom: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
 
+  public ios: boolean = false;
+
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation,
               private authprovider: AuthProvider, private loadingCtrl: LoadingController,
@@ -77,6 +79,10 @@ export class MyApp {
       this.menu.swipeEnable(false);
       if (this.platform.is('cordova')) {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
+      }
+
+      if (this.platform.is('ios')) {
+        this.ios = true;
       }
 
       this.storage.get('token').then((val: AuthTokenDto) => {
