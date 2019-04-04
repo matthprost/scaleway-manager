@@ -1,4 +1,4 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import {Pipe, PipeTransform} from '@angular/core';
 
 @Pipe({
   name: 'serverIcon',
@@ -35,6 +35,7 @@ export class ServerIconPipe implements PipeTransform {
         break;
       default:
         picturePath = 'assets/imgs/server.svg';
+        break;
     }
 
     return (picturePath);

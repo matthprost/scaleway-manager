@@ -80,6 +80,9 @@ export class HomeStatsDirective {
       case 'ARM64-128GB' :
         value = 22;
         break;
+      default :
+        value = 0;
+        break;
     }
     return (value);
   }

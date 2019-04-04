@@ -66,6 +66,7 @@ export class ShowServerPage {
         this.state = '#B2B6C3';
         this.serverLoading = true;
         this.stateClass = 'state';
+        break;
     }
   }
 
