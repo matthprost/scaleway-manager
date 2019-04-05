@@ -44,6 +44,7 @@ export class ServerPage {
         this.serversProvider.getAllServer(token.token.id).then(result => {
           this.serverParis = { 'servers': result.paris.servers, 'country': 'Paris' };
           this.serverNetherlands = { 'servers': result.netherlands.servers, 'country': 'Netherlands' };
+          this.serverParis.servers[0].image = null;
           console.log(this.serverParis.servers);
           console.log(this.serverNetherlands.servers);
           resolve('ok');

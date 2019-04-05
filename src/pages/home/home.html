@@ -44,7 +44,9 @@
           </ion-card-header>
 
           <ion-card-content class="card-stat2" text-center>
-            <img src="{{ oldestServer.server.image.name | serverIcon }}" margin-bottom>
+            <img
+              src="{{ oldestServer.server.image ? (oldestServer.server.image.name | serverIcon) : (oldestServer.server.name | serverIcon) }}"
+              margin-bottom>
             <div [class]='setClass(oldestServer.server)' [style.background]="setState(oldestServer.server)"></div>
             {{ oldestServer.server.name }}
             <small class="small-card">
@@ -62,7 +64,9 @@
           </ion-card-header>
 
           <ion-card-content class="card-stat2" text-center>
-            <img src="{{ powerfulServer.server.image.name | serverIcon }}" margin-bottom>
+            <img
+              src="{{ powerfulServer.server.image ? (powerfulServer.server.image.name | serverIcon) : (powerfulServer.server.name | serverIcon) }}"
+              margin-bottom>
             <div [class]='setClass(powerfulServer.server)' [style.background]="setState(powerfulServer.server)"></div>
             {{ powerfulServer.server.name }}
             <small class="small-card">

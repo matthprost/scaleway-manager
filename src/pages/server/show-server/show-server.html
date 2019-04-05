@@ -11,7 +11,8 @@
   <ion-row margin-top>
     <ion-col>
       <div class="server-header">
-        <ion-img class="is-round" width="85" height="85" src="{{ server.image.name | serverIcon }}"></ion-img>
+        <ion-img class="is-round" width="85" height="85"
+                 src="{{ server.image ? (server.image.name | serverIcon) : (server.name | serverIcon) }}"></ion-img>
         <div class="server">
           <div class="server-name">
             {{ serverName }}
@@ -64,7 +65,7 @@
         From image
       </div>
       <div class="information-content" item-end>
-        {{ server.image.name }}
+        {{ server.image ? server.image.name : '' }}
       </div>
     </ion-item>
     <ion-item>
