@@ -114,23 +114,6 @@
         </ion-card>
       </ion-col>
     </ion-row>
-    <div class="button" *ngIf="!isLoading && !ios">
-      <ion-row>
-        <ion-col col-12 text-center>
-          <div class="button-separator" (click)="navigate('about')"></div>
-          <button class="button-donate" (click)="openGitHub()">
-            <div class="button-donate-text">
-              GitHub
-            </div>
-          </button>
-          <button class="button-about" (click)="navigate('about')">
-            <div class="button-about-text">
-              About
-            </div>
-          </button>
-        </ion-col>
-      </ion-row>
-    </div>
   </ion-grid>
 
   <ion-fab right bottom #fab>

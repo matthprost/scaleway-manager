@@ -3,7 +3,7 @@ import {
   AlertController,
   FabContainer,
   MenuController,
-  NavController, Platform
+  NavController
 } from 'ionic-angular';
 import {ServerPage} from "../server/server";
 import {Storage} from "@ionic/storage";
@@ -49,16 +49,10 @@ export class HomePage {
   faRight = faChevronRight;
   faCode = faCode;
 
-  public ios: boolean = false;
-
   constructor(public navCtrl: NavController, private storage: Storage,
               private serversProvider: ServersProvider, private stats: HomeStatsDirective,
               public alertCtrl: AlertController, private iab: InAppBrowser,
-              private billingProvider: BillingProvider, public menu: MenuController, public statusBar: StatusBar,
-              private platform: Platform) {
-    if (this.platform.is('ios')) {
-      this.ios = true;
-    }
+              private billingProvider: BillingProvider, public menu: MenuController, public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
@@ -192,17 +186,6 @@ export class HomePage {
     };
 
     this.iab.create('https://matthias-prost.com',
-      '_blank', options);
-  }
-
-  public openGitHub() {
-    const options: InAppBrowserOptions = {
-      zoom: 'no',
-      location: 'no',
-      toolbarposition: 'top'
-    };
-
-    this.iab.create('https://github.com/F4OST/Scaleway-Manager',
       '_blank', options);
   }
 

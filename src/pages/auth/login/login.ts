@@ -1,11 +1,9 @@
 import {Component} from '@angular/core';
-import {LoadingController, MenuController, NavController, Platform, ToastController} from 'ionic-angular';
+import {LoadingController, MenuController, NavController, ToastController} from 'ionic-angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {HomePage} from "../../home/home";
 import {DoubleAuthPage} from "../double-auth/double-auth";
-import {InAppBrowser} from '@ionic-native/in-app-browser/ngx';
 import {StatusBar} from "@ionic-native/status-bar/ngx";
-import {InAppBrowserOptions} from "@ionic-native/in-app-browser/ngx";
 
 @Component({
   selector: 'page-login',
@@ -15,14 +13,9 @@ export class LoginPage {
 
   private email: string = null;
   private password: string = null;
-  private ios: boolean = false;
 
   constructor(private navCtrl: NavController, private toastCtrl: ToastController,
-              private auth: AuthProvider, private menu: MenuController, private loadingCtrl: LoadingController,
-              private iab: InAppBrowser, public statusBar: StatusBar, private platform: Platform) {
-    if (this.platform.is('ios')) {
-      this.ios = true;
-    }
+              private auth: AuthProvider, private menu: MenuController, private loadingCtrl: LoadingController, public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
@@ -95,17 +88,6 @@ export class LoginPage {
           }
         });
     }
-  }
-
-  public github() {
-    const options: InAppBrowserOptions = {
-      zoom: 'no',
-      location: 'no',
-      toolbarposition: 'top'
-    };
-
-    this.iab.create('https://github.com/F4OST/Scaleway-Manager',
-      '_blank', options);
   }
 
 }

@@ -14,8 +14,6 @@ import {BillingPage} from "../pages/billing/billing";
 import {faHome, faServer, faQuestion, faSignOutAlt, faUser, faMoneyCheckAlt, faCode} from '@fortawesome/free-solid-svg-icons';
 import {LogoutProvider} from "../providers/auth/logout/logout";
 import {AccountPage} from "../pages/account/account";
-import {InAppBrowserOptions} from "@ionic-native/in-app-browser/ngx";
-import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 
 @Component({
   templateUrl: 'app.html'
@@ -30,12 +28,10 @@ export class MyApp {
   pages: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
   pagesBottom: Array<{ title: string, component: any, picture?: any, icon?: string, parameters?: any }>;
 
-  public ios: boolean = false;
-
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation,
               private authprovider: AuthProvider, private loadingCtrl: LoadingController,
-              private logoutService: LogoutProvider, private iab: InAppBrowser) {
+              private logoutService: LogoutProvider) {
     this.initializeApp();
     this.pages = [
       {
@@ -81,10 +77,6 @@ export class MyApp {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       }
 
-      if (this.platform.is('ios')) {
-        this.ios = true;
-      }
-
       this.storage.get('token').then((val: AuthTokenDto) => {
         if (val) {
           this.authprovider.getToken(val.token.id).then(() => {
@@ -121,21 +113,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
 
-    if (page === 'github') {
-      const options: InAppBrowserOptions = {
-        zoom: 'no',
-        location: 'no',
-        toolbarposition: 'top'
-      };
-
-      this.iab.create('https://github.com/F4OST/Scaleway-Manager',
-        '_blank', options);
-    } else {
       if (page.parameters) {
         this.nav.setRoot(page.component, {server: page.parameters.country});
       } else {
         this.nav.setRoot(page.component);
-      }
     }
   }
 
