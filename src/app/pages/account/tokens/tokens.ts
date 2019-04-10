@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ItemSliding, Loading, LoadingController, NavController, NavParams} from '@ionic/angular';
+import { LoadingController, NavController, NavParams} from '@ionic/angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {TokenDto} from "../../../providers/auth/auth-tokens.dto";
 import {Storage} from "@ionic/storage";
@@ -38,20 +38,18 @@ export class TokensPage {
     });
   }
 
-  private refresh(loader?: Loading): Promise<any> {
+  private refresh(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.authProvide.getAllTokens().then(tokens => {
         this.tokens = tokens.tokens;
         this.storage.get('token').then(result => {
           this.currentSession = result.token.access_key;
-          if (loader) {
-            loader.dismiss();
-          }
           resolve('ok');
         });
       })
         .catch(error => {
           console.log(error);
+          reject(error);
         })
     });
   }
@@ -65,20 +63,14 @@ export class TokensPage {
     }
   }
 
-  public deleteToken(token: TokenDto, slidingItem: ItemSliding) {
+  public deleteToken(token: TokenDto, slidingItem: any) {
     slidingItem.close();
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-    });
-
-    loader.present();
 
     this.authProvide.deleteToken(token.access_key).then(() => {
-      this.refresh(loader);
+      this.refresh();
     })
       .catch(error => {
         console.log(error);
-        loader.dismiss();
       });
   }
 
