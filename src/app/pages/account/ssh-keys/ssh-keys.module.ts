@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import {AccountPage} from "./account";
+import {SshKeysPage} from "./ssh-keys";
 
 @NgModule({
   imports: [
@@ -13,12 +13,12 @@ import {AccountPage} from "./account";
     RouterModule.forChild([
       {
         path: '',
-        component: AccountPage,
-        outlet: 'account'
+        component: SshKeysPage,
+        outlet: 'sshkeys'
       }
     ])
   ],
-  declarations: [AccountPage],
-  entryComponents: [AccountPage]
+  declarations: [SshKeysPage],
+  entryComponents: [SshKeysPage]
 })
-export class AccountPageModule {}
+export class SshKeysPageModule {}
