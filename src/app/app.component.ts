@@ -1,5 +1,5 @@
-import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform, MenuController, LoadingController} from '@ionic/angular';
+import {Component} from '@angular/core';
+import {Platform, MenuController, LoadingController} from '@ionic/angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {HomePage} from './pages/home/home';
@@ -11,16 +11,22 @@ import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
 import {AboutPage} from "./pages/about/about";
 import {AuthProvider} from "./providers/auth/auth";
 import {BillingPage} from "./pages/billing/billing";
-import {faHome, faServer, faQuestion, faSignOutAlt, faUser, faMoneyCheckAlt, faCode} from '@fortawesome/free-solid-svg-icons';
+import {
+  faHome,
+  faServer,
+  faQuestion,
+  faSignOutAlt,
+  faUser,
+  faMoneyCheckAlt,
+  faCode
+} from '@fortawesome/free-solid-svg-icons';
 import {LogoutProvider} from "./providers/auth/logout/logout";
 import {AccountPage} from "./pages/account/account";
 
 @Component({
   templateUrl: 'app.html'
 })
-export class MyApp {
-  @ViewChild(Nav) nav: Nav;
-
+export class AppComponent {
   rootPage: any = LoginPage;
   faSignOutAlt = faSignOutAlt;
   faCode = faCode;
@@ -113,10 +119,10 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
 
-      if (page.parameters) {
-        this.nav.setRoot(page.component, {server: page.parameters.country});
-      } else {
-        this.nav.setRoot(page.component);
+    if (page.parameters) {
+      this.nav.setRoot(page.component, {server: page.parameters.country});
+    } else {
+      this.nav.setRoot(page.component);
     }
   }
 

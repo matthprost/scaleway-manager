@@ -1,8 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { ErrorHandler, NgModule } from '@angular/core';
-import { IonicApp, IonicErrorHandler, IonicModule } from '@ionic/angular';
+import { NgModule } from '@angular/core';
+import {IonicModule, IonicRouteStrategy} from '@ionic/angular';
+import {RouteReuseStrategy} from "@angular/router";
 
-import { MyApp } from './app.component';
+import { AppComponent } from './app.component';
 import { HomePage } from './pages/home/home';
 
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -30,11 +31,12 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {AccountPageModule} from "./pages/account/account.module";
 import { AccountProvider } from './providers/account/account';
 import {AddSshKeyPage} from "./pages/account/ssh-keys/add-ssh-key/add-ssh-key";
+import {AppRoutingModule} from "./app-routing.module";
 
 
 @NgModule({
   declarations: [
-    MyApp,
+    AppComponent,
     HomePage,
     LoginPage,
     DoubleAuthPage,
@@ -48,7 +50,9 @@ import {AddSshKeyPage} from "./pages/account/ssh-keys/add-ssh-key/add-ssh-key";
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp),
+    BrowserModule,
+    IonicModule.forRoot(),
+    AppRoutingModule,
     ProvidersModule,
     IonicStorageModule.forRoot(),
     PipesModule,
@@ -57,9 +61,8 @@ import {AddSshKeyPage} from "./pages/account/ssh-keys/add-ssh-key/add-ssh-key";
     FontAwesomeModule,
     AccountPageModule
   ],
-  bootstrap: [IonicApp],
+  bootstrap: [AppComponent],
   entryComponents: [
-    MyApp,
     HomePage,
     LoginPage,
     DoubleAuthPage,
@@ -72,10 +75,10 @@ import {AddSshKeyPage} from "./pages/account/ssh-keys/add-ssh-key/add-ssh-key";
     AddSshKeyPage
   ],
   providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     StatusBar,
     SplashScreen,
     Clipboard,
-    {provide: ErrorHandler, useClass: IonicErrorHandler},
     ScreenOrientation,
     EmailComposer,
     InAppBrowser,
