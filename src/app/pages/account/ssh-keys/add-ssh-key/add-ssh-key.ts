@@ -26,8 +26,16 @@ export class AddSshKeyPage {
     this.navCtrl.pop();
   }
 
-  public addSshKey() {
+  public async addSshKey() {
     let finalSshKeysArray: Array<{"key": string}> = [];
+    const toast = await this.toastController.create({
+      message: "Error: Your SSH Key is invalid",
+      duration: 5000,
+      showCloseButton: true,
+      position: 'bottom',
+      closeButtonText: 'Close',
+      cssClass: 'toastDanger'
+    });
 
     for (let value of this.keys) {
       finalSshKeysArray.push({"key": value.key});
@@ -40,14 +48,6 @@ export class AddSshKeyPage {
       .catch(error => {
         console.log(error);
         if (error.status === 400) {
-          const toast = this.toastController.create({
-            message: "Error: Your SSH Key is invalid",
-            duration: 5000,
-            showCloseButton: true,
-            position: 'bottom',
-            closeButtonText: 'Close',
-            cssClass: 'toastDanger'
-          });
           toast.present();
         }
       })

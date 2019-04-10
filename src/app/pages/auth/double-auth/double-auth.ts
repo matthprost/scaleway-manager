@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import {LoadingController, MenuController, NavController, NavParams, ToastController} from '@ionic/angular';
+import {LoadingController, MenuController, ToastController} from '@ionic/angular';
 import {AuthProvider} from "../../../providers/auth/auth";
-import {HomePage} from "../../home/home";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
+import {ActivatedRoute, Router} from "@angular/router";
+import {first} from "rxjs/internal/operators/first";
 
 @Component({
   selector: 'page-double-auth',
@@ -14,11 +15,13 @@ export class DoubleAuthPage {
   private email: string = null;
   private password: string = null;
 
-  constructor(private navCtrl: NavController, private navParams: NavParams, private auth: AuthProvider,
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private auth: AuthProvider,
               private menu: MenuController, private loadingCtrl: LoadingController, private toastCtrl: ToastController,
               public statusBar: StatusBar) {
-    this.email = this.navParams.get('email');
-    this.password = this.navParams.get('password');
+    this.activatedRoute.params.pipe(first()).subscribe(params => {
+      this.email = params.email;
+      this.password = params.password
+    });
   }
 
   ionViewDidLoad() {
@@ -29,27 +32,21 @@ export class DoubleAuthPage {
     this.statusBar.styleDefault();
   }
 
-  public login() {
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
+  public async login() {
+    const toast = await this.toastCtrl.create({
+      message: 'Token is not valid, please try again',
+      duration: 3000,
+      position: 'top'
     });
-    loader.present();
 
     this.auth.login(this.email, this.password, this.code)
       .then(() => {
       this.menu.swipeEnable(true);
-      loader.dismiss();
 
-      this.navCtrl.setRoot(HomePage);
+      this.router.navigateByUrl('/home');
     })
       .catch(error => {
-      loader.dismiss();
 
-        const toast = this.toastCtrl.create({
-          message: 'Token is not valid, please try again',
-          duration: 3000,
-          position: 'top'
-        });
         toast.present();
     });
   }

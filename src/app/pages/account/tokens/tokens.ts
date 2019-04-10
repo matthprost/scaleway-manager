@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
-import { LoadingController, NavController, NavParams} from '@ionic/angular';
+import { LoadingController } from '@ionic/angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {TokenDto} from "../../../providers/auth/auth-tokens.dto";
 import {Storage} from "@ionic/storage";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'page-tokens',
@@ -15,7 +16,7 @@ export class TokensPage {
   public tokens: Array<TokenDto> = null;
   public currentSession  = null;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authProvide: AuthProvider,
+  constructor(public router: Router, public activatedRoute: ActivatedRoute, private authProvide: AuthProvider,
               private storage: Storage, public statusBar: StatusBar, public loadingCtrl: LoadingController) {
   }
 
