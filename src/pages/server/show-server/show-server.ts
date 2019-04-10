@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {AlertController, NavParams, PopoverController, ToastController} from 'ionic-angular';
+import {AlertController, NavController, NavParams, PopoverController, ToastController} from 'ionic-angular';
 import {ServerDto} from "../../../providers/servers/server.dto";
 import {ServersProvider} from "../../../providers/servers/servers";
 import {AuthTokenDto} from "../../../providers/auth/auth-tokens.dto";
@@ -24,7 +24,7 @@ export class ShowServerPage {
   constructor(public navParams: NavParams, public popoverCtrl: PopoverController,
               private serversProvider: ServersProvider, private storage: Storage,
               private toastCtrl: ToastController, private clipboard: Clipboard, private alertController: AlertController,
-              public statusBar: StatusBar) {
+              public statusBar: StatusBar, private navCtrl: NavController) {
     this.server = navParams.get('server');
     this.serverCountry = navParams.get('serverCountry');
     this.serverName = this.server.name;
@@ -236,7 +236,7 @@ export class ShowServerPage {
             this.storage.get('token').then(token => {
               this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'terminate')
                 .then(() => {
-                  this.refreshServer();
+                  this.navCtrl.pop()
                 }).catch(error => {
                 console.log(error);
               })
