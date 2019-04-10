@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import {LoadingController, NavController, Platform, ToastController} from '@ionic/angular';
+import {Component} from '@angular/core';
+import { NavController, Platform, ToastController} from '@ionic/angular';
 import {EmailComposer} from "@ionic-native/email-composer/ngx";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 
@@ -12,8 +12,8 @@ export class BugReportPage {
   public message: string = null;
 
   constructor(public platform: Platform, public navCtrl: NavController,
-              private emailComposer: EmailComposer, public loadingCtrl: LoadingController,
-              public toastCtrl: ToastController, public statusBar: StatusBar) {
+              private emailComposer: EmailComposer, public toastCtrl: ToastController,
+              public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
@@ -24,14 +24,16 @@ export class BugReportPage {
     this.statusBar.styleDefault();
   }
 
-  public sendMail() {
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-    });
+  public async sendMail() {
 
     if (this.message) {
+      const toast = await this.toastCtrl.create({
+        message: 'Success: your message has been sent!',
+        duration: 3000,
+        position: 'top'
+      });
+
       if (this.platform.is('cordova')) {
-        loader.present();
 
         let email = {
           to: 'bug-report@matthias-prost.com',
@@ -41,21 +43,15 @@ export class BugReportPage {
         };
 
         this.emailComposer.open(email).then(() => {
-          loader.dismiss();
-          const toast = this.toastCtrl.create({
-            message: 'Success: your message has been sent!',
-            duration: 3000,
-            position: 'top'
-          });
 
           toast.present();
-          this.navCtrl.pop();
+          this.navCtrl.navigateBack('/home');
         }).catch(error => {
           console.log(error);
         });
       }
     } else {
-      const toast = this.toastCtrl.create({
+      const toast = await this.toastCtrl.create({
         message: 'Error: message is empty, please try again',
         duration: 3000,
         position: 'top'

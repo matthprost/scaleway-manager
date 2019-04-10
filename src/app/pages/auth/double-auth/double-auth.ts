@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {LoadingController, MenuController, ToastController} from '@ionic/angular';
+import {MenuController, ToastController} from '@ionic/angular';
 import {AuthProvider} from "../../../providers/auth/auth";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -15,7 +15,7 @@ export class DoubleAuthPage {
   private password: string = null;
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private auth: AuthProvider,
-              private menu: MenuController, private loadingCtrl: LoadingController, private toastCtrl: ToastController,
+              private menu: MenuController, private toastCtrl: ToastController,
               public statusBar: StatusBar) {
 
     this.email = this.activatedRoute.snapshot.paramMap.get('email');

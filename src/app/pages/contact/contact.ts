@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {LoadingController, NavController, Platform, ToastController} from '@ionic/angular';
+import {NavController, Platform, ToastController} from '@ionic/angular';
 import {EmailComposer} from "@ionic-native/email-composer/ngx";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 
@@ -13,8 +13,7 @@ export class ContactPage {
   public message: string = null;
 
   constructor(public platform: Platform, public navCtrl: NavController,
-              private emailComposer: EmailComposer, public loadingCtrl: LoadingController,
-              public toastCtrl: ToastController, public statusBar: StatusBar) {
+              private emailComposer: EmailComposer, public toastCtrl: ToastController, public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
@@ -25,14 +24,10 @@ export class ContactPage {
     this.statusBar.styleDefault();
   }
 
-  public sendMail() {
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-    });
+  public async sendMail() {
 
     if (this.subject && this.message) {
       if (this.platform.is('cordova')) {
-        loader.present();
 
         let email = {
           to: 'contact@matthias-prost.com',
@@ -41,13 +36,13 @@ export class ContactPage {
           isHtml: true
         };
 
+        const toast = await this.toastCtrl.create({
+          message: 'Success: your message has been sent!',
+          duration: 3000,
+          position: 'top'
+        });
+
         this.emailComposer.open(email).then(() => {
-          loader.dismiss();
-          const toast = this.toastCtrl.create({
-            message: 'Success: your message has been sent!',
-            duration: 3000,
-            position: 'top'
-          });
 
           toast.present();
           this.navCtrl.pop();
@@ -56,7 +51,7 @@ export class ContactPage {
         });
       }
     } else {
-      const toast = this.toastCtrl.create({
+      const toast = await this.toastCtrl.create({
         message: 'Error: subject or message is empty, please try again',
         duration: 3000,
         position: 'top'

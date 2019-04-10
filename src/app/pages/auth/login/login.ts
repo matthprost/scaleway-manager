@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
-import {LoadingController, MenuController, ToastController} from '@ionic/angular';
+import {MenuController, ToastController} from '@ionic/angular';
 import {AuthProvider} from "../../../providers/auth/auth";
-import {HomePage} from "../../home/home";
-import {DoubleAuthPage} from "../double-auth/double-auth";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {Router} from "@angular/router";
 
@@ -16,7 +14,7 @@ export class LoginPage {
   private password: string = null;
 
   constructor(private router: Router, private toastCtrl: ToastController,
-              private auth: AuthProvider, private menu: MenuController, private loadingCtrl: LoadingController, public statusBar: StatusBar) {
+              private auth: AuthProvider, private menu: MenuController, public statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
