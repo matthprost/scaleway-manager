@@ -1,26 +1,20 @@
 import {Component} from '@angular/core';
 import {
   AlertController,
-  FabContainer,
+  IonFab,
   MenuController,
   NavController
 } from '@ionic/angular';
-import {ServerPage} from "../server/server";
 import {Storage} from "@ionic/storage";
 import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {ServersProvider} from "../../providers/servers/servers";
 import {ServerDto} from "../../providers/servers/server.dto";
 import {HomeStatsDirective} from "../../directives/home-stats/home-stats";
-import {ShowServerPage} from "../server/show-server/show-server";
-import {ContactPage} from "../contact/contact";
-import {BugReportPage} from "../bug-report/bug-report";
 import {InAppBrowser} from "@ionic-native/in-app-browser/ngx";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {BillingProvider} from "../../providers/billing/billing";
 import {faServer, faChevronRight, faCode} from '@fortawesome/free-solid-svg-icons';
-import {BillingPage} from "../billing/billing";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
-import {AboutPage} from "../about/about";
 import {InAppBrowserOptions} from "@ionic-native/in-app-browser/ngx";
 
 @Component({
@@ -151,33 +145,33 @@ export class HomePage {
     }
   }
 
-  public navigate(location: string, fab?: FabContainer) {
+  public navigate(location: string, fab?: IonFab) {
     switch (location) {
       case 'servers' :
-        this.navCtrl.setRoot(ServerPage);
+        this.navCtrl.navigateRoot('server');
         break;
       case 'contact' :
         fab.close();
-        this.navCtrl.push(ContactPage);
+        this.navCtrl.navigateForward('contact');
         break;
       case 'bug' :
         fab.close();
-        this.navCtrl.push(BugReportPage);
+        this.navCtrl.navigateForward('bugreport');
         break;
       case 'billing' :
-        this.navCtrl.push(BillingPage);
+        this.navCtrl.navigateForward('billing');
         break;
       case 'about' :
-        this.navCtrl.push(AboutPage);
+        this.navCtrl.navigateForward('about');
         break;
     }
   }
 
   public navigateServ(serverInfo: { server: ServerDto, country: string }) {
-    this.navCtrl.push(ShowServerPage, {server: serverInfo.server, serverCountry: serverInfo.country});
+    this.navCtrl.navigateForward(['showserver', {server: serverInfo.server, serverCountry: serverInfo.country}]);
   }
 
-  public openWebSite(fab: FabContainer) {
+  public openWebSite(fab: IonFab) {
 
     const options: InAppBrowserOptions = {
       zoom: 'no',
