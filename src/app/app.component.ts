@@ -1,16 +1,12 @@
 import {Component} from '@angular/core';
-import {Platform, MenuController, LoadingController} from '@ionic/angular';
+import {Platform, MenuController} from '@ionic/angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {HomePage} from './pages/home/home';
 import {LoginPage} from './pages/auth/login/login';
 import {AuthTokenDto} from "./providers/auth/auth-tokens.dto";
 import {Storage} from '@ionic/storage';
-import {ServerPage} from "./pages/server/server";
 import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
-import {AboutPage} from "./pages/about/about";
 import {AuthProvider} from "./providers/auth/auth";
-import {BillingPage} from "./pages/billing/billing";
 import {
   faHome,
   faServer,
@@ -21,7 +17,7 @@ import {
   faCode
 } from '@fortawesome/free-solid-svg-icons';
 import {LogoutProvider} from "./providers/auth/logout/logout";
-import {AccountPage} from "./pages/account/account";
+import {Router} from "@angular/router";
 
 @Component({
   templateUrl: 'app.html'
@@ -36,28 +32,27 @@ export class AppComponent {
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen,
               private storage: Storage, public menu: MenuController, private screenOrientation: ScreenOrientation,
-              private authprovider: AuthProvider, private loadingCtrl: LoadingController,
-              private logoutService: LogoutProvider) {
+              private authprovider: AuthProvider, private logoutService: LogoutProvider, public router: Router) {
     this.initializeApp();
     this.pages = [
       {
         title: 'Dashboard',
-        component: HomePage,
+        component: '/home',
         picture: faHome
       },
       {
         title: 'Servers',
-        component: ServerPage,
+        component: '/server',
         picture: faServer,
       },
       {
         title: 'Account',
-        component: AccountPage,
+        component: '/account',
         picture: faUser,
       },
       {
         title: 'Billing',
-        component: BillingPage,
+        component: '/billing',
         picture: faMoneyCheckAlt,
       },
 
@@ -66,7 +61,7 @@ export class AppComponent {
     this.pagesBottom = [
       {
         title: 'About',
-        component: AboutPage,
+        component: '/about',
         picture: faQuestion,
       }
     ];
@@ -86,7 +81,7 @@ export class AppComponent {
       this.storage.get('token').then((val: AuthTokenDto) => {
         if (val) {
           this.authprovider.getToken(val.token.id).then(() => {
-            this.nav.setRoot(HomePage).then(() => {
+            this.router.navigateByUrl('/home').then(() => {
               this.statusBar.styleDefault();
               this.menu.swipeEnable(true);
               this.splashScreen.hide();
@@ -98,7 +93,7 @@ export class AppComponent {
           })
             .catch(() => {
               this.storage.remove('token').then(() => {
-                this.nav.setRoot(LoginPage).then(() => {
+                this.router.navigateByUrl('/login').then(() => {
                   this.statusBar.styleDefault();
                   this.splashScreen.hide();
                 })
@@ -115,30 +110,21 @@ export class AppComponent {
     });
   }
 
-  openPage(page) {
+  public openPage(page) {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
 
     if (page.parameters) {
-      this.nav.setRoot(page.component, {server: page.parameters.country});
-    } else {
-      this.nav.setRoot(page.component);
+      this.router.navigateByUrl(page.component);
     }
   }
 
   public logout() {
-    const loader = this.loadingCtrl.create({
-      content: "Please wait...",
-    });
-
-    loader.present();
 
     this.logoutService.logout().then(() => {
-      loader.dismiss();
-      this.nav.setRoot(LoginPage);
+      this.router.navigateByUrl('/login');
     })
       .catch(error => {
-        loader.dismiss();
         console.log(error);
       });
   }
