@@ -22,7 +22,7 @@
         <ion-item [style.color]="isCurrentSession(token) ? '#3F6ED8' : ''">
           <div class="information-title">
             <div class="information-title-content">
-              {{ token.access_key }} {{ isCurrentSession(token) ? ' (Current)': '' }}
+              {{ token.access_key }} <ion-badge color="thirdly" *ngIf="isCurrentSession(token)">Current</ion-badge>
             </div>
             <div class="description-left">
               {{ token.creation_ip }}

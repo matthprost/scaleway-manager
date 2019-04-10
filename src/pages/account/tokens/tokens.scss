@@ -9,13 +9,13 @@ page-tokens {
     &-left {
       font-size: 1.4rem;
       color: #868686;
-      margin-top: .2rem;
+      margin-top: .5rem;
       float:left;
     }
     &-right {
       font-size: 1.4rem;
       color: #868686;
-      margin-top: .2rem;
+      margin-top: .5rem;
       float: right;
     }
   }
@@ -37,5 +37,9 @@ page-tokens {
 
   .current-token {
     color: red !important;
+  }
+
+  ion-badge {
+    float: right;
   }
 }

@@ -112,33 +112,4 @@ export class ServerPage {
     }
   }
 
-  // It counts how many server in a state (ex: 2 servers are running)
-/*  public countServersByState(servers: Array<ServerDto>, state: string): number {
-    let i: number = -1;
-    let counter: number = 0;
-
-    while (servers[++i]) {
-      if (servers[i].state === state) {
-        counter++;
-      }
-    }
-
-    return (counter);
-  }*/
-
-  // It get all servers by a specific state (ex: all servers that are running)
- /* public getServerByState(state: Array<string>): ServerDto[] {
-    let newServers: ServerDto[] = [];
-
-    this.allServers.forEach(server => {
-      state.forEach(result => {
-        if (result === server.state) {
-          newServers.push(server);
-        }
-      });
-    });
-
-    return (newServers);
-  }*/
-
 }
