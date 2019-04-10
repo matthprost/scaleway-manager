@@ -3,7 +3,6 @@ import {LoadingController, MenuController, ToastController} from '@ionic/angular
 import {AuthProvider} from "../../../providers/auth/auth";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {ActivatedRoute, Router} from "@angular/router";
-import {first} from "rxjs/internal/operators/first";
 
 @Component({
   selector: 'page-double-auth',
@@ -18,10 +17,9 @@ export class DoubleAuthPage {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private auth: AuthProvider,
               private menu: MenuController, private loadingCtrl: LoadingController, private toastCtrl: ToastController,
               public statusBar: StatusBar) {
-    this.activatedRoute.params.pipe(first()).subscribe(params => {
-      this.email = params.email;
-      this.password = params.password
-    });
+
+    this.email = this.activatedRoute.snapshot.paramMap.get('email');
+    this.password = this.activatedRoute.snapshot.paramMap.get('password');
   }
 
   ionViewDidLoad() {
