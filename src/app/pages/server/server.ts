@@ -1,10 +1,9 @@
 import {Component} from '@angular/core';
-import {ItemSliding, LoadingController, NavController, NavParams} from '@ionic/angular';
+import {NavController, NavParams} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
 import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {ServersProvider} from "../../providers/servers/servers";
 import {ServerDto} from "../../providers/servers/server.dto";
-import {ShowServerPage} from "./show-server/show-server";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 
 @Component({
@@ -16,14 +15,10 @@ export class ServerPage {
   public serverNetherlands: { servers: Array<ServerDto>, country: 'Netherlands' };
   public serverParis: { servers: Array<ServerDto>, country: 'Paris' };
 
-  public loader = this.loadingCtrl.create({
-    content: "Please wait...",
-  });
-
   public isLoading: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
-              private storage: Storage, private serversProvider: ServersProvider, public statusBar: StatusBar) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private storage: Storage,
+              private serversProvider: ServersProvider, public statusBar: StatusBar) {
   }
 
   ionViewDidEnter() {
@@ -65,11 +60,11 @@ export class ServerPage {
   }
 
   public showServer(server: any, country: string) {
-    this.navCtrl.push(ShowServerPage, {server: server, serverCountry: country});
+    this.navCtrl.navigateForward(['showserver', {server: server, serverCountry: country}]);
   }
 
   // This function is for fast action on servers like start/stop
-  public serverAction(server, action, slidingItem: ItemSliding, country: string) {
+  public serverAction(server, action, slidingItem: any, country: string) {
     slidingItem.close();
     this.storage.get('token').then(token => {
       this.serversProvider.sendServerAction(country, server.id, token.token.id, action)

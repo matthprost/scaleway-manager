@@ -182,9 +182,8 @@ export class ShowServerPage {
     }
   }
 
-  public reboot() {
-    const alert = this.alertController.create({
-      title: 'Reboot ?',
+  public async reboot() {
+    const alert = await this.alertController.create({
       message: 'Are you sure you want to reboot this server ?',
       buttons: [
         {
@@ -221,9 +220,8 @@ export class ShowServerPage {
     });
   }
 
-  public delete() {
-    const alert = this.alertController.create({
-      title: 'Delete ?',
+  public async delete() {
+    const alert = await this.alertController.create({
       message: 'Are you sure you want to delete this server ?',
       buttons: [
         {
@@ -249,9 +247,9 @@ export class ShowServerPage {
     alert.present();
   }
 
-  public copyToClipBoard(text: string) {
+  public async copyToClipBoard(text: string) {
     this.clipboard.copy(text);
-    const toast = this.toastCtrl.create({
+    const toast = await this.toastCtrl.create({
       message: 'Address has been copied into your clipboard!',
       duration: 3000,
       position: 'top'
