@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {ItemSliding, ModalController, NavController, NavParams, ToastController} from '@ionic/angular';
+import {ModalController, NavController, NavParams, ToastController} from '@ionic/angular';
 import {AccountProvider} from "../../../providers/account/account";
 import {SshKeysDto} from "../../../providers/account/account.dto";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
@@ -60,9 +60,9 @@ export class SshKeysPage {
     return (splitted[3] + ' ' + splitted[4]);
   }
 
-  public copyToClipBoard(text: string) {
+  public async copyToClipBoard(text: string) {
     this.clipboard.copy(text);
-    const toast = this.toastCtrl.create({
+    const toast = await this.toastCtrl.create({
       message: 'Text has been copied into your clipboard!',
       duration: 3000,
       position: 'top'
@@ -70,7 +70,7 @@ export class SshKeysPage {
     toast.present();
   }
 
-  public deleteSshKey(SshKey: SshKeysDto, slidingItem: ItemSliding) {
+  public deleteSshKey(SshKey: SshKeysDto, slidingItem: any) {
     slidingItem.close();
 
     let finalSshKeysArray: Array<{"key": string}> = [];
@@ -89,10 +89,15 @@ export class SshKeysPage {
   }
 
   async addSshKey(event) {
-    const modal = await this.modalController.create(AddSshKeyPage, {"keys" : this.sshKeys});
-    await modal.onDidDismiss(() => {
+    const modal = await this.modalController.create({
+      component: AddSshKeyPage,
+      componentProps: {"keys" : this.sshKeys}
+    });
+
+    await modal.onDidDismiss().then(() => {
       this.refresh();
     });
+
     return await modal.present();
   }
 
