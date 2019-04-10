@@ -1,19 +1,19 @@
 import {Component, ViewChild} from '@angular/core';
-import {Nav, Platform, MenuController, LoadingController} from 'ionic-angular';
+import {Nav, Platform, MenuController, LoadingController} from '@ionic/angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {HomePage} from '../pages/home/home';
-import {LoginPage} from '../pages/auth/login/login';
-import {AuthTokenDto} from "../providers/auth/auth-tokens.dto";
+import {HomePage} from './pages/home/home';
+import {LoginPage} from './pages/auth/login/login';
+import {AuthTokenDto} from "./providers/auth/auth-tokens.dto";
 import {Storage} from '@ionic/storage';
-import {ServerPage} from "../pages/server/server";
+import {ServerPage} from "./pages/server/server";
 import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
-import {AboutPage} from "../pages/about/about";
-import {AuthProvider} from "../providers/auth/auth";
-import {BillingPage} from "../pages/billing/billing";
+import {AboutPage} from "./pages/about/about";
+import {AuthProvider} from "./providers/auth/auth";
+import {BillingPage} from "./pages/billing/billing";
 import {faHome, faServer, faQuestion, faSignOutAlt, faUser, faMoneyCheckAlt, faCode} from '@fortawesome/free-solid-svg-icons';
-import {LogoutProvider} from "../providers/auth/logout/logout";
-import {AccountPage} from "../pages/account/account";
+import {LogoutProvider} from "./providers/auth/logout/logout";
+import {AccountPage} from "./pages/account/account";
 
 @Component({
   templateUrl: 'app.html'
