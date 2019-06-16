@@ -1,25 +1,5 @@
 {
-  "name": "Scaleway",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular",
-  "proxies": [
-    {
-      "path": "/account",
-      "proxyUrl": "https://account.scaleway.com"
-    },
-    {
-      "path": "/billing",
-      "proxyUrl": "https://billing.scaleway.com"
-    },
-    {
-      "path": "/paris",
-      "proxyUrl": "https://cp-par1.scaleway.com"
-    },
-    {
-      "path": "/netherlands",
-      "proxyUrl": "https://cp-ams1.scaleway.com"
-    }
-  ]
+  "name": "Scaleway-Manager",
+  "integrations": {},
+  "type": "angular"
 }

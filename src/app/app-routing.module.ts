@@ -2,20 +2,19 @@ import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
-  { path: 'home', loadChildren: './home/home.module#HomePageModule' },
-  { path: 'about', loadChildren: './about/about.module#AboutPageModule' },
-  { path: 'account', loadChildren: './account/account.module#AccountPageModule' },
-  { path: 'sshkeys', loadChildren: './account/ssh-keys/sshkeys.module#SshKeysPageModule' },
-  { path: 'addsshkey', loadChildren: './account/ssh-keys/add-ssh-keys/addsshkey.module#AddSshKeyModule' },
-  { path: 'tokens', loadChildren: './account/tokens/tokens.module#TokensPageModule' },
-  { path: 'login', loadChildren: './auth/login/login.module#LoginPageModule' },
-  { path: 'doubleauth', loadChildren: './auth/double-auth/doubleauth.module#DoubleAuthPageModule' },
-  { path: 'billing', loadChildren: './billing/billing.module#BillingPageModule' },
-  { path: 'bugreport', loadChildren: './bug-report/bugreport.module#BugReportPageModule' },
-  { path: 'contact', loadChildren: './contact/contact.module#ContactPageModule' },
-  { path: 'server', loadChildren: './server/server.module#ServerPageModule' },
-  { path: 'showserver', loadChildren: './server/show-server/showserver.module#ShowServerPageModule' },
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full'
+  },
+  {
+    path: 'home',
+    loadChildren: './home/home.module#HomePageModule'
+  },
+  {
+    path: 'list',
+    loadChildren: './list/list.module#ListPageModule'
+  }
 ];
 
 @NgModule({
@@ -24,4 +23,4 @@ const routes: Routes = [
   ],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
