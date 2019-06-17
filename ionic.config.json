@@ -1,5 +1,7 @@
 {
   "name": "Scaleway-Manager",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }
