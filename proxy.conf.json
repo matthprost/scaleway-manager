@@ -1,0 +1,38 @@
+{
+  "/account/*": {
+    "target": "https://account.scaleway.com",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "^/account": ""
+    },
+    "logLevel": "debug"
+  },
+  "/billing/*": {
+    "target": "https://billing.scaleway.com",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "^/billing": ""
+    },
+    "logLevel": "debug"
+  },
+  "/paris/*": {
+    "target": "https://cp-par1.scaleway.com",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "^/paris": ""
+    },
+    "logLevel": "debug"
+  },
+  "/netherlands/*": {
+    "target": "https://cp-ams1.scaleway.com",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "^/netherlands": ""
+    },
+    "logLevel": "debug"
+  }
+}

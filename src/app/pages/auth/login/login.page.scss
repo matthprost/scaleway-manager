@@ -46,6 +46,10 @@ ion-list {
   }
 }
 
+.no-scroll .scroll-content{
+  overflow: hidden;
+}
+
 .content {
   background: url('/assets/imgs/background.svg') repeat 0 0, var(--ion-color-primary);
   width: 100%;
