@@ -3,42 +3,133 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>
-      Home
-    </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
-      <ion-img src="/assets/shapes.svg"></ion-img>
-      <ion-card-header>
-        <ion-card-subtitle>Get Started</ion-card-subtitle>
-        <ion-card-title>Welcome to Ionic</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-        <p>Now that your app has been created, you'll want to start building out features and components. Check out some of the resources below for next steps.</p>
-      </ion-card-content>
-    </ion-card>
-    <ion-list lines="none">
-      <ion-list-header>
-        <ion-label>Resources</ion-label>
-      </ion-list-header>
-      <ion-item href="https://ionicframework.com/docs/">
-        <ion-icon slot="start" color="medium" name="book"></ion-icon>
-        <ion-label>Ionic Documentation</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/building/scaffolding">
-        <ion-icon slot="start" color="medium" name="build"></ion-icon>
-        <ion-label>Scaffold Out Your App</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/layout/structure">
-        <ion-icon slot="start" color="medium" name="grid"></ion-icon>
-        <ion-label>Change Your App Layout</ion-label>
-      </ion-item>
-      <ion-item href="https://ionicframework.com/docs/theming/basics">
-        <ion-icon slot="start" color="medium" name="color-fill"></ion-icon>
-        <ion-label>Theme Your App</ion-label>
-      </ion-item>
-    </ion-list>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+<!--  <loader *ngIf="isLoading"></loader>-->
+  <ion-grid>
+    <ion-row>
+      <ion-col [ngClass]="classAppear" size="12">
+        <ion-card>
+          <ion-card-content class="servers" text-center no-padding>
+            <ion-row>
+              <ion-col size="9" no-padding>
+                <div class="servers-left">
+                  My Servers
+                  <ion-badge color="primary"
+                             *ngIf="nbrServParis + nbrServNetherlands !== 0">{{ nbrServParis + nbrServNetherlands }}</ion-badge>
+                </div>
+              </ion-col>
+              <ion-col size="3" no-padding>
+                <div class="servers-right">
+                  <!--<fa-icon [icon]="faRight"></fa-icon>-->
+                </div>
+              </ion-col>
+            </ion-row>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col [ngClass]="classAppear" *ngIf="oldestServer && oldestServer.server" size="6">
+        <ion-card>
+
+          <ion-card-header class="card-header-stats" text-center>
+            Oldest
+          </ion-card-header>
+
+          <ion-card-content class="card-stat2" text-center>
+            <ion-img
+              src="{{ oldestServer.server.image ? (oldestServer.server.image.name | serverIcon) : (oldestServer.server.name | serverIcon) }}"
+              margin-bottom></ion-img>
+            <div [ngClass]='setClass(oldestServer.server)' [style.background]="setState(oldestServer.server)"></div>
+            {{ oldestServer.server.name }}
+            <small class="small-card">
+              {{ oldestServer.server.creation_date | date:'dd/MM/yy, H:mm' }}
+            </small>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+      <ion-col [ngClass]="classAppear" *ngIf="powerfulServer && powerfulServer.server" size="6">
+        <ion-card>
+
+          <ion-card-header class="card-header-stats" text-center>
+            Powerfull
+          </ion-card-header>
+
+          <ion-card-content class="card-stat2" text-center>
+            <ion-img
+              src="{{ powerfulServer.server.image ? (powerfulServer.server.image.name | serverIcon) : (powerfulServer.server.name | serverIcon) }}"
+              margin-bottom></ion-img>
+            <div [ngClass]='setClass(powerfulServer.server)' [style.background]="setState(powerfulServer.server)"></div>
+            {{ powerfulServer.server.name }}
+            <small class="small-card">
+              {{ powerfulServer.server.commercial_type }}
+            </small>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col [ngClass]="classAppear" *ngIf="lastInvoice" size="6">
+        <ion-card>
+
+          <ion-card-header class="card-header-stats" text-center>
+            Current Invoice
+          </ion-card-header>
+
+          <ion-card-content class="card-invoices" text-center>
+            {{ lastInvoice.total_taxed }} {{ lastInvoice.currency }}
+            <small class="card-invoices-small">
+              <ion-icon name="{{ lastInvoice.state | billingStateIcon }}" style="vertical-align: middle;"></ion-icon>&nbsp;
+              {{ lastInvoice.state }}
+            </small>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+      <ion-col [ngClass]="classAppear" *ngIf="secondLastInvoice" size="6">
+        <ion-card>
+
+          <ion-card-header class="card-header-stats" text-center>
+            Last Month Invoice
+          </ion-card-header>
+
+          <ion-card-content class="card-invoices" text-center>
+            {{ secondLastInvoice.total_taxed }} {{ secondLastInvoice.currency }}
+            <small class="card-invoices-small">
+              <ion-icon name="{{ secondLastInvoice.state | billingStateIcon }}"
+                        style="vertical-align: middle"></ion-icon>&nbsp;
+              {{ secondLastInvoice.state }}
+            </small>
+          </ion-card-content>
+
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+<!--  <ion-fab right bottom #fab>
+    <button ion-fab color="primary">
+      <ion-icon name="help-buoy"></ion-icon>
+    </button>
+    <ion-fab-list side="left">
+      <button ion-fab color="grey">
+        <ion-icon name="bug"></ion-icon>
+      </button>
+      <button ion-fab color="grey">
+        <ion-icon name="mail"></ion-icon>
+      </button>
+      <button ion-fab color="grey">
+        <ion-icon name="globe"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>-->
 </ion-content>

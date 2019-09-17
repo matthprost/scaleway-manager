@@ -1,4 +1,133 @@
-.welcome-card ion-img {
-  max-height: 35vh;
-  overflow: hidden;
+.background {
+  &-rect {
+    left: -205px;
+    top: 60vh;
+    height: 405px;
+    width: 400px;
+    background: transparent;
+    border-right: 70px solid var(--ion-color-primary);
+    border-top: 70px solid var(--ion-color-primary);
+    position: absolute;
+    z-index: -1;
+    transform: rotate(45deg) translateX(-50%) translateY(-50%);
+  }
+}
+
+@keyframes rect-scale {
+  0% {
+    border-right: 0 solid var(--ion-color-primary);
+    border-top: 0 solid var(--ion-color-primary);
+  }
+  100% {
+    border-right: 65px solid var(--ion-color-primary);
+    border-top: 65px solid var(--ion-color-primary);
+  }
+}
+
+@keyframes card-appear {
+  0% {
+    transform: scale(0);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+.rect-scale {
+  animation: rect-scale .5s ease-in-out;
+}
+
+.card-appear {
+  animation: card-appear .35s ease-in-out;
+}
+
+.card-cont {
+  opacity: 0;
+}
+
+[col-12] {
+  padding: 1px;
+}
+
+[col-6] {
+  padding: 1px;
+}
+
+.card {
+  margin: 2.4px;
+  width: auto;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.075);
+  border-radius: 0;
+
+  img {
+    height: 30px;
+    width: 30px;
+    margin: 0 auto;
+  }
+
+  &-stat2 {
+    font-size: 1.8rem;
+    font-weight: lighter;
+    color: var(--ion-color-dark);
+  }
+
+  &-invoices {
+    font-size: 1.8rem;
+    font-weight: lighter;
+    color: var(--ion-color-dark);
+
+    &-small {
+      display: block;
+      color: dimgray;
+      font-size: 1.4rem;
+      margin-top: .5rem;
+      text-transform: capitalize;
+    }
+  }
+}
+
+.small-card {
+  display: block;
+  color: dimgray;
+  font-size: 1.4rem;
+  margin-top: .5rem;
+}
+
+.message {
+  font-weight: bold;
+  margin-top: .5rem;
+}
+
+.card-header-stats {
+  margin-bottom: 2rem;
+  color: white;
+  background: var(--ion-color-secondary);
+  padding: 10px;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: 1.4rem;
+}
+
+.servers {
+
+  &-left {
+    font-size: 2.25rem;
+    color: var(--ion-color-dark);
+    text-align: center;
+    font-weight: 300;
+    text-transform: uppercase;
+    padding: 2.75rem 2rem;
+
+    ion-badge {
+      vertical-align: top;
+    }
+  }
+
+  &-right {
+    font-size: 2.25rem;
+    text-align: center;
+    padding: 2.75rem 2rem;
+    background: var(--ion-color-secondary);
+    color: white;
+  }
 }

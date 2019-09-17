@@ -19,7 +19,7 @@ import { HttpClientModule } from '@angular/common/http';
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
-    HttpClientModule,
+    HttpClientModule
   ],
   providers: [
     StatusBar,

@@ -39,7 +39,7 @@ export class ApiService {
         this.httpClient.request<T>(HttpMethods[method.toString()], url, {
           headers: token ?
             {
-              'x-auth-token': token
+              'x-auth-token': token.token.id
             } : {},
           body: data
         }).toPromise().then(result => {
@@ -47,10 +47,10 @@ export class ApiService {
         })
           .catch((err) => {
             if (err && err.status && err.status === 401) {
-              this.storage.remove('token').then(() => {
+              /*this.storage.remove('token').then(() => {
                 console.log('Error 401: Token might be not valid anymore');
                 this.router.navigate(['/login']);
-              });
+              });*/
             }
             reject(err);
           });
