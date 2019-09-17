@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
@@ -16,18 +16,18 @@
     <ion-row>
       <ion-col [ngClass]="classAppear" size="12">
         <ion-card>
-          <ion-card-content class="servers" text-center no-padding>
+          <ion-card-content class="servers ion-text-center ion-no-padding">
             <ion-row>
-              <ion-col size="9" no-padding>
+              <ion-col size="9" class="ion-no-padding">
                 <div class="servers-left">
                   My Servers
                   <ion-badge color="primary"
                              *ngIf="nbrServParis + nbrServNetherlands !== 0">{{ nbrServParis + nbrServNetherlands }}</ion-badge>
                 </div>
               </ion-col>
-              <ion-col size="3" no-padding>
+              <ion-col size="3" class="ion-no-padding">
                 <div class="servers-right">
-                  <!--<fa-icon [icon]="faRight"></fa-icon>-->
+                  <fa-icon [icon]="faRight"></fa-icon>
                 </div>
               </ion-col>
             </ion-row>
@@ -39,14 +39,13 @@
       <ion-col [ngClass]="classAppear" *ngIf="oldestServer && oldestServer.server" size="6">
         <ion-card>
 
-          <ion-card-header class="card-header-stats" text-center>
+          <ion-card-header class="card-header-stats ion-text-center">
             Oldest
           </ion-card-header>
 
-          <ion-card-content class="card-stat2" text-center>
-            <ion-img
-              src="{{ oldestServer.server.image ? (oldestServer.server.image.name | serverIcon) : (oldestServer.server.name | serverIcon) }}"
-              margin-bottom></ion-img>
+          <ion-card-content class="card-stat2 ion-text-center">
+            <ion-img class="server-img ion-margin-bottom"
+              src="{{ oldestServer.server.image ? (oldestServer.server.image.name | serverIcon) : (oldestServer.server.name | serverIcon) }}"></ion-img>
             <div [ngClass]='setClass(oldestServer.server)' [style.background]="setState(oldestServer.server)"></div>
             {{ oldestServer.server.name }}
             <small class="small-card">
@@ -59,14 +58,13 @@
       <ion-col [ngClass]="classAppear" *ngIf="powerfulServer && powerfulServer.server" size="6">
         <ion-card>
 
-          <ion-card-header class="card-header-stats" text-center>
+          <ion-card-header class="card-header-stats ion-text-center">
             Powerfull
           </ion-card-header>
 
-          <ion-card-content class="card-stat2" text-center>
-            <ion-img
-              src="{{ powerfulServer.server.image ? (powerfulServer.server.image.name | serverIcon) : (powerfulServer.server.name | serverIcon) }}"
-              margin-bottom></ion-img>
+          <ion-card-content class="card-stat2 ion-text-center">
+            <ion-img class="server-img ion-margin-bottom"
+              src="{{ powerfulServer.server.image ? (powerfulServer.server.image.name | serverIcon) : (powerfulServer.server.name | serverIcon) }}"></ion-img>
             <div [ngClass]='setClass(powerfulServer.server)' [style.background]="setState(powerfulServer.server)"></div>
             {{ powerfulServer.server.name }}
             <small class="small-card">
@@ -81,14 +79,14 @@
       <ion-col [ngClass]="classAppear" *ngIf="lastInvoice" size="6">
         <ion-card>
 
-          <ion-card-header class="card-header-stats" text-center>
+          <ion-card-header class="card-header-stats ion-text-center">
             Current Invoice
           </ion-card-header>
 
-          <ion-card-content class="card-invoices" text-center>
+          <ion-card-content class="card-invoices ion-text-center">
             {{ lastInvoice.total_taxed }} {{ lastInvoice.currency }}
             <small class="card-invoices-small">
-              <ion-icon name="{{ lastInvoice.state | billingStateIcon }}" style="vertical-align: middle;"></ion-icon>&nbsp;
+              <ion-icon name="{{ lastInvoice.state | billingStateIcon }}"></ion-icon>&nbsp;
               {{ lastInvoice.state }}
             </small>
           </ion-card-content>
@@ -98,15 +96,14 @@
       <ion-col [ngClass]="classAppear" *ngIf="secondLastInvoice" size="6">
         <ion-card>
 
-          <ion-card-header class="card-header-stats" text-center>
+          <ion-card-header class="card-header-stats ion-text-center">
             Last Month Invoice
           </ion-card-header>
 
-          <ion-card-content class="card-invoices" text-center>
+          <ion-card-content class="card-invoices ion-text-center">
             {{ secondLastInvoice.total_taxed }} {{ secondLastInvoice.currency }}
             <small class="card-invoices-small">
-              <ion-icon name="{{ secondLastInvoice.state | billingStateIcon }}"
-                        style="vertical-align: middle"></ion-icon>&nbsp;
+              <ion-icon name="{{ secondLastInvoice.state | billingStateIcon }}"></ion-icon>&nbsp;
               {{ secondLastInvoice.state }}
             </small>
           </ion-card-content>

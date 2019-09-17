@@ -2,10 +2,10 @@ import {Component} from '@angular/core';
 import {AlertController, MenuController, NavController} from '@ionic/angular';
 import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
-import {faServer, faChevronRight, faCode} from '@fortawesome/fontawesome-free';
 import {InvoicesDto} from '../../services/billing/billing.dto';
 import {BillingService} from '../../services/billing/billing.service';
 import {HomeStatsDirective} from '../../directives/home-stats/home-stats.directive';
+import { faServer, faChevronRight, faCode } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-home',

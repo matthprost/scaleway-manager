@@ -8,6 +8,7 @@ import { HomePage } from './home.page';
 import {BillingStateIconPipe} from '../../pipes/billing-state-icon/billing-state-icon.pipe';
 import {ServerIconPipe} from '../../pipes/server-icon/server-icon.pipe';
 import {HomeStatsDirective} from '../../directives/home-stats/home-stats.directive';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 @NgModule({
   imports: [
@@ -20,6 +21,7 @@ import {HomeStatsDirective} from '../../directives/home-stats/home-stats.directi
         component: HomePage
       }
     ]),
+    FontAwesomeModule
   ],
   declarations: [HomePage, BillingStateIconPipe, ServerIconPipe, HomeStatsDirective],
   providers: [
