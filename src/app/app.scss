@@ -7,3 +7,31 @@
 
 .menu-app {
 }
+
+.state {
+  width: 9px;
+  height: 9px;
+  background-color: gray;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 10px;
+  margin-right: 5px;
+  margin-bottom: 1px;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.blinker {
+  animation: blinker 1.60s linear infinite;
+  width: 9px;
+  height: 9px;
+  background-color: gray;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 10px;
+  margin-right: 5px;
+}

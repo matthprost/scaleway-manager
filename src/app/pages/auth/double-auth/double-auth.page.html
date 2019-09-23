@@ -1,0 +1,43 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" [routerLink]="['home']">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content forceOverscroll="false">
+  <div class="content ion-padding ion-text-center">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <div class="login-header">
+            <ion-icon name="md-lock"></ion-icon>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <ion-list class="ion-padding">
+            <h3>Two-Factor Authentication</h3>
+
+            <form (ngSubmit)="login()">
+              <ion-row>
+                <ion-item class="background-transparent ion-margin-top">
+                  <ion-input type="number" maxlength="6" placeholder="••••••" name="number"></ion-input>
+                </ion-item>
+              </ion-row>
+
+              <ion-row>
+                  <ion-button color="secondary" type="submit" expand="full">
+                    Log in
+                  </ion-button>
+              </ion-row>
+            </form>
+          </ion-list>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+</ion-content>

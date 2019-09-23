@@ -62,12 +62,24 @@
     color: var(--ion-color-dark);
 
     &-small {
-      display: block;
       color: dimgray;
-      font-size: 1.4rem;
+      font-size: 1.1rem;
       margin-top: .5rem;
       text-transform: capitalize;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
     }
+  }
+
+  &-header-stats {
+    color: white;
+    background: var(--ion-color-secondary);
+    padding: 10px;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-size: .85rem;
   }
 }
 
@@ -81,15 +93,6 @@
 .message {
   font-weight: bold;
   margin-top: .5rem;
-}
-
-.card-header-stats {
-  color: white;
-  background: var(--ion-color-secondary);
-  padding: 10px;
-  text-transform: uppercase;
-  font-weight: 400;
-  font-size: 1rem;
 }
 
 .servers {
@@ -124,5 +127,5 @@
 }
 
 ion-card {
-  margin: .25rem;
+  margin: .1rem;
 }

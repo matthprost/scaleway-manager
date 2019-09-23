@@ -2,14 +2,14 @@
 
 </ion-header>
 
-<ion-content class="no-scroll">
-  <div class="content" text-center>
+<ion-content forceOverscroll="false">
+  <div class="content ion-text-center">
     <ion-grid>
       <ion-row>
         <ion-col class="col-12">
           <div class="login">
             <div class="login-header">
-              <img width="64" src="/assets/imgs/logo-white.svg">
+              <ion-img class="login-header-logo" src="/assets/imgs/logo-white.svg"></ion-img>
             </div>
             <form (ngSubmit)="login()" #loginForm="ngForm" class="form">
               <ion-item>
@@ -20,7 +20,7 @@
                 <ion-label position="floating">Password</ion-label>
                 <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
               </ion-item>
-              <div padding>
+              <div class="ion-padding">
                 <ion-button color="secondary" type="submit" expand="full">Log In</ion-button>
               </div>
             </form>
