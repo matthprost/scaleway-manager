@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/user/auth/auth.service';
-import {LoadingController, NavController, ToastController} from '@ionic/angular';
+import {LoadingController, MenuController, NavController, ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-double-auth',
@@ -14,7 +14,11 @@ export class DoubleAuthPage implements OnInit {
   private password: string = null;
 
   constructor(private auth: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController,
-              private toastCtrl: ToastController) {
+              private toastCtrl: ToastController, private menuCtrl: MenuController) {
+  }
+
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
   }
 
   ngOnInit() {

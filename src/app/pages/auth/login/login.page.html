@@ -1,5 +1,4 @@
 <ion-header>
-
 </ion-header>
 
 <ion-content forceOverscroll="false">
@@ -11,19 +10,28 @@
             <div class="login-header">
               <ion-img class="login-header-logo" src="/assets/imgs/logo-white.svg"></ion-img>
             </div>
-            <form (ngSubmit)="login()" #loginForm="ngForm" class="form">
-              <ion-item>
-                <ion-label position="floating">Email</ion-label>
-                <ion-input type="email" name="email" [(ngModel)]="email"></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-label position="floating">Password</ion-label>
-                <ion-input type="password" name="password" [(ngModel)]="password"></ion-input>
-              </ion-item>
-              <div class="ion-padding">
-                <ion-button color="secondary" type="submit" expand="full">Log In</ion-button>
-              </div>
-            </form>
+            <ion-card>
+              <ion-card-header>
+                <ion-card-subtitle>Scaleway account is needed</ion-card-subtitle>
+                <ion-card-title>Login</ion-card-title>
+              </ion-card-header>
+              <ion-card-content>
+                <form (ngSubmit)="login()" #loginForm="ngForm" class="form">
+                  <ion-list lines="none" class="ion-no-margin ion-no-padding">
+                    <ion-item>
+                      <ion-input type="email" name="email" placeholder="Email" [(ngModel)]="email"></ion-input>
+                    </ion-item>
+                    <ion-item class="ion-margin-top">
+                      <ion-input type="password" name="password" placeholder="Password"
+                                 [(ngModel)]="password"></ion-input>
+                    </ion-item>
+                    <div class="ion-padding">
+                      <ion-button color="secondary" type="submit" expand="full">Log In</ion-button>
+                    </div>
+                  </ion-list>
+                </form>
+              </ion-card-content>
+            </ion-card>
           </div>
         </ion-col>
       </ion-row>

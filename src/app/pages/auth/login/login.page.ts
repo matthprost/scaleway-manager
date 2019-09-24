@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LoadingController, ToastController} from '@ionic/angular';
+import {LoadingController, MenuController, ToastController} from '@ionic/angular';
 import {AuthService} from '../../../services/user/auth/auth.service';
 
 @Component({
@@ -14,7 +14,11 @@ export class LoginPage implements OnInit {
   private password: string = null;
 
   constructor(private router: Router, private toastCtrl: ToastController, private loadingCtrl: LoadingController,
-              private auth: AuthService) {
+              private auth: AuthService, private menuCtrl: MenuController) {
+  }
+
+  ionViewWillEnter() {
+    this.menuCtrl.enable(false);
   }
 
   ngOnInit() {

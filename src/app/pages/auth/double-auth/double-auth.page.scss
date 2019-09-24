@@ -24,21 +24,42 @@
 
   ion-icon {
     font-size: 4rem;
-    color: var(--ion-color-primary);
+    color: white;
     -webkit-animation: breathing 8s ease-out infinite normal;
     animation: breathing 8s ease-out infinite normal;
   }
 }
 
-ion-input {
-  height: 60px;
-  line-height: 100%;
-  background-color: transparent;
-  border: 0;
-  outline: 0;
-  color: black;
-  font-size: 60px;
-  word-spacing: 0px;
-  overflow: hidden;
+.content {
+  background: url('/assets/imgs/background.svg') repeat 0 0, var(--ion-color-primary);
+  width: 100%;
+  margin: 0;
   text-align: center;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.login {
+
+  &-header {
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 1rem 0;
+  }
+
+  ion-icon {
+      margin: 1rem 0 2rem 0;
+  }
+}
+
+ion-input {
+  --padding-start: 12px !important;
+  background: var(--ion-color-light);
+}
+
+ion-card {
+  background: white !important;
 }
