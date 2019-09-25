@@ -60,7 +60,7 @@ ion-list {
 }
 
 .item-inner {
-  padding-right: 0px !important;
+  padding-right: 0 !important;
 }
 
 .text-input {
@@ -68,11 +68,23 @@ ion-list {
   border-bottom: 1px lightgrey solid;
 }
 
+/* OVERLOAD OF EXISTING CSS */
+
 ion-card {
   background: white !important;
 }
 
 ion-input {
-  --padding-start: 12px !important;
+  background: var(--ion-color-light);
+  height: 42px;
+}
+
+ion-item {
+  --highlight-height: 0;
+}
+
+ion-icon {
+  margin: 0;
+  padding: 8px 7px 10px 7px;
   background: var(--ion-color-light);
 }

@@ -48,18 +48,32 @@
     justify-content: center;
     text-align: center;
     margin: 1rem 0;
-  }
 
-  ion-icon {
-      margin: 1rem 0 2rem 0;
+    ion-icon {
+      color: white;
+      background: transparent;
+    }
   }
 }
+
+/* OVERLOAD OF EXISTING CSS */
 
 ion-input {
   --padding-start: 12px !important;
   background: var(--ion-color-light);
+  height: 42px;
 }
 
 ion-card {
   background: white !important;
+}
+
+ion-item {
+  --highlight-height: 0;
+}
+
+ion-icon {
+  margin: 0;
+  padding: 8px 7px 10px 7px;
+  background: var(--ion-color-light);
 }

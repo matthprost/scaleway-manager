@@ -10,21 +10,22 @@
             <div class="login-header">
               <ion-icon name="md-lock"></ion-icon>
             </div>
-            <ion-card>
-              <ion-card-header>
-                <ion-card-subtitle>Another security step</ion-card-subtitle>
-                <ion-card-title>Double Auth</ion-card-title>
+            <ion-card mode="ios">
+              <ion-card-header mode="ios">
+                <ion-card-subtitle mode="ios">Another security step</ion-card-subtitle>
+                <ion-card-title mode="ios">Double Auth</ion-card-title>
               </ion-card-header>
               <ion-card-content>
                 <form (ngSubmit)="login()">
                   <ion-list lines="none" class="ion-no-margin ion-padding">
-                    <ion-item>
+                    <ion-item mode="md">
                       <!--<ion-label position="floating">Double Auth Code</ion-label>-->
                       <ion-input type="number" maxlength="6" clearInput placeholder="Code"
                                  name="number"></ion-input>
+                      <ion-icon name="md-keypad" slot="start"></ion-icon>
                     </ion-item>
                     <div class="ion-padding">
-                      <ion-button color="secondary" type="submit" expand="full">
+                      <ion-button color="secondary" type="submit" expand="full" mode="ios">
                         Log in
                       </ion-button>
                     </div>
