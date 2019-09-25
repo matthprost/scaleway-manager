@@ -22,9 +22,12 @@ export class GraphComponent implements OnInit {
   private formatData(data) {
     const array = [];
     const values = [];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     data.forEach(result => {
-      array.push(result.billing_period);
+      const parseResult = parseInt(result.billing_period.slice(-2), 12);
+      array.push(months[parseResult]);
     });
 
     this.dates = array.reverse();
@@ -94,7 +97,7 @@ export class GraphComponent implements OnInit {
                   display: true,
                   color: 'rgba(255, 255, 255, 0.3)',
                   drawBorder: false,
-                  zeroLineColor: 'rgba(255, 255, 255, 0.8)',
+                  zeroLineColor: 'rgba(255, 255, 255, 0.5)',
                   zeroLineWidth: 1,
                   borderDash: [1.5]
                 },
