@@ -26,7 +26,7 @@ export class DoubleAuthPage implements OnInit {
 
   public async login() {
     const loader = await this.loadingCtrl.create({
-      message: 'Please wait...',
+      message: 'Loading...',
     });
     await loader.present();
 
@@ -40,9 +40,11 @@ export class DoubleAuthPage implements OnInit {
         await loader.dismiss();
 
         const toast = await this.toastCtrl.create({
-          message: 'Token is not valid, please try again',
-          duration: 3000,
-          position: 'top'
+          message: 'Code is not valid, please try again',
+          duration: 5000,
+          position: 'top',
+          color: 'danger',
+          mode: 'ios'
         });
         await toast.present();
       });

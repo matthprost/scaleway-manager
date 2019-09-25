@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {LoadingController, MenuController, ToastController} from '@ionic/angular';
 import {AuthService} from '../../../services/user/auth/auth.service';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,8 @@ export class LoginPage implements OnInit {
   private password: string = null;
 
   constructor(private router: Router, private toastCtrl: ToastController, private loadingCtrl: LoadingController,
-              private auth: AuthService, private menuCtrl: MenuController) {
+              private auth: AuthService, private menuCtrl: MenuController, private statusBar: StatusBar) {
+    this.statusBar.styleLightContent();
   }
 
   ionViewWillEnter() {
@@ -30,20 +32,21 @@ export class LoginPage implements OnInit {
       const message: Array<string> = [];
 
       // tslint:disable-next-line:no-unused-expression
-      this.email ? null : message.push('Error: email is empty');
+      this.email ? null : message.push('Error: Please fill email input');
       // tslint:disable-next-line:no-unused-expression
-      this.password ? null : message.push('Error: password is empty');
+      this.password ? null : message.push('Error: Please fill password input');
 
       const toast = await this.toastCtrl.create({
         message: message[0],
-        duration: 3000,
+        duration: 5000,
         position: 'top',
-        color: 'danger'
+        color: 'danger',
+        mode: 'ios'
       });
       toast.present();
     } else {
       const loader = await this.loadingCtrl.create({
-        message: 'Please wait...'
+        message: 'Loading...'
       });
 
       loader.present();
@@ -58,9 +61,10 @@ export class LoginPage implements OnInit {
 
           if (error.status === 401) {
             const toast = await this.toastCtrl.create({
-              message: 'Error: email or password is incorrect, please check values',
-              duration: 3000,
-              position: 'top'
+              message: 'Error: Email or password is incorrect, please try again',
+              duration: 5000,
+              position: 'top',
+              mode: 'ios'
             });
 
             toast.present();
@@ -69,8 +73,9 @@ export class LoginPage implements OnInit {
           } else if (error.status === 403 && error.error.type === 'invalid_request_error') {
             const toast = await this.toastCtrl.create({
               message: 'Error: too many tokens are registered into your Scaleway account.',
-              duration: 3000,
-              position: 'top'
+              duration: 5000,
+              position: 'top',
+              mode: 'ios'
             });
 
             toast.present();

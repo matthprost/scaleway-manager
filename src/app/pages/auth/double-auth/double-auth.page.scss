@@ -30,13 +30,8 @@
   }
 }
 
-.content {
-  background: url('/assets/imgs/background.svg') repeat 0 0, var(--ion-color-primary);
-  width: 100%;
-  margin: 0;
-  text-align: center;
-  height: 100%;
-  box-sizing: border-box;
+ion-content {
+  --background: url('/assets/imgs/background.svg') repeat 0 0, var(--ion-color-primary);
 }
 
 .login {
