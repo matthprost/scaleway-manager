@@ -18,7 +18,7 @@ export class AuthService {
         'email': email,
         'password': password,
         'expires': false,
-        '2FA_token': code,
+        '2FA_token': String(code),
       })
         .then(result => {
           this.storage.set('token', result).then(() => {

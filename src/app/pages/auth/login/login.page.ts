@@ -1,8 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LoadingController, MenuController, ToastController} from '@ionic/angular';
+import {LoadingController, MenuController, NavController, ToastController} from '@ionic/angular';
 import {AuthService} from '../../../services/user/auth/auth.service';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {NavParamsService} from '../../../services/nav/nav-params.service';
 
 @Component({
   selector: 'app-login',
@@ -15,7 +16,8 @@ export class LoginPage implements OnInit {
   private password: string = null;
 
   constructor(private router: Router, private toastCtrl: ToastController, private loadingCtrl: LoadingController,
-              private auth: AuthService, private menuCtrl: MenuController, private statusBar: StatusBar) {
+              private auth: AuthService, private menuCtrl: MenuController, private statusBar: StatusBar, private navCtrl: NavController,
+              private navParams: NavParamsService) {
     this.statusBar.styleLightContent();
   }
 
@@ -53,7 +55,6 @@ export class LoginPage implements OnInit {
 
       this.auth.login(this.email, this.password).then(result => {
         loader.dismiss();
-
         this.router.navigate(['/home']);
       })
         .catch(async error => {
@@ -69,7 +70,8 @@ export class LoginPage implements OnInit {
 
             toast.present();
           } else if (error.status === 403 && error.error.type === '2FA_error') {
-            this.router.navigate(['']);
+            this.navParams.setParams({email: this.email, password: this.password});
+            this.navCtrl.navigateForward(['/login/double-auth']);
           } else if (error.status === 403 && error.error.type === 'invalid_request_error') {
             const toast = await this.toastCtrl.create({
               message: 'Error: too many tokens are registered into your Scaleway account.',

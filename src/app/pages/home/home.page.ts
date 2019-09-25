@@ -35,7 +35,8 @@ export class HomePage {
   faCode = faCode;
 
   constructor(public navCtrl: NavController, private srvService: ServersService, private stats: HomeStatsDirective,
-              public alertCtrl: AlertController, private billingProvider: BillingService, public menu: MenuController) {
+              public alertCtrl: AlertController, private billingProvider: BillingService, public menu: MenuController,
+              private menuCtrl: MenuController) {
   }
 
   ionViewDidLoad() {
@@ -43,6 +44,7 @@ export class HomePage {
 
   ionViewDidEnter() {
     this.refresh();
+    this.menuCtrl.enable(true);
   }
 
   public doRefresh(refresher) {

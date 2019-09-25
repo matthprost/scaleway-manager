@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {AuthService} from '../../../services/user/auth/auth.service';
 import {LoadingController, MenuController, NavController, ToastController} from '@ionic/angular';
+import {NavParamsService} from '../../../services/nav/nav-params.service';
 
 @Component({
   selector: 'app-double-auth',
@@ -10,15 +11,15 @@ import {LoadingController, MenuController, NavController, ToastController} from 
 export class DoubleAuthPage implements OnInit {
 
   public code: string = null;
-  private email: string = null;
-  private password: string = null;
+  private logins;
 
   constructor(private auth: AuthService, private loadingCtrl: LoadingController, private navCtrl: NavController,
-              private toastCtrl: ToastController, private menuCtrl: MenuController) {
+              private toastCtrl: ToastController, private menuCtrl: MenuController, private navParams: NavParamsService) {
   }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
+    this.logins = this.navParams.getParams();
   }
 
   ngOnInit() {
@@ -30,11 +31,11 @@ export class DoubleAuthPage implements OnInit {
     });
     await loader.present();
 
-    this.auth.login(this.email, this.password, this.code)
+    this.auth.login(this.logins.email, this.logins.password, this.code)
       .then(() => {
         loader.dismiss();
 
-        this.navCtrl.navigateForward(['home']);
+        this.navCtrl.navigateRoot(['home']);
       })
       .catch(async error => {
         await loader.dismiss();
