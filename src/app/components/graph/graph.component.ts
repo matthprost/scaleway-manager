@@ -45,7 +45,6 @@ export class GraphComponent implements OnInit {
     this.billingService.getXMonthsLastBilling(6).then(result => {
       this.formatData(result);
     }).then(() => {
-      console.log(this.dates);
 
       this.barChart = new Chart(this.barCanvas.nativeElement, {
         type: 'line',

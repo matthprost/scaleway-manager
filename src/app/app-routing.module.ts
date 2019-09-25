@@ -12,7 +12,16 @@ const routes: Routes = [
   },
   {
     path: 'home',
-    loadChildren: './pages/home/home.module#HomePageModule',
+    children: [
+      {
+        path: '',
+        loadChildren: './pages/home/home.module#HomePageModule',
+      },
+      {
+        path: 'account',
+        loadChildren: './pages/account/account/account.module#AccountPageModule'
+      }
+    ],
     canActivate: [HomeGuard]
   },
   {
@@ -29,7 +38,7 @@ const routes: Routes = [
         canActivate: [DoubleAuthGuard]
       },
     ]
-  },
+  }
 ];
 
 @NgModule({

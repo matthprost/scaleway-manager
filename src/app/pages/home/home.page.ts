@@ -137,9 +137,12 @@ export class HomePage implements OnInit {
     }
   }
 
-  /*public navigate(location: string, fab?: FabContainer) {
+  public navigate(location: string) {
     switch (location) {
-      case 'servers' :
+      case 'account' :
+        this.navCtrl.navigateForward(['/home/account']);
+        break;
+      /*case 'servers' :
         this.navCtrl.setRoot(ServerPage);
         break;
       case 'contact' :
@@ -155,9 +158,9 @@ export class HomePage implements OnInit {
         break;
       case 'about' :
         this.navCtrl.push(AboutPage);
-        break;
+        break;*/
     }
-  }*/
+  }
 
   /*public navigateServ(serverInfo: { server: ServerDto, country: string }) {
     this.navCtrl.push(ShowServerPage, {server: serverInfo.server, serverCountry: serverInfo.country});

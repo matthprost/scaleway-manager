@@ -15,8 +15,8 @@
           <h3>Dashboard</h3>
 
         </ion-button>
-        <ion-button class="ion-float-end" color="light" fill="clear">
-          <ion-icon slot="icon-only" name="ios-help-buoy"></ion-icon>
+        <ion-button class="ion-float-end" color="light" fill="clear" (click)="navigate('account')">
+          <ion-icon slot="icon-only" name="ios-contact"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
@@ -53,7 +53,7 @@
       </ion-refresher>-->
 
     <!--  <loader *ngIf="isLoading"></loader>-->
-    <!--<ion-grid>
+    <ion-grid>
       <ion-row>
         <ion-col [ngClass]="classAppear" *ngIf="oldestServer && oldestServer.server" size="6">
           <ion-card mode="ios">
@@ -95,43 +95,7 @@
           </ion-card>
         </ion-col>
       </ion-row>
-      <ion-row>
-        <ion-col [ngClass]="classAppear" *ngIf="lastInvoice" size="6">
-          <ion-card mode="ios">
-
-            <ion-card-header class="card-header-stats ion-text-center" mode="ios">
-              Current Invoice
-            </ion-card-header>
-
-            <ion-card-content class="card-invoices ion-text-center" mode="ios">
-              {{ lastInvoice.total_taxed }} {{ lastInvoice.currency }}
-              <small class="card-invoices-small">
-                <ion-icon name="{{ lastInvoice.state | billingStateIcon }}"></ion-icon>&nbsp;
-                {{ lastInvoice.state }}
-              </small>
-            </ion-card-content>
-
-          </ion-card>
-        </ion-col>
-        <ion-col [ngClass]="classAppear" *ngIf="secondLastInvoice" size="6">
-          <ion-card mode="ios">
-
-            <ion-card-header class="card-header-stats ion-text-center" mode="ios">
-              Last Month Invoice
-            </ion-card-header>
-
-            <ion-card-content class="card-invoices ion-text-center" mode="ios">
-              {{ secondLastInvoice.total_taxed }} {{ secondLastInvoice.currency }}
-              <small class="card-invoices-small">
-                <ion-icon name="{{ secondLastInvoice.state | billingStateIcon }}"></ion-icon>&nbsp;
-                {{ secondLastInvoice.state }}
-              </small>
-            </ion-card-content>
-
-          </ion-card>
-        </ion-col>
-      </ion-row>
-    </ion-grid>-->
+    </ion-grid>
 
     <!--  <ion-fab right bottom #fab>
         <button ion-fab color="primary">

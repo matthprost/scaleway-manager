@@ -1,0 +1,87 @@
+.menu-button {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: .75rem .75rem 0 .75rem;
+  color: white;
+  z-index: 100;
+}
+
+.ios .menu-button {
+  padding: 2rem 1rem 0 .5rem;
+}
+
+.background {
+  height: 45vh;
+  width: 100%;
+  background: url('/assets/imgs/background.svg'), radial-gradient(#8800C8, var(--ion-color-primary));
+}
+
+.profile {
+  text-align: center;
+  margin-top: -100px;
+
+  ion-img {
+    width: 145px;
+    margin: 0 auto;
+  }
+}
+
+.name {
+  text-align: center;
+  margin: .5rem 0;
+}
+
+.date {
+  text-align: center;
+  margin-bottom: 4rem;
+  margin-top: 1rem;
+
+  &-content {
+    text-align: center;
+    color: grey;
+    border: 1px #e4e4e4 solid;
+    border-radius: 1000px;
+    display: inline-block;
+    padding: .5rem 1rem;
+    font-size: .8rem;
+  }
+}
+
+.two-auth-enabled {
+  margin-right: .25rem;
+
+  ion-chip {
+    --background: var(--ion-color-secondary);
+    height: 30px;
+    line-height: 30px;
+  }
+
+  fa-icon {
+    color: white;
+  }
+
+  ion-label {
+    font-weight: 500;
+  }
+}
+
+.two-auth-disabled {
+  margin-right: .25rem;
+
+  ion-chip {
+    --background: var(--ion-color-danger);
+    height: 30px;
+    line-height: 30px;
+  }
+
+  fa-icon {
+    color: white;
+    font-size: 1.5rem;
+  }
+
+  ion-label {
+    font-size: 1.4rem;
+    font-weight: 500;
+  }
+}

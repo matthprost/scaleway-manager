@@ -1,0 +1,60 @@
+<ion-header>
+
+</ion-header>
+
+<ion-content force-overscroll="false">
+  <!--<loader *ngIf="isLoading"></loader>-->
+
+  <div>
+    <div class="menu-button">
+      <ion-button class="ion-float-end" color="light" fill="clear" (click)="navigate('home')">
+        <ion-icon name="md-close"></ion-icon>
+      </ion-button>
+    </div>
+    <div class="background"></div>
+    <div class="profile">
+      <ion-img src="assets/imgs/profile.svg"></ion-img>
+    </div>
+
+    <div *ngIf="!isLoading">
+      <div class="name">
+        <div class="two-auth-enabled" *ngIf="user.double_auth_enabled">
+          <ion-chip>
+            <ion-label color="light">
+              <fa-icon [icon]="faShieldAlt"></fa-icon>
+              2AF
+            </ion-label>
+          </ion-chip>
+        </div>
+        <div class="two-auth-disabled" *ngIf="!user.double_auth_enabled">
+          <ion-chip>
+            <ion-label color="light">
+              <fa-icon [icon]="danger"></fa-icon>
+              2AF
+            </ion-label>
+          </ion-chip>
+        </div>
+        {{ user.email }}
+      </div>
+      <div class="date">
+        <div class="date-content">
+          Member since {{ user.creation_date | date:'MMMM d, y'}}
+        </div>
+      </div>
+      <ion-list>
+        <ion-item (click)="navigate('ssh-keys')">
+          <ion-label>SSH Keys</ion-label>
+          <ion-note slot="end">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </ion-item>
+        <ion-item (click)="navigate('tokens')">
+          <ion-label>Tokens</ion-label>
+          <ion-note slot="end">
+            <ion-icon name="arrow-forward"></ion-icon>
+          </ion-note>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>
