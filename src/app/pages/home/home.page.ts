@@ -6,6 +6,7 @@ import {InvoicesDto} from '../../services/billing/billing.dto';
 import {BillingService} from '../../services/billing/billing.service';
 import {HomeStatsDirective} from '../../directives/home-stats/home-stats.directive';
 import { faServer, faChevronRight, faCode } from '@fortawesome/free-solid-svg-icons';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-home',
@@ -36,7 +37,7 @@ export class HomePage {
 
   constructor(public navCtrl: NavController, private srvService: ServersService, private stats: HomeStatsDirective,
               public alertCtrl: AlertController, private billingProvider: BillingService, public menu: MenuController,
-              private menuCtrl: MenuController) {
+              private menuCtrl: MenuController, private statusBar: StatusBar) {
   }
 
   ionViewDidLoad() {
@@ -45,6 +46,7 @@ export class HomePage {
   ionViewDidEnter() {
     this.refresh();
     this.menuCtrl.enable(true);
+    this.statusBar.styleDefault();
   }
 
   public doRefresh(refresher) {

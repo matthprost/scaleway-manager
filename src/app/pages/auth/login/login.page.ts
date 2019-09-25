@@ -18,11 +18,11 @@ export class LoginPage implements OnInit {
   constructor(private router: Router, private toastCtrl: ToastController, private loadingCtrl: LoadingController,
               private auth: AuthService, private menuCtrl: MenuController, private statusBar: StatusBar, private navCtrl: NavController,
               private navParams: NavParamsService) {
-    this.statusBar.styleLightContent();
   }
 
   ionViewWillEnter() {
     this.menuCtrl.enable(false);
+    this.statusBar.styleLightContent();
   }
 
   ngOnInit() {
