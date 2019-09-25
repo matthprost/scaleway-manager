@@ -5,7 +5,7 @@ import {Injectable} from '@angular/core';
 })
 export class NavParamsService {
 
-  params: {};
+  params: any;
 
   constructor() {
   }
@@ -14,7 +14,7 @@ export class NavParamsService {
     this.params = data;
   }
 
-  public getParams(): {} {
+  public getParams(): any {
     return this.params;
   }
 }

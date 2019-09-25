@@ -71,7 +71,7 @@ export class LoginPage implements OnInit {
             toast.present();
           } else if (error.status === 403 && error.error.type === '2FA_error') {
             this.navParams.setParams({email: this.email, password: this.password});
-            this.navCtrl.navigateForward(['/login/double-auth']);
+            this.navCtrl.navigateForward(['/login/double-home']);
           } else if (error.status === 403 && error.error.type === 'invalid_request_error') {
             const toast = await this.toastCtrl.create({
               message: 'Error: too many tokens are registered into your Scaleway account.',

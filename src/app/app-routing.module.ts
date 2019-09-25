@@ -1,6 +1,8 @@
 import {NgModule} from '@angular/core';
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
-import {AuthGuard} from './guards/auth/auth.guard';
+import {HomeGuard} from './guards/home/home.guard';
+import {DoubleAuthGuard} from './guards/double-auth/double-auth.guard';
+import {LoginGuard} from './guards/login/login.guard';
 
 const routes: Routes = [
   {
@@ -11,18 +13,20 @@ const routes: Routes = [
   {
     path: 'home',
     loadChildren: './pages/home/home.module#HomePageModule',
-    canActivate: [AuthGuard]
+    canActivate: [HomeGuard]
   },
   {
     path: 'login',
+    canActivate: [LoginGuard],
     children: [
       {
         path: '',
         loadChildren: './pages/auth/login/login.module#LoginPageModule'
       },
       {
-        path: 'double-auth',
-        loadChildren: './pages/auth/double-auth/double-auth.module#DoubleAuthPageModule'
+        path: 'double-home',
+        loadChildren: './pages/auth/double-auth/double-auth.module#DoubleAuthPageModule',
+        canActivate: [DoubleAuthGuard]
       },
     ]
   },
