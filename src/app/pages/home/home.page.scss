@@ -145,21 +145,41 @@ ion-content {
 
 .home {
   &-header {
-    background: linear-gradient(141deg, #8800C8 30%,var(--ion-color-primary) 70%) no-repeat;
+    background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%) no-repeat;
     padding: .75rem .75rem 0 .75rem;
+
     ion-button {
       --pading-top: 0;
       --padding-end: 0;
       --padding-start: 0;
       --padding-bottom: 0;
+
       .button-inner {
         display: inline-block;
       }
     }
+
     &-canvas {
-      padding: 4rem 0 4rem 0;
+      padding: 1rem 0 4rem 0;
+
+      &-title {
+        margin-bottom: 1.25rem;
+        color: white;
+        font-weight: 300;
+        font-size: .9rem;
+      }
+    }
+
+    h3 {
+      color: white;
+      display: inline-block;
+      margin: 0;
+      padding-left: .25rem;
+      font-weight: 300;
+      text-transform: inherit;
     }
   }
+
   .ios &-header {
     padding: 1.5rem 1rem 0 1rem;
   }

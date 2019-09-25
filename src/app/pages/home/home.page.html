@@ -8,13 +8,22 @@
 
 <ion-content force-overscroll="false">
   <div class="home-header">
-    <ion-button class="ion-float-start" color="light" fill="clear">
-      <ion-menu-button color="light"></ion-menu-button>
-    </ion-button>
-    <ion-button class="ion-float-end" color="light" fill="clear">
-      <ion-icon slot="icon-only" name="ios-help-buoy"></ion-icon>
-    </ion-button>
+    <ion-row>
+      <ion-col>
+        <ion-button class="ion-float-start" color="light" fill="clear" mode="ios">
+          <ion-menu-button color="light"></ion-menu-button>
+          <h3>Dashboard</h3>
+
+        </ion-button>
+        <ion-button class="ion-float-end" color="light" fill="clear">
+          <ion-icon slot="icon-only" name="ios-help-buoy"></ion-icon>
+        </ion-button>
+      </ion-col>
+    </ion-row>
     <div class="home-header-canvas">
+      <div class="home-header-canvas-title">
+        Last 6 months invoices
+      </div>
       <app-graph></app-graph>
     </div>
   </div>
@@ -44,7 +53,7 @@
       </ion-refresher>-->
 
     <!--  <loader *ngIf="isLoading"></loader>-->
-    <ion-grid>
+    <!--<ion-grid>
       <ion-row>
         <ion-col [ngClass]="classAppear" *ngIf="oldestServer && oldestServer.server" size="6">
           <ion-card mode="ios">
@@ -122,7 +131,7 @@
           </ion-card>
         </ion-col>
       </ion-row>
-    </ion-grid>
+    </ion-grid>-->
 
     <!--  <ion-fab right bottom #fab>
         <button ion-fab color="primary">
