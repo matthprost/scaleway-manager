@@ -55,10 +55,6 @@ ion-content {
   }
 }
 
-.item-inner {
-  padding-right: 0 !important;
-}
-
 .text-input {
   padding: .5rem 0;
   border-bottom: 1px lightgrey solid;
@@ -77,6 +73,7 @@ ion-input {
 
 ion-item {
   --highlight-height: 0;
+  --inner-padding-end: 0;
 }
 
 ion-icon {

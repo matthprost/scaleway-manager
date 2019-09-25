@@ -65,10 +65,13 @@ ion-card {
 
 ion-item {
   --highlight-height: 0;
+  --inner-padding-end: 0;
 }
 
-ion-icon {
-  margin: 0;
-  padding: 9px;
-  background: var(--ion-color-light);
+form {
+  ion-icon {
+    margin: 0;
+    padding: 9px;
+    background: var(--ion-color-light);
+  }
 }

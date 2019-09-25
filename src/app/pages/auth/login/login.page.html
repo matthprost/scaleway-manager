@@ -18,16 +18,16 @@
               <ion-card-content>
                 <form (ngSubmit)="login()" #loginForm="ngForm" class="form">
                   <ion-list lines="none" class="ion-no-margin ion-no-padding">
-                    <ion-item class="ion-margin-top" mode="md">
+                    <ion-item class="ion-margin-top ion-no-padding" mode="md">
                       <ion-input type="email" name="email" placeholder="Email" [(ngModel)]="email"></ion-input>
                       <ion-icon name="ios-mail" slot="start"></ion-icon>
                     </ion-item>
-                    <ion-item class="ion-margin-top" mode="md">
+                    <ion-item class="ion-margin-top ion-no-padding" mode="md">
                       <ion-input type="password" name="password" placeholder="Password"
                                  [(ngModel)]="password"></ion-input>
                       <ion-icon name="md-key" slot="start"></ion-icon>
                     </ion-item>
-                    <div class="ion-padding">
+                    <div class="ion-padding-top ion-padding-bottom">
                       <ion-button color="secondary" type="submit" expand="full" mode="ios">Log In</ion-button>
                     </div>
                   </ion-list>

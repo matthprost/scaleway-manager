@@ -17,14 +17,14 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    canActivate: [LoginGuard],
     children: [
       {
         path: '',
-        loadChildren: './pages/auth/login/login.module#LoginPageModule'
+        loadChildren: './pages/auth/login/login.module#LoginPageModule',
+        canActivate: [LoginGuard],
       },
       {
-        path: 'double-home',
+        path: 'double-auth',
         loadChildren: './pages/auth/double-auth/double-auth.module#DoubleAuthPageModule',
         canActivate: [DoubleAuthGuard]
       },
