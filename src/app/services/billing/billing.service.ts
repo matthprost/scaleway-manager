@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ApiService} from '../api/api.service';
 import {BillingDto} from './billing.dto';
 
@@ -7,7 +7,8 @@ import {BillingDto} from './billing.dto';
 })
 export class BillingService {
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {
+  }
 
   public getAllBilling(): Promise<any> {
     const ApiUrl = this.api.getBillingApiUrl();
@@ -30,6 +31,21 @@ export class BillingService {
     return new Promise((resolve, reject) => {
 
       this.api.get<BillingDto>(ApiUrl + '/invoices?page=1&per_page=2')
+        .then(result => {
+          resolve(result.invoices);
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
+
+  public getXMonthsLastBilling(months: number): Promise<any> {
+    const ApiUrl = this.api.getBillingApiUrl();
+
+    return new Promise((resolve, reject) => {
+
+      this.api.get<BillingDto>(ApiUrl + '/invoices?page=1&per_page=' + months)
         .then(result => {
           resolve(result.invoices);
         })

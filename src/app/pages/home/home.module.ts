@@ -9,6 +9,7 @@ import {BillingStateIconPipe} from '../../pipes/billing-state-icon/billing-state
 import {ServerIconPipe} from '../../pipes/server-icon/server-icon.pipe';
 import {HomeStatsDirective} from '../../directives/home-stats/home-stats.directive';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {GraphComponent} from '../../components/graph/graph.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     ]),
     FontAwesomeModule
   ],
-  declarations: [HomePage, BillingStateIconPipe, ServerIconPipe, HomeStatsDirective],
+  declarations: [HomePage, BillingStateIconPipe, ServerIconPipe, HomeStatsDirective, GraphComponent],
   providers: [
     HomeStatsDirective
   ]

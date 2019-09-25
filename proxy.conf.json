@@ -18,7 +18,7 @@
     "logLevel": "debug"
   },
   "/paris/*": {
-    "target": "https://cp-par1.scaleway.com",
+    "target": "https://api.scaleway.com/instance/v1/zones/fr-par-1",
     "changeOrigin": true,
     "secure": false,
     "pathRewrite": {
@@ -27,7 +27,7 @@
     "logLevel": "debug"
   },
   "/netherlands/*": {
-    "target": "https://cp-ams1.scaleway.com",
+    "target": "https://api.scaleway.com/instance/v1/zones/nl-ams-1",
     "changeOrigin": true,
     "secure": false,
     "pathRewrite": {

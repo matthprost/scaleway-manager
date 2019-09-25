@@ -26,8 +26,8 @@ export class ApiService {
     if (this.platform.is('cordova') === true) {
       this.apiUrl = 'https://account.scaleway.com';
       this.billing = 'https://billing.scaleway.com';
-      this.paris1 = 'https://cp-par1.scaleway.com';
-      this.amsterdam1 = 'https://cp-ams1.scaleway.com';
+      this.paris1 = 'https://api.scaleway.com/instance/v1/zones/fr-par-1';
+      this.amsterdam1 = 'https://api.scaleway.com/instance/v1/zones/nl-ams-1';
     }
   }
 

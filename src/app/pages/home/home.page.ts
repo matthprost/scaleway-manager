@@ -1,11 +1,11 @@
-import {Component} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {AlertController, MenuController, NavController} from '@ionic/angular';
 import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
 import {InvoicesDto} from '../../services/billing/billing.dto';
 import {BillingService} from '../../services/billing/billing.service';
 import {HomeStatsDirective} from '../../directives/home-stats/home-stats.directive';
-import { faServer, faChevronRight, faCode } from '@fortawesome/free-solid-svg-icons';
+import {faServer, faChevronRight, faCode} from '@fortawesome/free-solid-svg-icons';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
@@ -13,7 +13,7 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
 })
-export class HomePage {
+export class HomePage implements OnInit {
 
   public classAppear = 'card-cont';
   public rect = '';
@@ -40,13 +40,16 @@ export class HomePage {
               private menuCtrl: MenuController, private statusBar: StatusBar) {
   }
 
+  ngOnInit() {
+  }
+
   ionViewDidLoad() {
   }
 
   ionViewDidEnter() {
     this.refresh();
     this.menuCtrl.enable(true);
-    this.statusBar.styleDefault();
+    this.statusBar.styleLightContent();
   }
 
   public doRefresh(refresher) {
