@@ -103,7 +103,8 @@
     text-align: center;
     font-weight: 300;
     text-transform: uppercase;
-    padding: 1.75rem 1rem;
+    padding: .75rem 1rem;
+    background: white;
 
     ion-badge {
       vertical-align: top;
@@ -139,10 +140,7 @@ ion-toolbar {
 }
 
 ion-content {
-}
-
-ion-grid {
-  --ion-background-color: white;
+  --background: #eff3f6;
 }
 
 .home {
@@ -159,14 +157,22 @@ ion-grid {
       }
     }
     &-canvas {
-      padding: 4rem 0 1rem 0;
+      padding: 4rem 0 4rem 0;
     }
   }
   .ios &-header {
     padding: 1.5rem 1rem 0 1rem;
   }
 
+  &-middle {
+    ion-card {
+      margin: -1.75rem 3rem 0 3rem;
+    }
+  }
+
   &-page {
-    background: white;
+    ion-card {
+      --background: white;
+    }
   }
 }

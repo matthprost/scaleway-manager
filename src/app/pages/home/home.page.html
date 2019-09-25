@@ -18,6 +18,26 @@
       <app-graph></app-graph>
     </div>
   </div>
+
+  <div class="home-middle">
+    <ion-card [ngClass]="classAppear" mode="ios">
+      <ion-card-content class="servers ion-text-center ion-no-padding" mode="ios">
+        <ion-row>
+          <ion-col size="9" class="ion-no-padding">
+            <div class="servers-left">
+              my servers
+            </div>
+          </ion-col>
+          <ion-col size="3" class="ion-no-padding">
+            <div class="servers-right">
+              <fa-icon [icon]="faRight"></fa-icon>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
   <div class="home-page">
     <!--  <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content></ion-refresher-content>
@@ -25,28 +45,6 @@
 
     <!--  <loader *ngIf="isLoading"></loader>-->
     <ion-grid>
-      <ion-row>
-        <ion-col [ngClass]="classAppear" size="12">
-          <ion-card mode="ios">
-            <ion-card-content class="servers ion-text-center ion-no-padding" mode="ios">
-              <ion-row>
-                <ion-col size="9" class="ion-no-padding">
-                  <div class="servers-left">
-                    My Servers
-                    <ion-badge color="primary"
-                               *ngIf="nbrServParis + nbrServNetherlands !== 0">{{ nbrServParis + nbrServNetherlands }}</ion-badge>
-                  </div>
-                </ion-col>
-                <ion-col size="3" class="ion-no-padding">
-                  <div class="servers-right">
-                    <fa-icon [icon]="faRight"></fa-icon>
-                  </div>
-                </ion-col>
-              </ion-row>
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
       <ion-row>
         <ion-col [ngClass]="classAppear" *ngIf="oldestServer && oldestServer.server" size="6">
           <ion-card mode="ios">
