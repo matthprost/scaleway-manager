@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {UserDto} from '../../../services/user/account/account.dto';
+import {UserDto} from '../../services/user/account/account.dto';
 import {faShieldAlt, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import {NavController} from '@ionic/angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {AccountService} from '../../../services/user/account/account.service';
+import {AccountService} from '../../services/user/account/account.service';
 
 @Component({
   selector: 'app-account',

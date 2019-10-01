@@ -19,7 +19,7 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        loadChildren: './pages/account/account/account.module#AccountPageModule'
+        loadChildren: './pages/account/account.module#AccountPageModule'
       }
     ],
     canActivate: [HomeGuard]
