@@ -1,4 +1,4 @@
-import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {AlertController, MenuController, NavController} from '@ionic/angular';
 import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
@@ -35,12 +35,18 @@ export class HomePage implements OnInit {
   faRight = faChevronRight;
   faCode = faCode;
 
+  private interval;
+
   constructor(public navCtrl: NavController, private srvService: ServersService, private stats: HomeStatsDirective,
               public alertCtrl: AlertController, private billingProvider: BillingService, public menu: MenuController,
               private menuCtrl: MenuController, private statusBar: StatusBar) {
   }
 
   ngOnInit() {
+  }
+
+  ionViewDidLeave() {
+    clearInterval(this.interval);
   }
 
   ionViewDidLoad() {
@@ -110,7 +116,7 @@ export class HomePage implements OnInit {
   }
 
   public autoRefresh() {
-      setInterval(() => {
+      this.interval = setInterval(() => {
         console.log('Server auto refresh');
         this.refresh();
       }, 10000);
