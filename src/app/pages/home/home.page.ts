@@ -47,7 +47,9 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.refresh();
+    this.refresh().then(() => {
+      this.autoRefresh();
+    });
     this.menuCtrl.enable(true);
     this.statusBar.styleLightContent();
   }
@@ -105,6 +107,13 @@ export class HomePage implements OnInit {
         reject(error);
       });
     });
+  }
+
+  public autoRefresh() {
+      setInterval(() => {
+        console.log('Server auto refresh');
+        this.refresh();
+      }, 10000);
   }
 
   public setState(server: ServerDto): string {
