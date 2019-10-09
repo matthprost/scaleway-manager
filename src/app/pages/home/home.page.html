@@ -6,7 +6,11 @@
   </ion-toolbar>-->
 </ion-header>
 
-<ion-content>
+<ion-content *ngIf="isLoading">
+  <app-loader ></app-loader>
+</ion-content>
+
+<ion-content *ngIf="!isLoading">
   <div class="home-header">
     <ion-row>
       <ion-col>
@@ -53,25 +57,25 @@
     <ion-grid class="home-page-grid">
       <ion-row>
         <ion-slides pager="false" [options]="slideOpts">
-            <ion-slide  *ngFor="let serversInstance of serversInstances" [ngClass]="classAppear">
-              <ion-card mode="ios">
+          <ion-slide *ngFor="let serversInstance of serversInstances" [ngClass]="classAppear">
+            <ion-card mode="ios">
 
-                <ion-card-header class="card-header-stats ion-text-center" mode="ios">
-                  {{ serversInstance.name | slice:0:12 }}
-                </ion-card-header>
+              <ion-card-header class="card-header-stats ion-text-center" mode="ios">
+                {{ serversInstance.name | slice:0:12 }}
+              </ion-card-header>
 
-                <ion-card-content class="card-stat2 ion-text-center" mode="ios">
-                  <ion-img class="server-img ion-margin-bottom"
-                           src="{{ serversInstance.image ? (serversInstance.image.name | serverIcon) : (serversInstance.name | serverIcon) }}"></ion-img>
-                  <div [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"></div>
-                  {{ serversInstance.name }}
-                  <small class="small-card">
-                    {{ serversInstance.creation_date | date:'dd/MM/yy, H:mm' }}
-                  </small>
-                </ion-card-content>
+              <ion-card-content class="card-stat2 ion-text-center" mode="ios">
+                <ion-img class="server-img ion-margin-bottom"
+                         src="{{ serversInstance.image ? (serversInstance.image.name | serverIcon) : (serversInstance.name | serverIcon) }}"></ion-img>
+                <div [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"></div>
+                {{ serversInstance.name }}
+                <small class="small-card">
+                  {{ serversInstance.creation_date | date:'dd/MM/yy, H:mm' }}
+                </small>
+              </ion-card-content>
 
-              </ion-card>
-            </ion-slide>
+            </ion-card>
+          </ion-slide>
         </ion-slides>
       </ion-row>
     </ion-grid>

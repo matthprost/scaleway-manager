@@ -11,6 +11,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { IonicStorageModule } from '@ionic/storage';
 import {HttpBackend, HttpClientModule, HttpXhrBackend} from '@angular/common/http';
 import {NativeHttpBackend, NativeHttpFallback, NativeHttpModule} from 'ionic-native-http-connection-backend';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -25,11 +26,11 @@ import {NativeHttpBackend, NativeHttpFallback, NativeHttpModule} from 'ionic-nat
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     {
       provide: HttpBackend,
       useClass: NativeHttpFallback,
-      deps: [ Platform, NativeHttpBackend, HttpXhrBackend]
+      deps: [Platform, NativeHttpBackend, HttpXhrBackend]
     },
   ],
   bootstrap: [AppComponent]

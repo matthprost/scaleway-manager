@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {UserDto} from '../../services/user/account/account.dto';
 import {faShieldAlt, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import {NavController} from '@ionic/angular';
@@ -17,7 +17,8 @@ export class AccountPage implements OnInit {
   public faShieldAlt = faShieldAlt;
   public danger = faExclamationCircle;
 
-  constructor(public navCtrl: NavController, public statusBar: StatusBar, private accountProvider: AccountService) { }
+  constructor(public navCtrl: NavController, public statusBar: StatusBar, private accountProvider: AccountService) {
+  }
 
   ngOnInit() {
   }
@@ -27,7 +28,6 @@ export class AccountPage implements OnInit {
     this.accountProvider.getUserData().then(userData => {
       this.user = userData;
       this.isLoading = false;
-      console.log('yes');
     })
       .catch(error => {
         console.log(error);

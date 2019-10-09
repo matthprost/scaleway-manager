@@ -3,7 +3,6 @@ import {MenuController, NavController} from '@ionic/angular';
 import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
 import {BillingService} from '../../services/billing/billing.service';
-import {HomeStatsDirective} from '../../directives/home-stats/home-stats.directive';
 import {faServer, faChevronRight, faCode} from '@fortawesome/free-solid-svg-icons';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
@@ -38,7 +37,7 @@ export class HomePage implements OnInit {
     slidesPerView: 2,
   };
 
-  constructor(public navCtrl: NavController, private srvService: ServersService, private stats: HomeStatsDirective,
+  constructor(public navCtrl: NavController, private srvService: ServersService,
               private billingProvider: BillingService, public menu: MenuController,
               private menuCtrl: MenuController, private statusBar: StatusBar) {
   }
@@ -96,8 +95,8 @@ export class HomePage implements OnInit {
         if (this.parisServers && this.netherlandsServers) {
           this.serversInstances = this.parisServers.concat(this.netherlandsServers);
           console.log(this.serversInstances);
-          this.classAppear = 'card-appear';
           this.isLoading = false;
+          this.classAppear = 'card-appear';
           resolve('ok');
         } else {
           reject('error');

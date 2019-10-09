@@ -2,10 +2,12 @@
 
 </ion-header>
 
-<ion-content force-overscroll="false">
-  <!--<loader *ngIf="isLoading"></loader>-->
 
-  <div>
+<ion-content force-overscroll="false">
+
+  <app-loader *ngIf="isLoading" ></app-loader>
+
+  <div *ngIf="!isLoading">
     <div class="menu-button">
       <ion-button class="ion-float-end" color="light" fill="clear" (click)="navigate('home')">
         <ion-icon name="md-close"></ion-icon>

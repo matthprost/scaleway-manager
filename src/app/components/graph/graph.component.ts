@@ -67,7 +67,7 @@ export class GraphComponent implements OnInit {
             bodyFontColor: 'black',
             callbacks: {
               label: function(tooltipItem, data) {
-                return tooltipItem.xLabel + ': ' + tooltipItem.yLabel + '€';
+                return tooltipItem.xLabel + ': ' + tooltipItem.yLabel;
               },
               // remove title
               title: function(tooltipItem, data) {

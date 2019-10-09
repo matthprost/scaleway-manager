@@ -7,9 +7,8 @@ import { RouterModule } from '@angular/router';
 import { HomePage } from './home.page';
 import {BillingStateIconPipe} from '../../pipes/billing-state-icon/billing-state-icon.pipe';
 import {ServerIconPipe} from '../../pipes/server-icon/server-icon.pipe';
-import {HomeStatsDirective} from '../../directives/home-stats/home-stats.directive';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {GraphComponent} from '../../components/graph/graph.component';
+import {ComponentsModule} from '../../components/components.module';
 
 @NgModule({
   imports: [
@@ -22,11 +21,9 @@ import {GraphComponent} from '../../components/graph/graph.component';
         component: HomePage
       }
     ]),
-    FontAwesomeModule
+    FontAwesomeModule,
+    ComponentsModule
   ],
-  declarations: [HomePage, BillingStateIconPipe, ServerIconPipe, HomeStatsDirective, GraphComponent],
-  providers: [
-    HomeStatsDirective
-  ]
+  declarations: [HomePage, BillingStateIconPipe, ServerIconPipe],
 })
 export class HomePageModule {}
