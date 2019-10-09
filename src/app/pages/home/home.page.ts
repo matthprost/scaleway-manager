@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, MenuController, NavController} from '@ionic/angular';
+import {MenuController, NavController} from '@ionic/angular';
 import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
-import {InvoicesDto} from '../../services/billing/billing.dto';
 import {BillingService} from '../../services/billing/billing.service';
 import {HomeStatsDirective} from '../../directives/home-stats/home-stats.directive';
 import {faServer, faChevronRight, faCode} from '@fortawesome/free-solid-svg-icons';
@@ -24,10 +23,7 @@ export class HomePage implements OnInit {
   private parisServers: Array<ServerDto> = null;
   private netherlandsServers: Array<ServerDto> = null;
 
-  public oldestServer: { server: ServerDto, country: string };
-  public powerfulServer: { server: ServerDto, country: string };
-  public lastInvoice: InvoicesDto = null;
-  public secondLastInvoice: InvoicesDto = null;
+  public serversInstances: Array<ServerDto> = [];
 
   public isLoading = true;
 
@@ -37,8 +33,13 @@ export class HomePage implements OnInit {
 
   private interval;
 
+  slideOpts = {
+    initialSlide: 0,
+    slidesPerView: 2,
+  };
+
   constructor(public navCtrl: NavController, private srvService: ServersService, private stats: HomeStatsDirective,
-              public alertCtrl: AlertController, private billingProvider: BillingService, public menu: MenuController,
+              private billingProvider: BillingService, public menu: MenuController,
               private menuCtrl: MenuController, private statusBar: StatusBar) {
   }
 
@@ -54,7 +55,7 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
     this.refresh().then(() => {
-      this.autoRefresh();
+      /*this.autoRefresh();*/
     });
     this.menuCtrl.enable(true);
     this.statusBar.styleLightContent();
@@ -90,19 +91,11 @@ export class HomePage implements OnInit {
         reject(error);
       });
 
-      // Get two last billing
-      const billing = this.billingProvider.getTwoLastBilling().then(result => {
-        this.lastInvoice = result[0];
-        this.secondLastInvoice = result[1];
-      }).catch(error => {
-        reject(error);
-      });
-
       // Sync all promises, when they all finished, we display the information
-      Promise.all([paris, netherlands, billing]).then(() => {
+      Promise.all([paris, netherlands]).then(() => {
         if (this.parisServers && this.netherlandsServers) {
-          this.oldestServer = this.stats.whatIsTheOldest(this.parisServers, this.netherlandsServers);
-          this.powerfulServer = this.stats.whatIsThePowerful(this.parisServers, this.netherlandsServers);
+          this.serversInstances = this.parisServers.concat(this.netherlandsServers);
+          console.log(this.serversInstances);
           this.classAppear = 'card-appear';
           this.isLoading = false;
           resolve('ok');

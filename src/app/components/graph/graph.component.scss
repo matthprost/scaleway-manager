@@ -1,0 +1,29 @@
+.header {
+
+  &-left {
+    margin-bottom: 1.25rem;
+    color: white;
+    font-weight: 300;
+    font-size: .9rem;
+    display: inline-block;
+    padding: .25rem .5rem;
+    float: left;
+  }
+
+  &-right {
+    color: white;
+    font-size: .9rem;
+    font-weight: 300;
+    display: inline-block;
+    margin-bottom: 1.25rem;
+    float: right;
+
+    &-amount {
+      display: inline-block;
+      background: white;
+      color: black;
+      border-radius: 10000px;
+      padding: .25rem .5rem;
+    }
+  }
+}

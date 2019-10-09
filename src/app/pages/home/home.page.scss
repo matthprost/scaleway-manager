@@ -148,10 +148,6 @@ ion-content {
     background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%) no-repeat;
     padding: .75rem .75rem 0 .75rem;
 
-    .ios &-header {
-      padding: 1.5rem 1rem 0 1rem;
-    }
-
     ion-button {
       --pading-top: 0;
       --padding-end: 0;
@@ -164,14 +160,7 @@ ion-content {
     }
 
     &-canvas {
-      padding: 1rem 0 4rem 0;
-
-      &-title {
-        margin-bottom: 1.25rem;
-        color: white;
-        font-weight: 300;
-        font-size: .9rem;
-      }
+      padding: .5rem 0 4rem 0;
     }
 
     h3 {
@@ -184,6 +173,10 @@ ion-content {
     }
   }
 
+  .ios &-header {
+    padding: 1.25rem .5rem 0 .5rem;
+  }
+
   &-middle {
     ion-card {
       margin: -1.75rem 3rem 0 3rem;
@@ -193,6 +186,15 @@ ion-content {
   &-page {
     ion-card {
       --background: white;
+      margin: 0 .5rem;
+    }
+    &-grid {
+      margin-top: 1rem;
+      padding: 0;
+
+      ion-slides {
+        padding-bottom: 1.5rem;
+      }
     }
   }
 }

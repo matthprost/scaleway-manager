@@ -15,15 +15,12 @@
           <h3>Dashboard</h3>
 
         </ion-button>
-        <ion-button class="ion-float-end" color="light" fill="clear" (click)="navigate('account')">
-          <ion-icon slot="icon-only" name="ios-contact"></ion-icon>
+        <ion-button (click)="navigate('account')" class="ion-float-end" color="light" fill="clear">
+          <ion-icon name="ios-contact" slot="icon-only"></ion-icon>
         </ion-button>
       </ion-col>
     </ion-row>
     <div class="home-header-canvas">
-      <div class="home-header-canvas-title">
-        Last 6 months invoices
-      </div>
       <app-graph></app-graph>
     </div>
   </div>
@@ -32,12 +29,12 @@
     <ion-card [ngClass]="classAppear" mode="ios">
       <ion-card-content class="servers ion-text-center ion-no-padding" mode="ios">
         <ion-row>
-          <ion-col size="9" class="ion-no-padding">
+          <ion-col class="ion-no-padding" size="9">
             <div class="servers-left">
               instances
             </div>
           </ion-col>
-          <ion-col size="3" class="ion-no-padding">
+          <ion-col class="ion-no-padding" size="3">
             <div class="servers-right">
               <fa-icon [icon]="faRight"></fa-icon>
             </div>
@@ -53,47 +50,29 @@
       </ion-refresher>-->
 
     <!--  <loader *ngIf="isLoading"></loader>-->
-    <ion-grid>
+    <ion-grid class="home-page-grid">
       <ion-row>
-        <ion-col [ngClass]="classAppear" *ngIf="oldestServer && oldestServer.server" size="6">
-          <ion-card mode="ios">
+        <ion-slides pager="false" [options]="slideOpts">
+            <ion-slide  *ngFor="let serversInstance of serversInstances" [ngClass]="classAppear">
+              <ion-card mode="ios">
 
-            <ion-card-header class="card-header-stats ion-text-center" mode="ios">
-              Oldest
-            </ion-card-header>
+                <ion-card-header class="card-header-stats ion-text-center" mode="ios">
+                  {{ serversInstance.name | slice:0:12 }}
+                </ion-card-header>
 
-            <ion-card-content class="card-stat2 ion-text-center" mode="ios">
-              <ion-img class="server-img ion-margin-bottom"
-                       src="{{ oldestServer.server.image ? (oldestServer.server.image.name | serverIcon) : (oldestServer.server.name | serverIcon) }}"></ion-img>
-              <div [ngClass]='setClass(oldestServer.server)' [style.background]="setState(oldestServer.server)"></div>
-              {{ oldestServer.server.name }}
-              <small class="small-card">
-                {{ oldestServer.server.creation_date | date:'dd/MM/yy, H:mm' }}
-              </small>
-            </ion-card-content>
+                <ion-card-content class="card-stat2 ion-text-center" mode="ios">
+                  <ion-img class="server-img ion-margin-bottom"
+                           src="{{ serversInstance.image ? (serversInstance.image.name | serverIcon) : (serversInstance.name | serverIcon) }}"></ion-img>
+                  <div [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"></div>
+                  {{ serversInstance.name }}
+                  <small class="small-card">
+                    {{ serversInstance.creation_date | date:'dd/MM/yy, H:mm' }}
+                  </small>
+                </ion-card-content>
 
-          </ion-card>
-        </ion-col>
-        <ion-col [ngClass]="classAppear" *ngIf="powerfulServer && powerfulServer.server" size="6">
-          <ion-card mode="ios">
-
-            <ion-card-header class="card-header-stats ion-text-center" mode="ios">
-              Powerfull
-            </ion-card-header>
-
-            <ion-card-content class="card-stat2 ion-text-center" mode="ios">
-              <ion-img class="server-img ion-margin-bottom"
-                       src="{{ powerfulServer.server.image ? (powerfulServer.server.image.name | serverIcon) : (powerfulServer.server.name | serverIcon) }}"></ion-img>
-              <div [ngClass]='setClass(powerfulServer.server)'
-                   [style.background]="setState(powerfulServer.server)"></div>
-              {{ powerfulServer.server.name }}
-              <small class="small-card">
-                {{ powerfulServer.server.commercial_type }}
-              </small>
-            </ion-card-content>
-
-          </ion-card>
-        </ion-col>
+              </ion-card>
+            </ion-slide>
+        </ion-slides>
       </ion-row>
     </ion-grid>
 

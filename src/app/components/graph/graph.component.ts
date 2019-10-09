@@ -31,7 +31,6 @@ export class GraphComponent implements OnInit {
     });
 
     this.dates = array.reverse();
-    array[array.length - 1] = 'Now';
 
     data.forEach(result => {
       values.push(result.total_taxed);
