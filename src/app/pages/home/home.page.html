@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content *ngIf="isLoading">
-  <app-loader ></app-loader>
+  <app-loader></app-loader>
 </ion-content>
 
 <ion-content *ngIf="!isLoading">
@@ -30,7 +30,7 @@
   </div>
 
   <div class="home-middle">
-    <ion-card [ngClass]="classAppear" mode="ios">
+    <ion-card mode="ios">
       <ion-card-content class="servers ion-text-center ion-no-padding" mode="ios">
         <ion-row>
           <ion-col class="ion-no-padding" size="9">
@@ -49,29 +49,49 @@
   </div>
 
   <div class="home-page">
-    <!--  <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
-        <ion-refresher-content></ion-refresher-content>
-      </ion-refresher>-->
-
-    <!--  <loader *ngIf="isLoading"></loader>-->
     <ion-grid class="home-page-grid">
       <ion-row>
-        <ion-slides pager="false" [options]="slideOpts">
-          <ion-slide *ngFor="let serversInstance of serversInstances" [ngClass]="classAppear">
-            <ion-card mode="ios">
+        <div class="home-page-grid-instances">
+          <div class="home-page-grid-instances-title-left">
+            Instances
+          </div>
+          <div class="home-page-grid-instances-title-right">
+            See more
+          </div>
+        </div>
+        <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
+          <ion-slide *ngFor="let serversInstance of serversInstances">
+            <ion-card mode="ios" style="width:100%">
 
               <ion-card-header class="card-header-stats ion-text-center" mode="ios">
                 {{ serversInstance.name | slice:0:12 }}
               </ion-card-header>
 
               <ion-card-content class="card-stat2 ion-text-center" mode="ios">
-                <ion-img class="server-img ion-margin-bottom"
-                         src="{{ serversInstance.image ? (serversInstance.image.name | serverIcon) : (serversInstance.name | serverIcon) }}"></ion-img>
-                <div [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"></div>
-                {{ serversInstance.name }}
-                <small class="small-card">
-                  {{ serversInstance.creation_date | date:'dd/MM/yy, H:mm' }}
-                </small>
+                <ion-row>
+                  <ion-col>
+                    <img class="server-img ion-margin-bottom" alt="server_picture"
+                         src="{{ serversInstance.image ? (serversInstance.image.name | serverIcon) : (serversInstance.name | serverIcon) }}"/>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <ion-col>
+                    <div [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"></div>
+                    <div style="text-transform: capitalize; display: inline-block">
+                      {{ serversInstance.state === 'stopped in place' ? 'Standby' : serversInstance.state }}
+                    </div>
+                    <small class="small-card">
+                      {{ serversInstance.public_ip.address }}
+                    </small>
+                  </ion-col>
+                </ion-row>
+                <ion-row>
+                  <div class="server-toggle">
+                    <ion-toggle mode="ios" checked="{{ setToggle(serversInstance) }}"
+                                disabled="{{ setDisabled(serversInstance) }}"
+                                (ionChange)="startAndStopServers($event, serversInstance)"></ion-toggle>
+                  </div>
+                </ion-row>
               </ion-card-content>
 
             </ion-card>

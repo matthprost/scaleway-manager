@@ -3,7 +3,7 @@ import {MenuController, NavController} from '@ionic/angular';
 import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
 import {BillingService} from '../../services/billing/billing.service';
-import {faServer, faChevronRight, faCode} from '@fortawesome/free-solid-svg-icons';
+import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
@@ -14,32 +14,23 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 export class HomePage implements OnInit {
 
   public classAppear = 'card-cont';
-  public rect = '';
-
-  public nbrServParis = 0;
-  public nbrServNetherlands = 0;
-
-  private parisServers: Array<ServerDto> = null;
-  private netherlandsServers: Array<ServerDto> = null;
-
   public serversInstances: Array<ServerDto> = [];
-
   public isLoading = true;
 
-  faServer = faServer;
   faRight = faChevronRight;
-  faCode = faCode;
 
   private interval;
 
   slideOpts = {
     initialSlide: 0,
-    slidesPerView: 2,
+    slidesPerView: 2.15,
+    slidesOffsetBefore: 15,
+    slidesOffsetAfter: 15
   };
 
   constructor(public navCtrl: NavController, private srvService: ServersService,
-              private billingProvider: BillingService, public menu: MenuController,
-              private menuCtrl: MenuController, private statusBar: StatusBar) {
+              private billingProvider: BillingService, private menuCtrl: MenuController,
+              private statusBar: StatusBar) {
   }
 
   ngOnInit() {
@@ -53,65 +44,90 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.refresh().then(() => {
-      /*this.autoRefresh();*/
-    });
     this.menuCtrl.enable(true);
     this.statusBar.styleLightContent();
+    this.refresh().then(() => {
+      this.autoRefresh();
+      this.classAppear = 'card-appear';
+      this.isLoading = false;
+    });
   }
 
   public doRefresh(refresher) {
     this.refresh().then(() => {
       refresher.target.complete();
-    }).catch(error => {
-      console.log(error);
-      refresher.target.complete();
-    });
+    })
+      .catch(error => {
+        console.log(error);
+        refresher.target.complete();
+      });
   }
 
   private refresh(): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      this.rect = 'background-rect rect-scale';
+      this.srvService.getAllServer(5).then(value => {
+        this.serversInstances = value;
 
-      // Get all servers from PARIS
-      const paris = this.srvService.getAllServerByCountry('Paris').then(result => {
-        this.nbrServParis = result.servers.length;
-        this.parisServers = result.servers;
-      }).catch(error => {
-        reject(error);
-      });
-
-      // Get all servers from NETHERLANDS
-      const netherlands = this.srvService.getAllServerByCountry('Netherlands').then(result => {
-        this.nbrServNetherlands = result.servers.length;
-        this.netherlandsServers = result.servers;
-      }).catch(error => {
-        reject(error);
-      });
-
-      // Sync all promises, when they all finished, we display the information
-      Promise.all([paris, netherlands]).then(() => {
-        if (this.parisServers && this.netherlandsServers) {
-          this.serversInstances = this.parisServers.concat(this.netherlandsServers);
-          console.log(this.serversInstances);
-          this.isLoading = false;
-          this.classAppear = 'card-appear';
-          resolve('ok');
-        } else {
-          reject('error');
-        }
-      }).catch(error => {
-        reject(error);
-      });
+        console.log(this.serversInstances);
+        resolve('ok');
+      })
+        .catch(error => {
+          reject(error);
+        });
     });
   }
 
   public autoRefresh() {
+    console.log('Entering function');
+    let counter = 0;
+
+    this.serversInstances.forEach(server => {
+      if (server.state === 'starting' || server.state === 'stopping') {
+        counter++;
+      }
+    });
+
+    if (counter > 0) {
       this.interval = setInterval(() => {
-        console.log('Server auto refresh');
-        this.refresh();
+        console.log('Entering interval');
+
+        let newCounter = 0;
+
+        this.serversInstances.forEach(server => {
+          if (server.state === 'starting' || server.state === 'stopping') {
+            newCounter++;
+          }
+        });
+        if (newCounter > 0) {
+          this.refresh();
+        } else {
+          console.log('Interval cleared!');
+          clearInterval(this.interval);
+        }
       }, 10000);
+    }
+  }
+
+  public startAndStopServers(event: any, server: ServerDto) {
+
+    console.log(event.detail.checked);
+
+    if (event.detail.checked === true) {
+      this.srvService.sendServerAction(server.country, server.id, 'poweron').then(() => {
+        this.refresh().then(() => {
+          this.autoRefresh();
+        });
+        return;
+      });
+    } else if (event.detail.checked === false) {
+      this.srvService.sendServerAction(server.country, server.id, 'poweroff').then(() => {
+        this.refresh().then(() => {
+          this.autoRefresh();
+        });
+        return;
+      });
+    }
   }
 
   public setState(server: ServerDto): string {
@@ -124,8 +140,44 @@ export class HomePage implements OnInit {
         return '#3F6ED8';
       case 'starting':
         return '#3F6ED8';
+      case 'stopped in place':
+        return '#FF8C69';
       default:
         return '#B2B6C3';
+    }
+  }
+
+  public setToggle(server: ServerDto): boolean {
+    switch (server.state) {
+      case 'stopped':
+        return false;
+      case 'running':
+        return true;
+      case 'stopping':
+        return false;
+      case 'starting':
+        return true;
+      case 'stopped in place':
+        return true;
+      default:
+        return false;
+    }
+  }
+
+  public setDisabled(server: ServerDto): boolean {
+    switch (server.state) {
+      case 'stopped':
+        return false;
+      case 'running':
+        return false;
+      case 'stopping':
+        return true;
+      case 'starting':
+        return true;
+      case 'stopped in place':
+        return false;
+      default:
+        return false;
     }
   }
 

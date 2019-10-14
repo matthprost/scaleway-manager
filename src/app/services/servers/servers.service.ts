@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {ServerDto} from './server.dto';
 import {ApiService} from '../api/api.service';
 import {ActionDto} from './action.dto';
@@ -11,19 +11,31 @@ export class ServersService {
   private parisServers: Array<ServerDto> = null;
   private netherlandsServers: Array<ServerDto> = null;
 
-  constructor(private api: ApiService) { }
+  constructor(private api: ApiService) {
+  }
 
-  public getAllServer(): Promise<any> {
+  private sortServers(servers: Array<ServerDto>): Array<ServerDto> {
+
+    const runningServers = servers.filter(obj => obj.state === 'running');
+    const startAndStopServers = servers.filter(obj => obj.state === 'starting' || obj.state === 'stopping');
+    const stoppedServers = servers.filter(obj => obj.state === 'stopped');
+    const stoppedInPlaceServers = servers.filter(obj => obj.state === 'stopped in place');
+
+    return runningServers.concat(startAndStopServers, stoppedInPlaceServers, stoppedServers);
+  }
+
+  public getAllServer(nbrOfServ: number): Promise<any> {
+
     return new Promise((resolve, reject) => {
       // Get all servers from PARIS
-      const paris = this.getAllServerByCountry('Paris').then(result => {
+      const paris = this.getAllServerByCountry('fr-par-1', Math.ceil(nbrOfServ / 2)).then(result => {
         this.parisServers = result;
       }).catch(error => {
         reject(error);
       });
 
       // Get all servers from NETHERLANDS
-      const netherlands = this.getAllServerByCountry('Netherlands').then(result => {
+      const netherlands = this.getAllServerByCountry('nl-ams-1', Math.ceil(nbrOfServ / 2)).then(result => {
         this.netherlandsServers = result;
       }).catch(error => {
         reject(error);
@@ -32,7 +44,7 @@ export class ServersService {
       // Sync all promises, when they all finished, we display the information
       Promise.all([paris, netherlands]).then(() => {
         if (this.parisServers && this.netherlandsServers) {
-          resolve({'paris': this.parisServers, 'netherlands': this.netherlandsServers});
+          resolve(this.sortServers(this.parisServers.servers.concat(this.netherlandsServers.servers)));
         } else {
           reject('error');
         }
@@ -42,13 +54,17 @@ export class ServersService {
     });
   }
 
-  public getAllServerByCountry(country: string): Promise<any> {
+  public getAllServerByCountry(country: string, nbrOfServ: number): Promise<any> {
     let ApiUrl: string = null;
-    country === 'Paris' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
+    country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
 
     return new Promise((resolve, reject) => {
-      this.api.get<ServerDto[]>(ApiUrl + '/servers')
+      this.api.get<ServerDto[]>(ApiUrl + '/servers?per_page=' + nbrOfServ)
         .then(result => {
+          result.servers.forEach(value => {
+            value.country = country;
+          });
+
           resolve(result);
         })
         .catch(error => {
@@ -57,9 +73,9 @@ export class ServersService {
     });
   }
 
-  public getSpecificServer(country: string, serverId: string): Promise<any> {
+  public getServerById(country: string, serverId: string): Promise<any> {
     let ApiUrl: string = null;
-    country === 'Paris' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
+    country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
 
     return new Promise((resolve, reject) => {
       this.api.get<ServerDto>(ApiUrl + '/servers/' + serverId)
@@ -74,7 +90,7 @@ export class ServersService {
 
   public sendServerAction(country: string, serverId: string, action: string): Promise<any> {
     let ApiUrl: string = null;
-    country === 'Paris' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
+    country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
 
     return new Promise((resolve, reject) => {
       this.api.post<ActionDto>(ApiUrl + '/servers/' + serverId + '/action', {

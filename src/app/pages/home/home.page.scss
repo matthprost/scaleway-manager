@@ -39,8 +39,8 @@
 }
 
 .server-img {
-  height: 40px;
-  width: 40px;
+  height: 50px;
+  width: auto;
   margin: 0 auto;
 }
 
@@ -54,6 +54,7 @@
     font-size: 1rem;
     font-weight: lighter;
     color: var(--ion-color-dark);
+    padding: .5rem;
   }
 
   &-invoices {
@@ -75,7 +76,7 @@
 
   &-header-stats {
     color: white;
-    background: var(--ion-color-secondary);
+    background: var(--ion-color-primary);
     padding: 10px;
     text-transform: uppercase;
     font-weight: 400;
@@ -87,7 +88,7 @@
   display: block;
   color: dimgray;
   font-size: 1rem;
-  margin-top: .5rem;
+  margin-top: .25rem;
 }
 
 .message {
@@ -143,6 +144,12 @@ ion-content {
   --background: #eff3f6;
 }
 
+.server-toggle {
+  margin-top: .5rem;
+  width: 100%;
+  text-align: center;
+}
+
 .home {
   &-header {
     background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%) no-repeat;
@@ -186,14 +193,32 @@ ion-content {
   &-page {
     ion-card {
       --background: white;
-      margin: 0 .5rem;
+      margin: 0 .25rem;
     }
+
     &-grid {
       margin-top: 1rem;
       padding: 0;
 
       ion-slides {
         padding-bottom: 1.5rem;
+        padding-top: .5rem;
+        width: 100%;
+      }
+
+      &-instances {
+        width: 100%;
+        padding: .5rem 1rem;
+
+        &-title {
+          &-left {
+            float: left;
+          }
+
+          &-right {
+            float: right;
+          }
+        }
       }
     }
   }
