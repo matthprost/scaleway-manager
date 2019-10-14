@@ -29,14 +29,14 @@ export class ServersService {
     return new Promise((resolve, reject) => {
       // Get all servers from PARIS
       const paris = this.getAllServerByCountry('fr-par-1', Math.ceil(nbrOfServ / 2)).then(result => {
-        this.parisServers = result;
+        this.parisServers = result.servers;
       }).catch(error => {
         reject(error);
       });
 
       // Get all servers from NETHERLANDS
       const netherlands = this.getAllServerByCountry('nl-ams-1', Math.ceil(nbrOfServ / 2)).then(result => {
-        this.netherlandsServers = result;
+        this.netherlandsServers = result.servers;
       }).catch(error => {
         reject(error);
       });
@@ -44,7 +44,7 @@ export class ServersService {
       // Sync all promises, when they all finished, we display the information
       Promise.all([paris, netherlands]).then(() => {
         if (this.parisServers && this.netherlandsServers) {
-          resolve(this.sortServers(this.parisServers.servers.concat(this.netherlandsServers.servers)));
+          resolve(this.sortServers(this.parisServers.concat(this.netherlandsServers)));
         } else {
           reject('error');
         }
@@ -59,7 +59,7 @@ export class ServersService {
     country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
 
     return new Promise((resolve, reject) => {
-      this.api.get<ServerDto[]>(ApiUrl + '/servers?per_page=' + nbrOfServ)
+      this.api.get<{servers: ServerDto[]}>(ApiUrl + '/servers?per_page=' + nbrOfServ)
         .then(result => {
           result.servers.forEach(value => {
             value.country = country;

@@ -51,14 +51,6 @@
   <div class="home-page">
     <ion-grid class="home-page-grid">
       <ion-row>
-        <div class="home-page-grid-instances">
-          <div class="home-page-grid-instances-title-left">
-            Instances
-          </div>
-          <div class="home-page-grid-instances-title-right">
-            See more
-          </div>
-        </div>
         <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
           <ion-slide *ngFor="let serversInstance of serversInstances">
             <ion-card mode="ios" style="width:100%">

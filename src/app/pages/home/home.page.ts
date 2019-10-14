@@ -20,6 +20,7 @@ export class HomePage implements OnInit {
   faRight = faChevronRight;
 
   private interval;
+  private intervalSet = false;
 
   slideOpts = {
     initialSlide: 0,
@@ -88,7 +89,9 @@ export class HomePage implements OnInit {
       }
     });
 
-    if (counter > 0) {
+    if (counter > 0 && !this.intervalSet) {
+      this.intervalSet = true;
+
       this.interval = setInterval(() => {
         console.log('Entering interval');
 
@@ -104,8 +107,9 @@ export class HomePage implements OnInit {
         } else {
           console.log('Interval cleared!');
           clearInterval(this.interval);
+          this.intervalSet = false;
         }
-      }, 10000);
+      }, 15000);
     }
   }
 
