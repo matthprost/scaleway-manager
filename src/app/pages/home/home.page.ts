@@ -205,10 +205,10 @@ export class HomePage implements OnInit {
       case 'account' :
         this.navCtrl.navigateForward(['/home/account']);
         break;
-      /*case 'servers' :
-        this.navCtrl.setRoot(ServerPage);
+      case 'instances' :
+        this.navCtrl.navigateRoot(['/home/instances']);
         break;
-      case 'contact' :
+      /*case 'contact' :
         fab.close();
         this.navCtrl.push(ContactPage);
         break;

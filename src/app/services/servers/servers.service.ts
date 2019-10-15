@@ -24,7 +24,7 @@ export class ServersService {
     return runningServers.concat(startAndStopServers, stoppedInPlaceServers, stoppedServers);
   }
 
-  public getAllServer(nbrOfServ: number): Promise<any> {
+  public getAllServer(nbrOfServ: number): Promise<Array<ServerDto>> {
 
     return new Promise((resolve, reject) => {
       // Get all servers from PARIS
@@ -59,7 +59,7 @@ export class ServersService {
     country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
 
     return new Promise((resolve, reject) => {
-      this.api.get<{servers: ServerDto[]}>(ApiUrl + '/servers?per_page=' + nbrOfServ)
+      this.api.get<{ servers: ServerDto[] }>(ApiUrl + '/servers?per_page=' + nbrOfServ)
         .then(result => {
           result.servers.forEach(value => {
             value.country = country;

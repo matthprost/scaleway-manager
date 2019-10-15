@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="primary">Instances</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="isLoading">
+  <app-loader></app-loader>
+</ion-content>
+
+<ion-content *ngIf="!isLoading">
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-list *ngIf="instances !== undefined && instances.length !== 0">
+    <ion-item-sliding *ngFor="let server of instances" #item>
+      <ion-item (click)="showServer(server, server.country)" lines="none" detail="true">
+        <ion-avatar slot="start">
+          <img class="img-os" alt="os"
+               src="{{ server.image ? (server.image.name | serverIcon) : (server.name | serverIcon) }}">
+        </ion-avatar>
+        <ion-label>
+          <div [class]='setClass(server)' [style.background]="setState(server)"></div>
+          <h2>{{ server.name }}</h2>
+          <p>{{ server.commercial_type }}</p>
+        </ion-label>
+        <ion-note slot="end">
+          <img src="{{ server.country === 'fr-par-1' ? 'assets/imgs/france.svg' : 'assets/imgs/netherlands.svg' }}"
+               alt="country">
+        </ion-note>
+      </ion-item>
+
+      <ion-item-options *ngIf="server.state === 'running'">
+        <ion-button color="danger" (click)="serverAction(server, 'poweroff', item, server.country)">
+          OFF
+        </ion-button>
+      </ion-item-options>
+      <ion-item-options *ngIf="server.state === 'stopped'">
+        <ion-button color="secondary" (click)="serverAction(server, 'poweron', item, server.country)">
+          ON
+        </ion-button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <p class="no-server ion-margin-top ion-text-center"
+     *ngIf="!isLoading && instances.length === 0">
+    <img alt="no_server" src="assets/imgs/server.svg">
+    No server available
+  </p>
+</ion-content>
