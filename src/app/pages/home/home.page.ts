@@ -206,7 +206,7 @@ export class HomePage implements OnInit {
         this.navCtrl.navigateForward(['/home/account']);
         break;
       case 'instances' :
-        this.navCtrl.navigateRoot(['/home/instances']);
+        this.navCtrl.navigateRoot(['/instances']);
         break;
       /*case 'contact' :
         fab.close();

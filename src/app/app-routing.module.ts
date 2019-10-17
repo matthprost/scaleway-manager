@@ -20,12 +20,13 @@ const routes: Routes = [
       {
         path: 'account',
         loadChildren: './pages/account/account.module#AccountPageModule'
-      },
-      {
-        path: 'instances',
-        loadChildren: './pages/instances/instances.module#InstancesPageModule'
       }
     ],
+    canActivate: [HomeGuard]
+  },
+  {
+    path: 'instances',
+    loadChildren: './pages/instances/instances.module#InstancesPageModule',
     canActivate: [HomeGuard]
   },
   {

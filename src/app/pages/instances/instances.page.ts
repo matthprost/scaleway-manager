@@ -44,10 +44,10 @@ export class InstancesPage implements OnInit {
 
   public doRefresh(refresher) {
     this.refreshAllServers().then(() => {
-      refresher.complete();
+      refresher.target.complete();
     }).catch(error => {
       console.log(error);
-      refresher.complete();
+      refresher.target.complete();
     });
   }
 
