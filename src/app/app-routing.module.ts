@@ -15,7 +15,7 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './pages/home/home.module#HomePageModule',
+        loadChildren: './pages/home/home.module#HomePageModule'
       },
       {
         path: 'account',
@@ -26,7 +26,16 @@ const routes: Routes = [
   },
   {
     path: 'instances',
-    loadChildren: './pages/instances/instances.module#InstancesPageModule',
+    children: [
+      {
+        path: '',
+        loadChildren: './pages/instances/instances.module#InstancesPageModule'
+      },
+      {
+        path: ':zone/:id',
+        loadChildren: './pages/instances/details/details.module#DetailsPageModule'
+      }
+    ],
     canActivate: [HomeGuard]
   },
   {
@@ -35,7 +44,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren: './pages/auth/login/login.module#LoginPageModule',
-        canActivate: [LoginGuard],
+        canActivate: [LoginGuard]
       },
       {
         path: 'double-auth',
@@ -43,7 +52,16 @@ const routes: Routes = [
         canActivate: [DoubleAuthGuard]
       },
     ]
-  }
+  },
+  {
+    path: 'error',
+    children: [
+      {
+        path: '504',
+        loadChildren: './pages/errors/no-internet/no-internet.module#NoInternetPageModule'
+      },
+    ],
+  },
 ];
 
 @NgModule({
