@@ -1,0 +1,158 @@
+.vertical-align-content > * {
+  background-color: #653C87;
+  color: white;
+  display: flex !important;
+  align-content: center !important;
+  align-items: center !important;
+  margin-top: -8rem;
+}
+
+.background-transparent {
+  background: transparent;
+  color: white;
+}
+
+ion-img {
+  background: transparent;
+  vertical-align: middle;
+  padding: 10px;
+}
+
+.state {
+  width: 11px;
+  height: 11px;
+  background-color: gray;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+.has-refresher .scroll-content {
+  border-top: 0 !important;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+.blinker {
+  animation: blinker 1.60s linear infinite;
+  width: 11px;
+  height: 11px;
+  background-color: gray;
+  display: inline-block;
+  vertical-align: middle;
+  border-radius: 10px;
+  margin-right: 5px;
+}
+
+.server {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 1rem;
+
+  &-name {
+    font-size: 1.3rem;
+    text-align: center;
+    margin: 1rem 1rem 0 1rem;
+    display: inline-block;
+    align-items: center;
+    height: 100%;
+    vertical-align: middle;
+    word-break: break-word;
+  }
+
+  &-state {
+    text-transform: uppercase;
+    text-align: center;
+    color: darkgrey;
+    font-size: 1rem;
+    margin-top: .5rem;
+  }
+
+  &-header {
+    text-align: center;
+    margin-bottom: 1rem;
+
+    &-infos {
+      margin: 0 auto;
+    }
+  }
+
+  &-toggle {
+    &-on {
+      display: inline-block;
+      margin-left: .75rem;
+      font-weight: 600;
+      color: darkgrey;
+    }
+
+    &-off {
+      display: inline-block;
+      margin-right: .75rem;
+      font-weight: 600;
+      color: darkgrey;
+    }
+  }
+
+  &-actions {
+    margin-top: 1rem;
+    display: flex;
+    position: relative;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+
+    ion-button {
+      margin-left: 3rem;
+      height: 4rem;
+    }
+  }
+}
+
+.information {
+  &-title {
+    font-weight: bold;
+    color: #868686;
+    text-transform: uppercase;
+    font-size: .8rem;
+  }
+
+  &-header {
+    text-transform: uppercase;
+    padding: .25rem 1rem;
+    font-size: .9rem;
+  }
+
+  &-content {
+    ion-button {
+      width: 7rem;
+      margin: .5rem 0;
+      font-size: 1rem;
+      --border-radius: 6px;
+    }
+  }
+}
+
+.custom-popover .popover-content {
+  width: 90%;
+  top: 20%;
+  left: 5%;
+  border-radius: 0 0 4px 4px;
+  margin: 0;
+}
+
+.custom-popover .popover-arrow {
+  display: none;
+}
+
+.is-round {
+  border: 5px solid white;
+  border-radius: 50%;
+  background: white;
+  vertical-align: middle;
+}

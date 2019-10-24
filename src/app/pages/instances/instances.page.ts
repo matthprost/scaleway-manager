@@ -51,9 +51,8 @@ export class InstancesPage implements OnInit {
     });
   }
 
-  public showServer(server: any, country: string) {
-    /*this.navCtrl.push(ShowServerPage, {server: server, serverCountry: country});*/
-    console.log('todo');
+  public navigateInstanceDetails(server: any, country: string) {
+    this.navCtrl.navigateForward(['/instances/' + country + '/' + server.id]);
   }
 
   // This function is for fast action on servers like start/stop

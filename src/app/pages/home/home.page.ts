@@ -5,6 +5,7 @@ import {ServersService} from '../../services/servers/servers.service';
 import {BillingService} from '../../services/billing/billing.service';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {BillingDto} from '../../services/billing/billing.dto';
 
 @Component({
   selector: 'app-home',
@@ -22,6 +23,8 @@ export class HomePage implements OnInit {
   private interval;
   private intervalSet = false;
 
+  public billings: BillingDto = null;
+
   slideOpts = {
     initialSlide: 0,
     slidesPerView: 2.15,
@@ -30,7 +33,7 @@ export class HomePage implements OnInit {
   };
 
   constructor(public navCtrl: NavController, private srvService: ServersService,
-              private billingProvider: BillingService, private menuCtrl: MenuController,
+              private billingService: BillingService, private menuCtrl: MenuController,
               private statusBar: StatusBar) {
   }
 
@@ -47,10 +50,13 @@ export class HomePage implements OnInit {
   ionViewDidEnter() {
     this.menuCtrl.enable(true);
     this.statusBar.styleLightContent();
-    this.refresh().then(() => {
-      this.autoRefresh();
-      this.classAppear = 'card-appear';
-      this.isLoading = false;
+    this.billingService.getXMonthsLastBilling(6).then(value => {
+      this.billings = value;
+      this.refresh().then(() => {
+        this.autoRefresh();
+        this.classAppear = 'card-appear';
+        this.isLoading = false;
+      });
     });
   }
 

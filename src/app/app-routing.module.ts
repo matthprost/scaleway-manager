@@ -60,6 +60,10 @@ const routes: Routes = [
         path: '504',
         loadChildren: './pages/errors/no-internet/no-internet.module#NoInternetPageModule'
       },
+      {
+        path: '400',
+        loadChildren: './pages/errors/bad-request/bad-request.module#BadRequestPageModule'
+      },
     ],
   },
 ];

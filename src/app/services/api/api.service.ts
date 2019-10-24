@@ -1,8 +1,7 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Platform} from '@ionic/angular';
+import {NavController, Platform} from '@ionic/angular';
 
 
 enum HttpMethods {
@@ -22,7 +21,8 @@ export class ApiService {
   private readonly paris1: string = '/paris';
   private readonly amsterdam1: string = '/netherlands';
 
-  constructor(private storage: Storage, private httpClient: HttpClient, private router: Router, private platform: Platform) {
+  constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
+              private platform: Platform) {
     if (this.platform.is('cordova') === true) {
       this.apiUrl = 'https://account.scaleway.com';
       this.billing = 'https://billing.scaleway.com';
@@ -46,11 +46,16 @@ export class ApiService {
           resolve(result);
         })
           .catch((err) => {
+            console.log(err);
             if (err && err.status && err.status === 401) {
               /*this.storage.remove('token').then(() => {
                 console.log('Error 401: Token might be not valid anymore');
                 this.router.navigate(['/login']);
               });*/
+            } else if (err && err.status && err.status === 400) {
+              this.navCtrl.navigateRoot(['/error/400']);
+            } else if (err && err.status && err.status === 504) {
+              this.navCtrl.navigateRoot(['/error/504']);
             }
             reject(err);
           });

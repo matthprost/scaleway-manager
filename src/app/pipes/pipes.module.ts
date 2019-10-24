@@ -5,6 +5,7 @@ import {IonicModule} from '@ionic/angular';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ServerIconPipe} from './server-icon/server-icon.pipe';
 import {BillingStateIconPipe} from './billing-state-icon/billing-state-icon.pipe';
+import { TotalVolumesSpacePipe } from './total-volume-space/total-volumes-space.pipe';
 
 
 @NgModule({
@@ -14,10 +15,11 @@ import {BillingStateIconPipe} from './billing-state-icon/billing-state-icon.pipe
     IonicModule,
     FontAwesomeModule
   ],
-  declarations: [ServerIconPipe, BillingStateIconPipe],
+  declarations: [ServerIconPipe, BillingStateIconPipe, TotalVolumesSpacePipe],
   exports: [
     ServerIconPipe,
-    BillingStateIconPipe
+    BillingStateIconPipe,
+    TotalVolumesSpacePipe
   ]
 })
 export class PipesModule {}
