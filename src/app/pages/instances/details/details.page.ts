@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
 import {ServerDto} from '../../../services/servers/server.dto';
 import {ServersService} from '../../../services/servers/servers.service';
-import {AlertController, Platform, ToastController} from '@ionic/angular';
+import {AlertController, NavController, Platform, ToastController} from '@ionic/angular';
 import {Clipboard} from '@ionic-native/clipboard/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
@@ -26,7 +26,8 @@ export class DetailsPage implements OnInit {
 
   constructor(private serversProvider: ServersService,
               private toastCtrl: ToastController, private clipboard: Clipboard, private alertController: AlertController,
-              public statusBar: StatusBar, private route: ActivatedRoute, private platform: Platform) {
+              public statusBar: StatusBar, private route: ActivatedRoute, private platform: Platform,
+              private navCtrl: NavController) {
     this.server.id = this.route.snapshot.paramMap.get('id');
     this.serverCountry = this.route.snapshot.paramMap.get('zone');
   }
@@ -125,9 +126,9 @@ export class DetailsPage implements OnInit {
     } else if (value === 'delete') {
       switch (this.server.state) {
         case 'stopped in place':
-          return true;
+          return false;
         case 'stopped':
-          return true;
+          return false;
         case 'running':
           return false;
         case 'stopping':
@@ -164,7 +165,7 @@ export class DetailsPage implements OnInit {
         console.log(error);
       });
     } else {
-      this.serversProvider.sendServerAction(this.serverCountry, this.server.id, 'stop_in_place')
+      this.serversProvider.sendServerAction(this.serverCountry, this.server.id, 'poweroff')
         .then(() => {
           this.refreshServer();
         }).catch(error => {
@@ -173,10 +174,41 @@ export class DetailsPage implements OnInit {
     }
   }
 
+  public async stopInPlace() {
+    const alert = await this.alertController.create({
+      header: 'Are you sure you want to put your instance in standby mode?\n',
+      message: '</br><strong>This action will ask the kernel to shutdown itself via an ACPI call. ' +
+        'Stopping your instance may take some time.</strong></br></br>' +
+        'You will be billed for all resources assigned to your account even when the instance is in standby.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary'
+        }, {
+          text: 'Confirm',
+          handler: () => {
+            this.serversProvider.sendServerAction(this.serverCountry, this.server.id, 'stop_in_place')
+              .then(() => {
+                this.refreshServer();
+              }).catch(error => {
+              console.log(error);
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   public async reboot() {
     const alert = await this.alertController.create({
-      header: 'Reboot ?',
-      message: 'Are you sure you want to reboot this server ?',
+      header: 'Are you sure you want to reboot you instance?',
+      message: '<strong>Warning!</strong><br/> Powering off or rebooting an instance is similar to pulling ' +
+        'the electrical plug on a running ' +
+        'computer, which can cause data corruption.<br/> You need to shutdown the OS first: login to your instance as ' +
+        'root and execute the halt command.',
       buttons: [
         {
           text: 'Cancel',
@@ -210,8 +242,18 @@ export class DetailsPage implements OnInit {
 
   public async delete() {
     const alert = await this.alertController.create({
-      header: 'Delete ?',
-      message: 'Are you sure you want to delete this server ?',
+      header: 'Are you sure you want to delete this server ?',
+      message: '<strong>Warning!</strong><br/> ' +
+        'This will permanently delete your instance and all your data will be lost. This action is irreversible.',
+      inputs: [
+        {
+          name: 'ipCheckbox',
+          type: 'checkbox',
+          label: 'Yes, delete associated IP',
+          value: true,
+          checked: true
+        },
+      ],
       buttons: [
         {
           text: 'Cancel',
@@ -219,10 +261,11 @@ export class DetailsPage implements OnInit {
           cssClass: 'danger'
         }, {
           text: 'Delete',
-          handler: () => {
-            this.serversProvider.sendServerAction(this.serverCountry, this.server.id, 'terminate')
+          handler: (values) => {
+            this.serversProvider.serverDelete(this.serverCountry, this.server.id,
+              values[0] ? this.server.public_ip.id : null)
               .then(() => {
-                this.refreshServer();
+                this.navCtrl.pop();
               }).catch(error => {
               console.log(error);
             });

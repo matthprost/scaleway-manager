@@ -54,6 +54,8 @@ export class ApiService {
               });*/
             } else if (err && err.status && err.status === 400) {
               this.navCtrl.navigateRoot(['/error/400']);
+            } else if (err && err.status && err.status === 404) {
+              this.navCtrl.navigateRoot(['/error/404']);
             } else if (err && err.status && err.status === 504) {
               this.navCtrl.navigateRoot(['/error/504']);
             }

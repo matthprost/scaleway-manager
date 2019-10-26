@@ -20,7 +20,7 @@
   <ion-list *ngIf="instances !== undefined && instances.length !== 0" mode="ios">
     <ion-item-sliding *ngFor="let server of instances; let i = index;" #item>
       <ion-item (click)="navigateInstanceDetails(server, server.country)" lines="none" detail="true" mode="ios"
-                [ngClass]="(i % 2 == 1) ? 'background-white' : 'background-grey'">
+                [ngClass]="(i % 2 == 0) ? 'background-white' : 'background-grey'">
         <ion-note slot="start" mode="ios">
           <div [class]='setClass(server)' [style.background]="setState(server)"></div>
         </ion-note>

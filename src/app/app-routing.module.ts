@@ -64,6 +64,10 @@ const routes: Routes = [
         path: '400',
         loadChildren: './pages/errors/bad-request/bad-request.module#BadRequestPageModule'
       },
+      {
+        path: '404',
+        loadChildren: './pages/errors/not-found/not-found.module#NotFoundPageModule'
+      },
     ],
   },
 ];

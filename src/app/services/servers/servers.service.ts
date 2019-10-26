@@ -104,4 +104,32 @@ export class ServersService {
         });
     });
   }
+
+  public serverDelete(country: string, serverId: string, serverIp?: string) {
+    let ApiUrl: string = null;
+    country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
+
+    return new Promise((resolve, reject) => {
+      this.api.post<ActionDto>(ApiUrl + '/servers/' + serverId + '/action', {
+        'action': 'terminate'
+      })
+        .then(result => {
+
+          if (serverIp) {
+            this.api.delete(ApiUrl + '/ips/' + serverIp)
+              .then(() => {
+                resolve('ok');
+              })
+              .catch(error => {
+                reject(error);
+              });
+          } else {
+            resolve('ok');
+          }
+        })
+        .catch(error => {
+          reject(error);
+        });
+    });
+  }
 }

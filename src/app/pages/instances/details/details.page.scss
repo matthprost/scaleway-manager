@@ -130,7 +130,7 @@ ion-img {
 
   &-content {
     ion-button {
-      width: 7rem;
+      width: 8rem;
       margin: .5rem 0;
       font-size: 1rem;
       --border-radius: 6px;
@@ -151,8 +151,15 @@ ion-img {
 }
 
 .is-round {
-  border: 5px solid white;
+  padding: .5rem;
   border-radius: 50%;
   background: white;
   vertical-align: middle;
+  width: 85px;
+  height: 85px;
+  display: inline-block;
+  img {
+    height: 100%;
+    width: auto;
+  }
 }

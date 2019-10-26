@@ -26,13 +26,16 @@ export class ServerIconPipe implements PipeTransform {
           picturePath = 'assets/imgs/fedora.svg';
           break;
         case osName.indexOf('alpine') !== -1:
-          picturePath = 'assets/imgs/alpine.png';
+          picturePath = 'assets/imgs/alpine.svg';
           break;
         case osName.indexOf('gitlab') !== -1:
           picturePath = 'assets/imgs/gitlab.svg';
           break;
         case osName.indexOf('openvpn') !== -1:
-          picturePath = 'assets/imgs/openvpn.png';
+          picturePath = 'assets/imgs/openvpn.svg';
+          break;
+        case osName.indexOf('centos') !== -1:
+          picturePath = 'assets/imgs/centos.svg';
           break;
         default:
           picturePath = 'assets/imgs/server.svg';

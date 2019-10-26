@@ -14,6 +14,9 @@ export class InstancesPage implements OnInit {
   public instances: Array<ServerDto>;
   public isLoading = true;
 
+  private interval;
+  private intervalSet = false;
+
   constructor(public navCtrl: NavController, private serversProvider: ServersService,
               private statusBar: StatusBar) {
   }
@@ -26,10 +29,15 @@ export class InstancesPage implements OnInit {
     this.refreshAllServers()
       .then(() => {
         this.isLoading = false;
+        this.autoRefresh();
       })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  ionViewDidLeave() {
+    clearInterval(this.interval);
   }
 
   private refreshAllServers(): Promise<any> {
@@ -45,10 +53,47 @@ export class InstancesPage implements OnInit {
   public doRefresh(refresher) {
     this.refreshAllServers().then(() => {
       refresher.target.complete();
+      this.autoRefresh();
     }).catch(error => {
       console.log(error);
       refresher.target.complete();
     });
+  }
+
+  public autoRefresh() {
+    console.log('Entering function');
+    let counter = 0;
+
+    this.instances.forEach(server => {
+      if (server.state === 'starting' || server.state === 'stopping') {
+        counter++;
+      }
+    });
+
+    if (counter > 0 && !this.intervalSet) {
+      this.intervalSet = true;
+
+      this.interval = setInterval(() => {
+        console.log('Entering interval');
+
+        let newCounter = 0;
+
+        this.instances.forEach(server => {
+          if (server.state === 'starting' || server.state === 'stopping') {
+            newCounter++;
+          }
+        });
+        if (newCounter > 0) {
+          this.refreshAllServers();
+        } else {
+          console.log('Interval cleared!');
+          clearInterval(this.interval);
+          this.intervalSet = false;
+        }
+      }, 15000);
+    } else {
+      console.log('No interval needed');
+    }
   }
 
   public navigateInstanceDetails(server: any, country: string) {
@@ -60,7 +105,9 @@ export class InstancesPage implements OnInit {
     event.close();
     this.serversProvider.sendServerAction(country, server.id, action)
       .then(() => {
-        this.refreshAllServers();
+        this.refreshAllServers().then(() => {
+          this.autoRefresh();
+        });
       })
       .catch(error => {
         console.log(error);

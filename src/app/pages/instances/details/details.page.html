@@ -17,8 +17,10 @@
       <div class="server-header">
         <ion-row>
           <div class="server-header-infos">
-            <img class="is-round" width="85" height="85" alt="server image"
-                 src="{{ server.image ? (server.image.name | serverIcon) : (server.name | serverIcon) }}"/>
+            <div class="is-round">
+              <img alt="server image"
+                   src="{{ server.image ? (server.image.name | serverIcon) : (server.name | serverIcon) }}"/>
+            </div>
             <div class="server-name">
               {{ serverName }}
               <div class="server-state">
@@ -123,11 +125,11 @@
     </ion-item>
     <ion-item>
       <ion-label class="information-title">
-        Archive server
+        Standby Mode
       </ion-label>
       <div class="information-content" slot="end">
-        <ion-button slot="item-right" color="dark" size="large" type="submit" [disabled]="isDisabled('archive')"
-                    (click)="archive()">Archive
+        <ion-button slot="item-right" color="secondary" size="large" type="submit" [disabled]="isDisabled('archive')"
+                    (click)="stopInPlace()">Standby Mode
         </ion-button>
       </div>
     </ion-item>
