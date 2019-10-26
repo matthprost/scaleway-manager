@@ -76,7 +76,6 @@ export class HomePage implements OnInit {
       this.srvService.getAllServer(5).then(value => {
         this.serversInstances = value;
 
-        console.log(this.serversInstances);
         resolve('ok');
       })
         .catch(error => {
@@ -86,7 +85,7 @@ export class HomePage implements OnInit {
   }
 
   public autoRefresh() {
-    console.log('Entering function');
+    console.log('[AUTO REFRESH]: Entering function');
     let counter = 0;
 
     this.serversInstances.forEach(server => {
@@ -99,7 +98,7 @@ export class HomePage implements OnInit {
       this.intervalSet = true;
 
       this.interval = setInterval(() => {
-        console.log('Entering interval');
+        console.log('[AUTO REFRESH]: Entering interval');
 
         let newCounter = 0;
 
@@ -111,11 +110,13 @@ export class HomePage implements OnInit {
         if (newCounter > 0) {
           this.refresh();
         } else {
-          console.log('Interval cleared!');
+          console.log('[AUTO REFRESH]: Interval cleared!');
           clearInterval(this.interval);
           this.intervalSet = false;
         }
       }, 15000);
+    } else {
+      console.log('[AUTO REFRESH]: No interval needed');
     }
   }
 

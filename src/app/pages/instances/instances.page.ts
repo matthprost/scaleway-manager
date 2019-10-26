@@ -61,7 +61,7 @@ export class InstancesPage implements OnInit {
   }
 
   public autoRefresh() {
-    console.log('Entering function');
+    console.log('[AUTO REFRESH]: Entering function');
     let counter = 0;
 
     this.instances.forEach(server => {
@@ -74,7 +74,7 @@ export class InstancesPage implements OnInit {
       this.intervalSet = true;
 
       this.interval = setInterval(() => {
-        console.log('Entering interval');
+        console.log('[AUTO REFRESH]: Entering interval');
 
         let newCounter = 0;
 
@@ -86,13 +86,13 @@ export class InstancesPage implements OnInit {
         if (newCounter > 0) {
           this.refreshAllServers();
         } else {
-          console.log('Interval cleared!');
+          console.log('[AUTO REFRESH]: Interval cleared!');
           clearInterval(this.interval);
           this.intervalSet = false;
         }
       }, 15000);
     } else {
-      console.log('No interval needed');
+      console.log('[AUTO REFRESH]: No interval needed');
     }
   }
 

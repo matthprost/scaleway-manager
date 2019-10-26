@@ -34,7 +34,7 @@
           <div class="server-actions">
             <span class="server-toggle-off">OFF</span>
             <ion-toggle [(ngModel)]="power" (ngModelChange)="update($event)" [disabled]="isDisabled('power')"
-                        color="secondary"></ion-toggle>
+                        color="secondary" mode="ios"></ion-toggle>
             <span class="server-toggle-on">ON</span>
           </div>
         </ion-row>
@@ -119,7 +119,7 @@
       </ion-label>
       <div class="information-content" slot="end">
         <ion-button slot="item-right" color="dark" size="large" type="submit" [disabled]="isDisabled('reboot')"
-                    (click)="reboot()">Reboot
+                    (click)="reboot()" mode="ios">Reboot
         </ion-button>
       </div>
     </ion-item>
@@ -129,7 +129,7 @@
       </ion-label>
       <div class="information-content" slot="end">
         <ion-button slot="item-right" color="secondary" size="large" type="submit" [disabled]="isDisabled('archive')"
-                    (click)="stopInPlace()">Standby Mode
+                    (click)="stopInPlace()" mode="ios">Standby Mode
         </ion-button>
       </div>
     </ion-item>
@@ -139,7 +139,7 @@
       </ion-label>
       <div class="information-content" slot="end">
         <ion-button slot="item-right" color="danger" size="large" type="submit" [disabled]="isDisabled('delete')"
-                    (click)="delete()">Delete
+                    (click)="delete()" mode="ios">Delete
         </ion-button>
       </div>
     </ion-item>
