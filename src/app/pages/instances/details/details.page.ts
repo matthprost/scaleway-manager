@@ -24,6 +24,9 @@ export class DetailsPage implements OnInit {
 
   public isLoading = true;
 
+  private interval;
+  private intervalSet = false;
+
   constructor(private serversProvider: ServersService,
               private toastCtrl: ToastController, private clipboard: Clipboard, private alertController: AlertController,
               public statusBar: StatusBar, private route: ActivatedRoute, private platform: Platform,
@@ -40,10 +43,44 @@ export class DetailsPage implements OnInit {
     this.refreshServer().then(() => {
       this.setState();
       this.isLoading = false;
+      this.autoRefresh();
     });
   }
 
   ionViewDidLoad() {
+  }
+
+  public autoRefresh() {
+    console.log('Entering function');
+    let counter = 0;
+
+    if (this.server.state === 'starting' || this.server.state === 'stopping') {
+      counter++;
+    }
+
+    if (counter > 0 && !this.intervalSet) {
+      this.intervalSet = true;
+
+      this.interval = setInterval(() => {
+        console.log('Entering interval');
+
+        let newCounter = 0;
+
+        if (this.server.state === 'starting' || this.server.state === 'stopping') {
+          newCounter++;
+        }
+
+        if (newCounter > 0) {
+          this.refreshServer();
+        } else {
+          console.log('Interval cleared!');
+          clearInterval(this.interval);
+          this.intervalSet = false;
+        }
+      }, 15000);
+    } else {
+      console.log('No interval needed');
+    }
   }
 
   private setState() {
@@ -160,14 +197,18 @@ export class DetailsPage implements OnInit {
     if (this.power === true) {
       this.serversProvider.sendServerAction(this.serverCountry, this.server.id, 'poweron')
         .then(() => {
-          this.refreshServer();
+          this.refreshServer().then(() => {
+            this.autoRefresh();
+          });
         }).catch(error => {
         console.log(error);
       });
     } else {
       this.serversProvider.sendServerAction(this.serverCountry, this.server.id, 'poweroff')
         .then(() => {
-          this.refreshServer();
+          this.refreshServer().then(() => {
+            this.autoRefresh();
+          });
         }).catch(error => {
         console.log(error);
       });
@@ -190,7 +231,9 @@ export class DetailsPage implements OnInit {
           handler: () => {
             this.serversProvider.sendServerAction(this.serverCountry, this.server.id, 'stop_in_place')
               .then(() => {
-                this.refreshServer();
+                this.refreshServer().then(() => {
+                  this.autoRefresh();
+                });
               }).catch(error => {
               console.log(error);
             });
@@ -219,7 +262,9 @@ export class DetailsPage implements OnInit {
           handler: () => {
             this.serversProvider.sendServerAction(this.serverCountry, this.server.id, 'reboot')
               .then(() => {
-                this.refreshServer();
+                this.refreshServer().then(() => {
+                  this.autoRefresh();
+                });
               }).catch(error => {
               console.log(error);
             });
@@ -229,15 +274,6 @@ export class DetailsPage implements OnInit {
     });
 
     await alert.present();
-  }
-
-  public archive() {
-    this.serversProvider.sendServerAction(this.serverCountry, this.server.id, 'poweroff')
-      .then(() => {
-        this.refreshServer();
-      }).catch(error => {
-      console.log(error);
-    });
   }
 
   public async delete() {
