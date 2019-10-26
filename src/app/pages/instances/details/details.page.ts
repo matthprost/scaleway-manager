@@ -66,8 +66,12 @@ export class DetailsPage implements OnInit {
 
         let newCounter = 0;
 
-        if (this.server.state === 'starting' || this.server.state === 'stopping') {
-          newCounter++;
+        if (this.server) {
+          if (this.server.state === 'starting' || this.server.state === 'stopping') {
+            newCounter++;
+          }
+        } else {
+          clearInterval(this.interval);
         }
 
         if (newCounter > 0) {

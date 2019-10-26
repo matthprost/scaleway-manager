@@ -43,12 +43,12 @@
   </ion-row>
   <ion-item-group>
     <ion-item-divider class="information-header" color="secondary">Basic Informations</ion-item-divider>
-    <ion-item (click)="copyToClipBoard(server.public_ip.address)">
+    <ion-item (click)="server.public_ip ? copyToClipBoard(server.public_ip.address) : null">
       <ion-label class="information-title">
         Public IP
       </ion-label>
       <div id="cpyBtn" data-clipboard-target="#copyTarget" class="information-content" slot="end">
-        {{ server.public_ip.address }}
+        {{ server.public_ip ? server.public_ip.address : '-' }}
       </div>
     </ion-item>
     <ion-item (click)="server.private_ip ? copyToClipBoard(server.private_ip.address): ''">

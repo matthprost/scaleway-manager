@@ -206,7 +206,7 @@ export class HomePage implements OnInit {
     }
   }
 
-  public navigate(location: string) {
+  public navigate(location: string, country?: string, serverId?: string) {
     switch (location) {
       case 'account' :
         this.navCtrl.navigateForward(['/home/account']);
@@ -214,6 +214,8 @@ export class HomePage implements OnInit {
       case 'instances' :
         this.navCtrl.navigateRoot(['/instances']);
         break;
+      case 'instancesDetails' :
+        this.navCtrl.navigateForward(['/instances/' + country + '/' + serverId]);
       /*case 'contact' :
         fab.close();
         this.navCtrl.push(ContactPage);

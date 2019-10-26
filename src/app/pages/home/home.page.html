@@ -55,28 +55,31 @@
           <ion-slide *ngFor="let serversInstance of serversInstances">
             <ion-card mode="ios" style="width:100%">
 
-              <ion-card-header class="card-header-stats ion-text-center" mode="ios">
+              <ion-card-header class="card-header-stats ion-text-center" mode="ios"
+                               (click)="navigate('instancesDetails', serversInstance.country, serversInstance.id)">
                 {{ serversInstance.name | slice:0:12 }}
               </ion-card-header>
 
               <ion-card-content class="card-stat2 ion-text-center" mode="ios">
-                <ion-row>
-                  <ion-col>
-                    <img class="server-img ion-margin-bottom" alt="server_picture"
-                         src="{{ serversInstance.image ? (serversInstance.image.name | serverIcon) : (serversInstance.name | serverIcon) }}"/>
-                  </ion-col>
-                </ion-row>
-                <ion-row>
-                  <ion-col>
-                    <div [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"></div>
-                    <div style="text-transform: capitalize; display: inline-block">
-                      {{ serversInstance.state === 'stopped in place' ? 'Standby' : serversInstance.state }}
-                    </div>
-                    <small class="small-card">
-                      {{ serversInstance.public_ip.address }}
-                    </small>
-                  </ion-col>
-                </ion-row>
+                <div (click)="navigate('instancesDetails', serversInstance.country, serversInstance.id)">
+                  <ion-row>
+                    <ion-col>
+                      <img class="server-img ion-margin-bottom" alt="server_picture"
+                           src="{{ serversInstance.image ? (serversInstance.image.name | serverIcon) : (serversInstance.name | serverIcon) }}"/>
+                    </ion-col>
+                  </ion-row>
+                  <ion-row>
+                    <ion-col>
+                      <div [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"></div>
+                      <div style="text-transform: capitalize; display: inline-block">
+                        {{ serversInstance.state === 'stopped in place' ? 'Standby' : serversInstance.state }}
+                      </div>
+                      <small class="small-card">
+                        {{ serversInstance.public_ip ? serversInstance.public_ip.address : ' - ' }}
+                      </small>
+                    </ion-col>
+                  </ion-row>
+                </div>
                 <ion-row>
                   <div class="server-toggle">
                     <ion-toggle mode="ios" color="secondary" checked="{{ setToggle(serversInstance) }}"
