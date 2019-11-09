@@ -5,7 +5,7 @@
 
 <ion-content force-overscroll="false">
 
-  <app-loader *ngIf="isLoading" ></app-loader>
+  <app-loader *ngIf="isLoading"></app-loader>
 
   <div *ngIf="!isLoading">
     <div class="menu-button">
@@ -43,20 +43,32 @@
           Member since {{ user.creation_date | date:'MMMM d, y'}}
         </div>
       </div>
-      <ion-list>
-        <ion-item (click)="navigate('ssh-keys')">
-          <ion-label>SSH Keys</ion-label>
-          <ion-note slot="end">
-            <ion-icon name="arrow-forward"></ion-icon>
-          </ion-note>
-        </ion-item>
-        <ion-item (click)="navigate('tokens')">
-          <ion-label>Tokens</ion-label>
-          <ion-note slot="end">
-            <ion-icon name="arrow-forward"></ion-icon>
-          </ion-note>
-        </ion-item>
-      </ion-list>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-card mode="ios" (click)="navigate('ssh-keys')">
+              <ion-card-header class="ion-text-center" mode="ios">
+                <ion-icon name="key" mode="ios"></ion-icon>
+              </ion-card-header>
+
+              <ion-card-content class="ion-text-center" mode="ios">
+                SSH Keys
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+          <ion-col>
+            <ion-card mode="ios" (click)="navigate('tokens')">
+              <ion-card-header class="ion-text-center" mode="ios">
+                <ion-icon name="cloud" mode="ios"></ion-icon>
+              </ion-card-header>
+
+              <ion-card-content class="ion-text-center" mode="ios">
+                API Tokens
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
     </div>
   </div>
 </ion-content>
