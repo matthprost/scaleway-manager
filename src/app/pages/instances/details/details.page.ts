@@ -50,7 +50,7 @@ export class DetailsPage implements OnInit {
   ionViewDidLoad() {
   }
 
-  public autoRefresh() {
+  private async autoRefresh() {
     console.log('[AUTO REFRESH]: Entering function');
     let counter = 0;
 

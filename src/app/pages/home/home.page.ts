@@ -60,16 +60,6 @@ export class HomePage implements OnInit {
     });
   }
 
-  public doRefresh(refresher) {
-    this.refresh().then(() => {
-      refresher.target.complete();
-    })
-      .catch(error => {
-        console.log(error);
-        refresher.target.complete();
-      });
-  }
-
   private refresh(): Promise<any> {
 
     return new Promise((resolve, reject) => {
@@ -84,7 +74,7 @@ export class HomePage implements OnInit {
     });
   }
 
-  public autoRefresh() {
+  private async autoRefresh() {
     console.log('[AUTO REFRESH]: Entering function');
     let counter = 0;
 
