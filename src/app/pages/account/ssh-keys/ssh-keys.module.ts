@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { AccountPage } from './account.page';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ComponentsModule} from '../../components/components.module';
+import { SshKeysPage } from './ssh-keys.page';
+import {ComponentsModule} from '../../../components/components.module';
+import {Clipboard} from '@ionic-native/clipboard/ngx';
 
 const routes: Routes = [
   {
     path: '',
-    component: AccountPage
+    component: SshKeysPage
   }
 ];
 
@@ -22,9 +22,11 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    FontAwesomeModule,
     ComponentsModule
   ],
-  declarations: [AccountPage]
+  declarations: [SshKeysPage],
+  providers: [
+    Clipboard
+  ]
 })
-export class AccountPageModule {}
+export class SshKeysPageModule {}

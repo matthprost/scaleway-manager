@@ -39,10 +39,10 @@ export class AccountPage implements OnInit {
       case 'home' :
         this.navCtrl.navigateBack(['/home']);
         break;
-      /*case 'ssh-keys' :
-        this.navCtrl.push(SshKeysPage);
+      case 'ssh-keys' :
+        this.navCtrl.navigateForward(['/home/account/ssh-keys']);
         break;
-      case 'tokens' :
+      /*case 'tokens' :
         this.navCtrl.push(TokensPage);
         break;*/
     }

@@ -23,7 +23,7 @@
     "@fortawesome/angular-fontawesome": "^0.3.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
     "@fortawesome/free-solid-svg-icons": "^5.10.2",
-    "@ionic-native/clipboard": "^5.15.1",
+    "@ionic-native/clipboard": "^5.16.0",
     "@ionic-native/core": "^5.14.0",
     "@ionic-native/http": "^5.14.0",
     "@ionic-native/splash-screen": "^5.14.0",

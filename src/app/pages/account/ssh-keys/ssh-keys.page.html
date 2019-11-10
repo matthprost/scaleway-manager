@@ -1,0 +1,54 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary">SSH Keys</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="!isLoading" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-loader *ngIf="isLoading"></app-loader>
+
+  <div *ngIf="!isLoading">
+    <div class="text">
+      <p style="margin-top: 0">SSH Keys are a secure way to log into your servers through SSH.</p>
+      <p>To generate your key, run:</p>
+      <p style="margin-bottom: 0"><code (click)="copyToClipBoard('ssh-keygen -t rsa -b 4096 -C  user@email.com')">ssh-keygen -t rsa -b 4096 -C
+        "user@email.com"</code></p>
+    </div>
+
+    <ion-list>
+      <ion-list-header class="title" color="secondary">SSH Keys</ion-list-header>
+      <ion-item-sliding *ngFor="let sshKey of sshKeys" #item>
+        <ion-item>
+          <div class="information-title">
+            <div class="information-title-content">
+              {{ sshKey.fingerprint }}
+            </div>
+            <div class="description-left">
+              {{ sshKey.description }}
+            </div>
+            <div class="description-right">
+              {{ split(sshKey) }}
+            </div>
+          </div>
+        </ion-item>
+        <ion-item-options>
+          <ion-button color="danger" (click)="deleteSshKey(sshKey, item)">
+            DELETE
+          </ion-button>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+    <p class="no-ssh-keys ion-margin-top ion-text-center" *ngIf="!isLoading && (sshKeys === undefined || sshKeys.length === 0)"
+       text-center>
+      <img src="assets/imgs/key.svg" alt="key">
+      No SSH Key found
+    </p>
+  </div>
+</ion-content>

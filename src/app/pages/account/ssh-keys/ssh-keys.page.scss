@@ -1,0 +1,49 @@
+.title {
+  text-transform: uppercase;
+  font-weight: 400;
+}
+
+.description {
+  &-left {
+    color: #868686;
+    margin-top: .2rem;
+    float: left;
+  }
+
+  &-right {
+    color: #868686;
+    margin-top: .2rem;
+    float: right;
+  }
+}
+
+.text {
+  background: white;
+  padding: 1rem 1.2rem 1rem 1.2rem;
+}
+
+code {
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: #ededed;
+  font-size: .9rem;
+  padding: .25rem 0;
+}
+
+.no-ssh-keys {
+  color: var(--ion-color-dark-tint);
+  text-transform: uppercase;
+  font-weight: 600;
+
+  img {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    width: 50px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 2rem;
+  }
+}

@@ -19,7 +19,16 @@ const routes: Routes = [
       },
       {
         path: 'account',
-        loadChildren: './pages/account/account.module#AccountPageModule'
+        children: [
+          {
+            path: '',
+            loadChildren: './pages/account/account.module#AccountPageModule'
+          },
+          {
+            path: 'ssh-keys',
+            loadChildren: './pages/account/ssh-keys/ssh-keys.module#SshKeysPageModule'
+          },
+        ]
       }
     ],
     canActivate: [HomeGuard]
