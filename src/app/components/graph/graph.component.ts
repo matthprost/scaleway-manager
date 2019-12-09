@@ -28,7 +28,7 @@ export class GraphComponent implements OnInit {
       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     data.forEach(result => {
-      const parseResult = parseInt(result.billing_period.slice(-2), 12);
+      const parseResult = Number(result.billing_period.slice(-2));
       array.push(months[parseResult]);
     });
 
