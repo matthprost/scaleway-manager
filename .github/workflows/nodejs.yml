@@ -62,4 +62,6 @@ jobs:
 
       - name: Ionic Cordova Build Android
         run: |
+          sudo chown -R $USER:$GROUP ~/.npm
+          sudo chown -R $USER:$GROUP ~/.config
           ionic cordova build android --prod
