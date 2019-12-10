@@ -34,7 +34,7 @@ jobs:
 
       - name: ionic build
         run: |
-          ionic build
+          ng run app:build
 
   android_build:
 
