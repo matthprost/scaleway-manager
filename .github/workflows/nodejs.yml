@@ -44,9 +44,16 @@ jobs:
 
     strategy:
       matrix:
+        node-version: [13.x]
+        ionic-version: [5.x]
         cordova-version: [9.x]
 
     steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
 
       - name: Setup Ionic & Cordova
         uses: coturiv/setup-ionic@v1.0.0
