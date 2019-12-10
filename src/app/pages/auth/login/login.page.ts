@@ -12,8 +12,8 @@ import {NavParamsService} from '../../../services/nav/nav-params.service';
 })
 export class LoginPage implements OnInit {
 
-  private email: string = null;
-  private password: string = null;
+  public email: string = null;
+  public password: string = null;
 
   constructor(private router: Router, private toastCtrl: ToastController, private loadingCtrl: LoadingController,
               private auth: AuthService, private menuCtrl: MenuController, private statusBar: StatusBar, private navCtrl: NavController,

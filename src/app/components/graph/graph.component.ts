@@ -15,7 +15,7 @@ export class GraphComponent implements OnInit {
   @ViewChild('billingCanvas') barCanvas: ElementRef;
   private barChart: Chart;
   private dates;
-  private values;
+  public values;
   private currency;
 
   constructor() {
