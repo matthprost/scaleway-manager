@@ -26,8 +26,6 @@ jobs:
       - name: npm install
         run: |
           npm i
-        env:
-          CI: true
 
       - name: Setup Ionic
         uses: coturiv/setup-ionic@v1.0.0
