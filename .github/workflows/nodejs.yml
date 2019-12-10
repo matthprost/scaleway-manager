@@ -1,0 +1,69 @@
+name: Scaleway Manager CI
+
+on:
+  push:
+    branches:
+      - master
+      - release
+      - CI
+
+jobs:
+  Linux Build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [13.x]
+        ionic-version: [5.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install
+        run: |
+          npm i
+        env:
+          CI: true
+
+      - name: Setup Ionic
+        uses: coturiv/setup-ionic@v1.0.0
+        with:
+          ionic-version: ${{ matrix.ionic-version }}
+      - name: ionic build
+        run: |
+          ionic build
+
+  Android Build:
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [13.x]
+        ionic-version: [5.x]
+        cordova-version: [9.x]
+
+      steps:
+        - uses: actions/checkout@v1
+        - name: Use Node.js ${{ matrix.node-version }}
+          uses: actions/setup-node@v1
+          with:
+            node-version: ${{ matrix.node-version }}
+        - name: npm install
+          run: |
+            npm i
+          env:
+            CI: true
+
+        - name: Setup Ionic & Cordova
+          uses: coturiv/setup-ionic@v1.0.0
+          with:
+            ionic-version: ${{ matrix.ionic-version }}
+            cordova-version: ${{ matrix.cordova-version }}
+        - name: Ionic Cordova Build Android
+          run: |
+            ionic cordova build android
