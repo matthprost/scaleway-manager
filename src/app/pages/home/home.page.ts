@@ -203,7 +203,7 @@ export class HomePage implements OnInit {
         this.navCtrl.navigateForward(['/home/account']);
         break;
       case 'instances' :
-        this.navCtrl.navigateRoot(['/instances']);
+        this.navCtrl.navigateForward(['/instances']);
         break;
       case 'instancesDetails' :
         this.navCtrl.navigateForward(['/instances/' + country + '/' + serverId]);

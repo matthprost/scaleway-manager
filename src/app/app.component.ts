@@ -17,7 +17,7 @@ export class AppComponent {
     },
     {
       title: 'Instances',
-      url: '/home/instances',
+      url: '/instances',
       icon: 'switch'
     }
   ];

@@ -3,7 +3,6 @@ import {ServersService} from '../../services/servers/servers.service';
 import {ServerDto} from '../../services/servers/server.dto';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {NavController} from '@ionic/angular';
-
 @Component({
   selector: 'app-instances',
   templateUrl: './instances.page.html',

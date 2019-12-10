@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ModalController, NavController, ToastController} from '@ionic/angular';
+import {IonItemSliding, ModalController, NavController, ToastController} from '@ionic/angular';
 import {AccountService} from '../../../services/user/account/account.service';
 import {SshKeysDto} from '../../../services/user/account/account.dto';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
@@ -64,13 +64,13 @@ export class SshKeysPage implements OnInit {
     await toast.present();
   }
 
-  /*public deleteSshKey(SshKey: SshKeysDto, slidingItem: ItemSliding) {
-    slidingItem.close();
+  public async deleteSshKey(SshKey: SshKeysDto, slidingItem: IonItemSliding) {
+    await slidingItem.close();
 
-    let finalSshKeysArray: Array<{ 'key': string }> = [];
-    for (let sshkey of this.sshKeys) {
-      if (sshkey !== SshKey) {
-        finalSshKeysArray.push({'key': sshkey.key});
+    const finalSshKeysArray: Array<{ 'key': string }> = [];
+    for (const sshKey of this.sshKeys) {
+      if (sshKey !== SshKey) {
+        finalSshKeysArray.push({key: sshKey.key});
       }
     }
 
@@ -80,7 +80,7 @@ export class SshKeysPage implements OnInit {
       .catch(error => {
         console.log(error);
       });
-  }*/
+  }
 
   /*async addSshKey(event) {
     const modal = await this.modalController.create(AddSshKeyPage, {'keys': this.sshKeys});
