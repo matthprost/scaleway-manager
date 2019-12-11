@@ -18,13 +18,13 @@ jobs:
         ionic-version: [5.x]
 
     steps:
-      - timeout-minutes: 60
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
+        timeout-minutes: 60
 
       - name: Setup Ionic
         uses: coturiv/setup-ionic@v1.0.0
@@ -33,6 +33,7 @@ jobs:
 
       - name: Ionic Build
         run: ionic build
+
 
   Android_build:
 
@@ -44,13 +45,13 @@ jobs:
         ionic-version: [5.x]
 
     steps:
-      - timeout-minutes: 60
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
       - run: npm install
+        timeout-minutes: 60
 
       - name: Setup Ionic & Cordova
         uses: coturiv/setup-ionic@v1.0.0
