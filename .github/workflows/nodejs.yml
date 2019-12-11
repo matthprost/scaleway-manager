@@ -8,7 +8,7 @@ on:
       - CI
 
 jobs:
-  linux_build:
+  Linux_build:
 
     runs-on: self-hosted
 
@@ -33,7 +33,7 @@ jobs:
       - name: Ionic Build
         run: ng run app:build
 
-  android_build:
+  Android_build:
 
     runs-on: self-hosted
 
