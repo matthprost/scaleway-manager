@@ -18,6 +18,7 @@ jobs:
         ionic-version: [5.x]
 
     steps:
+      - timeout-minutes: 60
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
@@ -43,6 +44,7 @@ jobs:
         ionic-version: [5.x]
 
     steps:
+      - timeout-minutes: 60
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
