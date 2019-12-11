@@ -23,7 +23,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
+      - run: npm i
 
       - name: Setup Ionic
         uses: coturiv/setup-ionic@v1.0.0
@@ -48,7 +48,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm install
+      - run: npm i
 
       - name: Setup Ionic & Cordova
         uses: coturiv/setup-ionic@v1.0.0
