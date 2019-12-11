@@ -14,8 +14,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [13]
-        ionic-version: [5]
+        node-version: [13.x]
+        ionic-version: [5.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -23,7 +23,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i
+      - run: |
+          rm -rf node_modules
+          rm package-lock.json
+          npm cache clean
+          npm i
 
       - name: Setup Ionic
         uses: coturiv/setup-ionic@v1.0.0
@@ -39,8 +43,8 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [13]
-        ionic-version: [5]
+        node-version: [13.x]
+        ionic-version: [5.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -48,7 +52,11 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - run: npm i
+      - run: |
+          rm -rf node_modules
+          rm package-lock.json
+          npm cache clean
+          npm i
 
       - name: Setup Ionic & Cordova
         uses: coturiv/setup-ionic@v1.0.0
