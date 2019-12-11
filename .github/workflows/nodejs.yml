@@ -44,7 +44,6 @@ jobs:
       matrix:
         node-version: [13.x]
         ionic-version: [5.x]
-        cordova-version: [9.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -56,7 +55,7 @@ jobs:
       - name: Setup Ionic & Cordova
         uses: coturiv/setup-ionic@v1.0.0
         with:
-          cordova-version: ${{ matrix.cordova-version }}
+          cordova-version: 9.0.0
 
       - name: Ionic Cordova Build Android
         run: |
