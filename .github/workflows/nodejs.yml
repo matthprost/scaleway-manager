@@ -26,7 +26,6 @@ jobs:
       - run: |
           rm -rf node_modules
           rm package-lock.json
-          npm cache clean
           npm i
 
       - name: Setup Ionic
@@ -55,7 +54,6 @@ jobs:
       - run: |
           rm -rf node_modules
           rm package-lock.json
-          npm cache clean
           npm i
 
       - name: Setup Ionic & Cordova
