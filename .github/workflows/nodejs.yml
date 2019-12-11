@@ -31,7 +31,7 @@ jobs:
           ionic-version: ${{ matrix.ionic-version }}
 
       - name: Ionic Build
-        run: ng run app:build
+        run: ionic build
 
   Android_build:
 
