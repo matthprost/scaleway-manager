@@ -24,14 +24,14 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
       - name: npm install
-        run: npm istall
+        run: npm install
 
       - name: Setup Ionic
         uses: coturiv/setup-ionic@v1.0.0
         with:
           ionic-version: ${{ matrix.ionic-version }}
 
-      - name: ionic build
+      - name: Ionic Build
         run: ng run app:build
 
   android_build:
@@ -56,7 +56,7 @@ jobs:
         with:
           cordova-version: 9.0.0
 
-      - name: Ionic Cordova Build Android
+      - name: Build Android
         run: |
           sudo chown -R $USER:$GROUP ~/.npm
           sudo chown -R $USER:$GROUP ~/.config
