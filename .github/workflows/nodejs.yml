@@ -28,7 +28,7 @@ jobs:
       - name: Setup Ionic
         uses: coturiv/setup-ionic@v1
         with:
-          ionic-version: ${{ matrix.ionic-version }}
+          cordova-version: 8
 
       - name: Ionic Build
         run: ionic build
@@ -38,26 +38,18 @@ jobs:
 
     runs-on: self-hosted
 
-    strategy:
-      matrix:
-        node-version: [12.x]
-
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-        timeout-minutes: 60
+      - uses: actions/checkout@v1$
 
       - name: Setup Ionic & Cordova
         uses: coturiv/setup-ionic@v1
         with:
-          cordova-version: 9
+          cordova-version: 8
 
       - name: Build Android
         run: |
           sudo chown -R $USER:$GROUP ~/.npm
           sudo chown -R $USER:$GROUP ~/.config
-          ionic cordova build android --prod
+          ionic info
+          ionic cordova platform add android@latest
+          ionic cordova build android
