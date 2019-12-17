@@ -15,7 +15,6 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
-        ionic-version: [5.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -27,7 +26,7 @@ jobs:
         timeout-minutes: 60
 
       - name: Setup Ionic
-        uses: coturiv/setup-ionic@v1.0.0
+        uses: coturiv/setup-ionic@v1
         with:
           ionic-version: ${{ matrix.ionic-version }}
 
@@ -42,7 +41,6 @@ jobs:
     strategy:
       matrix:
         node-version: [12.x]
-        ionic-version: [5.x]
 
     steps:
       - uses: actions/checkout@v1
@@ -54,7 +52,7 @@ jobs:
         timeout-minutes: 60
 
       - name: Setup Ionic & Cordova
-        uses: coturiv/setup-ionic@v1.0.0
+        uses: coturiv/setup-ionic@v1
         with:
           cordova-version: 9
 
