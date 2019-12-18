@@ -8,30 +8,30 @@ on:
       - CI
 
 jobs:
-  Linux_build:
-
-    runs-on: self-hosted
-
-    strategy:
-      matrix:
-        node-version: [12.x]
-
-    steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - run: npm install
-        timeout-minutes: 60
-
-      - name: Setup Ionic
-        uses: coturiv/setup-ionic@v1
-        with:
-          cordova-version: 8
-
-      - name: Ionic Build
-        run: ionic build
+#  Linux_build:
+#
+#    runs-on: self-hosted
+#
+#    strategy:
+#      matrix:
+#        node-version: [12.x]
+#
+#    steps:
+#      - uses: actions/checkout@v1
+#      - name: Use Node.js ${{ matrix.node-version }}
+#        uses: actions/setup-node@v1
+#        with:
+#          node-version: ${{ matrix.node-version }}
+#      - run: npm install
+#        timeout-minutes: 60
+#
+#      - name: Setup Ionic
+#        uses: coturiv/setup-ionic@v1
+#        with:
+#          cordova-version: 8
+#
+#      - name: Ionic Build
+#        run: ionic build
 
 
   Android_build:
@@ -54,6 +54,6 @@ jobs:
           install-pods: false
 
       - name: Android Build
-          run: |
-            ionic info
-            ionic cordova build android --prod
+        run: |
+          ionic info
+          ionic cordova build android --prod
