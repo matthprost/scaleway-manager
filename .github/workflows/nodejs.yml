@@ -42,14 +42,18 @@ jobs:
       - uses: actions/checkout@v1
 
       - name: Setup Ionic & Cordova
-        uses: coturiv/setup-ionic@v1
+        uses: coturiv/setup-ionic@v1.0.0
         with:
-          cordova-version: 8
+          # Version range or exact version of Cordova to use
+          cordova-version: 9.0.0
+          # Version range or exact version of Ionic to use
+          ionic-version: 5.4.11
+          # Whether to install Java
+          install-java: true
+          # Whether to install CocoaPods
+          install-pods: false
 
-      - name: Build Android
-        run: |
-          sudo chown -R $USER:$GROUP ~/.npm
-          sudo chown -R $USER:$GROUP ~/.config
-          ionic info
-          ionic cordova platform add android@latest
-          ionic cordova build android
+      - name: Android Build
+          run: |
+            ionic info
+            ionic cordova build android --prod
