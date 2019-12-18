@@ -49,6 +49,5 @@ jobs:
 
       - name: Android Build
         run: |
-          npm ci
           ionic info
           ionic cordova build android --prod
