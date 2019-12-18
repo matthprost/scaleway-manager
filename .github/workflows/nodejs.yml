@@ -23,7 +23,9 @@ jobs:
           cordova-version: 9.0.0
 
       - name: Ionic Build
-        run: ionic build
+        run: |
+          ionic info
+          ionic build
 
 
   Android_Build:
@@ -49,6 +51,5 @@ jobs:
 
       - name: Android Build
         run: |
-          npm ci
           ionic info
           ionic cordova build android --prod
