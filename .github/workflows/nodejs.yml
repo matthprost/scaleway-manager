@@ -8,60 +8,48 @@ on:
       - CI
 
 jobs:
-  linux_build:
+  Linux_Build:
 
-    runs-on: ubuntu-latest
-
-    strategy:
-      matrix:
-        node-version: [13.x]
-        ionic-version: [5.x]
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
-      - name: npm install
-        run: |
-          npm i
-        env:
-          CI: true
 
-      - name: Setup Ionic
-        uses: coturiv/setup-ionic@v1.0.0
-        with:
-          ionic-version: ${{ matrix.ionic-version }}
+      - run: npm ci
 
-      - name: ionic build
+      - name: Setup Ionic & Cordova
+        uses: coturiv/setup-ionic@v1
+        with:
+          cordova-version: 9.0.0
+
+      - name: Ionic Build
         run: |
+          ionic info
           ionic build
 
-  android_build:
 
-    runs-on: ubuntu-latest
+  Android_Build:
 
-    strategy:
-      matrix:
-        node-version: [13.x]
-        ionic-version: [5.x]
-        cordova-version: [9.x]
+    runs-on: self-hosted
 
     steps:
       - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
-        with:
-          node-version: ${{ matrix.node-version }}
+
+      - run: npm ci
 
       - name: Setup Ionic & Cordova
         uses: coturiv/setup-ionic@v1.0.0
         with:
-          cordova-version: ${{ matrix.cordova-version }}
+          # Version range or exact version of Cordova to use
+          cordova-version: 9.0.0
+          # Version range or exact version of Ionic to use
+          ionic-version: 5.4.11
+          # Whether to install Java
+          install-java: true
+          # Whether to install CocoaPods
+          install-pods: false
 
-      - name: Ionic Cordova Build Android
+      - name: Android Build
         run: |
-          sudo chown -R $USER:$GROUP ~/.npm
-          sudo chown -R $USER:$GROUP ~/.config
+          ionic info
           ionic cordova build android --prod
