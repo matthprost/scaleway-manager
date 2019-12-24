@@ -5,9 +5,6 @@
     </ion-buttons>
     <ion-title color="primary">SSH Keys</ion-title>
     <ion-buttons slot="end" *ngIf="sshKeys.length > 0">
-      <ion-button slot="icon-only" (click)="addSshKey($event)">
-        <ion-icon name="add"></ion-icon>
-      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -56,5 +53,11 @@
       <img src="assets/imgs/key.svg" alt="key">
       No SSH Key found
     </p>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button color="secondary" (click)="addSshKey($event)">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </div>
 </ion-content>

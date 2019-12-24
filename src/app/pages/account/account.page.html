@@ -4,71 +4,68 @@
 
 
 <ion-content force-overscroll="false">
+  <div class="menu-button">
+    <ion-button class="ion-float-end" color="light" fill="clear" (click)="navigate('home')">
+      <ion-icon name="md-close"></ion-icon>
+    </ion-button>
+  </div>
+  <div class="background"></div>
+  <div class="profile">
+    <ion-img src="assets/imgs/profile.svg"></ion-img>
+  </div>
 
   <app-loader *ngIf="isLoading"></app-loader>
 
   <div *ngIf="!isLoading">
-    <div class="menu-button">
-      <ion-button class="ion-float-end" color="light" fill="clear" (click)="navigate('home')">
-        <ion-icon name="md-close"></ion-icon>
-      </ion-button>
-    </div>
-    <div class="background"></div>
-    <div class="profile">
-      <ion-img src="assets/imgs/profile.svg"></ion-img>
-    </div>
-
-    <div *ngIf="!isLoading">
-      <div class="name">
-        <div class="two-auth-enabled" *ngIf="user.double_auth_enabled">
-          <ion-chip>
-            <ion-label color="light">
-              <fa-icon [icon]="faShieldAlt"></fa-icon>
-              2AF
-            </ion-label>
-          </ion-chip>
-        </div>
-        <div class="two-auth-disabled" *ngIf="!user.double_auth_enabled">
-          <ion-chip>
-            <ion-label color="light">
-              <fa-icon [icon]="danger"></fa-icon>
-              2AF
-            </ion-label>
-          </ion-chip>
-        </div>
-        {{ user.email }}
+    <div class="name">
+      <div class="two-auth-enabled" *ngIf="user.double_auth_enabled">
+        <ion-chip>
+          <ion-label color="light">
+            <fa-icon [icon]="faShieldAlt"></fa-icon>
+            2AF
+          </ion-label>
+        </ion-chip>
       </div>
-      <div class="date">
-        <div class="date-content">
-          Member since {{ user.creation_date | date:'MMMM d, y'}}
-        </div>
+      <div class="two-auth-disabled" *ngIf="!user.double_auth_enabled">
+        <ion-chip>
+          <ion-label color="light">
+            <fa-icon [icon]="danger"></fa-icon>
+            2AF
+          </ion-label>
+        </ion-chip>
       </div>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-card mode="ios" (click)="navigate('ssh-keys')">
-              <ion-card-header class="ion-text-center" mode="ios">
-                <ion-icon name="key" mode="ios"></ion-icon>
-              </ion-card-header>
-
-              <ion-card-content class="ion-text-center" mode="ios">
-                SSH Keys
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-          <ion-col>
-            <ion-card mode="ios" (click)="navigate('tokens')">
-              <ion-card-header class="ion-text-center" mode="ios">
-                <ion-icon name="cloud" mode="ios"></ion-icon>
-              </ion-card-header>
-
-              <ion-card-content class="ion-text-center" mode="ios">
-                API Tokens
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      {{ user.email }}
     </div>
+    <div class="date">
+      <div class="date-content">
+        Member since {{ user.creation_date | date:'MMMM d, y'}}
+      </div>
+    </div>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card mode="ios" (click)="navigate('ssh-keys')">
+            <ion-card-header class="ion-text-center" mode="ios">
+              <ion-icon name="key" mode="ios"></ion-icon>
+            </ion-card-header>
+
+            <ion-card-content class="ion-text-center" mode="ios">
+              SSH Keys
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card mode="ios" (click)="navigate('tokens')">
+            <ion-card-header class="ion-text-center" mode="ios">
+              <ion-icon name="cloud" mode="ios"></ion-icon>
+            </ion-card-header>
+
+            <ion-card-content class="ion-text-center" mode="ios">
+              API Tokens
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

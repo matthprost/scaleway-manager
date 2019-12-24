@@ -1,7 +1,7 @@
 .title {
   text-transform: uppercase;
   font-weight: 400;
-  font-size: 1rem;
+  font-size: .9rem;
 }
 
 .description {
@@ -47,4 +47,8 @@ code {
     margin: 0 auto;
     margin-bottom: 2rem;
   }
+}
+
+p {
+  font-size: .9rem;
 }
