@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { SshKeysPage } from './ssh-keys.page';
 import {ComponentsModule} from '../../../components/components.module';
 import {Clipboard} from '@ionic-native/clipboard/ngx';
+import {AddSshKeyPage} from './add-ssh-key/add-ssh-key.page';
 
 const routes: Routes = [
   {
@@ -24,9 +25,10 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     ComponentsModule
   ],
-  declarations: [SshKeysPage],
+  declarations: [SshKeysPage, AddSshKeyPage],
   providers: [
     Clipboard
-  ]
+  ],
+  entryComponents: [AddSshKeyPage]
 })
 export class SshKeysPageModule {}

@@ -4,6 +4,7 @@ import {AccountService} from '../../../services/user/account/account.service';
 import {SshKeysDto} from '../../../services/user/account/account.dto';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {Clipboard} from '@ionic-native/clipboard/ngx';
+import {AddSshKeyPage} from './add-ssh-key/add-ssh-key.page';
 
 @Component({
   selector: 'app-ssh-keys',
@@ -13,7 +14,7 @@ import {Clipboard} from '@ionic-native/clipboard/ngx';
 export class SshKeysPage implements OnInit {
 
   public isLoading = true;
-  public sshKeys: Array<SshKeysDto>;
+  public sshKeys: Array<SshKeysDto> = [];
 
   constructor(public navCtrl: NavController, private accountProvider: AccountService,
               public statusBar: StatusBar, private clipboard: Clipboard, private toastCtrl: ToastController,
@@ -43,7 +44,7 @@ export class SshKeysPage implements OnInit {
   }
 
   private async refresh() {
-      this.sshKeys = (await this.accountProvider.getUserData()).ssh_public_keys;
+    this.sshKeys = (await this.accountProvider.getUserData()).ssh_public_keys;
   }
 
   public split(sshKey: SshKeysDto): string {
@@ -82,12 +83,19 @@ export class SshKeysPage implements OnInit {
       });
   }
 
-  /*async addSshKey(event) {
-    const modal = await this.modalController.create(AddSshKeyPage, {'keys': this.sshKeys});
-    await modal.onDidDismiss(() => {
+  async addSshKey(event) {
+    const modal = await this.modalController.create({
+      component: AddSshKeyPage,
+      componentProps: {
+        keys: this.sshKeys
+      }
+    });
+
+    await modal.present();
+
+    await modal.onDidDismiss().then(() => {
       this.refresh();
     });
-    return await modal.present();
-  }*/
+  }
 
 }

@@ -79,6 +79,7 @@ const routes: Routes = [
       },
     ],
   },
+  { path: 'add-ssh-key', loadChildren: './pages/account/ssh-keys/add-ssh-key/add-ssh-key.module#AddSshKeyPageModule' },
 ];
 
 @NgModule({

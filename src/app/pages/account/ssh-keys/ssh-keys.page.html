@@ -4,6 +4,11 @@
       <ion-back-button defaultHref="/home/account"></ion-back-button>
     </ion-buttons>
     <ion-title color="primary">SSH Keys</ion-title>
+    <ion-buttons slot="end" *ngIf="sshKeys.length > 0">
+      <ion-button slot="icon-only" (click)="addSshKey($event)">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -19,8 +24,7 @@
       <p style="margin-top: 0">SSH Keys are a secure way to log into your servers through SSH.</p>
       <p>To generate your key, run:</p>
       <p style="margin-bottom: 0"><code (click)="copyToClipBoard('ssh-keygen -t rsa -b 4096 -C  user@email.com')">ssh-keygen
-        -t rsa -b 4096 -C
-        "user@email.com"</code></p>
+        -t rsa -b 4096 -C "user@email.com"</code></p>
     </div>
 
     <ion-list>
