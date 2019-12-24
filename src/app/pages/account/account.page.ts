@@ -42,9 +42,9 @@ export class AccountPage implements OnInit {
       case 'ssh-keys' :
         this.navCtrl.navigateForward(['/home/account/ssh-keys']);
         break;
-      /*case 'tokens' :
-        this.navCtrl.push(TokensPage);
-        break;*/
+      case 'tokens' :
+        this.navCtrl.navigateForward(['/home/account/tokens']);
+        break;
     }
   }
 

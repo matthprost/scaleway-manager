@@ -1,0 +1,28 @@
+.title {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: .9rem;
+}
+
+.text {
+  background: white;
+  padding: 1rem 1.2rem 1rem 1.2rem;
+}
+
+p {
+  font-size: .9rem;
+}
+
+.description {
+  &-left {
+    color: #868686;
+    margin-top: .2rem;
+    float: left;
+  }
+
+  &-right {
+    color: #868686;
+    margin-top: .2rem;
+    float: right;
+  }
+}

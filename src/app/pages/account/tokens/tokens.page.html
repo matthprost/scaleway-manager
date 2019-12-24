@@ -1,0 +1,46 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/home/account"></ion-back-button>
+    </ion-buttons>
+    <ion-title color="primary">Tokens</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="!isLoading" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <div class="text">
+    <p>API tokens are unique identifier associated with your Scaleway account to authenticate command in Scaleway
+      API.</p>
+  </div>
+
+  <app-loader *ngIf="isLoading"></app-loader>
+
+  <ion-list *ngIf="!isLoading">
+    <ion-list-header class="title" color="secondary">Tokens</ion-list-header>
+    <ion-item-sliding *ngFor="let token of tokens" #item>
+      <ion-item [style.color]="isCurrentSession(token) ? '#3F6ED8' : ''">
+        <ion-label>
+          <div class="information-title-content">
+            {{ token.access_key }}
+            <ion-badge color="thirdly" *ngIf="isCurrentSession(token)">Current</ion-badge>
+          </div>
+          <div class="description-left">
+            {{ token.creation_ip }}
+          </div>
+          <div class="description-right">
+            {{ token.creation_date | date: 'MMM MM y' }}
+          </div>
+        </ion-label>
+      </ion-item>
+      <ion-item-options *ngIf="!isCurrentSession(token)">
+        <ion-item-option expandable="true" color="danger" (click)="deleteToken(token, item)">
+          DELETE
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>
