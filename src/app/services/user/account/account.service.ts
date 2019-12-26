@@ -15,7 +15,7 @@ export class AccountService {
 
     return new Promise((resolve, reject) => {
       this.storage.get('token').then(result => {
-        this.api.get<UsersDto>(this.api.getApiUrl() + '/users/' + result.token.user_id)
+        this.api.get<UsersDto>(this.api.getApiUrl() + '/users/' + result.jwt.id)
         // tslint:disable-next-line:no-shadowed-variable
           .then(result => {
             resolve(result.user);
@@ -30,7 +30,7 @@ export class AccountService {
   public patchSshKeys(keys: Array<{'key': string}>): Promise<UserDto> {
     return new Promise((resolve, reject) => {
       this.storage.get('token').then(result => {
-        this.api.patch<UsersDto>(this.api.getApiUrl() + '/users/' + result.token.user_id, {
+        this.api.patch<UsersDto>(this.api.getApiUrl() + '/users/' + result.jwt.id, {
           'ssh_public_keys': keys
         })
         // tslint:disable-next-line:no-shadowed-variable

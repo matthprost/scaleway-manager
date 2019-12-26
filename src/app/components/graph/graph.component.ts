@@ -39,6 +39,7 @@ export class GraphComponent implements OnInit {
     });
 
     this.values = values.reverse();
+
     this.currency = data[0].currency;
   }
 

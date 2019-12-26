@@ -39,7 +39,7 @@ export class ApiService {
         this.httpClient.request<T>(HttpMethods[method.toString()], url, {
           headers: token ?
             {
-              'x-auth-token': token.token.id
+              'X-Session-Token': token.auth.jwt_key
             } : {},
           body: data
         }).toPromise().then(result => {

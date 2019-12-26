@@ -14,10 +14,10 @@ export class AuthService {
   public login(email: string, password: string, code?: string): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      this.api.post<AuthTokenDto>(this.api.getApiUrl() + '/tokens', {
+      this.api.post<AuthTokenDto>(this.api.getApiUrl() + '/jwt', {
         'email': email,
         'password': password,
-        'expires': false,
+        'renewable': true,
         '2FA_token': String(code),
       })
         .then(result => {

@@ -22,7 +22,8 @@
   <ion-list *ngIf="!isLoading">
     <ion-list-header class="title" color="secondary">Tokens</ion-list-header>
     <ion-item-sliding *ngFor="let token of tokens" #item>
-      <ion-item [style.color]="isCurrentSession(token) ? '#3F6ED8' : ''">
+      <ion-item [style.color]="isCurrentSession(token) ? '#3F6ED8' : ''"
+                lines="{{ tokens.length > 1 ? 'inset' : 'none' }}">
         <ion-label>
           <div class="information-title-content">
             {{ token.access_key }}
