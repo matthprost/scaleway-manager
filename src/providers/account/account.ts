@@ -15,7 +15,7 @@ export class AccountProvider {
 
     return new Promise((resolve, reject) => {
       this.storage.get('token').then(result => {
-        this.api.get<UsersDto>(this.api.getApiUrl() + '/users/' + result.token.user_id, result.token.id)
+        this.api.get<UsersDto>(this.api.getApiUrl() + '/users/' + result.jwt.issuer, result.auth.jwt_key)
           .then(result => {
             resolve(result.user);
           })
@@ -29,7 +29,7 @@ export class AccountProvider {
   public patchSshKeys(keys: Array<{"key": string}>): Promise<UserDto> {
     return new Promise((resolve, reject) => {
       this.storage.get('token').then(result => {
-        this.api.patch<UsersDto>(this.api.getApiUrl() + '/users/' + result.token.user_id, result.token.id, {
+        this.api.patch<UsersDto>(this.api.getApiUrl() + '/users/' + result.jwt.issuer, result.auth.jwt_key, {
           "ssh_public_keys": keys
         })
           .then(result => {

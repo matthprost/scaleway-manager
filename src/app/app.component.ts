@@ -4,7 +4,6 @@ import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {HomePage} from '../pages/home/home';
 import {LoginPage} from '../pages/auth/login/login';
-import {AuthTokenDto} from "../providers/auth/auth-tokens.dto";
 import {Storage} from '@ionic/storage';
 import {ServerPage} from "../pages/server/server";
 import {ScreenOrientation} from "@ionic-native/screen-orientation/ngx";
@@ -77,9 +76,9 @@ export class MyApp {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       }
 
-      this.storage.get('token').then((val: AuthTokenDto) => {
+      this.storage.get('token').then((val: any) => {
         if (val) {
-          this.authprovider.getToken(val.token.id).then(() => {
+          /*this.authprovider.getToken(val.token.auth.jwt_key).then(() => {*/
             this.nav.setRoot(HomePage).then(() => {
               this.statusBar.styleDefault();
               this.menu.swipeEnable(true);
@@ -89,7 +88,7 @@ export class MyApp {
                 console.log(error);
                 this.splashScreen.hide();
               });
-          })
+          /*})
             .catch(() => {
               this.storage.remove('token').then(() => {
                 this.nav.setRoot(LoginPage).then(() => {
@@ -97,7 +96,7 @@ export class MyApp {
                   this.splashScreen.hide();
                 })
               });
-            });
+            });*/
         } else {
           this.statusBar.styleDefault();
           this.splashScreen.hide();

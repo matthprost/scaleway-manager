@@ -1,9 +1,8 @@
-import { Component } from '@angular/core';
-import {ItemSliding, NavController, NavParams} from 'ionic-angular';
-import {AuthProvider} from "../../../providers/auth/auth";
-import {TokenDto} from "../../../providers/auth/auth-tokens.dto";
-import {Storage} from "@ionic/storage";
-import {StatusBar} from "@ionic-native/status-bar/ngx";
+import {Component} from '@angular/core';
+import {ItemSliding, LoadingController, NavController} from 'ionic-angular';
+import {AuthProvider} from '../../../providers/auth/auth';
+import {TokenDto} from '../../../providers/auth/auth-tokens.dto';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'page-tokens',
@@ -12,11 +11,10 @@ import {StatusBar} from "@ionic-native/status-bar/ngx";
 export class TokensPage {
 
   public isLoading: boolean = true;
-  public tokens: Array<TokenDto> = null;
-  public currentSession  = null;
+  public tokens: Array<TokenDto> = [];
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authProvide: AuthProvider,
-              private storage: Storage, public statusBar: StatusBar) {
+  constructor(public navCtrl: NavController, private authProvide: AuthProvider, public statusBar: StatusBar,
+              private loadingCtrl: LoadingController) {
   }
 
   ionViewDidEnter() {
@@ -26,7 +24,7 @@ export class TokensPage {
   ionViewDidLoad() {
     this.refresh().then(() => {
       this.isLoading = false;
-    })
+    });
   }
 
   public doRefresh(refresher) {
@@ -39,36 +37,32 @@ export class TokensPage {
   }
 
   private refresh(): Promise<any> {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.authProvide.getAllTokens().then(tokens => {
         this.tokens = tokens.tokens;
-        this.storage.get('token').then(result => {
-          this.currentSession = result.token.access_key;
-          resolve('ok');
-        });
+        resolve('ok');
       })
         .catch(error => {
           console.log(error);
-        })
+        });
     });
-  }
-
-  public isCurrentSession(token) {
-
-    if (token.access_key === this.currentSession) {
-      return true;
-    } else {
-      return false;
-    }
   }
 
   public deleteToken(token: TokenDto, slidingItem: ItemSliding) {
     slidingItem.close();
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+
+    loading.present();
 
     this.authProvide.deleteToken(token.access_key).then(() => {
-      this.refresh();
+      this.refresh().then(() => {
+        loading.dismiss();
+      });
     })
       .catch(error => {
+        loading.dismiss();
         console.log(error);
       });
   }

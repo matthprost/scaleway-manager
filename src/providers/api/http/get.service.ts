@@ -14,7 +14,7 @@ export class GetService {
       this.http.get<T>(url, {
         headers: token ?
           {
-            'x-auth-token': token
+            'X-Session-Token': token
           } : {}
       }).subscribe(
         data => {

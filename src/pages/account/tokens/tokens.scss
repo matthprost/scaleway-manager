@@ -38,4 +38,10 @@ page-tokens {
   .current-token {
     color: red !important;
   }
+
+  .no-tokens {
+    color: grey;
+    text-align: center;
+    width: 100%;
+  }
 }

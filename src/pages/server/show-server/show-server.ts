@@ -137,8 +137,8 @@ export class ShowServerPage {
   private refreshServer(): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      this.storage.get('token').then((token: AuthTokenDto) => {
-        this.serversProvider.getSpecificServer(this.serverCountry, token.token.id, this.server.id).then(result => {
+      this.storage.get('token').then((token) => {
+        this.serversProvider.getSpecificServer(this.serverCountry, token.auth.jwt_key, this.server.id).then(result => {
           this.server = result.server;
           this.serverName = result.server.name;
           this.setState();
@@ -163,7 +163,7 @@ export class ShowServerPage {
     this.power = event;
     if (this.power === true) {
       this.storage.get('token').then(token => {
-        this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'poweron')
+        this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.auth.jwt_key, 'poweron')
           .then(() => {
             this.refreshServer();
           }).catch(error => {
@@ -172,7 +172,7 @@ export class ShowServerPage {
       });
     } else {
       this.storage.get('token').then(token => {
-        this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'stop_in_place')
+        this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.auth.jwt_key, 'stop_in_place')
           .then(() => {
             this.refreshServer();
           }).catch(error => {
@@ -195,7 +195,7 @@ export class ShowServerPage {
           text: 'Reboot',
           handler: () => {
             this.storage.get('token').then(token => {
-              this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'reboot')
+              this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.auth.jwt_key, 'reboot')
                 .then(() => {
                   this.refreshServer();
                 }).catch(error => {
@@ -212,7 +212,7 @@ export class ShowServerPage {
 
   public archive() {
     this.storage.get('token').then(token => {
-      this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'poweroff')
+      this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.auth.jwt_key, 'poweroff')
         .then(() => {
           this.refreshServer();
         }).catch(error => {
@@ -234,7 +234,7 @@ export class ShowServerPage {
           text: 'Delete',
           handler: () => {
             this.storage.get('token').then(token => {
-              this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.token.id, 'terminate')
+              this.serversProvider.sendServerAction(this.serverCountry, this.server.id, token.auth.jwt_key, 'terminate')
                 .then(() => {
                   this.refreshServer();
                 }).catch(error => {
