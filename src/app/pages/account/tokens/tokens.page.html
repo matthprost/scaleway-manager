@@ -22,12 +22,10 @@
   <ion-list *ngIf="!isLoading">
     <ion-list-header class="title" color="secondary">Tokens</ion-list-header>
     <ion-item-sliding *ngFor="let token of tokens" #item>
-      <ion-item [style.color]="isCurrentSession(token) ? '#3F6ED8' : ''"
-                lines="{{ tokens.length > 1 ? 'inset' : 'none' }}">
+      <ion-item lines="{{ tokens.length > 1 ? 'inset' : 'none' }}">
         <ion-label>
           <div class="information-title-content">
             {{ token.access_key }}
-            <ion-badge color="thirdly" *ngIf="isCurrentSession(token)">Current</ion-badge>
           </div>
           <div class="description-left">
             {{ token.creation_ip }}
@@ -37,7 +35,7 @@
           </div>
         </ion-label>
       </ion-item>
-      <ion-item-options *ngIf="!isCurrentSession(token)">
+      <ion-item-options>
         <ion-item-option expandable="true" color="danger" (click)="deleteToken(token, item)">
           DELETE
         </ion-item-option>

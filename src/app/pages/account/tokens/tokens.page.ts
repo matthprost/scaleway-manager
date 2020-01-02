@@ -13,7 +13,6 @@ export class TokensPage implements OnInit {
 
   public isLoading = true;
   public tokens: Array<TokenDto> = null;
-  public currentSession = null;
 
   constructor(public navCtrl: NavController, private authProvide: AuthService, private storage: Storage) {
   }
@@ -40,19 +39,12 @@ export class TokensPage implements OnInit {
     return new Promise((resolve, reject) => {
       this.authProvide.getAllTokens().then(tokens => {
         this.tokens = tokens.tokens;
-        this.storage.get('token').then(result => {
-          this.currentSession = result.token.access_key;
-          resolve('ok');
-        });
+        resolve('ok');
       })
         .catch(error => {
           console.log(error);
         });
     });
-  }
-
-  public isCurrentSession(token) {
-    return token.access_key === this.currentSession;
   }
 
   public async deleteToken(token: TokenDto, slidingItem: IonItemSliding) {
