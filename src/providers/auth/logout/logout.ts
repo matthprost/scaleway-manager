@@ -24,7 +24,7 @@ export class LogoutProvider {
 
             reject(error);
           });
-        this.api.delete(this.api.getApiUrl() + '/tokens/' + token.auth.jwt_key, token.token.auth.jwt_key);
+        this.api.delete(this.api.getApiUrl() + '/jwt/' + token.jwt.jti, token.auth.jwt_key);
         resolve('ok');
       }).catch(error => {
         reject(error);

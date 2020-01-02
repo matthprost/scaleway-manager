@@ -102,8 +102,10 @@ export class MyApp {
           this.splashScreen.hide();
         }
       }).catch(() => {
-        this.statusBar.styleDefault();
-        this.splashScreen.hide();
+        this.nav.setRoot(LoginPage).then(() => {
+          this.statusBar.styleDefault();
+          this.splashScreen.hide();
+        });
       });
     });
   }
