@@ -19,10 +19,10 @@
   <ion-list *ngIf="!isLoading">
     <ion-list-header class="title" color="secondary">Tokens</ion-list-header>
     <ion-item-sliding *ngFor="let token of tokens" #item>
-        <ion-item [style.color]="isCurrentSession(token) ? '#3F6ED8' : ''">
+        <ion-item>
           <div class="information-title">
             <div class="information-title-content">
-              {{ token.access_key }} {{ isCurrentSession(token) ? ' (Current)': '' }}
+              {{ token.access_key }}
             </div>
             <div class="description-left">
               {{ token.creation_ip }}
@@ -32,11 +32,15 @@
             </div>
           </div>
         </ion-item>
-      <ion-item-options *ngIf="!isCurrentSession(token)">
+      <ion-item-options>
         <button ion-button color="danger" (click)="deleteToken(token, item)">
           DELETE
         </button>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+
+  <div *ngIf="tokens.length === 0 && !isLoading">
+    <p class="no-tokens">No token are registered on your account</p>
+  </div>
 </ion-content>

@@ -7,7 +7,6 @@ import {
 } from 'ionic-angular';
 import {ServerPage} from "../server/server";
 import {Storage} from "@ionic/storage";
-import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {ServersProvider} from "../../providers/servers/servers";
 import {ServerDto} from "../../providers/servers/server.dto";
 import {HomeStatsDirective} from "../../directives/home-stats/home-stats";
@@ -77,10 +76,10 @@ export class HomePage {
 
     return new Promise((resolve, reject) => {
       this.rect = 'background-rect rect-scale';
-      this.storage.get('token').then((token: AuthTokenDto) => {
+      this.storage.get('token').then((token) => {
 
         // Get all servers from PARIS
-        const paris = this.serversProvider.getAllServerByCountry('Paris', token.token.id).then(result => {
+        const paris = this.serversProvider.getAllServerByCountry('Paris', token.auth.jwt_key).then(result => {
           this.nbrServParis = result.servers.length;
           this.parisServers = result.servers;
         }).catch(error => {
@@ -88,7 +87,7 @@ export class HomePage {
         });
 
         // Get all servers from NETHERLANDS
-        const netherlands = this.serversProvider.getAllServerByCountry('Netherlands', token.token.id).then(result => {
+        const netherlands = this.serversProvider.getAllServerByCountry('Netherlands', token.auth.jwt_key).then(result => {
           this.nbrServNetherlands = result.servers.length;
           this.netherlandsServers = result.servers;
         }).catch(error => {
@@ -96,7 +95,7 @@ export class HomePage {
         });
 
         // Get two last billing
-        const billing = this.billingProvider.getTwoLastBilling(token.token.id).then(result => {
+        const billing = this.billingProvider.getTwoLastBilling(token.auth.jwt_key).then(result => {
           this.lastInvoice = result[0];
           this.secondLastInvoice = result[1];
         }).catch(error => {

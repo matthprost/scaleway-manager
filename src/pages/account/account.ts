@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {NavController, NavParams} from 'ionic-angular';
+import {NavController} from 'ionic-angular';
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 import {AccountProvider} from "../../providers/account/account";
 import {UserDto} from "../../providers/account/account.dto";
@@ -18,7 +18,7 @@ export class AccountPage {
   public faShieldAlt = faShieldAlt;
   public danger = faExclamationCircle;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,
+  constructor(public navCtrl: NavController,
               public statusBar: StatusBar, private accountProvider: AccountProvider) {
   }
 

@@ -14,7 +14,7 @@ export class DeleteService {
         {
           headers: token ?
             {
-              'x-auth-token': token
+              'X-Session-Token': token
             } : {}
         }).subscribe(
         data => {

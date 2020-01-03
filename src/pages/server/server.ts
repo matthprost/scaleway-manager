@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {ItemSliding, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {ItemSliding, LoadingController, NavController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
-import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {ServersProvider} from "../../providers/servers/servers";
 import {ServerDto} from "../../providers/servers/server.dto";
 import {ShowServerPage} from "./show-server/show-server";
@@ -22,7 +21,7 @@ export class ServerPage {
 
   public isLoading: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
               private storage: Storage, private serversProvider: ServersProvider, public statusBar: StatusBar) {
   }
 
@@ -39,9 +38,9 @@ export class ServerPage {
 
   private refreshAllServers(): Promise<any> {
 
-    return new Promise((resolve, reject) => {
-      this.storage.get('token').then((token: AuthTokenDto) => {
-        this.serversProvider.getAllServer(token.token.id).then(result => {
+    return new Promise((resolve) => {
+      this.storage.get('token').then((token) => {
+        this.serversProvider.getAllServer(token.auth.jwt_key).then(result => {
           this.serverParis = { 'servers': result.paris.servers, 'country': 'Paris' };
           this.serverNetherlands = { 'servers': result.netherlands.servers, 'country': 'Netherlands' };
           console.log(this.serverParis.servers);
@@ -72,7 +71,7 @@ export class ServerPage {
   public serverAction(server, action, slidingItem: ItemSliding, country: string) {
     slidingItem.close();
     this.storage.get('token').then(token => {
-      this.serversProvider.sendServerAction(country, server.id, token.token.id, action)
+      this.serversProvider.sendServerAction(country, server.id, token.auth.jwt_key, action)
         .then(() => {
           this.refreshAllServers();
         })

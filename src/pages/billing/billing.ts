@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {BillingProvider} from "../../providers/billing/billing";
 import {Storage} from "@ionic/storage";
-import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 
@@ -39,8 +38,8 @@ export class BillingPage {
 
   private refresh(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.storage.get('token').then((token: AuthTokenDto) => {
-        this.billingProvider.getBilling(token.token.id, 15).then(result => {
+      this.storage.get('token').then((token) => {
+        this.billingProvider.getBilling(token.auth.jwt_key, 15).then(result => {
           this.invoices = result;
           this.invoices = this.invoices.slice(1, this.invoices.length);
           this.currentInvoice = result[0];
