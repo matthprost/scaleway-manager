@@ -1,8 +1,8 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
-import { Platform } from '@ionic/angular';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
+import {Platform} from '@ionic/angular';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-root',
@@ -13,12 +13,30 @@ export class AppComponent {
     {
       title: 'Home',
       url: '/home',
-      icon: 'home'
+      icon: 'md-home'
     },
     {
       title: 'Instances',
       url: '/instances',
-      icon: 'switch'
+      icon: 'desktop'
+    },
+    {
+      title: 'Object Storage',
+      url: '/object-storage',
+      icon: 'cube'
+    }
+  ];
+
+  public appPagesFooter = [
+    {
+      title: 'Settings',
+      url: '/settings',
+      icon: 'settings'
+    },
+    {
+      title: 'About',
+      url: '/about',
+      icon: 'help-buoy'
     }
   ];
 
