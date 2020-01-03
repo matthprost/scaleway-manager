@@ -31,7 +31,7 @@
             {{ token.creation_ip }}
           </div>
           <div class="description-right">
-            {{ token.creation_date | date: 'MMM MM y' }}
+            {{ token.creation_date | date }}
           </div>
         </ion-label>
       </ion-item>
@@ -42,4 +42,8 @@
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+  <div class="no-tokens" *ngIf="!isLoading && tokens.length === 0">
+    <ion-icon name="cloud-outline"></ion-icon>
+    <p>No token registered on your account</p>
+  </div>
 </ion-content>

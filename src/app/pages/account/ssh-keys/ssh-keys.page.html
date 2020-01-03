@@ -45,17 +45,16 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
-    <p class="no-ssh-keys ion-margin-top ion-text-center"
-       *ngIf="!isLoading && (sshKeys === undefined || sshKeys.length === 0)"
-       text-center>
-      <img src="assets/imgs/key.svg" alt="key">
-      No SSH Key found
-    </p>
 
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
       <ion-fab-button color="secondary" (click)="addSshKey($event)">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>
+  </div>
+
+  <div class="no-ssh-keys" *ngIf="!isLoading && sshKeys.length === 0">
+    <ion-icon name="ios-key"></ion-icon>
+    <p>No SSH Key registered on your account</p>
   </div>
 </ion-content>

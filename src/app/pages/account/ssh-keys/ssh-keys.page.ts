@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {IonItemSliding, ModalController, NavController, ToastController} from '@ionic/angular';
+import {IonItemSliding, LoadingController, ModalController, NavController, ToastController} from '@ionic/angular';
 import {AccountService} from '../../../services/user/account/account.service';
 import {SshKeysDto} from '../../../services/user/account/account.dto';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
@@ -18,7 +18,7 @@ export class SshKeysPage implements OnInit {
 
   constructor(public navCtrl: NavController, private accountProvider: AccountService,
               public statusBar: StatusBar, private clipboard: Clipboard, private toastCtrl: ToastController,
-              public modalController: ModalController) {
+              public modalController: ModalController, private loadingCtrl: LoadingController) {
   }
 
   ngOnInit(): void {
@@ -67,6 +67,11 @@ export class SshKeysPage implements OnInit {
 
   public async deleteSshKey(SshKey: SshKeysDto, slidingItem: IonItemSliding) {
     await slidingItem.close();
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...'
+    });
+
+    await loading.present();
 
     const finalSshKeysArray: Array<{ 'key': string }> = [];
     for (const sshKey of this.sshKeys) {
@@ -77,8 +82,10 @@ export class SshKeysPage implements OnInit {
 
     this.accountProvider.patchSshKeys(finalSshKeysArray).then(result => {
       this.sshKeys = result.ssh_public_keys;
+      loading.dismiss();
     })
       .catch(error => {
+        loading.dismiss();
         console.log(error);
       });
   }

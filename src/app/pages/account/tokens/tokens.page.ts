@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TokenDto} from '../../../services/user/auth/auth-tokens.dto';
-import {IonItemSliding, NavController} from '@ionic/angular';
+import {IonItemSliding, LoadingController, NavController} from '@ionic/angular';
 import {AuthService} from '../../../services/user/auth/auth.service';
-import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-tokens',
@@ -12,9 +11,9 @@ import {Storage} from '@ionic/storage';
 export class TokensPage implements OnInit {
 
   public isLoading = true;
-  public tokens: Array<TokenDto> = null;
+  public tokens: Array<TokenDto> = [];
 
-  constructor(public navCtrl: NavController, private authProvide: AuthService, private storage: Storage) {
+  constructor(public navCtrl: NavController, private authProvide: AuthService, private loadingCtrl: LoadingController) {
   }
 
   ngOnInit() {
@@ -49,11 +48,19 @@ export class TokensPage implements OnInit {
 
   public async deleteToken(token: TokenDto, slidingItem: IonItemSliding) {
     await slidingItem.close();
+    const loading = await this.loadingCtrl.create({
+      message: 'Loading...'
+    });
+
+    await loading.present();
 
     this.authProvide.deleteToken(token.access_key).then(() => {
-      this.refresh();
+      this.refresh().then(() => {
+        loading.dismiss();
+      });
     })
       .catch(error => {
+        loading.dismiss();
         console.log(error);
       });
   }

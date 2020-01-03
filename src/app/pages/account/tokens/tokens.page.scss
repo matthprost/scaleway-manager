@@ -26,3 +26,17 @@ p {
     float: right;
   }
 }
+
+.no-tokens {
+  color: grey;
+  text-align: center;
+  width: 100%;
+  ion-icon {
+    font-size: 2.5rem;
+  }
+  p {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: .9rem;
+  }
+}

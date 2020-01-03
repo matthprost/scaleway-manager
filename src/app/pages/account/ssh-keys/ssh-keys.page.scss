@@ -35,17 +35,16 @@ code {
 }
 
 .no-ssh-keys {
-  color: var(--ion-color-dark-tint);
-  text-transform: uppercase;
-  font-weight: 600;
-
-  img {
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
-    width: 50px;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 2rem;
+  color: grey;
+  text-align: center;
+  width: 100%;
+  ion-icon {
+    font-size: 2.5rem;
+  }
+  p {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: .9rem;
   }
 }
 
