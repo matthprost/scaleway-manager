@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {ItemSliding, LoadingController, NavController, NavParams} from 'ionic-angular';
+import {ItemSliding, LoadingController, NavController} from 'ionic-angular';
 import {Storage} from '@ionic/storage';
-import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {ServersProvider} from "../../providers/servers/servers";
 import {ServerDto} from "../../providers/servers/server.dto";
 import {ShowServerPage} from "./show-server/show-server";
@@ -22,7 +21,7 @@ export class ServerPage {
 
   public isLoading: boolean = true;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public loadingCtrl: LoadingController,
+  constructor(public navCtrl: NavController, public loadingCtrl: LoadingController,
               private storage: Storage, private serversProvider: ServersProvider, public statusBar: StatusBar) {
   }
 
@@ -39,7 +38,7 @@ export class ServerPage {
 
   private refreshAllServers(): Promise<any> {
 
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.storage.get('token').then((token) => {
         this.serversProvider.getAllServer(token.auth.jwt_key).then(result => {
           this.serverParis = { 'servers': result.paris.servers, 'country': 'Paris' };

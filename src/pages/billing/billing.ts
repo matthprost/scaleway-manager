@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
 import {BillingProvider} from "../../providers/billing/billing";
 import {Storage} from "@ionic/storage";
-import {AuthTokenDto} from "../../providers/auth/auth-tokens.dto";
 import {InvoicesDto} from "../../providers/billing/billing.dto";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
 

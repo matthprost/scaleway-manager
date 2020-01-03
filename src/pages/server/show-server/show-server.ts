@@ -1,8 +1,7 @@
 import {Component} from '@angular/core';
-import {AlertController, NavParams, PopoverController, ToastController} from 'ionic-angular';
+import {AlertController, NavParams, ToastController} from 'ionic-angular';
 import {ServerDto} from "../../../providers/servers/server.dto";
 import {ServersProvider} from "../../../providers/servers/servers";
-import {AuthTokenDto} from "../../../providers/auth/auth-tokens.dto";
 import {Storage} from "@ionic/storage";
 import {Clipboard} from "@ionic-native/clipboard/ngx";
 import {StatusBar} from "@ionic-native/status-bar/ngx";
@@ -21,8 +20,7 @@ export class ShowServerPage {
   public stateClass: string = 'state';
   public power: boolean = false;
 
-  constructor(public navParams: NavParams, public popoverCtrl: PopoverController,
-              private serversProvider: ServersProvider, private storage: Storage,
+  constructor(public navParams: NavParams, private serversProvider: ServersProvider, private storage: Storage,
               private toastCtrl: ToastController, private clipboard: Clipboard, private alertController: AlertController,
               public statusBar: StatusBar) {
     this.server = navParams.get('server');
