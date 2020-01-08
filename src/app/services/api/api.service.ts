@@ -47,11 +47,11 @@ export class ApiService {
         })
           .catch((err) => {
             console.log(err);
-            if (err && err.status && err.status === 401) {
-              /*this.storage.remove('token').then(() => {
+            if (err && err.status && err.status === 401 && err.error.type === 'invalid_auth') {
+              this.storage.remove('token').then(() => {
                 console.log('Error 401: Token might be not valid anymore');
-                this.router.navigate(['/login']);
-              });*/
+                this.navCtrl.navigateRoot(['/login']);
+              });
             } else if (err && err.status && err.status === 404) {
               this.navCtrl.navigateRoot(['/error/404']);
             } else if (err && err.status && err.status === 504) {

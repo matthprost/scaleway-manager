@@ -29,8 +29,9 @@ export class GraphComponent implements OnInit {
 
     data.forEach(result => {
       const parseResult = Number(result.billing_period.slice(-2));
-      array.push(months[parseResult]);
+      array.push(months[parseResult - 1]);
     });
+
 
     this.dates = array.reverse();
 
@@ -90,8 +91,8 @@ export class GraphComponent implements OnInit {
           yAxes: [
             {
               ticks: {
-                beginAtZero: true,
                 display: false,
+                fontColor: 'rgba(255, 255, 255, 0.8)',
               },
               gridLines: {
                 display: true,

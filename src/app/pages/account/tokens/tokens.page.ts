@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TokenDto} from '../../../services/user/auth/auth-tokens.dto';
 import {IonItemSliding, LoadingController, NavController} from '@ionic/angular';
 import {AuthService} from '../../../services/user/auth/auth.service';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-tokens',
@@ -13,13 +14,16 @@ export class TokensPage implements OnInit {
   public isLoading = true;
   public tokens: Array<TokenDto> = [];
 
-  constructor(public navCtrl: NavController, private authProvide: AuthService, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, private authProvide: AuthService, private loadingCtrl: LoadingController,
+              private statusBar: StatusBar) {
+    this.statusBar.styleDefault();
   }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
+    this.statusBar.styleDefault();
     this.refresh().then(() => {
       this.isLoading = false;
     });

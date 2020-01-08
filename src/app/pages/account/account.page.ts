@@ -18,6 +18,7 @@ export class AccountPage implements OnInit {
   public danger = faExclamationCircle;
 
   constructor(public navCtrl: NavController, public statusBar: StatusBar, private accountProvider: AccountService) {
+    this.statusBar.styleLightContent();
   }
 
   ngOnInit() {

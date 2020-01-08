@@ -1,3 +1,9 @@
+ion-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+  position: absolute;
+}
+
 @keyframes rect-scale {
   0% {
     border-right: 0 solid var(--ion-color-primary);
@@ -134,12 +140,6 @@ ion-card {
 
 /* Header */
 
-ion-toolbar {
-  --background: transparent;
-  --ion-color-base: transparent !important;
-  height: 0;
-}
-
 ion-content {
   --background: #eff3f6;
 }
@@ -153,7 +153,7 @@ ion-content {
 .home {
   &-header {
     background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%) no-repeat;
-    padding: .75rem .75rem 0 .75rem;
+    padding: 1.75rem .75rem 0 .75rem;
 
     ion-button {
       --pading-top: 0;
@@ -168,6 +168,7 @@ ion-content {
 
     &-canvas {
       padding: .5rem 0 3rem 0;
+      margin-top: 10vh;
     }
 
     h3 {
@@ -194,6 +195,7 @@ ion-content {
     ion-card {
       --background: white;
       margin: 0 .25rem;
+      min-height: 215px;
     }
 
     &-grid {
@@ -222,4 +224,15 @@ ion-content {
       }
     }
   }
+}
+
+.title-instances {
+  margin-left: .75rem;
+  margin-bottom: .5rem;
+  color: gray;
+  font-size: .9rem;
+  font-weight: 300;
+  padding-right: .5rem;
+  border-bottom: 1px solid lightgray;
+  display: inline-block;
 }

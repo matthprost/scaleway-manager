@@ -1,3 +1,9 @@
+ion-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+  position: absolute;
+}
+
 .menu-button {
   position: absolute;
   top: 0;

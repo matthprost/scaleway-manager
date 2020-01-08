@@ -87,6 +87,10 @@ const routes: Routes = [
     path: 'about',
     loadChildren: './pages/about/about.module#AboutPageModule'
   },
+  {
+    path: 'invoices',
+    loadChildren: './pages/invoices/invoices.module#InvoicesPageModule'
+  },
 ];
 
 @NgModule({

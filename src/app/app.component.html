@@ -19,7 +19,7 @@
         </ion-list>
       </ion-content>
       <ion-footer>
-        <ion-list style="margin: 0">
+        <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPagesFooter">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" lines="none">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>

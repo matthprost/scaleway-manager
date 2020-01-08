@@ -19,6 +19,7 @@ export class SshKeysPage implements OnInit {
   constructor(public navCtrl: NavController, private accountProvider: AccountService,
               public statusBar: StatusBar, private clipboard: Clipboard, private toastCtrl: ToastController,
               public modalController: ModalController, private loadingCtrl: LoadingController) {
+    this.statusBar.styleDefault();
   }
 
   ngOnInit(): void {

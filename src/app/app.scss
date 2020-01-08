@@ -9,8 +9,19 @@ ion-content {
   --background: #eff3f6;
 }
 
+ion-menu-toggle {
+  ion-item {
+    margin: .6rem 0;
+  }
+}
+
 ion-toolbar {
   --border-width: 0 0 0px !important;
+  --min-height: 3.5rem;
+  ion-title {
+    font-weight: 300;
+    font-size: 1.3rem;
+  }
 }
 
 .menu-app {

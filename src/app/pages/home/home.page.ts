@@ -35,6 +35,7 @@ export class HomePage implements OnInit {
   constructor(public navCtrl: NavController, private srvService: ServersService,
               private billingService: BillingService, private menuCtrl: MenuController,
               private statusBar: StatusBar) {
+    this.statusBar.styleLightContent();
   }
 
   ngOnInit() {
@@ -48,8 +49,8 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.menuCtrl.enable(true);
     this.statusBar.styleLightContent();
+    this.menuCtrl.enable(true);
     this.billingService.getXMonthsLastBilling(6).then(value => {
       this.billings = value;
       this.refresh().then(() => {

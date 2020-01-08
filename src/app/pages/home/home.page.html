@@ -1,9 +1,15 @@
 <ion-header>
-  <!--<ion-toolbar mode="ios">
+  <ion-toolbar mode="md">
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-  </ion-toolbar>-->
+    <ion-title color="light">Dashboard</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="navigate('account')" class="ion-float-end" color="light" fill="clear">
+        <ion-icon name="ios-contact" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="isLoading">
@@ -12,18 +18,6 @@
 
 <ion-content *ngIf="!isLoading">
   <div class="home-header">
-    <ion-row>
-      <ion-col>
-        <ion-button class="ion-float-start" color="light" fill="clear" mode="ios">
-          <ion-menu-button color="light"></ion-menu-button>
-          <h3>Dashboard</h3>
-
-        </ion-button>
-        <ion-button (click)="navigate('account')" class="ion-float-end" color="light" fill="clear">
-          <ion-icon name="ios-contact" slot="icon-only"></ion-icon>
-        </ion-button>
-      </ion-col>
-    </ion-row>
     <div class="home-header-canvas">
       <app-graph [billings]="this.billings"></app-graph>
     </div>
@@ -50,6 +44,9 @@
 
   <div class="home-page">
     <ion-grid class="home-page-grid">
+      <div class="title-instances">
+        Last 5 Active Instances
+      </div>
       <ion-row>
         <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
           <ion-slide *ngFor="let serversInstance of serversInstances">

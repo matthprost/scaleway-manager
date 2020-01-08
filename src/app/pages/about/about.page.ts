@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-about',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AboutPage implements OnInit {
 
-  constructor() { }
+  constructor(private statusBar: StatusBar) {
+    this.statusBar.styleDefault();
+  }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.statusBar.styleDefault();
   }
 
 }

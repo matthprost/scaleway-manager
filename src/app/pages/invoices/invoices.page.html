@@ -1,0 +1,68 @@
+<ion-header>
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="primary">Invoices</ion-title>
+    <ion-buttons slot="end">
+      <ion-button>
+        <ion-icon name="pie" mode="md"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <app-loader *ngIf="isLoading"></app-loader>
+
+  <ion-item-group *ngIf="!isLoading">
+    <ion-item-divider class="title" color="secondary">
+      Current Invoice
+      <span class="last-update">Updated at {{ currentInvoice.last_update | date:'h:mm a, dd/MM/yy' }}</span>
+    </ion-item-divider>
+    <ion-item>
+      <div class="information-title">
+        <div class="information-title-content">
+          <ion-icon name="{{ currentInvoice.state }}"></ion-icon>&nbsp;
+          {{ currentInvoice.state }}
+        </div>
+        <div class="date">
+          {{ currentInvoice.start_date | date:'MMMM y' }}
+        </div>
+      </div>
+      <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
+        <div class="price">
+          {{ currentInvoice.total_taxed }} {{ currentInvoice.currency }}
+        </div>
+        <div class="price-ht">
+          {{ currentInvoice.total_untaxed }} HT
+        </div>
+      </div>
+    </ion-item>
+  </ion-item-group>
+
+  <ion-item-group *ngIf="!isLoading">
+    <ion-item-divider class="title" color="secondary">Older Invoices</ion-item-divider>
+    <ion-item *ngFor="let invoice of invoices">
+      <div class="information-title">
+        <div class="information-title-content">
+          <ion-icon name="{{ invoice.state }}"></ion-icon>&nbsp;
+          {{ invoice.state }}
+        </div>
+        <div class="date">
+          {{ invoice.start_date | date:'MMMM y' }}
+        </div>
+      </div>
+      <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
+        <div class="price">
+          {{ invoice.total_taxed }} {{ invoice.currency }}
+        </div>
+        <div class="price-ht">
+          {{ invoice.total_untaxed }} HT
+        </div>
+      </div>
+    </ion-item>
+  </ion-item-group>
+
+</ion-content>

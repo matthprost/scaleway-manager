@@ -55,7 +55,7 @@ ion-img {
   margin-left: 1rem;
 
   &-name {
-    font-size: 1.3rem;
+    font-size: 1.1rem;
     text-align: center;
     margin: 1rem 1rem 0 1rem;
     display: inline-block;
@@ -75,7 +75,7 @@ ion-img {
 
   &-header {
     text-align: center;
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
 
     &-infos {
       margin: 0 auto;
@@ -132,7 +132,7 @@ ion-img {
     ion-button {
       width: 8rem;
       margin: .5rem 0;
-      font-size: 1rem;
+      font-size: .9rem;
       --border-radius: 6px;
     }
   }
