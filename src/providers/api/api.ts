@@ -45,11 +45,11 @@ export class ApiProvider {
         })
           /* AN ERROR OCCURRED WE TRY TO RENEW TOKEN */
           .catch((err) => {
-            this.renewJWT().then(token => {
+            this.renewJWT().then(value => {
               this.httpClient.request<T>(HttpMethods[method.toString()], url, {
-                headers: token ?
+                headers: value ?
                   {
-                    'X-Session-Token': token.auth.jwt_key
+                    'X-Session-Token': value.auth.jwt_key
                   } : {},
                 body: data
               }).toPromise().then(result => {
@@ -70,7 +70,7 @@ export class ApiProvider {
     });
   }
 
-  private renewJWT() {
+  private renewJWT(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.storage.get('token').then(token => {
         if (token) {
