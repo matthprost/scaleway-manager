@@ -1,9 +1,15 @@
 import {Injectable} from '@angular/core';
-import {GetService} from "./http/get.service";
-import {PostService} from "./http/post.service";
-import {DeleteService} from "./http/delete.service";
-import {Platform} from "ionic-angular";
-import {PatchService} from "./http/patch.service";
+import {Platform} from 'ionic-angular';
+import {Storage} from '@ionic/storage';
+import {HttpClient} from '@angular/common/http';
+import {ErrorsProvider} from '../errors/errors';
+
+enum HttpMethods {
+  GET,
+  POST,
+  DELETE,
+  PATCH
+}
 
 @Injectable()
 export class ApiProvider {
@@ -13,9 +19,7 @@ export class ApiProvider {
   private readonly paris1: string = '/paris';
   private readonly amsterdam1: string = '/netherlands';
 
-  constructor(private platform: Platform, private getService: GetService,
-              private postService: PostService, private deleteService: DeleteService,
-              private patchService: PatchService) {
+  constructor(private platform: Platform, private storage: Storage, private httpClient: HttpClient) {
 
     if (this.platform.is('cordova') == true) {
       this.apiUrl = 'https://account.scaleway.com';
@@ -23,6 +27,68 @@ export class ApiProvider {
       this.paris1 = 'https://cp-par1.scaleway.com';
       this.amsterdam1 = 'https://cp-ams1.scaleway.com';
     }
+  }
+
+  private request<T>(method: HttpMethods, url: string, data: {} = {}): Promise<T> {
+
+    return new Promise((resolve, reject) => {
+      this.storage.get('token').then(token => {
+
+        this.httpClient.request<T>(HttpMethods[method.toString()], url, {
+          headers: token ?
+            {
+              'X-Session-Token': token.auth.jwt_key
+            } : {},
+          body: data
+        }).toPromise().then(result => {
+          resolve(result);
+        })
+          /* AN ERROR OCCURRED WE TRY TO RENEW TOKEN */
+          .catch((err) => {
+            this.renewJWT().then(token => {
+              this.httpClient.request<T>(HttpMethods[method.toString()], url, {
+                headers: token ?
+                  {
+                    'X-Session-Token': token.auth.jwt_key
+                  } : {},
+                body: data
+              }).toPromise().then(result => {
+                resolve(result);
+              })
+                /* EVEN AFTER RENEWING TOKEN REQUEST STILL FAIL */
+                .catch(error => {
+                  reject(error);
+                });
+            })
+              /* RENEWING TOKEN FAILED REJECT ERROR */
+              .catch(error => {
+                reject(error);
+              });
+            reject(err);
+          });
+      });
+    });
+  }
+
+  private renewJWT() {
+    return new Promise((resolve, reject) => {
+      this.storage.get('token').then(token => {
+        if (token) {
+          this.httpClient.request('POST', this.apiUrl + '/jwt/' + token.jwt.jti + '/renew', {
+            body: {jwt_renew: token.auth.jwt_renew}
+          }).toPromise().then(result => {
+            this.storage.set('token', result).then(() => {
+              resolve(result);
+            });
+          })
+            .catch(error => {
+              reject(error);
+            });
+        } else {
+          reject('error');
+        }
+      });
+    });
   }
 
   public getApiUrl() {
@@ -42,18 +108,18 @@ export class ApiProvider {
   }
 
   public get<T>(url: string, token?: string): Promise<T> {
-    return this.getService.submit(url, token);
+    return this.request<T>(HttpMethods.GET, url);
   }
 
-  public post<T>(url: string, token?: string, body?: object): Promise<T> {
-    return this.postService.submit(url, token, body);
+  public post<T>(url: string, token?: string, data?: object): Promise<T> {
+    return this.request<T>(HttpMethods.POST, url, data);
   }
 
-  public patch<T>(url: string, token?: string, body?: object): Promise<T> {
-    return this.patchService.submit(url, token, body);
+  public patch<T>(url: string, token?: string, data?: object): Promise<T> {
+    return this.request<T>(HttpMethods.PATCH, url, data);
   }
 
   public delete<T>(url: string, token?: string): Promise<T> {
-    return this.deleteService.submit(url, token);
+    return this.request<T>(HttpMethods.DELETE, url);
   }
 }
