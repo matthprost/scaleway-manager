@@ -17,7 +17,7 @@ export class AuthService {
       this.api.post<AuthTokenDto>(this.api.getApiUrl() + '/jwt', {
         'email': email,
         'password': password,
-        'renewable': false,
+        'renewable': true,
         '2FA_token': String(code),
       })
         .then(result => {

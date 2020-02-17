@@ -13,22 +13,26 @@ export class AppComponent {
     {
       title: 'Dashboard',
       url: '/home',
-      icon: 'md-home'
+      icon: 'md-home',
+      new: false
     },
     {
       title: 'Instances',
       url: '/instances',
-      icon: 'desktop'
+      icon: 'desktop',
+      new: false,
     },
     {
       title: 'Object Storage',
       url: '/object-storage',
-      icon: 'cube'
+      icon: 'cube',
+      new: true,
     },
     {
       title: 'Invoices',
       url: '/invoices',
-      icon: 'stats'
+      icon: 'stats',
+      new: false
     }
   ];
 

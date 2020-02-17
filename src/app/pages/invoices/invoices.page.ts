@@ -28,9 +28,18 @@ export class InvoicesPage implements OnInit {
     });
   }
 
+  public doRefresh(refresher) {
+    this.refresh().then(() => {
+      refresher.target.complete();
+    }).catch(error => {
+      console.log(error);
+      refresher.target.complete();
+    });
+  }
+
   private refresh(): Promise<any> {
     return new Promise((resolve, reject) => {
-        this.billingService.getBilling(5).then(result => {
+        this.billingService.getBilling(10).then(result => {
           this.invoices = result;
           this.invoices = this.invoices.slice(1, this.invoices.length);
           this.currentInvoice = result[0];

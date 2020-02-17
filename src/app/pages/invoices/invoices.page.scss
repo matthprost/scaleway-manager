@@ -1,0 +1,52 @@
+.information-title {
+
+  &-content {
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+}
+
+.information-content {
+  text-align: right;
+}
+
+span {
+  display: block;
+}
+
+.price-ht {
+  font-size: .9rem;
+  margin-top: .2rem;
+  color: dimgray;
+  font-weight: lighter;
+
+}
+
+.date {
+  font-size: .9rem;
+  font-weight: lighter;
+  margin-top: .2rem;
+  color: dimgray;
+}
+
+.price {
+  font-size: 1rem;
+}
+
+.title {
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: .9rem;
+  padding: .5rem .75rem;
+}
+
+.last-update {
+  float: right;
+  font-size: .8rem;
+}
+
+ion-item {
+  --inner-padding-bottom: .75rem;
+  --inner-padding-top: .75rem;
+  background: white;
+}

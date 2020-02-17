@@ -4,11 +4,6 @@
       <ion-menu-button color="primary"></ion-menu-button>
     </ion-buttons>
     <ion-title color="primary">Invoices</ion-title>
-    <ion-buttons slot="end">
-      <ion-button>
-        <ion-icon name="pie" mode="md"></ion-icon>
-      </ion-button>
-    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -16,15 +11,20 @@
 
   <app-loader *ngIf="isLoading"></app-loader>
 
+  <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-item-group *ngIf="!isLoading">
     <ion-item-divider class="title" color="secondary">
-      Current Invoice
-      <span class="last-update">Updated at {{ currentInvoice.last_update | date:'h:mm a, dd/MM/yy' }}</span>
+      <div style="width: 100%">
+        <div style="float: left">Current Invoice</div>
+        <div class="last-update">Updated at <br/>{{ currentInvoice.last_update | date:'h:mm a, dd/MM/yy' }}</div>
+      </div>
     </ion-item-divider>
-    <ion-item>
+    <ion-item lines="none">
       <div class="information-title">
         <div class="information-title-content">
-          <ion-icon name="{{ currentInvoice.state }}"></ion-icon>&nbsp;
           {{ currentInvoice.state }}
         </div>
         <div class="date">
@@ -44,10 +44,9 @@
 
   <ion-item-group *ngIf="!isLoading">
     <ion-item-divider class="title" color="secondary">Older Invoices</ion-item-divider>
-    <ion-item *ngFor="let invoice of invoices">
+    <ion-item *ngFor="let invoice of invoices" lines="full">
       <div class="information-title">
         <div class="information-title-content">
-          <ion-icon name="{{ invoice.state }}"></ion-icon>&nbsp;
           {{ invoice.state }}
         </div>
         <div class="date">

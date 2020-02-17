@@ -91,6 +91,10 @@ const routes: Routes = [
     path: 'invoices',
     loadChildren: './pages/invoices/invoices.module#InvoicesPageModule'
   },
+  {
+    path: 'settings',
+    loadChildren: './pages/settings/settings.module#SettingsPageModule'
+  },
 ];
 
 @NgModule({

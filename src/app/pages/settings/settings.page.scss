@@ -1,0 +1,16 @@
+.footer {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+  opacity: .6;
+  filter: grayscale(40%);
+  img {
+    width: 25px;
+  }
+  h2 {
+    color: var(--ion-color-primary);
+    margin: 0 0 0 0.5rem;
+  }
+}

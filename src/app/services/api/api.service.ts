@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {HttpClient} from '@angular/common/http';
 import {NavController, Platform} from '@ionic/angular';
+import {Router} from '@angular/router';
 
 
 enum HttpMethods {
@@ -22,7 +23,7 @@ export class ApiService {
   private readonly amsterdam1: string = '/netherlands';
 
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
-              private platform: Platform) {
+              private platform: Platform, private router: Router) {
     if (this.platform.is('cordova') === true) {
       this.apiUrl = 'https://account.scaleway.com';
       this.billing = 'https://billing.scaleway.com';
@@ -48,9 +49,15 @@ export class ApiService {
           .catch((err) => {
             console.log(err);
             if (err && err.status && err.status === 401 && err.error.type === 'invalid_auth') {
-              this.storage.remove('token').then(() => {
-                console.log('Error 401: Token might be not valid anymore');
-                this.navCtrl.navigateRoot(['/login']);
+              console.warn('ERROR 401: Token might be not valid anymore, trying to renew');
+
+              this.renewJWT().then(() => {
+                this.router.navigate([this.router.getCurrentNavigation()]);
+              }).catch(error => {
+                console.warn('DELETE JWT IN STORAGE');
+                this.storage.remove('token').then(() => {
+                  this.navCtrl.navigateRoot(['/login']);
+                });
               });
             } else if (err && err.status && err.status === 404) {
               this.navCtrl.navigateRoot(['/error/404']);
@@ -61,6 +68,29 @@ export class ApiService {
             }
             reject(err);
           });
+      });
+    });
+  }
+
+  private renewJWT(): Promise<any> {
+    return new Promise((resolve, reject) => {
+      this.storage.get('token').then(token => {
+        if (token) {
+          this.httpClient.request('POST', this.apiUrl + '/jwt/' + token.jwt.jti + '/renew', {
+            body: {jwt_renew: token.auth.jwt_renew}
+          }).toPromise().then(result => {
+            this.storage.set('token', result).then(() => {
+              console.log('JWT RENEWED!');
+              resolve(result);
+            });
+          })
+            .catch(error => {
+              console.error('ERROR: JWT CANNOT BE RENEWED');
+              reject(error);
+            });
+        } else {
+          reject('error');
+        }
       });
     });
   }
