@@ -27,7 +27,7 @@ export class SettingsPage implements OnInit {
 
     this.storage.get('settings').then(result => {
       if (result) {
-        result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : null;
+        result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : this.instancesToDisplay = 5;
       }
     });
   }
@@ -62,7 +62,6 @@ export class SettingsPage implements OnInit {
   async openPicker() {
     const defaultColumnOptions = [
       [
-        '1 Instance',
         '2 Instances',
         '3 Instances',
         '4 Instances',
@@ -76,7 +75,7 @@ export class SettingsPage implements OnInit {
     ];
 
     const picker = await this.pickerController.create({
-      columns: SettingsPage.getColumns(1, 10, defaultColumnOptions),
+      columns: SettingsPage.getColumns(1, 9, defaultColumnOptions),
       buttons: [
         {
           text: 'Cancel',
@@ -86,7 +85,7 @@ export class SettingsPage implements OnInit {
           text: 'Confirm',
           handler: (value) => {
             this.changeHasBeenDone = true;
-            this.instancesToDisplay = value.col0.value + 1;
+            this.instancesToDisplay = value.col0.value + 2;
           }
         }
       ]

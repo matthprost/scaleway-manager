@@ -6,6 +6,7 @@ import {BillingService} from '../../services/billing/billing.service';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {BillingDto} from '../../services/billing/billing.dto';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-home',
@@ -32,10 +33,18 @@ export class HomePage implements OnInit {
     slidesOffsetAfter: 15
   };
 
+  // STORAGE SETTINGS
+  public instancesToDisplay = null;
+
   constructor(public navCtrl: NavController, private srvService: ServersService,
               private billingService: BillingService, private menuCtrl: MenuController,
-              private statusBar: StatusBar) {
+              private statusBar: StatusBar, private storage: Storage) {
     this.statusBar.styleLightContent();
+    this.storage.get('settings').then(result => {
+      if (result) {
+        result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : this.instancesToDisplay = null;
+      }
+    });
   }
 
   ngOnInit() {
