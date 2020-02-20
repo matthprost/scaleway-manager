@@ -34,17 +34,12 @@ export class HomePage implements OnInit {
   };
 
   // STORAGE SETTINGS
-  public instancesToDisplay = null;
+  public instancesToDisplay = 6;
 
   constructor(public navCtrl: NavController, private srvService: ServersService,
               private billingService: BillingService, private menuCtrl: MenuController,
               private statusBar: StatusBar, private storage: Storage) {
     this.statusBar.styleLightContent();
-    this.storage.get('settings').then(result => {
-      if (result) {
-        result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : this.instancesToDisplay = null;
-      }
-    });
   }
 
   ngOnInit() {
@@ -73,14 +68,19 @@ export class HomePage implements OnInit {
   private refresh(): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      this.srvService.getAllServer(5).then(value => {
-        this.serversInstances = value;
+      this.storage.get('settings').then(result => {
+        if (result) {
+          result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : this.instancesToDisplay = 6;
+        }
+        this.srvService.getAllServer(this.instancesToDisplay).then(value => {
+          this.serversInstances = value;
 
-        resolve('ok');
-      })
-        .catch(error => {
-          reject(error);
-        });
+          resolve('ok');
+        })
+          .catch(error => {
+            reject(error);
+          });
+      });
     });
   }
 

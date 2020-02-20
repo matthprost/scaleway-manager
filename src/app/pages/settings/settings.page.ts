@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {AppVersion} from '@ionic-native/app-version/ngx';
 import {PickerController, Platform} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-settings',
@@ -15,10 +16,10 @@ export class SettingsPage implements OnInit {
   public changeHasBeenDone = false;
 
   // DEFAULT VALUES IN CASE STORAGE IS EMPTY
-  public instancesToDisplay = 5;
+  public instancesToDisplay = 6;
 
   constructor(private appVersion: AppVersion, private platform: Platform, private storage: Storage,
-              private pickerController: PickerController) {
+              private pickerController: PickerController, private statusBar: StatusBar) {
     if (this.platform.is('cordova')) {
       this.appVersion.getVersionNumber().then(versionNumber => {
         this.version = versionNumber;
@@ -27,7 +28,7 @@ export class SettingsPage implements OnInit {
 
     this.storage.get('settings').then(result => {
       if (result) {
-        result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : this.instancesToDisplay = 5;
+        result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : this.instancesToDisplay = 6;
       }
     });
   }
@@ -56,6 +57,10 @@ export class SettingsPage implements OnInit {
     return options;
   }
 
+  ionViewDidEnter() {
+    this.statusBar.styleDefault();
+  }
+
   ngOnInit() {
   }
 
@@ -63,19 +68,15 @@ export class SettingsPage implements OnInit {
     const defaultColumnOptions = [
       [
         '2 Instances',
-        '3 Instances',
         '4 Instances',
-        '5 Instances',
         '6 Instances',
-        '7 Instances',
         '8 Instances',
-        '9 Instances',
         '10 Instances',
       ]
     ];
 
     const picker = await this.pickerController.create({
-      columns: SettingsPage.getColumns(1, 9, defaultColumnOptions),
+      columns: SettingsPage.getColumns(1, 5, defaultColumnOptions),
       buttons: [
         {
           text: 'Cancel',
