@@ -5,6 +5,16 @@
     </ion-buttons>
     <ion-title color="primary">Instances</ion-title>
   </ion-toolbar>
+  <ion-toolbar>
+    <ion-segment value="instances" color="primary" mode="ios" (ionChange)="segmentChanged($event)">
+      <ion-segment-button value="instances">
+        <ion-label>Instances</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="volumes">
+        <ion-label>Volumes</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content *ngIf="isLoading">
