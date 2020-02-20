@@ -95,6 +95,10 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: './pages/settings/settings.module#SettingsPageModule'
   },
+  {
+    path: 'objects',
+    loadChildren: './pages/objects/objects.module#ObjectsPageModule'
+  },
 ];
 
 @NgModule({

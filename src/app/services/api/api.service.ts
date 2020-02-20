@@ -22,6 +22,10 @@ export class ApiService {
   private readonly paris1: string = '/paris';
   private readonly amsterdam1: string = '/netherlands';
 
+  // OBJECT STORAGE
+  private readonly parisObject: string = '/paris-object';
+  private readonly amsObject: string = '/ams-object';
+
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
               private platform: Platform, private router: Router) {
     if (this.platform.is('cordova') === true) {
@@ -29,6 +33,11 @@ export class ApiService {
       this.billing = 'https://billing.scaleway.com';
       this.paris1 = 'https://api.scaleway.com/instance/v1/zones/fr-par-1';
       this.amsterdam1 = 'https://api.scaleway.com/instance/v1/zones/nl-ams-1';
+
+      // OBJECT STORAGE
+      this.parisObject = 'https://s3.fr-par.scw.cloud';
+      this.amsObject = 'https://s3.nl-ams.scw.cloud';
+
     }
   }
 
@@ -105,6 +114,14 @@ export class ApiService {
 
   public getAmsterdamApiUrl() {
     return (this.amsterdam1);
+  }
+
+  public getParisObjectApiUrl() {
+    return (this.parisObject);
+  }
+
+  public getAmsObjectApiUrl() {
+    return (this.amsObject);
   }
 
   public getBillingApiUrl() {

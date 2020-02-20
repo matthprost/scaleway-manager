@@ -25,7 +25,7 @@ export class AppComponent {
     },
     {
       title: 'Object Storage',
-      url: '/object-storage',
+      url: '/objects',
       icon: 'cube',
       new: true,
     },

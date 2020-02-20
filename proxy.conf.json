@@ -34,5 +34,23 @@
       "^/netherlands": ""
     },
     "logLevel": "debug"
+  },
+  "/paris-object/*": {
+    "target": "https://s3.fr-par.scw.cloud",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "^/paris-object": ""
+    },
+    "logLevel": "debug"
+  },
+  "/ams-object/*": {
+    "target": "https://s3.nl-ams.scw.cloud",
+    "changeOrigin": true,
+    "secure": false,
+    "pathRewrite": {
+      "^/ams-object": ""
+    },
+    "logLevel": "debug"
   }
 }
