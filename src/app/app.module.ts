@@ -12,6 +12,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import {HttpBackend, HttpClientModule, HttpXhrBackend} from '@angular/common/http';
 import {NativeHttpBackend, NativeHttpFallback, NativeHttpModule} from 'ionic-native-http-connection-backend';
 import {AppVersion} from '@ionic-native/app-version/ngx';
+import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,6 +29,7 @@ import {AppVersion} from '@ionic-native/app-version/ngx';
     StatusBar,
     SplashScreen,
     AppVersion,
+    ScreenOrientation,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     {
       provide: HttpBackend,
