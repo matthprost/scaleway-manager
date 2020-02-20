@@ -5,7 +5,6 @@
   justify-content: center;
   margin-top: 1rem;
   opacity: .6;
-  filter: grayscale(40%);
   img {
     width: 25px;
   }
@@ -13,4 +12,25 @@
     color: var(--ion-color-primary);
     margin: 0 0 0 0.5rem;
   }
+}
+
+small {
+  display: block;
+  width: 100%;
+  text-align: center;
+  margin-top: .5rem;
+  opacity: .6;
+  color: var(--ion-color-primary);
+}
+
+.item-right {
+  display: flex;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+
+.label-right {
+  margin-right: .5rem;
+  color: var(--ion-color-medium);
 }

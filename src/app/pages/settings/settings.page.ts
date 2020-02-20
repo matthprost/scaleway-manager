@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {AppVersion} from '@ionic-native/app-version/ngx';
+import {PickerController, Platform} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
 
 @Component({
   selector: 'app-settings',
@@ -7,9 +10,97 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SettingsPage implements OnInit {
 
-  constructor() { }
+  public version = null;
+  public isLoading = false;
+  public changeHasBeenDone = false;
+
+  // DEFAULT VALUES IN CASE STORAGE IS EMPTY
+  public instancesToDisplay = 5;
+
+  constructor(private appVersion: AppVersion, private platform: Platform, private storage: Storage,
+              private pickerController: PickerController) {
+    if (this.platform.is('cordova')) {
+      this.appVersion.getVersionNumber().then(versionNumber => {
+        this.version = versionNumber;
+      });
+    }
+
+    this.storage.get('settings').then(result => {
+      if (result) {
+        result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : null;
+      }
+    });
+  }
+
+  private static getColumns(numColumns, numOptions, columnOptions) {
+    const columns = [];
+    for (let i = 0; i < numColumns; i++) {
+      columns.push({
+        name: `col${i}`,
+        options: SettingsPage.getColumnOptions(i, numOptions, columnOptions)
+      });
+    }
+
+    return columns;
+  }
+
+  private static getColumnOptions(columnIndex, numOptions, columnOptions) {
+    const options = [];
+    for (let i = 0; i < numOptions; i++) {
+      options.push({
+        text: columnOptions[columnIndex][i % numOptions],
+        value: i
+      });
+    }
+
+    return options;
+  }
 
   ngOnInit() {
+  }
+
+  async openPicker() {
+    const defaultColumnOptions = [
+      [
+        '1 Instance',
+        '2 Instances',
+        '3 Instances',
+        '4 Instances',
+        '5 Instances',
+        '6 Instances',
+        '7 Instances',
+        '8 Instances',
+        '9 Instances',
+        '10 Instances',
+      ]
+    ];
+
+    const picker = await this.pickerController.create({
+      columns: SettingsPage.getColumns(1, 10, defaultColumnOptions),
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel'
+        },
+        {
+          text: 'Confirm',
+          handler: (value) => {
+            this.changeHasBeenDone = true;
+            this.instancesToDisplay = value.col0.value + 1;
+          }
+        }
+      ]
+    });
+
+    await picker.present();
+  }
+
+  public save() {
+    this.isLoading = true;
+    this.storage.set('settings', {instancesToDisplay: this.instancesToDisplay}).then(() => {
+      this.isLoading = false;
+      this.changeHasBeenDone = false;
+    });
   }
 
 }

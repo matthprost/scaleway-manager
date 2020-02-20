@@ -6,14 +6,35 @@
     <ion-title color="primary">
       Settings
     </ion-title>
+    <ion-buttons slot="end" *ngIf="changeHasBeenDone">
+      <ion-button (click)="save()">Save</ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-progress-bar type="indeterminate" *ngIf="isLoading"></ion-progress-bar>
+
+  <div class="content">
+    <ion-list>
+      <ion-list-header>
+        Dashboard
+      </ion-list-header>
+
+      <ion-item lines="none">
+        <div class="item-right" slot="end" (click)="openPicker()">
+          <ion-label class="label-right">{{ instancesToDisplay }}</ion-label>
+          <ion-icon name="arrow-down" mode="ios" color="medium" size="small"></ion-icon>
+        </div>
+        <ion-label>Instances to display</ion-label>
+      </ion-item>
+    </ion-list>
+  </div>
 
   <div class="footer">
     <img src="assets/imgs/logo-purple.svg" alt="logo">
     <h2>Scaleway-Manager</h2>
-    <small>V.{{ version }}</small>
   </div>
+  <small *ngIf="version">V.{{ version }}</small>
+
 </ion-content>
