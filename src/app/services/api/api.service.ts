@@ -61,7 +61,7 @@ export class ApiService {
               console.warn('ERROR 401: Token might be not valid anymore, trying to renew');
 
               this.renewJWT().then(() => {
-                this.router.navigate([this.router.getCurrentNavigation()]);
+                this.router.navigate(['home']);
               }).catch(error => {
                 /*console.warn('DELETE JWT IN STORAGE');
                 this.storage.remove('token').then(() => {
@@ -90,7 +90,7 @@ export class ApiService {
           }).toPromise().then(result => {
             this.storage.set('token', result).then(() => {
               console.log('JWT RENEWED!');
-              this.router.navigate([this.router.getCurrentNavigation()]);
+              this.router.navigate(['home']);
               resolve(result);
             });
           })
