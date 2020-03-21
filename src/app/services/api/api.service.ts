@@ -63,10 +63,10 @@ export class ApiService {
               this.renewJWT().then(() => {
                 this.router.navigate([this.router.getCurrentNavigation()]);
               }).catch(error => {
-                console.warn('DELETE JWT IN STORAGE');
+                /*console.warn('DELETE JWT IN STORAGE');
                 this.storage.remove('token').then(() => {
                   this.navCtrl.navigateRoot(['/login']);
-                });
+                });*/
               });
             } else if (err && err.status && err.status === 404) {
               this.navCtrl.navigateRoot(['/error/404']);
@@ -90,6 +90,7 @@ export class ApiService {
           }).toPromise().then(result => {
             this.storage.set('token', result).then(() => {
               console.log('JWT RENEWED!');
+              this.router.navigate([this.router.getCurrentNavigation()]);
               resolve(result);
             });
           })

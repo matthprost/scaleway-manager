@@ -86,7 +86,7 @@ export class SettingsPage implements OnInit {
           text: 'Confirm',
           handler: (value) => {
             this.changeHasBeenDone = true;
-            this.instancesToDisplay = value.col0.value + 2;
+            this.instancesToDisplay = value.col0.text.substr(0, value.col0.text.indexOf(' '));
           }
         }
       ]

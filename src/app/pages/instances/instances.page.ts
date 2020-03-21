@@ -143,8 +143,4 @@ export class InstancesPage implements OnInit {
     }
   }
 
-  public segmentChanged(event: any) {
-    console.log(event.detail.value);
-  }
-
 }
