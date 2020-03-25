@@ -1,0 +1,22 @@
+ion-card {
+  background: white;
+  text-align: center;
+  img {
+    width: 90px;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+  margin: .25rem;
+
+  &-header {
+    padding-top: 0;
+  }
+  &-title {
+    font-size: 1.1rem;
+    text-align: center;
+  }
+  &-content{
+    padding-top: 0;
+    text-align: center;
+  }
+}
