@@ -76,7 +76,7 @@ export class ApiService {
             return;
           }
         } else {
-          return e;
+          throw e;
         }
       }
     }

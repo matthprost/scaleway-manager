@@ -64,7 +64,7 @@ export class AuthService {
         this.api.post<TokenDto>(this.api.getApiUrl() + '/tokens', {
           email: userData.email,
           expires: false,
-          description: 'AWS'
+          description: 'AWS_Scaleway_Manager'
         })
           .then(val => {
             resolve(val);
