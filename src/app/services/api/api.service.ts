@@ -17,7 +17,7 @@ enum HttpMethods {
 })
 export class ApiService {
 
-  private readonly apiUrl: string = '/account';
+  private readonly accountApiUrl: string = '/account';
   private readonly billing: string = '/billing';
   private readonly paris1: string = '/paris';
   private readonly amsterdam1: string = '/netherlands';
@@ -29,7 +29,7 @@ export class ApiService {
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
               private platform: Platform, private router: Router) {
     if (this.platform.is('cordova') === true) {
-      this.apiUrl = 'https://account.scaleway.com';
+      this.accountApiUrl = 'https://account.scaleway.com';
       this.billing = 'https://billing.scaleway.com';
       this.paris1 = 'https://api.scaleway.com/instance/v1/zones/fr-par-1';
       this.amsterdam1 = 'https://api.scaleway.com/instance/v1/zones/nl-ams-1';
@@ -75,6 +75,12 @@ export class ApiService {
             await this.navCtrl.navigateRoot(['/login']);
             return;
           }
+        } else if (e && e.status && e.status === 504) {
+          await this.navCtrl.navigateRoot(['/error/504']);
+          throw e;
+        } else if (e && e.status && e.status === 500) {
+          await this.navCtrl.navigateRoot(['/error/504']);
+          throw e;
         } else {
           throw e;
         }
@@ -86,7 +92,7 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       this.storage.get('token').then(token => {
         if (token) {
-          this.httpClient.request('POST', this.apiUrl + '/jwt/' + token.jwt.jti + '/renew', {
+          this.httpClient.request('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
             body: {jwt_renew: token.auth.jwt_renew}
           }).toPromise().then(result => {
             this.storage.set('token', result).then(() => {
@@ -105,8 +111,8 @@ export class ApiService {
     });
   }
 
-  public getApiUrl() {
-    return (this.apiUrl);
+  public getAccountApiUrl() {
+    return (this.accountApiUrl);
   }
 
   public getParisApiUrl() {
