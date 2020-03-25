@@ -13,6 +13,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-builders/custom-webpack": "^7.5.2",
+    "@angular-builders/dev-server": "^7.3.1",
     "@angular/common": "^7.2.16",
     "@angular/core": "^7.2.16",
     "@angular/forms": "^7.2.16",
@@ -32,6 +34,7 @@
     "@ionic-native/status-bar": "^5.21.5",
     "@ionic/angular": "^4.11.10",
     "@ionic/storage": "^2.2.0",
+    "aws4": "^1.9.1",
     "chart.js": "^2.8.0",
     "cordova-android": "^8.1.0",
     "cordova-clipboard": "^1.3.0",

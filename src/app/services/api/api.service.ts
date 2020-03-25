@@ -23,8 +23,8 @@ export class ApiService {
   private readonly amsterdam1: string = '/netherlands';
 
   // OBJECT STORAGE
-  private readonly parisObject: string = '/paris-object';
-  private readonly amsObject: string = '/ams-object';
+  private readonly s3par: string = '/s3par';
+  private readonly s3ams: string = '/s3ams';
 
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
               private platform: Platform, private router: Router) {
@@ -35,50 +35,51 @@ export class ApiService {
       this.amsterdam1 = 'https://api.scaleway.com/instance/v1/zones/nl-ams-1';
 
       // OBJECT STORAGE
-      this.parisObject = 'https://s3.fr-par.scw.cloud';
-      this.amsObject = 'https://s3.nl-ams.scw.cloud';
+      this.s3par = 'https://s3.fr-par.scw.cloud';
+      this.s3ams = 'https://s3.nl-ams.scw.cloud';
 
     }
   }
 
-  private request<T>(method: HttpMethods, url: string, data: {} = {}): Promise<T> {
+  private async request<T>(method: HttpMethods, url: string, data: {} = {}): Promise<T> {
 
-    return new Promise((resolve, reject) => {
-      this.storage.get('token').then(token => {
-
-        this.httpClient.request<T>(HttpMethods[method.toString()], url, {
+    const token = await this.storage.get('token');
+    if (!token) {
+      return this.httpClient.request<T>(HttpMethods[method.toString()], url, {
+        headers: token ?
+          {
+            'X-Session-Token': token.auth.jwt_key
+          } : {},
+        body: data
+      }).toPromise();
+    } else {
+      try {
+        return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
           headers: token ?
             {
               'X-Session-Token': token.auth.jwt_key
             } : {},
           body: data
-        }).toPromise().then(result => {
-          resolve(result);
-        })
-          .catch((err) => {
-            console.log(err);
-            if (err && err.status && err.status === 401 && err.error.type === 'invalid_auth') {
-              console.warn('ERROR 401: Token might be not valid anymore, trying to renew');
+        }).toPromise();
+      } catch (e) {
+        console.log(e);
+        if (e && e.status && e.status === 401 && e.error.type === 'invalid_auth') {
+          console.warn('ERROR 401: Token might be not valid anymore, trying to renew');
 
-              this.renewJWT().then(() => {
-                this.router.navigate(['home']);
-              }).catch(error => {
-                /*console.warn('DELETE JWT IN STORAGE');
-                this.storage.remove('token').then(() => {
-                  this.navCtrl.navigateRoot(['/login']);
-                });*/
-              });
-            } else if (err && err.status && err.status === 404) {
-              this.navCtrl.navigateRoot(['/error/404']);
-            } else if (err && err.status && err.status === 504) {
-              this.navCtrl.navigateRoot(['/error/504']);
-            } else if (err && err.status && err.status === 500) {
-              this.navCtrl.navigateRoot(['/error/504']);
-            }
-            reject(err);
-          });
-      });
-    });
+          try {
+            await this.renewJWT();
+            return this.request<T>(method, url, data);
+          } catch (e) {
+            console.warn('DELETE JWT IN STORAGE');
+            await this.storage.remove('token');
+            await this.navCtrl.navigateRoot(['/login']);
+            return;
+          }
+        } else {
+          return e;
+        }
+      }
+    }
   }
 
   private renewJWT(): Promise<any> {
@@ -90,7 +91,6 @@ export class ApiService {
           }).toPromise().then(result => {
             this.storage.set('token', result).then(() => {
               console.log('JWT RENEWED!');
-              this.router.navigate(['home']);
               resolve(result);
             });
           })
@@ -118,11 +118,11 @@ export class ApiService {
   }
 
   public getParisObjectApiUrl() {
-    return (this.parisObject);
+    return (this.s3par);
   }
 
   public getAmsObjectApiUrl() {
-    return (this.amsObject);
+    return (this.s3ams);
   }
 
   public getBillingApiUrl() {

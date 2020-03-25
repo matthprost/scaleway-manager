@@ -2,13 +2,14 @@ import {Injectable} from '@angular/core';
 import {ApiService} from '../../api/api.service';
 import {AuthTokenDto, TokenDto} from './auth-tokens.dto';
 import {Storage} from '@ionic/storage';
+import {AccountService} from '../account/account.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private api: ApiService, private storage: Storage) {
+  constructor(private api: ApiService, private storage: Storage, private accountService: AccountService) {
   }
 
   public login(email: string, password: string, code?: string): Promise<any> {
@@ -54,6 +55,24 @@ export class AuthService {
         .catch(error => {
           reject(error);
         });
+    });
+  }
+
+  public addToken(): Promise<TokenDto> {
+    return new Promise((resolve, reject) => {
+      this.accountService.getUserData().then(userData => {
+        this.api.post<TokenDto>(this.api.getApiUrl() + '/tokens', {
+          email: userData.email,
+          expires: false,
+          description: 'AWS'
+        })
+          .then(val => {
+            resolve(val);
+          })
+          .catch(error => {
+            reject(error);
+          });
+      });
     });
   }
 

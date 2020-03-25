@@ -14,7 +14,8 @@ export class ObjectsPage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewDidEnter() {
-    this.objectService.getBucketsByCountry('nl-ams');
+  async ionViewDidEnter() {
+    const result = await this.objectService.request('fr-par');
+    console.log('RESULT:', result);
   }
 }

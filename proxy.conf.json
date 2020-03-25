@@ -35,21 +35,21 @@
     },
     "logLevel": "debug"
   },
-  "/paris-object/*": {
+  "/s3par/*": {
     "target": "https://s3.fr-par.scw.cloud",
     "changeOrigin": true,
     "secure": false,
     "pathRewrite": {
-      "^/paris-object": ""
+      "^/s3par": ""
     },
     "logLevel": "debug"
   },
-  "/ams-object/*": {
+  "/s3ams/*": {
     "target": "https://s3.nl-ams.scw.cloud",
     "changeOrigin": true,
     "secure": false,
     "pathRewrite": {
-      "^/ams-object": ""
+      "^/s3ams": ""
     },
     "logLevel": "debug"
   }

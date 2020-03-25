@@ -19,6 +19,7 @@ export interface TokenRoles {
 
 export interface TokenDto {
   access_key: string;
+  secret_key: string;
   category: string;
   creation_date: string;
   creation_ip: string;
