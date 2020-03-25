@@ -18,8 +18,8 @@ export class ObjectsPage implements OnInit {
 
   async ionViewDidEnter() {
     this.statusBar.styleDefault();
-    
-    const result = await this.objectService.request('fr-par');
+
+    const result = await this.objectService.getAllBuckets();
     console.log('RESULT:', result);
   }
 }
