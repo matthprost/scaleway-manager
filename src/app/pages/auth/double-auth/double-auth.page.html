@@ -20,8 +20,9 @@
                   <ion-list lines="none" class="ion-no-margin ion-no-padding">
                     <ion-item class="ion-no-padding" mode="md">
                       <!--<ion-label position="floating">Double Auth Code</ion-label>-->
-                      <ion-input type="number" maxlength="6" clearInput placeholder="Code"
-                                 name="number" [(ngModel)]="code"></ion-input>
+                      <ion-input type="text" maxlength="6" clearInput placeholder="Code"
+                                 name="number" [(ngModel)]="code" inputmode="numeric"
+                                 pattern="[0-9]*" autocomplete="one-time-code"></ion-input>
                       <ion-icon name="md-keypad" slot="start"></ion-icon>
                     </ion-item>
                     <div class="ion-padding-top ion-padding-bottom">
