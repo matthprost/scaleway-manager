@@ -14,9 +14,13 @@ export class ObjectService {
   constructor(private api: ApiService, private httpClient: HttpClient, private storage: Storage, private authService: AuthService) {
   }
 
-  public async request(country: 'nl-ams' | 'fr-par', path?: string) {
+  public async request(country: 'nl-ams' | 'fr-par', path?: string, subHost?: string) {
     const opts = {
-      service: 's3', region: country, host: 's3.' + country + '.scw.cloud', path: path ? path : '', headers: undefined
+      service: 's3',
+      region: country,
+      host: subHost ? subHost : '' + 's3.' + country + '.scw.cloud',
+      path: path ? path : '',
+      headers: undefined
     };
 
     // We get aws token in storage
