@@ -35,9 +35,30 @@ ion-card {
   margin: 0 auto;
 }
 
+.bucket-not-available {
+  width: 90px;
+  padding: 1rem 1rem .5rem 1rem;
+  margin: 0 auto;
+  filter: grayscale(100%);
+}
+
 .ion-card-content-img {
   width: 20px;
   vertical-align: middle;
   display: inline-block;
   margin-right: .25rem;
+}
+
+.no-bucket {
+  color: grey;
+  text-align: center;
+  width: 100%;
+  ion-icon {
+    font-size: 2.5rem;
+  }
+  p {
+    text-transform: uppercase;
+    font-weight: bold;
+    font-size: .9rem;
+  }
 }

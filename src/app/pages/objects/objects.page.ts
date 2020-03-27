@@ -21,13 +21,19 @@ export class ObjectsPage implements OnInit {
   }
 
   async ionViewDidEnter() {
-    this.isLoading = true;
     this.statusBar.styleDefault();
+    await this.refresh();
+  }
+
+  private async refresh() {
+    this.isLoading = true;
 
     const result = await this.objectService.getAllBuckets();
+    console.log('RESULT:', result);
+
     this.bucketsPar = result.s3par;
     this.bucketsAms = result.s3ams;
+
     this.isLoading = false;
-    console.log('RESULT:', result);
   }
 }
