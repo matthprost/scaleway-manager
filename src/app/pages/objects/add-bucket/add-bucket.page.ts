@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ModalController, NavParams, ToastController} from '@ionic/angular';
 
 @Component({
@@ -7,6 +7,8 @@ import {ModalController, NavParams, ToastController} from '@ionic/angular';
   styleUrls: ['./add-bucket.page.scss'],
 })
 export class AddBucketPage implements OnInit {
+
+  public bucketName: string = null;
 
   constructor(private modalCtrl: ModalController, private toastController: ToastController, private navParams: NavParams) {
   }

@@ -9,5 +9,50 @@
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <div class="item1"></div>
+        <ion-item lines="none">
+          <ion-label position="stacked">Name your bucket</ion-label>
+          <ion-input placeholder="Bucket Name" [(ngModel)]="bucketName"></ion-input>
+          <small>Your bucket name can only contain the following characters (min 3) : lowercase letters, digits,
+            periods(.) and hyphens (-)</small>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="item2"></div>
+        <ion-item lines="none">
+          <ion-label style="margin: .5rem 0">Choose a Region</ion-label>
+        </ion-item>
 
+        <ion-list>
+          <ion-radio-group value="">
+            <ion-item class="region" lines="none">
+              <ion-label>
+                <div>
+                  <img src="assets/imgs/france.svg" class="region-img" alt="Paris" style="vertical-align: text-top">
+                  PARIS
+                </div>
+              </ion-label>
+              <ion-radio slot="start" value="par"></ion-radio>
+            </ion-item>
+
+            <ion-item class="region" lines="none">
+              <ion-label>
+                <div>
+                  <img src="assets/imgs/netherlands.svg" class="region-img" alt="Paris"
+                       style="vertical-align: text-top">
+                  AMS
+                </div>
+              </ion-label>
+              <ion-radio slot="start" value="ams"></ion-radio>
+            </ion-item>
+          </ion-radio-group>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
