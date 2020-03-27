@@ -15,7 +15,7 @@ export class AuthService {
   public login(email: string, password: string, code?: string): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      this.api.post<AuthTokenDto>(this.api.getApiUrl() + '/jwt', {
+      this.api.post<AuthTokenDto>(this.api.getAccountApiUrl() + '/jwt', {
         'email': email,
         'password': password,
         'renewable': true,
@@ -35,7 +35,7 @@ export class AuthService {
   public getToken(token: string): Promise<AuthTokenDto> {
 
     return new Promise((resolve, reject) => {
-      this.api.get<AuthTokenDto>(this.api.getApiUrl() + '/tokens/' + token)
+      this.api.get<AuthTokenDto>(this.api.getAccountApiUrl() + '/tokens/' + token)
         .then(result => {
           resolve(result);
         })
@@ -48,7 +48,7 @@ export class AuthService {
   public getAllTokens(): Promise<{ 'tokens': Array<TokenDto> }> {
 
     return new Promise((resolve, reject) => {
-      this.api.get<{ 'tokens': Array<TokenDto> }>(this.api.getApiUrl() + '/tokens?valid_forever=&sort=-creation_date')
+      this.api.get<{ 'tokens': Array<TokenDto> }>(this.api.getAccountApiUrl() + '/tokens?valid_forever=&sort=-creation_date')
         .then(val => {
           resolve(val);
         })
@@ -61,7 +61,7 @@ export class AuthService {
   public addToken(): Promise<TokenDto> {
     return new Promise((resolve, reject) => {
       this.accountService.getUserData().then(userData => {
-        this.api.post<TokenDto>(this.api.getApiUrl() + '/tokens', {
+        this.api.post<TokenDto>(this.api.getAccountApiUrl() + '/tokens', {
           email: userData.email,
           expires: false,
           description: 'AWS_Scaleway_Manager'
@@ -79,7 +79,7 @@ export class AuthService {
   public deleteToken(token: string): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      this.api.delete(this.api.getApiUrl() + '/tokens/' + token).then(() => {
+      this.api.delete(this.api.getAccountApiUrl() + '/tokens/' + token).then(() => {
         resolve('ok');
       }).catch(error => {
         reject(error);
