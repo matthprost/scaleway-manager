@@ -1,6 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ObjectService} from '../../services/object/object.service';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {ModalController} from '@ionic/angular';
+import {AddBucketPage} from './add-bucket/add-bucket.page';
 
 @Component({
   selector: 'app-objects',
@@ -13,7 +15,7 @@ export class ObjectsPage implements OnInit {
   public bucketsAms = null;
   public isLoading = true;
 
-  constructor(private objectService: ObjectService, private statusBar: StatusBar) {
+  constructor(private objectService: ObjectService, private statusBar: StatusBar, private modalController: ModalController) {
     this.statusBar.styleDefault();
   }
 
@@ -35,5 +37,19 @@ export class ObjectsPage implements OnInit {
     this.bucketsAms = result.s3ams;
 
     this.isLoading = false;
+  }
+
+  public async addBucket(event: any) {
+    const modal = await this.modalController.create({
+      component: AddBucketPage,
+    });
+
+    await modal.present();
+
+    await modal.onDidDismiss().then(value => {
+      if (!value.data.close) {
+        this.refresh();
+      }
+    });
   }
 }
