@@ -9,7 +9,8 @@ enum HttpMethods {
   GET,
   POST,
   DELETE,
-  PATCH
+  PATCH,
+  OPTIONS
 }
 
 @Injectable({
@@ -17,22 +18,30 @@ enum HttpMethods {
 })
 export class ApiService {
 
-  private readonly accountApiUrl: string = '/account';
-  private readonly billing: string = '/billing';
-  private readonly paris1: string = '/paris';
-  private readonly amsterdam1: string = '/netherlands';
+  // GENERAL API
+  private readonly api: string = '/api';
 
-  // OBJECT STORAGE
+  // ACCOUNT API
+  private readonly accountApiUrl: string = '/account';
+
+  // BILLING API
+  private readonly billing: string = '/billing';
+
+  // OBJECT STORAGE API
   private readonly s3par: string = '/s3par';
   private readonly s3ams: string = '/s3ams';
 
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
               private platform: Platform, private router: Router) {
     if (this.platform.is('cordova') === true) {
+      // GENERAL API
+      this.api = 'https://api.scaleway.com';
+
+      // ACCOUNT API
       this.accountApiUrl = 'https://account.scaleway.com';
+
+      // BILLING API
       this.billing = 'https://billing.scaleway.com';
-      this.paris1 = 'https://api.scaleway.com/instance/v1/zones/fr-par-1';
-      this.amsterdam1 = 'https://api.scaleway.com/instance/v1/zones/nl-ams-1';
 
       // OBJECT STORAGE
       this.s3par = 'https://s3.fr-par.scw.cloud';
@@ -116,14 +125,14 @@ export class ApiService {
   }
 
   public getParisApiUrl() {
-    return (this.paris1);
+    return (this.api + '/instance/v1/zones/fr-par-1');
   }
 
   public getAmsterdamApiUrl() {
-    return (this.amsterdam1);
+    return (this.api + '/instance/v1/zones/nl-ams-1');
   }
 
-  public getParisObjectApiUrl() {
+  public getParObjectApiUrl() {
     return (this.s3par);
   }
 
@@ -135,16 +144,24 @@ export class ApiService {
     return (this.billing);
   }
 
+  public getApiUrl() {
+    return (this.api);
+  }
+
   public get<T>(url: string): Promise<T> {
     return this.request<T>(HttpMethods.GET, url);
   }
 
   public post<T>(url: string, data?: {}): Promise<T> {
-    return this.request<T>(HttpMethods.POST, url, data);
+    return this.request<T>(HttpMethods.POST, url, data ? data : null);
   }
 
   public patch<T>(url: string, data?: {}): Promise<T> {
-    return this.request<T>(HttpMethods.PATCH, url, data);
+    return this.request<T>(HttpMethods.PATCH, url, data ? data : null);
+  }
+
+  public options<T>(url: string, data?: {}): Promise<T> {
+    return this.request<T>(HttpMethods.OPTIONS, url, data ? data : null);
   }
 
   public delete<T>(url: string): Promise<T> {
