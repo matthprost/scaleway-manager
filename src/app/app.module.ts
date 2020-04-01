@@ -13,6 +13,7 @@ import {HttpBackend, HttpClientModule, HttpXhrBackend} from '@angular/common/htt
 import {NativeHttpBackend, NativeHttpFallback, NativeHttpModule} from 'ionic-native-http-connection-backend';
 import {AppVersion} from '@ionic-native/app-version/ngx';
 import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
+import {Keyboard} from '@ionic-native/keyboard/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +31,7 @@ import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
     SplashScreen,
     AppVersion,
     ScreenOrientation,
+    Keyboard,
     {provide: RouteReuseStrategy, useClass: IonicRouteStrategy},
     {
       provide: HttpBackend,

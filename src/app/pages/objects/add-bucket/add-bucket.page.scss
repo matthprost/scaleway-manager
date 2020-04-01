@@ -15,6 +15,13 @@ ion-input {
   --background: white;
 }
 
+.danger {
+  border: 1px solid var(--ion-color-danger);
+  &-small {
+    color: var(--ion-color-danger);
+  }
+}
+
 ion-list {
   background: transparent;
 }

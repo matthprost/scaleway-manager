@@ -16,9 +16,9 @@
         <div class="item1"></div>
         <ion-item lines="none">
           <ion-label position="stacked">Name your bucket</ion-label>
-          <ion-input placeholder="Bucket Name" [(ngModel)]="bucketName"></ion-input>
-          <small>Your bucket name can only contain the following characters (min 3) : lowercase letters, digits,
-            periods(.) and hyphens (-)</small>
+          <ion-input placeholder="Bucket Name" [(ngModel)]="bucketName" [ngClass]="error ? 'danger' : ''"></ion-input>
+          <small [ngClass]="error ? 'danger-small' : ''">Your bucket name can only contain the
+            following characters (min 3) : lowercase letters, digits, periods(.) and hyphens (-)</small>
         </ion-item>
       </ion-col>
     </ion-row>
@@ -151,7 +151,10 @@
     <!-- CONFIRMATION BUTTON -->
     <ion-row>
       <ion-col>
-        <ion-button color="secondary" expand="full">Create Bucket</ion-button>
+        <ion-button color="secondary" expand="full" (click)="createBucket()">
+          <span *ngIf="!isLoading">Create Bucket</span>
+          <app-loader [color]="'light'" *ngIf="isLoading"></app-loader>
+        </ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>
