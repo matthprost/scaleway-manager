@@ -1,3 +1,10 @@
+ion-content {
+  --padding-start: .5rem;
+  --padding-top: .5rem;
+  --padding-end: .5rem;
+  --padding-bottom: .5rem;
+}
+
 ion-input {
   border: 1px solid lightgray;
   border-radius: 3px;
@@ -20,16 +27,11 @@ ion-label {
 
 small {
   color: grey;
-  margin-top: .5rem;
+  margin-top: .75rem;
 }
 
 ion-row:not(:first-of-type) {
   margin-top: 1rem;
-}
-
-ion-list {
-  background: transparent;
-  text-align: center;
 }
 
 .region {
@@ -38,8 +40,8 @@ ion-list {
   border: 1px solid lightgray;
   border-radius: 3px;
   display: inline-block;
-  margin: .5rem;
-  width: 150px;
+  margin: .25rem;
+  width: 140px;
   color: grey;
 
   &-img {
@@ -105,6 +107,26 @@ ion-list {
     background-color: rgb(74, 79, 98);
     color: rgb(255, 255, 255);
     content: "2";
+    border-radius: 50%;
+    margin-left: .25rem;
+  }
+}
+
+.item3 {
+  &::before {
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    left: 0;
+    top: 13px;
+    height: 18px;
+    width: 18px;
+    padding: 4px;
+    display: inline-block;
+    background-color: rgb(74, 79, 98);
+    color: rgb(255, 255, 255);
+    content: "3";
     border-radius: 50%;
     margin-left: .25rem;
   }

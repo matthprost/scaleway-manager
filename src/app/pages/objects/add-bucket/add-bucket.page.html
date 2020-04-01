@@ -10,6 +10,7 @@
 
 <ion-content>
   <ion-grid>
+    <!-- BUCKET NAME -->
     <ion-row>
       <ion-col>
         <div class="item1"></div>
@@ -21,16 +22,22 @@
         </ion-item>
       </ion-col>
     </ion-row>
+
+    <!-- BUCKET REGION -->
     <ion-row>
       <ion-col>
         <div class="item2"></div>
         <ion-item lines="none">
-          <ion-label style="margin: .5rem 0">Choose a Region</ion-label>
+          <ion-label style="margin: .5rem 0; white-space: unset;">
+            Choose a Region
+            <p>Geographical location in which your bucket will be created</p>
+          </ion-label>
         </ion-item>
 
-        <ion-list>
+        <ion-item lines="none">
           <ion-radio-group value="">
-            <ion-item [ngClass]="region === 'par' ? 'region region-selected': 'region'" lines="none">
+            <ion-item [ngClass]="region === 'par' ? 'region region-selected': 'region'" lines="none"
+                      style="margin-left: 0">
               <ion-label>
                 <div>
                   <img src="assets/imgs/france.svg" class="region-img" alt="Paris" style="vertical-align: text-top">
@@ -40,7 +47,8 @@
               <ion-radio slot="start" value="par" (ionSelect)="regionSelected($event)"></ion-radio>
             </ion-item>
 
-            <ion-item [ngClass]="region === 'ams' ? 'region region-selected': 'region'" lines="none">
+            <ion-item [ngClass]="region === 'ams' ? 'region region-selected': 'region'" lines="none"
+                      style="margin-left: 0">
               <ion-label>
                 <div>
                   <img src="assets/imgs/netherlands.svg" class="region-img" alt="Paris"
@@ -51,7 +59,35 @@
               <ion-radio slot="start" value="ams" (ionSelect)="regionSelected($event)"></ion-radio>
             </ion-item>
           </ion-radio-group>
-        </ion-list>
+        </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- BUCKET VISIBILITY -->
+    <ion-row>
+      <ion-col>
+        <div class="item3"></div>
+        <ion-item lines="none">
+          <ion-label style="margin: .5rem 0">Set your Bucket Visibility</ion-label>
+        </ion-item>
+
+        <ion-radio-group value="{{ visibility }}">
+
+          <ion-item>
+            <ion-label>Public</ion-label>
+            <ion-radio slot="start" value="public" (ionSelect)="visibilitySelected($event)"></ion-radio>
+          </ion-item>
+
+          <ion-item>
+            <ion-label>Private</ion-label>
+            <ion-radio slot="start" value="private" (ionSelect)="visibilitySelected($event)"></ion-radio>
+          </ion-item>
+        </ion-radio-group>
+        <ion-item lines="none">
+          <small>The bucket visibility specifies whether everyone can see the list of objects in the bucket or not. It
+            does not affect objects visibility. A file uploaded to a public bucket is private by default. A private file
+            in a public bucket cannot be accessed publicly.</small>
+        </ion-item>
       </ion-col>
     </ion-row>
   </ion-grid>

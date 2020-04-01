@@ -10,6 +10,7 @@ export class AddBucketPage implements OnInit {
 
   public bucketName: string = null;
   public region: string = null;
+  public visibility = 'private';
 
   constructor(private modalCtrl: ModalController, private toastController: ToastController, private navParams: NavParams) {
   }
@@ -26,6 +27,10 @@ export class AddBucketPage implements OnInit {
 
   public regionSelected(event: any) {
     this.region = event.detail.value;
+  }
+
+  public visibilitySelected(event: any) {
+    this.visibility = event.detail.value;
   }
 
 }
