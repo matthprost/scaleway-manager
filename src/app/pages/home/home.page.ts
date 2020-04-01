@@ -39,7 +39,6 @@ export class HomePage implements OnInit {
   constructor(public navCtrl: NavController, private srvService: ServersService,
               private billingService: BillingService, private menuCtrl: MenuController,
               private statusBar: StatusBar, private storage: Storage) {
-    this.statusBar.styleLightContent();
   }
 
   ngOnInit() {
@@ -53,13 +52,14 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleLightContent();
+    this.statusBar.styleDefault();
     this.menuCtrl.enable(true);
     this.billingService.getXMonthsLastBilling(6).then(value => {
       this.billings = value;
       this.refresh().then(() => {
         this.autoRefresh();
         this.classAppear = 'card-appear';
+        this.statusBar.styleLightContent();
         this.isLoading = false;
       });
     });

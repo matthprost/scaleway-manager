@@ -5,6 +5,10 @@
 // file can hold Sass mixins, functions, and placeholder classes to be imported
 // and used throughout the application.
 
+.menu-labels {
+  color: var(--ion-color-dark);
+}
+
 ion-content {
   --background: #eff3f6;
 }

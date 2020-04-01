@@ -123,7 +123,8 @@
             </ion-label>
 
             <ion-label slot="end" class="summary-label-end" style="text-transform: capitalize">
-              <ion-icon name="md-lock" *ngIf="visibility === 'private'"></ion-icon>
+              <ion-icon name="md-lock" *ngIf="visibility === 'private'"
+                        style="color: var(--ion-color-dark-tint)"></ion-icon>
               <ion-icon name="md-unlock" *ngIf="visibility === 'public'"
                         style="color: var(--ion-color-secondary)"></ion-icon>
               {{ visibility }}

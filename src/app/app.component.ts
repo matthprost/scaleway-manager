@@ -26,13 +26,13 @@ export class AppComponent {
     {
       title: 'Object Storage',
       url: '/objects',
-      icon: 'cube',
+      icon: 'ios-cloud',
       pro: true,
     },
     {
       title: 'Invoices',
       url: '/invoices',
-      icon: 'stats',
+      icon: 'md-stats',
       pro: false
     }
   ];
@@ -41,12 +41,12 @@ export class AppComponent {
     {
       title: 'Settings',
       url: '/settings',
-      icon: 'settings'
+      icon: 'ios-settings'
     },
     {
       title: 'About',
       url: '/about',
-      icon: 'help-buoy'
+      icon: 'ios-help-buoy'
     }
   ];
 
