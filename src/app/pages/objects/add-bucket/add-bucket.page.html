@@ -35,12 +35,13 @@
         </ion-item>
 
         <ion-item lines="none">
-          <ion-radio-group value="">
+          <ion-radio-group value="{{ region }}">
             <ion-item [ngClass]="region === 'par' ? 'region region-selected': 'region'" lines="none"
                       style="margin-left: 0">
               <ion-label>
                 <div>
-                  <img src="assets/imgs/france.svg" class="region-img" alt="Paris" style="vertical-align: text-top">
+                  <img src="assets/imgs/france.svg" class="region-img" alt="Paris"
+                       style="vertical-align: middle">
                   PARIS
                 </div>
               </ion-label>
@@ -52,7 +53,7 @@
               <ion-label>
                 <div>
                   <img src="assets/imgs/netherlands.svg" class="region-img" alt="Paris"
-                       style="vertical-align: text-top">
+                       style="vertical-align: middle">
                   AMS
                 </div>
               </ion-label>
@@ -88,6 +89,68 @@
             does not affect objects visibility. A file uploaded to a public bucket is private by default. A private file
             in a public bucket cannot be accessed publicly.</small>
         </ion-item>
+      </ion-col>
+    </ion-row>
+
+    <!-- SUMMARY -->
+    <ion-row>
+      <ion-col>
+        <div class="item4"></div>
+        <ion-item lines="none">
+          <ion-label style="margin: .5rem 0">Summary</ion-label>
+        </ion-item>
+
+        <ion-list class="summary">
+          <ion-item>
+            <ion-label class="summary-label-start">
+              Region
+            </ion-label>
+
+            <ion-label slot="end" class="summary-label-end" *ngIf="region === 'par'">
+              <img alt="region" src="assets/imgs/france.svg">
+              PARIS
+            </ion-label>
+
+            <ion-label slot="end" class="summary-label-end" *ngIf="region === 'ams'">
+              <img alt="region" src="assets/imgs/netherlands.svg">
+              AMS
+            </ion-label>
+          </ion-item>
+
+          <ion-item>
+            <ion-label class="summary-label-start">
+              Bucket visibility
+            </ion-label>
+
+            <ion-label slot="end" class="summary-label-end" style="text-transform: capitalize">
+              <ion-icon name="md-lock" *ngIf="visibility === 'private'"></ion-icon>
+              <ion-icon name="md-unlock" *ngIf="visibility === 'public'"
+                        style="color: var(--ion-color-secondary)"></ion-icon>
+              {{ visibility }}
+            </ion-label>
+          </ion-item>
+
+          <ion-item lines="none">
+            <ion-label class="summary-label-start">
+              Estimated cost
+            </ion-label>
+          </ion-item>
+          <ion-item lines="none">
+            <ul style="margin: 0">
+              <li>75 first GB stored offered</li>
+              <li>75 first outgoing GB offered afterwards</li>
+              <li>Data stored: €0.01 / Go / Month</li>
+              <li>Bandwith outside Scaleway: €0.01 / Go / Month</li>
+            </ul>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+
+    <!-- CONFIRMATION BUTTON -->
+    <ion-row>
+      <ion-col>
+        <ion-button color="secondary" expand="full">Create Bucket</ion-button>
       </ion-col>
     </ion-row>
   </ion-grid>

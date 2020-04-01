@@ -9,7 +9,7 @@ import {ModalController, NavParams, ToastController} from '@ionic/angular';
 export class AddBucketPage implements OnInit {
 
   public bucketName: string = null;
-  public region: string = null;
+  public region = 'par';
   public visibility = 'private';
 
   constructor(private modalCtrl: ModalController, private toastController: ToastController, private navParams: NavParams) {

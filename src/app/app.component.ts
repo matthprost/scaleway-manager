@@ -15,25 +15,25 @@ export class AppComponent {
       title: 'Dashboard',
       url: '/home',
       icon: 'md-home',
-      new: false
+      pro: false
     },
     {
       title: 'Instances',
       url: '/instances',
       icon: 'desktop',
-      new: false,
+      pro: false,
     },
     {
       title: 'Object Storage',
       url: '/objects',
       icon: 'cube',
-      new: true,
+      pro: true,
     },
     {
       title: 'Invoices',
       url: '/invoices',
       icon: 'stats',
-      new: false
+      pro: false
     }
   ];
 

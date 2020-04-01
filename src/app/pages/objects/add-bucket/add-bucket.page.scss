@@ -15,6 +15,10 @@ ion-input {
   --background: white;
 }
 
+ion-list {
+  background: transparent;
+}
+
 ion-item {
   --background: transparent;
   padding-left: 1.25rem;
@@ -69,6 +73,30 @@ ion-row:not(:first-of-type) {
     height: 0;
     margin: 0;
     opacity: 0;
+  }
+}
+
+.summary {
+  margin: 0;
+
+  img {
+    width: 30px;
+    vertical-align: middle;
+    margin-right: .5rem
+  }
+
+  &-label-start {
+    color: var(--ion-color-dark-tint);
+    font-size: 1rem !important;
+  }
+
+  &-label-end {
+    font-size: 1rem;
+
+    ion-icon {
+      vertical-align: text-bottom;
+      font-size: 1.3rem;
+    }
   }
 }
 
@@ -127,6 +155,26 @@ ion-row:not(:first-of-type) {
     background-color: rgb(74, 79, 98);
     color: rgb(255, 255, 255);
     content: "3";
+    border-radius: 50%;
+    margin-left: .25rem;
+  }
+}
+
+.item4 {
+  &::before {
+    position: absolute;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    left: 0;
+    top: 13px;
+    height: 18px;
+    width: 18px;
+    padding: 4px;
+    display: inline-block;
+    background-color: rgb(74, 79, 98);
+    color: rgb(255, 255, 255);
+    content: "4";
     border-radius: 50%;
     margin-left: .25rem;
   }
