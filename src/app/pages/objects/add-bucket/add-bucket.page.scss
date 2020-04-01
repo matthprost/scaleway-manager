@@ -56,10 +56,18 @@ ion-list {
   div {
     padding: .5rem .25rem;
   }
-}
 
-ion-radio {
-  display: none;
+  &-selected {
+    border: 1px solid var(--ion-color-primary);
+    color: var(--ion-color-primary);
+  }
+
+  ion-radio {
+    width: 0;
+    height: 0;
+    margin: 0;
+    opacity: 0;
+  }
 }
 
 .item1 {

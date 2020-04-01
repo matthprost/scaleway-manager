@@ -9,6 +9,7 @@ import {ModalController, NavParams, ToastController} from '@ionic/angular';
 export class AddBucketPage implements OnInit {
 
   public bucketName: string = null;
+  public region: string = null;
 
   constructor(private modalCtrl: ModalController, private toastController: ToastController, private navParams: NavParams) {
   }
@@ -21,6 +22,10 @@ export class AddBucketPage implements OnInit {
       dismissed: true,
       close: true,
     });
+  }
+
+  public regionSelected(event: any) {
+    this.region = event.detail.value;
   }
 
 }
