@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController, NavParams, ToastController} from '@ionic/angular';
+import {ObjectService} from '../../../services/object/object.service';
 
 @Component({
   selector: 'app-add-bucket',
@@ -14,7 +15,7 @@ export class AddBucketPage implements OnInit {
   public error = false;
   public isLoading = false;
 
-  constructor(private modalCtrl: ModalController, private toastController: ToastController) {
+  constructor(private modalCtrl: ModalController, private toastController: ToastController, private objectService: ObjectService) {
   }
 
   ngOnInit() {

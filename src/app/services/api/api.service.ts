@@ -27,10 +27,6 @@ export class ApiService {
   // BILLING API
   private readonly billing: string = '/billing';
 
-  // OBJECT STORAGE API
-  private readonly s3par: string = '/s3par';
-  private readonly s3ams: string = '/s3ams';
-
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
               private platform: Platform, private router: Router) {
     if (this.platform.is('cordova') === true) {
@@ -42,10 +38,6 @@ export class ApiService {
 
       // BILLING API
       this.billing = 'https://billing.scaleway.com';
-
-      // OBJECT STORAGE
-      this.s3par = 'https://s3.fr-par.scw.cloud';
-      this.s3ams = 'https://s3.nl-ams.scw.cloud';
 
     }
   }
@@ -130,14 +122,6 @@ export class ApiService {
 
   public getAmsterdamApiUrl() {
     return (this.api + '/instance/v1/zones/nl-ams-1');
-  }
-
-  public getParObjectApiUrl() {
-    return (this.s3par);
-  }
-
-  public getAmsObjectApiUrl() {
-    return (this.s3ams);
   }
 
   public getBillingApiUrl() {
