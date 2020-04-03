@@ -31,8 +31,11 @@ export class ObjectApiService {
       region: country,
       host: subHost ? subHost + '.s3.' + country + '.scw.cloud' : 's3.' + country + '.scw.cloud',
       path: path ? path : '',
-      headers: undefined
+      headers: {},
+      method: HttpMethods[method.toString()]
     };
+
+    console.log('OPTS:', opts);
 
     // We get aws token in storage
     let awsToken = await this.storage.get('awsToken');
@@ -60,6 +63,7 @@ export class ObjectApiService {
       }
 
       const value = await this.httpClient.request(HttpMethods[method.toString()], url, {
+        body: null,
         headers: subHost ? myHeaders : opts.headers,
         responseType: 'text'
       }).toPromise();
