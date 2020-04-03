@@ -82,7 +82,7 @@
           "builder": "@angular-builders/dev-server:generic",
           "options": {
             "browserTarget": "app:build",
-            "proxyConfig": "proxy.conf.json"
+            "proxyConfig": "proxy.conf.js"
           },
           "configurations": {
             "production": {

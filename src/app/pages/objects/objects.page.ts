@@ -30,11 +30,11 @@ export class ObjectsPage implements OnInit {
   private async refresh() {
     this.isLoading = true;
 
-   /* const result = await this.objectService.getAllBuckets();
+    const result = await this.objectService.getAllBuckets();
     console.log('RESULT:', result);
 
     this.bucketsPar = result.s3par;
-    this.bucketsAms = result.s3ams;*/
+    this.bucketsAms = result.s3ams;
 
     this.isLoading = false;
   }

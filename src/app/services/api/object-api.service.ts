@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 import {AuthService} from '../user/auth/auth.service';
 import * as xml2js from '../../../../node_modules/xml2js';
-import {ToastController} from '@ionic/angular';
+import {Platform, ToastController} from '@ionic/angular';
 
 enum HttpMethods {
   GET,
@@ -22,14 +22,14 @@ enum HttpMethods {
 export class ObjectApiService {
 
   constructor(private httpClient: HttpClient, private storage: Storage, private authService: AuthService,
-              private toastController: ToastController) {
+              private toastController: ToastController, private platform: Platform) {
   }
 
   public async request(method: HttpMethods, country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
     const opts = {
       service: 's3',
       region: country,
-      host: subHost ? subHost : '' + 's3.' + country + '.scw.cloud',
+      host: subHost ? subHost + '.s3.' + country + '.scw.cloud' : 's3.' + country + '.scw.cloud',
       path: path ? path : '',
       headers: undefined
     };
@@ -53,8 +53,14 @@ export class ObjectApiService {
       aws4.sign(opts, {accessKeyId: awsToken.token.access_key, secretAccessKey: awsToken.token.secret_key});
       console.log(opts);
 
-      const value = await this.httpClient.request(HttpMethods[method.toString()], country === 'nl-ams' ? '/s3ams' : '/s3par', {
-        headers: opts.headers,
+      const myHeaders = {...opts.headers, ...{subHost}};
+      let url = country === 'fr-par' ? '/s3par' : '/s3ams';
+      if (this.platform.is('cordova')) {
+        url = subHost ? 'https://' + subHost + '.s3.' + country + '.scw.cloud' : 'https://s3.' + country + '.scw.cloud';
+      }
+
+      const value = await this.httpClient.request(HttpMethods[method.toString()], url, {
+        headers: subHost ? myHeaders : opts.headers,
         responseType: 'text'
       }).toPromise();
 
@@ -66,7 +72,7 @@ export class ObjectApiService {
       // We remove access_token from storage and retry if token not found
       if (e.status === 404) {
         await this.storage.remove('awsToken');
-        return this.request(method, country);
+        return this.request(method, country, subHost, path);
       } else {
         const errorMessage = await xml2js.parseStringPromise(e.error);
         console.log(errorMessage.Error.Message[0]);

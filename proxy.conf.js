@@ -1,4 +1,4 @@
-{
+const PROXY_CONFIG = {
   "/api/*": {
     "target": "https://api.scaleway.com",
     "changeOrigin": true,
@@ -27,21 +27,35 @@
     "logLevel": "debug"
   },
   "/s3par/*": {
-    "target": "https://s3.fr-par.scw.cloud",
-    "changeOrigin": true,
-    "secure": false,
+    target: true,
+    router: function (req) {
+      var subhost = req.headers.subhost;
+      var target = 'https://'+ (subhost ? subhost + '.' : '' ) +'s3.fr-par.scw.cloud';
+      console.log(target);
+      return target;
+    },
+    changeOrigin: true,
+    secure: false,
     "pathRewrite": {
       "^/s3par": ""
     },
     "logLevel": "debug"
   },
   "/s3ams/*": {
-    "target": "https://s3.nl-ams.scw.cloud",
-    "changeOrigin": true,
-    "secure": false,
+    target: true,
+    router: function (req) {
+      var subhost = req.headers.subhost;
+      var target = 'https://'+ (subhost ? subhost + '.' : '' ) +'s3.nl-ams.scw.cloud';
+      console.log(target);
+      return target;
+    },
+    changeOrigin: true,
+    secure: false,
     "pathRewrite": {
       "^/s3ams": ""
     },
     "logLevel": "debug"
   }
-}
+};
+
+module.exports = PROXY_CONFIG;
