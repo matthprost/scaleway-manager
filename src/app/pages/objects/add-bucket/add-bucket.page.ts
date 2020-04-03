@@ -21,8 +21,8 @@ export class AddBucketPage implements OnInit {
   ngOnInit() {
   }
 
-  public close() {
-    this.modalCtrl.dismiss({
+  public async close() {
+    await this.modalCtrl.dismiss({
       dismissed: true,
       close: true,
     });
@@ -63,6 +63,16 @@ export class AddBucketPage implements OnInit {
       return;
     } else {
       this.isLoading = true;
+      try {
+        await this.objectService.createBucket(this.region === 'par' ? 'fr-par' : 'nl-ams', this.bucketName);
+
+        await this.modalCtrl.dismiss({
+          dismissed: true,
+          close: false
+        });
+      } catch (e) {
+        this.isLoading = false;
+      }
     }
   }
 

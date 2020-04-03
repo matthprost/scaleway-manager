@@ -4,6 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 import {AuthService} from '../user/auth/auth.service';
 import * as xml2js from '../../../../node_modules/xml2js';
+import {ToastController} from '@ionic/angular';
 
 enum HttpMethods {
   GET,
@@ -20,7 +21,8 @@ enum HttpMethods {
 
 export class ObjectApiService {
 
-  constructor(private httpClient: HttpClient, private storage: Storage, private authService: AuthService) {
+  constructor(private httpClient: HttpClient, private storage: Storage, private authService: AuthService,
+              private toastController: ToastController) {
   }
 
   public async request(method: HttpMethods, country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
@@ -57,15 +59,29 @@ export class ObjectApiService {
       }).toPromise();
 
       // Convert XML into JSON
-      try {
-        return await xml2js.parseStringPromise(value);
-      } catch (e) {
+      return await xml2js.parseStringPromise(value);
+
+    } catch (e) {
+
+      // We remove access_token from storage and retry if token not found
+      if (e.status === 404) {
+        await this.storage.remove('awsToken');
+        return this.request(method, country);
+      } else {
+        const errorMessage = await xml2js.parseStringPromise(e.error);
+        console.log(errorMessage.Error.Message[0]);
+
+        const alert = await this.toastController.create({
+          position: 'top',
+          showCloseButton: true,
+          duration: 8000,
+          color: 'danger',
+          message: errorMessage.Error.Message[0] ? errorMessage.Error.Message[0] : 'An error occurred'
+        });
+
+        await alert.present();
         throw e;
       }
-    } catch (e) {
-      // We remove access_token from storage and retry
-      await this.storage.remove('awsToken');
-      return this.request(method, country);
     }
   }
 

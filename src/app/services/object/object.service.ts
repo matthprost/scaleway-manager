@@ -25,11 +25,7 @@ export class ObjectService {
     }
   }
 
-  public async createBucket(country: 'fr-par' | 'nl-ams', subHost: string) {
-    try {
-      await this.objectApi.put(country, subHost);
-    } catch (e) {
-      throw e;
-    }
+  public async createBucket(country: 'fr-par' | 'nl-ams', name: string) {
+    return this.objectApi.put(country, name);
   }
 }
