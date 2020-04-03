@@ -15,8 +15,13 @@
       <ion-col>
         <div class="item1"></div>
         <ion-item lines="none">
-          <ion-label position="stacked">Name your bucket</ion-label>
+          <ion-label style="margin: .5rem 0">Name your bucket</ion-label>
+        </ion-item>
+
+        <ion-item lines="none">
           <ion-input placeholder="Bucket Name" [(ngModel)]="bucketName" [ngClass]="error ? 'danger' : ''"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
           <small [ngClass]="error ? 'danger-small' : ''">Your bucket name can only contain the
             following characters (min 3) : lowercase letters, digits, periods(.) and hyphens (-)</small>
         </ion-item>
