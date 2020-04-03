@@ -11,8 +11,8 @@ import {AddBucketPage} from './add-bucket/add-bucket.page';
 })
 export class ObjectsPage implements OnInit {
 
-  public bucketsPar = null;
-  public bucketsAms = null;
+  public bucketsPar = [];
+  public bucketsAms = [];
   public isLoading = true;
 
   constructor(private objectService: ObjectService, private statusBar: StatusBar, private modalController: ModalController) {
@@ -33,8 +33,8 @@ export class ObjectsPage implements OnInit {
     const result = await this.objectService.getAllBuckets();
     console.log('RESULT:', result);
 
-    this.bucketsPar = result.s3par;
-    this.bucketsAms = result.s3ams;
+    this.bucketsPar = result.s3par ? result.s3par : [];
+    this.bucketsAms = result.s3ams ? result.s3ams : [];
 
     this.isLoading = false;
   }
