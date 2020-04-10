@@ -96,8 +96,17 @@ const routes: Routes = [
     loadChildren: './pages/settings/settings.module#SettingsPageModule'
   },
   {
-    path: 'objects',
-    loadChildren: './pages/objects/objects.module#ObjectsPageModule'
+    path: 'buckets',
+    children: [
+      {
+        path: '',
+        loadChildren: './pages/buckets/buckets.module#ObjectsPageModule',
+      },
+      {
+        path: ':zone/:id/:prefix',
+        loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
+      }
+    ],
   },
 ];
 

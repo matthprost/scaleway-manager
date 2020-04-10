@@ -5,14 +5,14 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ObjectsPage } from './objects.page';
+import { BucketsPage } from './buckets.page';
 import {ComponentsModule} from '../../components/components.module';
 import {AddBucketPage} from './add-bucket/add-bucket.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ObjectsPage
+    component: BucketsPage
   }
 ];
 
@@ -24,7 +24,7 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         ComponentsModule
     ],
-  declarations: [ObjectsPage, AddBucketPage],
+  declarations: [BucketsPage, AddBucketPage],
   entryComponents: [AddBucketPage]
 })
 export class ObjectsPageModule {}

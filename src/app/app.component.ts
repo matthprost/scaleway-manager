@@ -25,7 +25,7 @@ export class AppComponent {
     },
     {
       title: 'Object Storage',
-      url: '/objects',
+      url: '/buckets',
       icon: 'ios-cloud',
       pro: true,
     },

@@ -59,4 +59,11 @@
     <p style="margin: 0">No bucket available</p>
     <small>You can add a new one to start using object storage</small>
   </div>
+
+  <div class="no-bucket"
+       *ngIf="!isLoading && error">
+    <p style="margin: 0">An error occurred</p>
+    <small>Please refresh</small><br/>
+    <ion-button color="secondary" (click)="refresh()" style="margin-top: 1rem;">Refresh</ion-button>
+  </div>
 </ion-content>
