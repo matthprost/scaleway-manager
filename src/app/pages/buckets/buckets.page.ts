@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ObjectService} from '../../services/object/object.service';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
-import {ModalController} from '@ionic/angular';
+import {ModalController, NavController} from '@ionic/angular';
 import {AddBucketPage} from './add-bucket/add-bucket.page';
 
 @Component({
@@ -16,7 +16,8 @@ export class BucketsPage implements OnInit {
   public isLoading = true;
   public error = false;
 
-  constructor(private objectService: ObjectService, private statusBar: StatusBar, private modalController: ModalController) {
+  constructor(private objectService: ObjectService, private statusBar: StatusBar, private modalController: ModalController,
+              private navCtrl: NavController) {
     this.statusBar.styleDefault();
   }
 
@@ -57,5 +58,9 @@ export class BucketsPage implements OnInit {
         this.refresh();
       }
     });
+  }
+
+  public async accessToBucket(region: string, bucketName: string) {
+    await this.navCtrl.navigateForward(['/buckets/' + region + '/' + bucketName]);
   }
 }

@@ -103,7 +103,7 @@ const routes: Routes = [
         loadChildren: './pages/buckets/buckets.module#ObjectsPageModule',
       },
       {
-        path: ':zone/:id/:prefix',
+        path: ':zone/:id',
         loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
       }
     ],

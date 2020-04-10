@@ -23,7 +23,7 @@
   <ion-grid>
     <ion-row class="align-items-center">
       <ion-col *ngFor="let bucketPar of bucketsPar" size="6" style="margin: 0 auto">
-        <ion-card>
+        <ion-card (click)="accessToBucket('fr-par', bucketPar.Name[0])">
           <img src="assets/imgs/bucket.svg" class="bucket" alt="bucket"/>
           <ion-card-header>
             <ion-card-title color="primary">{{bucketPar.Name[0]}}</ion-card-title>
@@ -37,7 +37,7 @@
         </ion-card>
       </ion-col>
       <ion-col *ngFor="let bucketAms of bucketsAms" size="6">
-        <ion-card>
+        <ion-card (click)="accessToBucket('nl-ams', bucketAms.Name[0])">
           <img src="assets/imgs/bucket.svg" class="bucket" alt="bucket"/>
           <ion-card-header>
             <ion-card-title color="primary">{{bucketAms.Name[0]}}</ion-card-title>
