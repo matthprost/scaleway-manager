@@ -104,7 +104,16 @@ const routes: Routes = [
       },
       {
         path: ':zone/:id',
-        loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
+        children: [
+          {
+            path: '',
+            loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
+          },
+          {
+            path: '**',
+            loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
+          }
+        ]
       }
     ],
   },
