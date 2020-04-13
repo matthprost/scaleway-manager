@@ -15,10 +15,15 @@ export class BucketsPage implements OnInit {
   public bucketsAms = [];
   public isLoading = true;
   public error = false;
+  private temp = true;
 
   constructor(private objectService: ObjectService, private statusBar: StatusBar, private modalController: ModalController,
               private navCtrl: NavController) {
     this.statusBar.styleDefault();
+    this.temp = true;
+    this.refresh(true).then(() => {
+      this.temp = false;
+    });
   }
 
   ngOnInit() {
@@ -26,11 +31,13 @@ export class BucketsPage implements OnInit {
 
   async ionViewDidEnter() {
     this.statusBar.styleDefault();
-    await this.refresh();
+    if (!this.temp) {
+      await this.refresh(false);
+    }
   }
 
-  private async refresh() {
-    this.isLoading = true;
+  private async refresh(displayLoading?: boolean) {
+    displayLoading ? this.isLoading = true : this.isLoading = false;
 
     try {
       const result = await this.objectService.getAllBuckets();

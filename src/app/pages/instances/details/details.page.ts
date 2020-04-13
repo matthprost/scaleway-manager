@@ -47,9 +47,6 @@ export class DetailsPage implements OnInit {
     });
   }
 
-  ionViewDidLoad() {
-  }
-
   private async autoRefresh() {
     console.log('[AUTO REFRESH]: Entering function');
     let counter = 0;

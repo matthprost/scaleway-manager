@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-objects',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ObjectsPage implements OnInit {
 
-  constructor() { }
+  public currentPath: string = null;
+
+  constructor(private route: ActivatedRoute) {
+    this.currentPath = this.route.snapshot.paramMap.get('id');
+  }
 
   ngOnInit() {
   }
