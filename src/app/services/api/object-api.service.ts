@@ -30,7 +30,7 @@ export class ObjectApiService {
       service: 's3',
       region: country,
       host: subHost ? subHost + '.s3.' + country + '.scw.cloud' : 's3.' + country + '.scw.cloud',
-      path: path ? '/?prefix=' + path : null,
+      path: path ? '/?delimiter=/&marker=&prefix=' + path : '/?delimiter=/&marker=',
       headers: {},
       method: HttpMethods[method.toString()]
     };
@@ -56,7 +56,7 @@ export class ObjectApiService {
       aws4.sign(opts, {accessKeyId: awsToken.token.access_key, secretAccessKey: awsToken.token.secret_key});
       console.log(opts);
 
-      const myHeaders = {...opts.headers, ...{subHost}};
+      let myHeaders = {...opts.headers, ...{subHost}};
 
       if (path) {
         myHeaders = {...opts.headers, ...{subHost}, ...{path}};
@@ -64,9 +64,10 @@ export class ObjectApiService {
 
       let url = country === 'fr-par' ? '/s3par' : '/s3ams';
       if (this.platform.is('cordova')) {
-        url = subHost ? 'https://' + subHost + '.s3.' + country + '.scw.cloud' : 'https://s3.' + country + '.scw.cloud';
+        url = subHost ? 'https://' + subHost + '.s3.' + country + '.scw.cloud' : 'https://s3.' + country +
+          '.scw.cloud//?delimiter=/&marker=&prefix=';
         if (path) {
-          url += '/?prefix=' + path;
+          url += '&prefix=' + path;
         }
       }
 

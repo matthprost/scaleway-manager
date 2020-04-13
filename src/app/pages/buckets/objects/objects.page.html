@@ -7,12 +7,32 @@
   </ion-toolbar>
 </ion-header>
 
+<ion-content *ngIf="isLoading">
+  <app-loader></app-loader>
+</ion-content>
+
 <ion-content>
   <ion-list>
-    <ion-item *ngFor="let object of objectsList; let i = index;"
-              lines="none" detail="true" mode="ios"
-              [ngClass]="(i % 2 == 0) ? 'background-white' : 'background-grey'">
-      <ion-label>{{ object.Key[0] }}</ion-label>
+    <ion-item *ngFor="let folder of foldersList" lines="none" detail="true" mode="ios"
+              (click)="goToSubFolder(folder.Prefix[0])"
+    >
+      <ion-label>
+        <h2>{{ folder.Prefix[0] }}</h2>
+      </ion-label>
+    </ion-item>
+    <ion-item *ngFor="let object of objectsList" lines="none" detail="{{ object.Key[0].indexOf('/') > 0 }}"
+              mode="ios"
+    >
+      <ion-label>
+        <h2>{{ object.Key[0] }}</h2>
+        <p>{{ object.LastModified[0] | date:'MMM d, y' }} {{ object.Size[0] !== '0' ? '· ' + object.Size[0] + 'B' : null }}</p>
+      </ion-label>
     </ion-item>
   </ion-list>
+
+  <!--<div class="bucket-empty"
+       *ngIf="!isLoading && !objectsList && !foldersList">
+    <p style="margin: 0">The bucket is empty</p>
+    <small>You can add new file or create a new folder by using + button</small>
+  </div>-->
 </ion-content>
