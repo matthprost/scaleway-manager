@@ -30,7 +30,7 @@ export class ObjectApiService {
       service: 's3',
       region: country,
       host: subHost ? subHost + '.s3.' + country + '.scw.cloud' : 's3.' + country + '.scw.cloud',
-      path: path ? path : '',
+      path: path ? '/?prefix=' + path : null,
       headers: {},
       method: HttpMethods[method.toString()]
     };
@@ -57,9 +57,17 @@ export class ObjectApiService {
       console.log(opts);
 
       const myHeaders = {...opts.headers, ...{subHost}};
+
+      if (path) {
+        myHeaders = {...opts.headers, ...{subHost}, ...{path}};
+      }
+
       let url = country === 'fr-par' ? '/s3par' : '/s3ams';
       if (this.platform.is('cordova')) {
         url = subHost ? 'https://' + subHost + '.s3.' + country + '.scw.cloud' : 'https://s3.' + country + '.scw.cloud';
+        if (path) {
+          url += '/?prefix=' + path;
+        }
       }
 
       const value = await this.httpClient.request(HttpMethods[method.toString()], url, {

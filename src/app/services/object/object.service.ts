@@ -25,6 +25,14 @@ export class ObjectService {
     }
   }
 
+  public async getAllObjects(bucketName: string, region: 'fr-par' | 'nl-ams', prefix?: string) {
+    try {
+      return this.objectApi.get(region, bucketName, prefix ? prefix : null);
+    } catch (e) {
+      throw e;
+    }
+  }
+
   public async createBucket(country: 'fr-par' | 'nl-ams', name: string) {
     return this.objectApi.put(country, name);
   }

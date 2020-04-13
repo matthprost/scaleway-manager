@@ -103,7 +103,7 @@ const routes: Routes = [
         loadChildren: './pages/buckets/buckets.module#ObjectsPageModule',
       },
       {
-        path: ':zone/:id',
+        path: ':region/:bucket',
         children: [
           {
             path: '',
