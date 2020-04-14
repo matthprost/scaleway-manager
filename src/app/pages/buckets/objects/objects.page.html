@@ -14,15 +14,15 @@
 <ion-content *ngIf="!isLoading">
   <ion-list>
     <ion-item *ngFor="let folder of foldersList" lines="none" detail="true" mode="ios"
-              (click)="goToSubFolder(folder.Prefix[0])"
-    >
+              (click)="goToSubFolder(folder.Prefix[0])">
+      <ion-icon slot="start" name="folder" mode="md" style="color: var(--ion-color-primary-tint)"></ion-icon>
       <ion-label>
         <h2>{{ folder.Prefix[0] }}</h2>
       </ion-label>
     </ion-item>
     <ion-item *ngFor="let object of objectsList" lines="none" detail="{{ object.Key[0].indexOf('/') > 0 }}"
-              mode="ios"
-    >
+              mode="ios">
+      <ion-icon slot="start" name="document" mode="ios" style="color: var(--ion-color-primary-tint)"></ion-icon>
       <ion-label>
         <h2>{{ object.Key[0] }}</h2>
         <p>{{ object.LastModified[0] | date:'MMM d, y' }} {{ object.Size[0] !== '0' ? '· ' + object.Size[0] + 'B' : null }}</p>

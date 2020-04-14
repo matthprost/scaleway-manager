@@ -51,13 +51,13 @@ export class ObjectsPage implements OnInit {
         if (value.Key) {
           if (this.fullPath !== '') {
             value.Key[0] = value.Key[0].replace(this.fullPath, '');
-            value.Key[0] = value.Key[0].replace('/', '');
           }
+          value.Key[0] = value.Key[0].replace('/', '');
         } else {
           if (this.fullPath !== '') {
             value.Prefix[0] = value.Prefix[0].replace(this.fullPath, '');
-            value.Prefix[0] = value.Prefix[0].replace('/', '');
           }
+          value.Prefix[0] = value.Prefix[0].replace('/', '');
         }
       });
 
