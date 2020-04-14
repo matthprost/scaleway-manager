@@ -34,8 +34,8 @@ export class ObjectsPage implements OnInit {
     this.objectService.getAllObjects(this.bucket, this.currentRegion, this.fullPath !== '/' ? this.fullPath : null)
       .then(result => {
         console.log(result);
-        this.objectsList = result.ListBucketResult.Contents;
-        this.foldersList = result.ListBucketResult.CommonPrefixes;
+        this.objectsList = result.ListBucketResult.Contents ? this.clean(result.ListBucketResult.Contents) : [];
+        this.foldersList = result.ListBucketResult.CommonPrefixes ? this.clean(result.ListBucketResult.CommonPrefixes) : [];
         this.isLoading = false;
       }).catch(error => {
       this.isLoading = false;
@@ -43,6 +43,41 @@ export class ObjectsPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  private clean(array: Array<any>) {
+    try {
+      array.forEach((value, index, object) => {
+        if (value.Key) {
+          if (this.fullPath !== '') {
+            value.Key[0] = value.Key[0].replace(this.fullPath, '');
+            value.Key[0] = value.Key[0].replace('/', '');
+          }
+        } else {
+          if (this.fullPath !== '') {
+            value.Prefix[0] = value.Prefix[0].replace(this.fullPath, '');
+            value.Prefix[0] = value.Prefix[0].replace('/', '');
+          }
+        }
+      });
+
+      array.forEach((value, index, object) => {
+        if (value.Key) {
+          if (value.Key[0] === '') {
+            object.splice(index, 1);
+          }
+        } else {
+          if (value.Prefix[0] === '') {
+            object.splice(index, 1);
+          }
+        }
+      });
+    } catch (e) {
+      console.log(e);
+    }
+
+    console.log(array);
+    return array;
   }
 
   private getFullPath() {
