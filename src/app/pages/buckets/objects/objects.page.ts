@@ -1,7 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ObjectService} from '../../../services/object/object.service';
-import {NavController} from '@ionic/angular';
+import {NavController, PopoverController} from '@ionic/angular';
+import {OptionsPage} from './options/options.page';
 
 @Component({
   selector: 'app-objects',
@@ -21,7 +22,8 @@ export class ObjectsPage implements OnInit {
   public objectsList = [];
   public foldersList = [];
 
-  constructor(private route: ActivatedRoute, private router: Router, private objectService: ObjectService, private navCtrl: NavController) {
+  constructor(private route: ActivatedRoute, private router: Router, private objectService: ObjectService, private navCtrl: NavController,
+              private popoverCtrl: PopoverController) {
     const pathArray = this.router.url.split('/');
     this.currentPath = pathArray[pathArray.length - 1];
     this.fullPath = this.getFullPath();
@@ -95,6 +97,16 @@ export class ObjectsPage implements OnInit {
 
   public async goToSubFolder(name: string) {
     await this.navCtrl.navigateForward([this.router.url + '/' + name]);
+  }
+
+  public async openOptions(event: any) {
+    const popover = await this.popoverCtrl.create({
+      component: OptionsPage,
+      translucent: true,
+      mode: 'ios',
+      event: event
+    });
+    return await popover.present();
   }
 
 }
