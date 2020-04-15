@@ -54,7 +54,7 @@
   </ion-grid>
 
   <div class="no-bucket"
-       *ngIf="!isLoading && (!bucketsAms && !bucketsPar) || (bucketsPar.length === 0 && bucketsAms.length === 0)">
+       *ngIf="!isLoading && (!bucketsAms && !bucketsPar) || (bucketsPar.length === 0 && bucketsAms.length === 0) && !error">
     <img src="assets/imgs/bucket.svg" class="bucket-not-available" alt="bucket"/>
     <p style="margin: 0">No bucket available</p>
     <small>You can add a new one to start using object storage</small>
@@ -62,7 +62,7 @@
 
   <div class="no-bucket"
        *ngIf="!isLoading && error">
-    <p style="margin: 0">An error occurred</p>
+    <p style="margin: 1rem 0 0 0">An error occurred</p>
     <small>Please refresh</small><br/>
     <ion-button color="secondary" (click)="refresh()" style="margin-top: 1rem;">Refresh</ion-button>
   </div>

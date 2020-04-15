@@ -21,8 +21,8 @@
         Dashboard
       </ion-list-header>
 
-      <ion-item lines="none">
-        <div class="item-right" slot="end" (click)="openPicker()">
+      <ion-item lines="none" (click)="openPicker()">
+        <div class="item-right" slot="end">
           <ion-label class="label-right">{{ instancesToDisplay }}</ion-label>
           <ion-icon name="arrow-down" mode="ios" color="medium" size="small"></ion-icon>
         </div>

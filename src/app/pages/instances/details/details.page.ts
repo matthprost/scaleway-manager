@@ -321,7 +321,9 @@ export class DetailsPage implements OnInit {
       const toast = await this.toastCtrl.create({
         message: 'Address has been copied into your clipboard!',
         duration: 3000,
-        position: 'top'
+        position: 'top',
+        color: 'secondary',
+        showCloseButton: true,
       });
 
       await toast.present();
