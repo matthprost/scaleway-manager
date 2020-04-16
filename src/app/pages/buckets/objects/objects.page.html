@@ -21,7 +21,7 @@
         <h3 style="margin: 8px 0">{{ folder.Prefix[0] }}</h3>
       </ion-label>
       <ion-icon slot="end" name="more" mode="ios" style="color: darkgray; font-size: 1.1rem; padding: .75rem"
-                (click)="openOptions($event, 'folder')"></ion-icon>
+                (click)="openOptions($event, 'folder', folder)"></ion-icon>
     </ion-item>
 
     <!-- FILES -->
@@ -33,7 +33,7 @@
         <p>{{ object.LastModified[0] | date:'MMM d, y' }} {{ object.Size[0] !== '0' ? '· ' + (object.Size[0] | fileSize: 0) : null }}</p>
       </ion-label>
       <ion-icon slot="end" name="more" mode="ios" style="color: darkgray; font-size: 1.1rem; padding: .75rem"
-                (click)="openOptions($event, object.StorageClass[0] === 'GLACIER' ? 'glacier' : 'standard')"></ion-icon>
+                (click)="openOptions($event, object.StorageClass[0] === 'GLACIER' ? 'glacier' : 'standard', object)"></ion-icon>
     </ion-item>
   </ion-list>
 

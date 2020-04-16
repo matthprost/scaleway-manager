@@ -48,7 +48,8 @@ export class LoginPage implements OnInit {
       toast.present();
     } else {
       const loader = await this.loadingCtrl.create({
-        message: 'Loading...'
+        message: 'Loading...',
+        mode: 'ios'
       });
 
       loader.present();

@@ -33,11 +33,11 @@ export class ObjectService {
     }
   }
 
-  public async createBucket(country: 'fr-par' | 'nl-ams', name: string) {
-    return this.objectApi.put(country, name);
+  public async createBucket(region: 'fr-par' | 'nl-ams', name: string) {
+    return this.objectApi.put(region, name);
   }
 
-  public async deleteObject(bucketName: string, country: 'fr-par' | 'nl-ams', name: string) {
-    return this.objectApi.delete(country, bucketName, '/' + name);
+  public async deleteObject(bucketName: string, region: 'fr-par' | 'nl-ams', objectName: string) {
+    return this.objectApi.delete(region, bucketName, '/' + objectName);
   }
 }

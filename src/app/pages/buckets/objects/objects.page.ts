@@ -33,6 +33,13 @@ export class ObjectsPage implements OnInit {
     this.currentRegion = this.route.snapshot.paramMap.get('region') as 'fr-par' | 'nl-ams';
     this.bucket = this.route.snapshot.paramMap.get('bucket');
 
+    this.reload();
+  }
+
+  ngOnInit() {
+  }
+
+  private reload() {
     this.objectService.getAllObjects(this.bucket, this.currentRegion, this.fullPath !== '/' ? this.fullPath : null)
       .then(result => {
         console.log(result);
@@ -42,9 +49,6 @@ export class ObjectsPage implements OnInit {
       }).catch(error => {
       this.isLoading = false;
     });
-  }
-
-  ngOnInit() {
   }
 
   private clean(array: Array<any>) {
@@ -99,15 +103,21 @@ export class ObjectsPage implements OnInit {
     await this.navCtrl.navigateForward([this.router.url + '/' + name]);
   }
 
-  public async openOptions(event: any, type: 'folder' | 'standard' | 'glacier') {
+  public async openOptions(event: any, type: 'folder' | 'standard' | 'glacier', object: any) {
     const popover = await this.popoverCtrl.create({
       component: OptionsPage,
-      componentProps: {type},
+      componentProps: {type, region: this.currentRegion, object: object, bucket: this.bucket},
       translucent: true,
       mode: 'ios',
       event: event
     });
-    return await popover.present();
+
+    await popover.present();
+    await popover.onDidDismiss().then(data => {
+      if (data && data.data && data.data.reload) {
+        this.reload();
+      }
+    });
   }
 
 }

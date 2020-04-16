@@ -78,7 +78,11 @@ export class ObjectApiService {
       }).toPromise();
 
       // Convert XML into JSON
-      return await xml2js.parseStringPromise(value);
+      if (value) {
+        return await xml2js.parseStringPromise(value);
+      } else {
+        return 'ok';
+      }
 
     } catch (e) {
 

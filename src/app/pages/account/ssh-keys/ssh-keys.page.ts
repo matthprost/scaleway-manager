@@ -69,7 +69,8 @@ export class SshKeysPage implements OnInit {
   public async deleteSshKey(SshKey: SshKeysDto, slidingItem: IonItemSliding) {
     await slidingItem.close();
     const loading = await this.loadingCtrl.create({
-      message: 'Loading...'
+      message: 'Loading...',
+      mode: 'ios'
     });
 
     await loading.present();

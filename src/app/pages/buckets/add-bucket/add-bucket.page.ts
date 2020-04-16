@@ -56,7 +56,8 @@ export class AddBucketPage implements OnInit {
         showCloseButton: true,
         duration: 5000,
         color: 'danger',
-        message: 'Please check form, name of the bucket might not be correct'
+        message: 'Please check form, name of the bucket might not be correct',
+        mode: 'ios'
       });
 
       await alert.present();

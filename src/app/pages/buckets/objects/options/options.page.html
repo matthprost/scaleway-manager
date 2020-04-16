@@ -1,5 +1,5 @@
 <ion-list mode="ios" style="margin: 0" *ngIf="type === 'folder'">
-  <ion-item button lines="none" style="color: var(--ion-color-danger)" detail="false">Delete</ion-item>
+  <ion-item button lines="none" style="color: var(--ion-color-danger)" detail="false" (click)="deleteObject()">Delete</ion-item>
 </ion-list>
 
 <ion-list mode="ios" style="margin: 0" *ngIf="type === 'standard'">
@@ -8,7 +8,7 @@
   <ion-item button lines="full" detail="false">Send to S3 Glacier</ion-item>
   <ion-item button lines="none" detail="false">Edit name</ion-item>
   <ion-item button lines="none" detail="false">Get public link</ion-item>
-  <ion-item button lines="none" style="color: var(--ion-color-danger)" detail="false">Delete</ion-item>
+  <ion-item button lines="none" style="color: var(--ion-color-danger)" detail="false" (click)="deleteObject()">Delete</ion-item>
 </ion-list>
 
 <ion-list mode="ios" style="margin: 0" *ngIf="type === 'glacier'">
@@ -17,5 +17,5 @@
   <ion-item button lines="full" detail="false">Restore</ion-item>
   <ion-item button lines="none" detail="false">Edit name</ion-item>
   <ion-item button lines="none" detail="false" disabled="true">Get public link</ion-item>
-  <ion-item button lines="none" style="color: var(--ion-color-danger)" detail="false">Delete</ion-item>
+  <ion-item button lines="none" style="color: var(--ion-color-danger)" detail="false" (click)="deleteObject()">Delete</ion-item>
 </ion-list>
