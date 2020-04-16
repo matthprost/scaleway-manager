@@ -51,10 +51,10 @@ export class ObjectService {
   }
 
   public async restore(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
-    return this.objectApi.put(
+    return this.objectApi.post(
       region,
       bucketName,
-      path,
+      path + '?restore',
       {'x-amz-storage-class': 'STANDARD', 'x-amz-copy-source': fullPath});
   }
 }

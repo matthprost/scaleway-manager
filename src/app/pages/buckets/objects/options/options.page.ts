@@ -29,6 +29,35 @@ export class OptionsPage implements OnInit {
   ngOnInit() {
   }
 
+  public async restore() {
+    const alert = await this.alertCtrl.create({
+      header: 'Restore Object',
+      message: 'Restoring an object can take up to 6 hours.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'Restore',
+          handler: async (values) => {
+            const loading = await this.loadingCtrl.create({
+              message: 'Loading...',
+              mode: 'ios'
+            });
+
+            await loading.present();
+            console.log(this.fullPathWithoutBucket);
+            await this.objectService.restore(this.bucket, this.region, this.fullPathWithoutBucket, this.fullPathWithBucket);
+            await this.popoverController.dismiss({reload: true});
+            await loading.dismiss();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   public async sendToGlacier() {
     const alert = await this.alertCtrl.create({
       header: 'Send to S3 Glacier',
