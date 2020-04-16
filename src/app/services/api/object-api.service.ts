@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 import {AuthService} from '../user/auth/auth.service';
 import * as xml2js from '../../../../node_modules/xml2js';
-import {AlertController, Platform, ToastController} from '@ionic/angular';
+import { Platform, ToastController} from '@ionic/angular';
 
 enum HttpMethods {
   GET,
@@ -22,7 +22,7 @@ enum HttpMethods {
 export class ObjectApiService {
 
   constructor(private httpClient: HttpClient, private storage: Storage, private authService: AuthService,
-              private toastController: ToastController, private platform: Platform, public alertController: AlertController) {
+              private toastController: ToastController, private platform: Platform) {
   }
 
   public async request(method: HttpMethods, country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
@@ -30,7 +30,7 @@ export class ObjectApiService {
       service: 's3',
       region: country,
       host: subHost ? subHost + '.s3.' + country + '.scw.cloud' : 's3.' + country + '.scw.cloud',
-      path: path ? '/?delimiter=/&marker=&prefix=' + path : '/?delimiter=/&marker=',
+      path,
       headers: {},
       method: HttpMethods[method.toString()]
     };
@@ -64,10 +64,10 @@ export class ObjectApiService {
 
       let url = country === 'fr-par' ? '/s3par' : '/s3ams';
       if (this.platform.is('cordova')) {
-        url = subHost ? 'https://' + subHost + '.s3.' + country + '.scw.cloud/?delimiter=/&marker=' : 'https://s3.' + country +
-          '.scw.cloud/?delimiter=/&marker=';
+        url = subHost ? 'https://' + subHost + '.s3.' + country + '.scw.cloud' : 'https://s3.' + country +
+          '.scw.cloud';
         if (path) {
-          url += '&prefix=' + path;
+          url += path;
         }
       }
 

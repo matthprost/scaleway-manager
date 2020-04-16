@@ -30,8 +30,8 @@ const PROXY_CONFIG = {
     target: true,
     router: function (req) {
       var subhost = req.headers.subhost;
-      var prefix = req.headers.path;
-      var target = 'https://' + (subhost ? subhost + '.' : '') + 's3.fr-par.scw.cloud/?delimiter=/&marker=' + (prefix ? '&prefix=' + prefix + '/' : '');
+      var path = req.headers.path;
+      var target = 'https://' + (subhost ? subhost + '.' : '') + 's3.fr-par.scw.cloud' + (path ? path : '');
       console.log(target);
       return target;
     },
@@ -46,8 +46,8 @@ const PROXY_CONFIG = {
     target: true,
     router: function (req) {
       var subhost = req.headers.subhost;
-      var prefix = req.headers.path;
-      var target = 'https://' + (subhost ? subhost + '.' : '') + 's3.nl-ams.scw.cloud/?delimiter=/&marker=' + (prefix ? '&prefix=' + prefix + '/' : '');
+      var path = req.headers.path;
+      var target = 'https://' + (subhost ? subhost + '.' : '') + 's3.nl-ams.scw.cloud' + (path ? path : '');
       console.log(target);
       return target;
     },

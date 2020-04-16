@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {NavParams} from '@ionic/angular';
+import {ObjectService} from '../../../../services/object/object.service';
 
 @Component({
   selector: 'app-options',
@@ -10,7 +11,7 @@ export class OptionsPage implements OnInit {
 
   public type: 'folder' | 'standard' | 'glacier' = null;
 
-  constructor(private navParams: NavParams) {
+  constructor(private navParams: NavParams, private objectService: ObjectService) {
     this.type = this.navParams.get('type');
   }
 
