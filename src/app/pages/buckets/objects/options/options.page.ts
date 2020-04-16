@@ -25,6 +25,35 @@ export class OptionsPage implements OnInit {
   ngOnInit() {
   }
 
+  public async sendToGlacier() {
+    const alert = await this.alertCtrl.create({
+      header: 'Send to S3 Glacier',
+      message: 'Modifying the storage class is free of charge and the storage cost to Glacier is much lower than the standard storage ' +
+        'fee. However, keep in mind that accessing an object stored in Glacier takes more time.',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'Send',
+          handler: async (values) => {
+            const loading = await this.loadingCtrl.create({
+              message: 'Loading...',
+              mode: 'ios'
+            });
+
+            await loading.present();
+            await this.objectService.sendToGlacierS3(this.bucket, this.region, this.object.Key[0]);
+            await this.popoverController.dismiss({reload: true});
+            await loading.dismiss();
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
   public async deleteObject() {
     const alert = await this.alertCtrl.create({
       header: 'Delete File',

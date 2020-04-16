@@ -25,13 +25,13 @@ export class ObjectApiService {
               private toastController: ToastController, private platform: Platform) {
   }
 
-  public async request(method: HttpMethods, country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
+  public async request(method: HttpMethods, country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
     const opts = {
       service: 's3',
       region: country,
       host: subHost ? subHost + '.s3.' + country + '.scw.cloud' : 's3.' + country + '.scw.cloud',
       path,
-      headers: {},
+      headers: customHeader ? customHeader : {},
       method: HttpMethods[method.toString()]
     };
 
@@ -56,10 +56,10 @@ export class ObjectApiService {
       aws4.sign(opts, {accessKeyId: awsToken.token.access_key, secretAccessKey: awsToken.token.secret_key});
       console.log(opts);
 
-      let myHeaders = {...opts.headers, ...{subHost}};
+      let myHeaders = {...opts.headers, ...{subHost}, ...customHeader};
 
       if (path) {
-        myHeaders = {...opts.headers, ...{subHost}, ...{path}};
+        myHeaders = {...opts.headers, ...{subHost}, ...{path}, ...customHeader};
       }
 
       let url = country === 'fr-par' ? '/s3par' : '/s3ams';
@@ -73,7 +73,7 @@ export class ObjectApiService {
 
       const value = await this.httpClient.request(HttpMethods[method.toString()], url, {
         body: null,
-        headers: subHost ? myHeaders : opts.headers,
+        headers: subHost ? myHeaders : {...opts.headers, ...customHeader},
         responseType: 'text'
       }).toPromise();
 
@@ -108,27 +108,27 @@ export class ObjectApiService {
     }
   }
 
-  public get(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
-    return this.request(HttpMethods.GET, country, subHost, path);
+  public get(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+    return this.request(HttpMethods.GET, country, subHost, path, customHeader);
   }
 
-  public post(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
-    return this.request(HttpMethods.POST, country, subHost, path);
+  public post(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+    return this.request(HttpMethods.POST, country, subHost, path, customHeader);
   }
 
-  public put(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
-    return this.request(HttpMethods.PUT, country, subHost, path);
+  public put(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+    return this.request(HttpMethods.PUT, country, subHost, path, customHeader);
   }
 
-  public patch(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
-    return this.request(HttpMethods.PATCH, country, subHost, path);
+  public patch(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+    return this.request(HttpMethods.PATCH, country, subHost, path, customHeader);
   }
 
-  public options(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
-    return this.request(HttpMethods.OPTIONS, country, subHost, path);
+  public options(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+    return this.request(HttpMethods.OPTIONS, country, subHost, path, customHeader);
   }
 
-  public delete(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string) {
-    return this.request(HttpMethods.DELETE, country, subHost, path);
+  public delete(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+    return this.request(HttpMethods.DELETE, country, subHost, path, customHeader);
   }
 }
