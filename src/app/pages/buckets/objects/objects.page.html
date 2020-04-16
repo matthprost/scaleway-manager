@@ -12,6 +12,10 @@
 </ion-content>
 
 <ion-content *ngIf="!isLoading">
+  <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="!isLoading" slot="fixed">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-list>
     <!-- FOLDERS -->
     <ion-item *ngFor="let folder of foldersList" detail="false" mode="ios">

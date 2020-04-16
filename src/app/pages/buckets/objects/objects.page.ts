@@ -33,22 +33,32 @@ export class ObjectsPage implements OnInit {
     this.currentRegion = this.route.snapshot.paramMap.get('region') as 'fr-par' | 'nl-ams';
     this.bucket = this.route.snapshot.paramMap.get('bucket');
 
-    this.reload();
+    this.refresh();
   }
 
   ngOnInit() {
   }
 
-  private reload() {
-    this.objectService.getAllObjects(this.bucket, this.currentRegion, this.fullPath !== '/' ? this.fullPath : null)
-      .then(result => {
-        console.log(result);
-        this.objectsList = result.ListBucketResult.Contents ? this.clean(result.ListBucketResult.Contents) : [];
-        this.foldersList = result.ListBucketResult.CommonPrefixes ? this.clean(result.ListBucketResult.CommonPrefixes) : [];
-        this.isLoading = false;
-      }).catch(error => {
-      this.isLoading = false;
+  public doRefresh(refresher) {
+    this.refresh().then(() => {
+      refresher.target.complete();
+    }).catch(error => {
+      console.log(error);
+      refresher.target.complete();
     });
+  }
+
+  private async refresh() {
+    try {
+      const result = await this.objectService.getAllObjects(this.bucket, this.currentRegion, this.fullPath !== '/' ? this.fullPath : null);
+      console.log(result);
+      this.objectsList = result.ListBucketResult.Contents ? this.clean(result.ListBucketResult.Contents) : [];
+      this.foldersList = result.ListBucketResult.CommonPrefixes ? this.clean(result.ListBucketResult.CommonPrefixes) : [];
+    } catch (e) {
+      console.log(e);
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   private clean(array: Array<any>) {
@@ -115,7 +125,7 @@ export class ObjectsPage implements OnInit {
     await popover.present();
     await popover.onDidDismiss().then(data => {
       if (data && data.data && data.data.reload) {
-        this.reload();
+        this.refresh();
       }
     });
   }
