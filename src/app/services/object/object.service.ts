@@ -41,7 +41,20 @@ export class ObjectService {
     return this.objectApi.delete(region, bucketName, '/' + objectName);
   }
 
-  public async sendToGlacierS3(bucketName: string, region: 'fr-par' | 'nl-ams', objectName: string) {
-    return this.objectApi.put(region, bucketName, '/' + objectName, {'x-amz-storage-class': 'GLACIER'});
+  public async sendToGlacierS3(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
+    return this.objectApi.put(
+      region,
+      bucketName,
+      path,
+      {'x-amz-storage-class': 'GLACIER', 'x-amz-copy-source': fullPath}
+    );
+  }
+
+  public async restore(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
+    return this.objectApi.put(
+      region,
+      bucketName,
+      path,
+      {'x-amz-storage-class': 'STANDARD', 'x-amz-copy-source': fullPath});
   }
 }

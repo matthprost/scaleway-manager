@@ -13,6 +13,8 @@ export class OptionsPage implements OnInit {
   public object: any = null;
   public region: 'fr-par' | 'nl-ams' = null;
   public bucket: string = null;
+  public fullPathWithoutBucket: string = null;
+  public fullPathWithBucket: string = null;
 
   constructor(private navParams: NavParams, private objectService: ObjectService, private loadingCtrl: LoadingController,
               private popoverController: PopoverController, private alertCtrl: AlertController) {
@@ -20,6 +22,8 @@ export class OptionsPage implements OnInit {
     this.object = this.navParams.get('object');
     this.region = this.navParams.get('region');
     this.bucket = this.navParams.get('bucket');
+    this.fullPathWithoutBucket = '/' + this.navParams.get('fullPath') + this.object.Key[0];
+    this.fullPathWithBucket = '/' + this.bucket + '/' + this.navParams.get('fullPath') + this.object.Key[0];
   }
 
   ngOnInit() {
@@ -43,7 +47,8 @@ export class OptionsPage implements OnInit {
             });
 
             await loading.present();
-            await this.objectService.sendToGlacierS3(this.bucket, this.region, this.object.Key[0]);
+            console.log(this.fullPathWithoutBucket);
+            await this.objectService.sendToGlacierS3(this.bucket, this.region, this.fullPathWithoutBucket, this.fullPathWithBucket);
             await this.popoverController.dismiss({reload: true});
             await loading.dismiss();
           }

@@ -8,7 +8,7 @@ export class FileSizePipe implements PipeTransform {
   private units = [
     'B',
     'kB',
-    'mB',
+    'MB',
     'GB',
     'TB',
     'PB'

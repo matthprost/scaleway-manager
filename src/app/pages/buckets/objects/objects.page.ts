@@ -116,7 +116,13 @@ export class ObjectsPage implements OnInit {
   public async openOptions(event: any, type: 'folder' | 'standard' | 'glacier', object: any) {
     const popover = await this.popoverCtrl.create({
       component: OptionsPage,
-      componentProps: {type, region: this.currentRegion, object: object, bucket: this.bucket},
+      componentProps: {
+        type,
+        region: this.currentRegion,
+        object: object,
+        bucket: this.bucket,
+        fullPath: this.fullPath,
+      },
       translucent: true,
       mode: 'ios',
       event: event
