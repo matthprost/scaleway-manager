@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { ObjectsPage } from './objects.page';
 import {ComponentsModule} from '../../../components/components.module';
 import {OptionsPage} from './options/options.page';
+import {PipesModule} from '../../../pipes/pipes.module';
 
 const routes: Routes = [
   {
@@ -22,7 +23,8 @@ const routes: Routes = [
         FormsModule,
         IonicModule,
         RouterModule.forChild(routes),
-        ComponentsModule
+        ComponentsModule,
+        PipesModule
     ],
   declarations: [ObjectsPage, OptionsPage],
   entryComponents: [OptionsPage]

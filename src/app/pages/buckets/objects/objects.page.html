@@ -13,22 +13,27 @@
 
 <ion-content *ngIf="!isLoading">
   <ion-list>
+    <!-- FOLDERS -->
     <ion-item *ngFor="let folder of foldersList" detail="false" mode="ios">
       <ion-icon slot="start" name="folder" mode="md" style="color: var(--ion-color-primary-tint)"
                 (click)="goToSubFolder(folder.Prefix[0])"></ion-icon>
       <ion-label (click)="goToSubFolder(folder.Prefix[0])">
-        <h2 style="margin: 8px 0">{{ folder.Prefix[0] }}</h2>
+        <h3 style="margin: 8px 0">{{ folder.Prefix[0] }}</h3>
       </ion-label>
-      <ion-icon slot="end" name="more" mode="ios" style="color: darkgray; font-size: 1.1rem" (click)="openOptions($event)"></ion-icon>
+      <ion-icon slot="end" name="more" mode="ios" style="color: darkgray; font-size: 1.1rem; padding: .75rem"
+                (click)="openOptions($event, 'folder')"></ion-icon>
     </ion-item>
+
+    <!-- FILES -->
     <ion-item *ngFor="let object of objectsList" detail="false"
               mode="ios">
       <ion-icon slot="start" name="document" mode="ios" style="color: var(--ion-color-primary-tint)"></ion-icon>
       <ion-label>
-        <h2>{{ object.Key[0] }}</h2>
-        <p>{{ object.LastModified[0] | date:'MMM d, y' }} {{ object.Size[0] !== '0' ? '· ' + object.Size[0] + 'B' : null }}</p>
+        <h3>{{ object.Key[0] }}</h3>
+        <p>{{ object.LastModified[0] | date:'MMM d, y' }} {{ object.Size[0] !== '0' ? '· ' + (object.Size[0] | fileSize: 0) : null }}</p>
       </ion-label>
-      <ion-icon slot="end" name="more" mode="ios" style="color: darkgray; font-size: 1.1rem" (click)="openOptions($event)"></ion-icon>
+      <ion-icon slot="end" name="more" mode="ios" style="color: darkgray; font-size: 1.1rem; padding: .75rem"
+                (click)="openOptions($event, object.StorageClass[0] === 'GLACIER' ? 'glacier' : 'standard')"></ion-icon>
     </ion-item>
   </ion-list>
 

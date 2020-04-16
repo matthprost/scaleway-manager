@@ -99,9 +99,10 @@ export class ObjectsPage implements OnInit {
     await this.navCtrl.navigateForward([this.router.url + '/' + name]);
   }
 
-  public async openOptions(event: any) {
+  public async openOptions(event: any, type: 'folder' | 'standard' | 'glacier') {
     const popover = await this.popoverCtrl.create({
       component: OptionsPage,
+      componentProps: {type},
       translucent: true,
       mode: 'ios',
       event: event

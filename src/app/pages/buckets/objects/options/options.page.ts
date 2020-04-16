@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {NavParams} from '@ionic/angular';
 
 @Component({
   selector: 'app-options',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OptionsPage implements OnInit {
 
-  constructor() { }
+  public type: 'folder' | 'standard' | 'glacier' = null;
+
+  constructor(private navParams: NavParams) {
+    this.type = this.navParams.get('type');
+  }
 
   ngOnInit() {
   }
