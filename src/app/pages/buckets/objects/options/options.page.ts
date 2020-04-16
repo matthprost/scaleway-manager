@@ -77,7 +77,7 @@ export class OptionsPage implements OnInit {
             });
 
             await loading.present();
-            await this.objectService.deleteObject(this.bucket, this.region, this.object.Key ? this.object.Key[0] : this.object.Prefix[0]);
+            await this.objectService.deleteObject(this.bucket, this.region, this.fullPathWithoutBucket);
             await this.popoverController.dismiss({reload: true});
             await loading.dismiss();
           }

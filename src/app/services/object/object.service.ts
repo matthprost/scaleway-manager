@@ -37,8 +37,8 @@ export class ObjectService {
     return this.objectApi.put(region, name);
   }
 
-  public async deleteObject(bucketName: string, region: 'fr-par' | 'nl-ams', objectName: string) {
-    return this.objectApi.delete(region, bucketName, '/' + objectName);
+  public async deleteObject(bucketName: string, region: 'fr-par' | 'nl-ams', path: string) {
+    return this.objectApi.delete(region, bucketName, path);
   }
 
   public async sendToGlacierS3(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
