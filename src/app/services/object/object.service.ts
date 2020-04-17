@@ -41,6 +41,15 @@ export class ObjectService {
     return this.objectApi.delete(region, bucketName, path);
   }
 
+  public async copyObject(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
+    return this.objectApi.put(
+      region,
+      bucketName,
+      path,
+      {'X-amz-copy-source': fullPath}
+    );
+  }
+
   public async sendToGlacierS3(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
     return this.objectApi.put(
       region,

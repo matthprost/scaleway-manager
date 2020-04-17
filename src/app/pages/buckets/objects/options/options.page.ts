@@ -29,6 +29,49 @@ export class OptionsPage implements OnInit {
   ngOnInit() {
   }
 
+  public async editName() {
+    const alert = await this.alertCtrl.create({
+      header: 'Edit Name',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+        }, {
+          text: 'Send',
+          handler: async (data) => {
+            const loading = await this.loadingCtrl.create({
+              message: 'Loading...',
+              mode: 'ios'
+            });
+
+            console.log('/' + this.navParams.get('fullPath') + data.name);
+
+            await loading.present();
+            try {
+              await this.objectService.copyObject(this.bucket, this.region, '/' + this.navParams.get('fullPath') + data.name, this.fullPathWithBucket);
+              await this.objectService.deleteObject(this.bucket, this.region, this.fullPathWithoutBucket);
+            } catch (e) {
+              console.log(e);
+            } finally {
+              await this.popoverController.dismiss({reload: true});
+              await loading.dismiss();
+            }
+          }
+        }
+      ],
+      inputs: [
+        {
+          name: 'name',
+          type: 'text',
+          placeholder: 'Enter a name...',
+          value: this.object.Key[0]
+        },
+      ]
+    });
+
+    await alert.present();
+  }
+
   /*public async restore() {
     const alert = await this.alertCtrl.create({
       header: 'Restore Object',
