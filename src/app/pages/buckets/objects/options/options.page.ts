@@ -29,7 +29,7 @@ export class OptionsPage implements OnInit {
   ngOnInit() {
   }
 
-  public async restore() {
+  /*public async restore() {
     const alert = await this.alertCtrl.create({
       header: 'Restore Object',
       message: 'Restoring an object can take up to 6 hours.',
@@ -47,16 +47,21 @@ export class OptionsPage implements OnInit {
 
             await loading.present();
             console.log(this.fullPathWithoutBucket);
-            await this.objectService.restore(this.bucket, this.region, this.fullPathWithoutBucket, this.fullPathWithBucket);
-            await this.popoverController.dismiss({reload: true});
-            await loading.dismiss();
+            try {
+              await this.objectService.restore(this.bucket, this.region, this.fullPathWithoutBucket, this.fullPathWithBucket);
+            } catch (e) {
+              console.log(e);
+            } finally {
+              await this.popoverController.dismiss({reload: true});
+              await loading.dismiss();
+            }
           }
         }
       ]
     });
 
     await alert.present();
-  }
+  }*/
 
   public async sendToGlacier() {
     const alert = await this.alertCtrl.create({
@@ -76,10 +81,14 @@ export class OptionsPage implements OnInit {
             });
 
             await loading.present();
-            console.log(this.fullPathWithoutBucket);
-            await this.objectService.sendToGlacierS3(this.bucket, this.region, this.fullPathWithoutBucket, this.fullPathWithBucket);
-            await this.popoverController.dismiss({reload: true});
-            await loading.dismiss();
+            try {
+              await this.objectService.sendToGlacierS3(this.bucket, this.region, this.fullPathWithoutBucket, this.fullPathWithBucket);
+            } catch (e) {
+              console.log(e);
+            } finally {
+              await this.popoverController.dismiss({reload: true});
+              await loading.dismiss();
+            }
           }
         }
       ]
@@ -106,9 +115,14 @@ export class OptionsPage implements OnInit {
             });
 
             await loading.present();
-            await this.objectService.deleteObject(this.bucket, this.region, this.fullPathWithoutBucket);
-            await this.popoverController.dismiss({reload: true});
-            await loading.dismiss();
+            try {
+              await this.objectService.deleteObject(this.bucket, this.region, this.fullPathWithoutBucket);
+            } catch (e) {
+              console.log(e);
+            } finally {
+              await this.popoverController.dismiss({reload: true});
+              await loading.dismiss();
+            }
           }
         }
       ]

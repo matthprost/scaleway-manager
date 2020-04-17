@@ -3,6 +3,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ObjectService} from '../../../services/object/object.service';
 import {NavController, PopoverController} from '@ionic/angular';
 import {OptionsPage} from './options/options.page';
+import { faSnowflake } from '@fortawesome/free-solid-svg-icons';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-objects',
@@ -22,8 +24,11 @@ export class ObjectsPage implements OnInit {
   public objectsList = [];
   public foldersList = [];
 
+  faSnowflake = faSnowflake;
+
   constructor(private route: ActivatedRoute, private router: Router, private objectService: ObjectService, private navCtrl: NavController,
-              private popoverCtrl: PopoverController) {
+              private popoverCtrl: PopoverController, private statusBar: StatusBar) {
+    this.statusBar.styleLightContent();
     const pathArray = this.router.url.split('/');
     this.currentPath = pathArray[pathArray.length - 1];
     this.fullPath = this.getFullPath();
@@ -37,6 +42,10 @@ export class ObjectsPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    this.statusBar.styleLightContent();
   }
 
   public doRefresh(refresher) {

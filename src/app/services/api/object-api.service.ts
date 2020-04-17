@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 import {AuthService} from '../user/auth/auth.service';
 import * as xml2js from '../../../../node_modules/xml2js';
-import { Platform, ToastController} from '@ionic/angular';
+import {AlertController, Platform, ToastController} from '@ionic/angular';
 
 enum HttpMethods {
   GET,
@@ -22,7 +22,7 @@ enum HttpMethods {
 export class ObjectApiService {
 
   constructor(private httpClient: HttpClient, private storage: Storage, private authService: AuthService,
-              private toastController: ToastController, private platform: Platform) {
+              private toastController: ToastController, private platform: Platform, private alertCtrl: AlertController) {
   }
 
   public async request(method: HttpMethods, country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
@@ -51,24 +51,31 @@ export class ObjectApiService {
     try {
       // We check if access_token is still working
       await this.authService.getToken(awsToken.token.access_key);
+    } catch (e) {
+      if (e.status === 404) {
+        await this.storage.remove('awsToken');
+        await this.authService.deleteToken(awsToken.token.access_key);
+        return this.request(method, country, subHost, path);
+      } else {
+        return;
+      }
+    }
 
+    try {
       // Create AWS Signature
       aws4.sign(opts, {accessKeyId: awsToken.token.access_key, secretAccessKey: awsToken.token.secret_key});
       console.log(opts);
 
       let myHeaders = {...opts.headers, ...{subHost}, ...customHeader};
+      let url;
 
-      if (path) {
-        myHeaders = {...opts.headers, ...{subHost}, ...{path}, ...customHeader};
-      }
-
-      let url = country === 'fr-par' ? '/s3par' : '/s3ams';
       if (this.platform.is('cordova')) {
-        url = subHost ? 'https://' + subHost + '.s3.' + country + '.scw.cloud' : 'https://s3.' + country +
-          '.scw.cloud';
+        url = 'https://' + (subHost ? subHost + '.' : '') + 's3.' + country + '.scw.cloud' + (path ? path : '');
+      } else {
         if (path) {
-          url += path;
+          myHeaders = {...opts.headers, ...{subHost}, ...{path}, ...customHeader};
         }
+        url = country === 'fr-par' ? '/s3par' : '/s3ams';
       }
 
       const value = await this.httpClient.request(HttpMethods[method.toString()], url, {
@@ -77,24 +84,33 @@ export class ObjectApiService {
         responseType: 'text'
       }).toPromise();
 
+
       // Convert XML into JSON
-      if (value) {
+      if (value && value.indexOf('xml') > 0) {
         return await xml2js.parseStringPromise(value);
       } else {
         return 'ok';
       }
 
     } catch (e) {
+      console.log('AN ERROR OCCURRED:', e);
 
       // We remove access_token from storage and retry if token not found
-      if (e.status === 404) {
-        await this.storage.remove('awsToken');
-        return this.request(method, country, subHost, path);
+      if (e.status) {
+        const toast = await this.toastController.create({
+          position: 'top',
+          showCloseButton: true,
+          duration: 8000,
+          color: 'danger',
+          message: e.message
+        });
+
+        await toast.present();
       } else {
         const errorMessage = await xml2js.parseStringPromise(e.error);
         console.log(errorMessage.Error.Message[0]);
 
-        const alert = await this.toastController.create({
+        const toast = await this.toastController.create({
           position: 'top',
           showCloseButton: true,
           duration: 8000,
@@ -102,7 +118,7 @@ export class ObjectApiService {
           message: errorMessage.Error.Message[0] ? errorMessage.Error.Message[0] : 'An error occurred'
         });
 
-        await alert.present();
+        await toast.present();
         throw e;
       }
     }

@@ -11,7 +11,7 @@
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" lines="none" class="menu-labels">
               <ion-icon slot="start" [name]="p.icon"></ion-icon>
               <ion-label>
-                {{p.title}} <ion-badge color="secondary" *ngIf="p.pro" mode="ios">Pro</ion-badge>
+                {{p.title}} <ion-badge color="danger" *ngIf="p.new" mode="ios">New</ion-badge>
               </ion-label>
             </ion-item>
           </ion-menu-toggle>

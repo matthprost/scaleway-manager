@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar mode="ios" style="--background: var(--ion-color-dark)">
+  <ion-toolbar mode="ios" style="--background: var(--ion-color-primary)">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/buckets" color="light"></ion-back-button>
     </ion-buttons>
@@ -19,7 +19,7 @@
   <ion-list>
     <!-- FOLDERS -->
     <ion-item *ngFor="let folder of foldersList" detail="false" mode="ios">
-      <ion-icon slot="start" name="folder" mode="md" style="color: var(--ion-color-primary-tint)"
+      <ion-icon slot="start" name="folder" mode="md" style="color: var(--ion-color-primary)"
                 (click)="goToSubFolder(folder.Prefix[0])"></ion-icon>
       <ion-label (click)="goToSubFolder(folder.Prefix[0])">
         <h3 style="margin: 8px 0">{{ folder.Prefix[0] }}</h3>
@@ -31,11 +31,12 @@
     <!-- FILES -->
     <ion-item *ngFor="let object of objectsList" detail="false"
               mode="ios">
-      <ion-icon slot="start" name="document" mode="ios" style="color: var(--ion-color-primary-tint)"></ion-icon>
+      <ion-icon slot="start" name="document" mode="ios" style="color: var(--ion-color-primary)"></ion-icon>
       <ion-label>
         <h3>{{ object.Key[0] }}</h3>
         <p>{{ object.LastModified[0] | date:'MMM d, y' }} {{ object.Size[0] !== '0' ? '· ' + (object.Size[0] | fileSize: 0) : null }}</p>
       </ion-label>
+      <fa-icon *ngIf="object.StorageClass[0] === 'GLACIER'" [icon]="faSnowflake" style="color: var(--ion-color-tertiary); padding: 0 .1rem"></fa-icon>
       <ion-icon slot="end" name="more" mode="ios" style="color: darkgray; font-size: 1.1rem; padding: .75rem"
                 (click)="openOptions($event, object.StorageClass[0] === 'GLACIER' ? 'glacier' : 'standard', object)"></ion-icon>
     </ion-item>

@@ -46,15 +46,17 @@ export class ObjectService {
       region,
       bucketName,
       path,
-      {'x-amz-storage-class': 'GLACIER', 'x-amz-copy-source': fullPath}
+      {'X-amz-storage-class': 'GLACIER', 'X-amz-copy-source': fullPath}
     );
   }
 
-  public async restore(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
+  /*public async restore(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
     return this.objectApi.post(
       region,
       bucketName,
       path + '?restore',
-      {'x-amz-storage-class': 'STANDARD', 'x-amz-copy-source': fullPath});
-  }
+      {
+        ContentType: 'application/octet-stream',
+      });
+  }*/
 }

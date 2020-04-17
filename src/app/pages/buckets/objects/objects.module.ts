@@ -9,6 +9,7 @@ import { ObjectsPage } from './objects.page';
 import {ComponentsModule} from '../../../components/components.module';
 import {OptionsPage} from './options/options.page';
 import {PipesModule} from '../../../pipes/pipes.module';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
         IonicModule,
         RouterModule.forChild(routes),
         ComponentsModule,
-        PipesModule
+        PipesModule,
+        FontAwesomeModule
     ],
   declarations: [ObjectsPage, OptionsPage],
   entryComponents: [OptionsPage]
