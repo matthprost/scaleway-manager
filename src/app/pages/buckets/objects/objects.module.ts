@@ -19,15 +19,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        RouterModule.forChild(routes),
-        ComponentsModule,
-        PipesModule,
-        FontAwesomeModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes),
+    ComponentsModule,
+    PipesModule,
+    FontAwesomeModule,
+  ],
   declarations: [ObjectsPage, OptionsPage],
   entryComponents: [OptionsPage]
 })

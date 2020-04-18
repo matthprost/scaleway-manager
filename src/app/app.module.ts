@@ -14,6 +14,9 @@ import {NativeHttpBackend, NativeHttpFallback, NativeHttpModule} from 'ionic-nat
 import {AppVersion} from '@ionic-native/app-version/ngx';
 import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
 import {Keyboard} from '@ionic-native/keyboard/ngx';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { far } from '@fortawesome/free-regular-svg-icons';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +27,7 @@ import {Keyboard} from '@ionic-native/keyboard/ngx';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     NativeHttpModule,
+    FontAwesomeModule
   ],
   providers: [
     StatusBar,
@@ -40,4 +44,8 @@ import {Keyboard} from '@ionic-native/keyboard/ngx';
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule {
+  constructor() {
+    library.add(far);
+  }
+}
