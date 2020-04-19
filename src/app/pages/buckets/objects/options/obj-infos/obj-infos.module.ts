@@ -5,13 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { OptionsPage } from './options.page';
-import {ObjInfosPage} from './obj-infos/obj-infos.page';
+import { ObjInfosPage } from './obj-infos.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: OptionsPage
+    component: ObjInfosPage
   }
 ];
 
@@ -21,6 +20,6 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes)
-  ],
+  ]
 })
-export class OptionsPageModule {}
+export class ObjInfosPageModule {}

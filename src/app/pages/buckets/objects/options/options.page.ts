@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {AlertController, LoadingController, NavParams, PopoverController} from '@ionic/angular';
+import {AlertController, LoadingController, ModalController, NavParams, PopoverController} from '@ionic/angular';
 import {ObjectService} from '../../../../services/object/object.service';
+import {ObjInfosPage} from './obj-infos/obj-infos.page';
 
 @Component({
   selector: 'app-options',
@@ -17,7 +18,7 @@ export class OptionsPage implements OnInit {
   public fullPathWithBucket: string = null;
 
   constructor(private navParams: NavParams, private objectService: ObjectService, private loadingCtrl: LoadingController,
-              private popoverController: PopoverController, private alertCtrl: AlertController) {
+              private popoverController: PopoverController, private alertCtrl: AlertController, private modalController: ModalController) {
     this.type = this.navParams.get('type');
     this.object = this.navParams.get('object');
     this.region = this.navParams.get('region');
@@ -27,6 +28,15 @@ export class OptionsPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public async fileInfos() {
+    const modal = await this.modalController.create({
+      component: ObjInfosPage,
+    });
+
+    await modal.present();
+    await this.popoverController.dismiss({reload: false});
   }
 
   public async editName() {
@@ -48,7 +58,8 @@ export class OptionsPage implements OnInit {
 
             await loading.present();
             try {
-              await this.objectService.copyObject(this.bucket, this.region, '/' + this.navParams.get('fullPath') + data.name, this.fullPathWithBucket);
+              await this.objectService.copyObject(this.bucket, this.region, '/' + this.navParams.get('fullPath') + data.name,
+                this.fullPathWithBucket);
               await this.objectService.deleteObject(this.bucket, this.region, this.fullPathWithoutBucket);
             } catch (e) {
               console.log(e);

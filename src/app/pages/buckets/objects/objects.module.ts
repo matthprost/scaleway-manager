@@ -10,6 +10,7 @@ import {ComponentsModule} from '../../../components/components.module';
 import {OptionsPage} from './options/options.page';
 import {PipesModule} from '../../../pipes/pipes.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ObjInfosPage} from './options/obj-infos/obj-infos.page';
 
 const routes: Routes = [
   {
@@ -28,7 +29,7 @@ const routes: Routes = [
     PipesModule,
     FontAwesomeModule,
   ],
-  declarations: [ObjectsPage, OptionsPage],
-  entryComponents: [OptionsPage]
+  declarations: [ObjectsPage, OptionsPage, ObjInfosPage],
+  entryComponents: [OptionsPage, ObjInfosPage]
 })
 export class ObjectsPageModule {}

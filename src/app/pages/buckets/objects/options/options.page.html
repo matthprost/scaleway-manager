@@ -5,7 +5,7 @@
 -->
 
 <ion-list mode="ios" style="margin: 0" *ngIf="type === 'standard'">
-  <ion-item button lines="none" detail="false">More info</ion-item>
+  <ion-item button lines="none" detail="false" (click)="fileInfos()">More info</ion-item>
   <ion-item button lines="full" detail="false">Download</ion-item>
   <ion-item button lines="full" detail="false" (click)="sendToGlacier()">Send to S3 Glacier</ion-item>
   <ion-item button lines="none" detail="false" (click)="editName()">Edit name</ion-item>
