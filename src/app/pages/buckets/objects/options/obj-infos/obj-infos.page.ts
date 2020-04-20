@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalController} from '@ionic/angular';
+import {ModalController, NavParams} from '@ionic/angular';
 
 @Component({
   selector: 'app-obj-infos',
@@ -8,7 +8,13 @@ import {ModalController} from '@ionic/angular';
 })
 export class ObjInfosPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController) { }
+  public object: any = null;
+  public region: 'fr-par' | 'nl-ams' = null;
+
+  constructor(private modalCtrl: ModalController, private navParams: NavParams) {
+    this.object = this.navParams.get('object');
+    this.region = this.navParams.get('region');
+  }
 
   ngOnInit() {
   }

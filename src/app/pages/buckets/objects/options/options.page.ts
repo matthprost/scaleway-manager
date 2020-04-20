@@ -33,6 +33,10 @@ export class OptionsPage implements OnInit {
   public async fileInfos() {
     const modal = await this.modalController.create({
       component: ObjInfosPage,
+      componentProps: {
+        object: this.object,
+        region: this.region
+      }
     });
 
     await modal.present();
