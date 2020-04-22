@@ -23,12 +23,14 @@ export class ObjectsPage implements OnInit {
   public objectsList = [];
   public foldersList = [];
 
+  public displayName: string = null;
+
   constructor(private route: ActivatedRoute, private router: Router, private objectService: ObjectService, private navCtrl: NavController,
               private popoverCtrl: PopoverController, private statusBar: StatusBar) {
     this.statusBar.styleLightContent();
     const pathArray = this.router.url.split('/');
-    this.currentPath = decodeURI(pathArray[pathArray.length - 1]);
-    this.fullPath = this.getFullPath();
+    this.currentPath = pathArray[pathArray.length - 1];
+    this.fullPath = decodeURI(this.getFullPath());
 
     console.log('FULL:', this.fullPath);
 

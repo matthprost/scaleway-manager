@@ -119,8 +119,9 @@ export class ObjectApiService {
         });
 
         await toast.present();
-        throw e;
       }
+
+      throw e;
     }
   }
 
