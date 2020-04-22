@@ -27,7 +27,7 @@ export class ObjectsPage implements OnInit {
               private popoverCtrl: PopoverController, private statusBar: StatusBar) {
     this.statusBar.styleLightContent();
     const pathArray = this.router.url.split('/');
-    this.currentPath = pathArray[pathArray.length - 1];
+    this.currentPath = decodeURI(pathArray[pathArray.length - 1]);
     this.fullPath = this.getFullPath();
 
     console.log('FULL:', this.fullPath);
@@ -136,6 +136,7 @@ export class ObjectsPage implements OnInit {
 
     await popover.present();
     await popover.onDidDismiss().then(data => {
+      this.statusBar.styleLightContent();
       if (data && data.data && data.data.reload) {
         this.refresh();
       }

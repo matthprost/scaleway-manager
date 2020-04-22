@@ -40,7 +40,10 @@ export class OptionsPage implements OnInit {
     });
 
     await modal.present();
-    await this.popoverController.dismiss({reload: false});
+
+    await modal.onWillDismiss().then(async () => {
+      await this.popoverController.dismiss({reload: false});
+    });
   }
 
   public async editName() {
