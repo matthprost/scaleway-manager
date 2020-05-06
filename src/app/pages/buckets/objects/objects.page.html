@@ -1,9 +1,9 @@
 <ion-header>
-  <ion-toolbar mode="ios" style="--background: var(--ion-color-primary)">
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/buckets" color="light"></ion-back-button>
     </ion-buttons>
-    <ion-title color="light">{{ fullPath }}</ion-title>
+    <ion-title>{{ fullPath }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -43,12 +43,6 @@
   <div class="bucket-empty"
        *ngIf="!isLoading && objectsList.length === 0 && foldersList.length === 0 && fullPath.length === 0">
     <p style="margin: 0">The bucket is empty</p>
-    <small>You can add new file or create a new folder by using + button</small>
-  </div>
-
-  <div class="bucket-empty"
-       *ngIf="!isLoading && objectsList.length === 0 && foldersList.length === 0 && fullPath.length > 0">
-    <p style="margin: 0">This folder is empty</p>
     <small>You can add new file or create a new folder by using + button</small>
   </div>
 </ion-content>

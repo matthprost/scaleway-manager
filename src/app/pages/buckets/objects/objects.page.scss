@@ -29,3 +29,11 @@ fa-icon {
   width: 25px;
   text-align: center;
 }
+
+ion-toolbar {
+  --background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
+}
+
+ion-title {
+  --color: white;
+}

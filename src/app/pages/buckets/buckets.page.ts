@@ -37,6 +37,7 @@ export class BucketsPage implements OnInit {
   }
 
   private async refresh(displayLoading?: boolean) {
+    this.error = false;
     displayLoading ? this.isLoading = true : this.isLoading = false;
 
     try {
