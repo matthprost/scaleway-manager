@@ -62,7 +62,16 @@ ion-card {
 }
 
 ion-card-title {
+  background: var(--ion-color-primary);
   background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+fa-icon ::ng-deep .fa-database {
+  font-size: 2.5rem;
+  margin-top: 1rem;
+  background: var(--ion-color-primary);
+  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
+  color: white;
 }
