@@ -45,4 +45,10 @@
     <p style="margin: 0">The bucket is empty</p>
     <small>You can add new file or create a new folder by using + button</small>
   </div>
+
+  <div class="bucket-empty"
+       *ngIf="!isLoading && objectsList.length === 0 && foldersList.length === 0 && fullPath.length > 0">
+    <p style="margin: 0">This folder is empty</p>
+    <small>You can add new file or create a new folder by using + button</small>
+  </div>
 </ion-content>
