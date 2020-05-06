@@ -71,6 +71,7 @@ ion-card-title {
 fa-icon ::ng-deep .fa-database {
   font-size: 2.5rem;
   margin-top: 1rem;
+  border: none;
   background: var(--ion-color-primary);
   background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
   color: white;

@@ -27,12 +27,8 @@ ion-toolbar {
   --border-width: 0 0 0px !important;
   --min-height: 3.5rem;
   ion-title {
-    font-weight: 500;
     font-size: 1.3rem;
-    background: var(--ion-color-primary);
-    background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    font-weight: 400;
   }
 }
 

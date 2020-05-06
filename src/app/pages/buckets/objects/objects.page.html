@@ -19,7 +19,7 @@
   <ion-list>
     <!-- FOLDERS -->
     <ion-item *ngFor="let folder of foldersList" detail="false" mode="ios" (click)="goToSubFolder(folder.Prefix[0])">
-      <fa-icon slot="start" [icon]="['far', 'folder']" size="lg" style="color: var(--ion-color-primary)"></fa-icon>
+      <fa-icon slot="start" [icon]="['fas', 'folder']" [mask]="['fas', 'square-full']" size="1x"></fa-icon>
       <ion-label>
         <h3 style="margin: 8px 0">{{ folder.Prefix[0] }}</h3>
       </ion-label>
@@ -29,7 +29,7 @@
     <!-- FILES -->
     <ion-item *ngFor="let object of objectsList" detail="false"
               mode="ios">
-      <fa-icon slot="start" [icon]="['far', 'file-alt']" size="lg" style="color: var(--ion-color-primary)"></fa-icon>
+      <fa-icon slot="start" [icon]="['fas', 'file-alt']" [mask]="['fas', 'square-full']" size="1x"></fa-icon>
       <ion-label>
         <h3>{{ object.Key[0] }}</h3>
         <p>{{ object.LastModified[0] | date:'MMM d, y' }} {{ object.Size[0] !== '0' ? '· ' + (object.Size[0] | fileSize: 0) : null }}</p>

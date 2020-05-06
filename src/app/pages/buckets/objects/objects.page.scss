@@ -37,3 +37,17 @@ ion-toolbar {
 ion-title {
   --color: white;
 }
+
+fa-icon ::ng-deep .fa-folder {
+  font-size: 1.75rem;
+  background: var(--ion-color-primary);
+  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
+  color: white;
+}
+
+fa-icon ::ng-deep .fa-file-alt {
+  font-size: 1.75rem;
+  background: var(--ion-color-primary);
+  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
+  color: white;
+}
