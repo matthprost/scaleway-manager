@@ -95,31 +95,21 @@ export class ObjectApiService {
     } catch (e) {
       console.log('AN ERROR OCCURRED:', e);
 
-      // We remove access_token from storage and retry if token not found
-      if (e.status) {
-        const toast = await this.toastController.create({
-          position: 'top',
-          showCloseButton: true,
-          duration: 8000,
-          color: 'danger',
-          message: e.message
-        });
-
-        await toast.present();
-      } else {
-        const errorMessage = await xml2js.parseStringPromise(e.error);
+      let errorMessage = null;
+      if (e.error.indexOf('<?xml') === 0) {
+        errorMessage = await xml2js.parseStringPromise(e.error);
         console.log(errorMessage.Error.Message[0]);
-
-        const toast = await this.toastController.create({
-          position: 'top',
-          showCloseButton: true,
-          duration: 8000,
-          color: 'danger',
-          message: errorMessage.Error.Message[0] ? errorMessage.Error.Message[0] : 'An error occurred'
-        });
-
-        await toast.present();
       }
+
+      const toast = await this.toastController.create({
+        position: 'top',
+        showCloseButton: true,
+        duration: 8000,
+        color: 'danger',
+        message: errorMessage ? errorMessage.Error.Message[0] : 'An error occurred'
+      });
+
+      await toast.present();
 
       throw e;
     }

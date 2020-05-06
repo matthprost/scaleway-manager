@@ -11,6 +11,8 @@ import {OptionsPage} from './options/options.page';
 import {PipesModule} from '../../../pipes/pipes.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ObjInfosPage} from './options/obj-infos/obj-infos.page';
+import {FileTransfer, FileTransferObject} from '@ionic-native/file-transfer/ngx';
+import { File } from '@ionic-native/file/ngx';
 
 const routes: Routes = [
   {
@@ -30,6 +32,11 @@ const routes: Routes = [
     FontAwesomeModule,
   ],
   declarations: [ObjectsPage, OptionsPage, ObjInfosPage],
-  entryComponents: [OptionsPage, ObjInfosPage]
+  entryComponents: [OptionsPage, ObjInfosPage],
+  providers: [
+    FileTransferObject,
+    FileTransfer,
+    File
+  ]
 })
 export class ObjectsPageModule {}

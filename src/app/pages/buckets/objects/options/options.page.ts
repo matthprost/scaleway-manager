@@ -2,6 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {AlertController, LoadingController, ModalController, NavParams, PopoverController} from '@ionic/angular';
 import {ObjectService} from '../../../../services/object/object.service';
 import {ObjInfosPage} from './obj-infos/obj-infos.page';
+import {FileTransfer, FileTransferObject} from '@ionic-native/file-transfer/ngx';
+import {File} from '@ionic-native/file/ngx';
 
 @Component({
   selector: 'app-options',
@@ -18,7 +20,8 @@ export class OptionsPage implements OnInit {
   public fullPathWithBucket: string = null;
 
   constructor(private navParams: NavParams, private objectService: ObjectService, private loadingCtrl: LoadingController,
-              private popoverController: PopoverController, private alertCtrl: AlertController, private modalController: ModalController) {
+              private popoverController: PopoverController, private alertCtrl: AlertController, private modalController: ModalController,
+              private fileTransfer: FileTransferObject, private transfer: FileTransfer, private file: File) {
     this.type = this.navParams.get('type');
     this.object = this.navParams.get('object');
     this.region = this.navParams.get('region');
@@ -28,6 +31,31 @@ export class OptionsPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  private async download() {
+    const fileTransfer: FileTransferObject = this.transfer.create();
+    try {
+      const value = await fileTransfer.download(encodeURI('https://gravedigger.fr/images/digflix.png'), this.file.dataDirectory + 'file.png');
+
+      console.log(value);
+    } catch (e) {
+      const alert = await this.alertCtrl.create({
+        header: 'Delete File',
+        message: e,
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+          }, {
+            text: 'Delete',
+            cssClass: 'danger',
+          }
+        ]
+      });
+
+      await alert.present();
+    }
   }
 
   public async fileInfos() {
@@ -65,7 +93,7 @@ export class OptionsPage implements OnInit {
 
             await loading.present();
             try {
-              await this.objectService.copyObject(this.bucket, this.region, '/' + this.navParams.get('fullPath') + data.name,
+              await this.objectService.copyObject(this.bucket, this.region, '/' + this.navParams.get('fullPath') + encodeURIComponent(data.name),
                 this.fullPathWithBucket);
               await this.objectService.deleteObject(this.bucket, this.region, this.fullPathWithoutBucket);
             } catch (e) {

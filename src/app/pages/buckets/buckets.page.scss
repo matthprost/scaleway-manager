@@ -4,10 +4,6 @@ ion-card {
   margin: 0;
   height: 100%;
 
-  &-header {
-    padding-top: 0;
-  }
-
   &-title {
     font-size: 1rem;
     text-align: center;
@@ -53,12 +49,26 @@ ion-card {
   color: grey;
   text-align: center;
   width: 100%;
+
   ion-icon {
     font-size: 2.5rem;
   }
+
   p {
     text-transform: uppercase;
     font-weight: bold;
     font-size: .9rem;
   }
+}
+
+ion-card-title {
+  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.fa-gradient {
+  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

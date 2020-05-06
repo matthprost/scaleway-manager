@@ -4,6 +4,12 @@ ion-toolbar {
   position: absolute;
 }
 
+ion-title {
+  background: white;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 @keyframes rect-scale {
   0% {
     border-right: 0 solid var(--ion-color-primary);

@@ -24,7 +24,9 @@
     <ion-row class="align-items-center">
       <ion-col *ngFor="let bucketPar of bucketsPar" size="6" style="margin: 0 auto">
         <ion-card (click)="accessToBucket('fr-par', bucketPar.Name[0])">
-          <img src="assets/imgs/bucket.svg" class="bucket" alt="bucket"/>
+          <div class="fa-gradient">
+            <fa-icon class="fa-gradient" slot="start" [icon]="['fas', 'box-open']" size="2x"></fa-icon>
+          </div>
           <ion-card-header>
             <ion-card-title color="primary">{{bucketPar.Name[0]}}</ion-card-title>
           </ion-card-header>
@@ -38,7 +40,7 @@
       </ion-col>
       <ion-col *ngFor="let bucketAms of bucketsAms" size="6">
         <ion-card (click)="accessToBucket('nl-ams', bucketAms.Name[0])">
-          <img src="assets/imgs/bucket.svg" class="bucket" alt="bucket"/>
+          <fa-icon slot="start" [icon]="['fas', 'box-open']" size="2x"></fa-icon>
           <ion-card-header>
             <ion-card-title color="primary">{{bucketAms.Name[0]}}</ion-card-title>
           </ion-card-header>
