@@ -13,7 +13,7 @@
     <ion-row>
       <ion-col>
         <div class="file-header">
-          <fa-icon [icon]="['far', 'file-alt']" size="3x" style="color: var(--ion-color-primary)"></fa-icon>
+          <fa-icon slot="start" [icon]="['fas', 'file-alt']" [mask]="['fas', 'square-full']" size="3x"></fa-icon>
         </div>
         <div class="file-header-title">
           {{ object.Key[0] }}
@@ -38,12 +38,20 @@
         {{ object.LastModified[0] | date:'MMM d, y' }}
       </div>
     </ion-item>
-    <ion-item lines="none">
+    <ion-item>
       <ion-label class="information-title">
         Size
       </ion-label>
       <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
         {{ object.Size[0] !== '0' ? (object.Size[0] | fileSize: 0) : null }}
+      </div>
+    </ion-item>
+    <ion-item lines="none">
+      <ion-label class="information-title">
+        Storage Class
+      </ion-label>
+      <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
+        {{ object.StorageClass[0] }}
       </div>
     </ion-item>
   </ion-item-group>
