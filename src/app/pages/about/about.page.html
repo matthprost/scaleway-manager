@@ -10,11 +10,17 @@
 </ion-header>
 
 <ion-content>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="sendEmail()">
+      <ion-icon name="ios-mail"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
   <div class="about-content">
     <h5>Who created this app ?</h5>
     <p>I am only one developer who basically wanted to create a Scaleway application for personal use and then I
       realized that it could be useful for many other people.
-      I'm a student in France in an IT school. You can follow me on Twitter: @f7ost_</p>
+      I'm a student in France in an IT school. You can follow me on Twitter: <span class="twitter">@f7ost_</span></p>
     <br/>
     <h5>Is it an official application published by Scaleway ?</h5>
     <p><b><u>Absolutely not !</u></b> Before creating the app I asked Scaleway if I could publish it and they give me
@@ -28,9 +34,9 @@
     <p>I'm not a big fan of advertising, I think it destroy the design of an application.</p>
     <br/>
     <h5>I have other questions, where can I ask ?</h5>
-    <p>At the home page you have an icon of a life buoy on the bottom where you can find my website, a way to contact me
-      or to report a bug. You can also contact me on Twitter: @matth_prost. Don't hesitate to contact me if you have any
-      questions!</p>
+    <p>From this page at the bottom you have an icon of mail, just tap on it to contact me.
+      You can also contact me on Twitter: <span class="twitter">@f7ost_</span>.
+      Don't hesitate to contact me if you have any questions!</p>
     <br/>
     <h5>What about our data/privacy ?</h5>
     <p>I do not sell or personally use your data at any moment. I just use Scaleway API to allow you to connect, get

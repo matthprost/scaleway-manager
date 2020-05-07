@@ -29,6 +29,7 @@
     "@ionic-native/app-version": "^5.24.0",
     "@ionic-native/clipboard": "^5.24.0",
     "@ionic-native/core": "^5.24.0",
+    "@ionic-native/email-composer": "^5.25.0",
     "@ionic-native/file": "^5.24.0",
     "@ionic-native/file-transfer": "^5.24.0",
     "@ionic-native/http": "^5.24.0",
@@ -100,7 +101,8 @@
       "cordova-plugin-app-version": {},
       "cordova-plugin-screen-orientation": {},
       "cordova-plugin-file-transfer": {},
-      "cordova-plugin-file": {}
+      "cordova-plugin-file": {},
+      "cordova-plugin-email-composer": {}
     },
     "platforms": [
       "android"
