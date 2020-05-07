@@ -14,25 +14,25 @@ export class AppComponent {
     {
       title: 'Dashboard',
       url: '/home',
-      icon: 'md-home',
+      icon: 'home',
       new: false
     },
     {
       title: 'Instances',
       url: '/instances',
-      icon: 'desktop',
+      icon: 'server',
       new: false,
     },
     {
       title: 'Object Storage',
       url: '/buckets',
-      icon: 'ios-cloud',
+      icon: 'database',
       new: true,
     },
     {
       title: 'Invoices',
       url: '/invoices',
-      icon: 'md-stats',
+      icon: 'chart-line',
       new: false
     }
   ];
@@ -41,12 +41,12 @@ export class AppComponent {
     {
       title: 'Settings',
       url: '/settings',
-      icon: 'ios-settings'
+      icon: 'cog'
     },
     {
       title: 'About',
       url: '/about',
-      icon: 'ios-help-buoy'
+      icon: 'life-ring'
     }
   ];
 

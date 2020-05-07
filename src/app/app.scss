@@ -5,9 +5,6 @@
 // file can hold Sass mixins, functions, and placeholder classes to be imported
 // and used throughout the application.
 
-fa-icon {
-  font-size: 1rem !important;
-}
 
 .menu-labels {
   color: var(--ion-color-dark);
@@ -21,7 +18,14 @@ ion-menu-toggle {
   ion-item {
     margin: .6rem 0;
   }
+
+  fa-icon {
+    font-size: 1.25rem;
+    width: 27px;
+    text-align: center;
+  }
 }
+
 
 ion-toolbar {
   --border-width: 0 0 0px !important;

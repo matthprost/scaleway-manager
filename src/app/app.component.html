@@ -1,7 +1,7 @@
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
-      <ion-header>
+      <ion-header mode="ios" collapse="condense">
         <ion-toolbar>
         </ion-toolbar>
       </ion-header>
@@ -9,7 +9,7 @@
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" lines="none" class="menu-labels">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <fa-icon slot="start" [icon]="['fas', p.icon]"></fa-icon>
               <ion-label>
                 {{p.title}} <ion-badge color="danger" *ngIf="p.new" mode="ios">New</ion-badge>
               </ion-label>
@@ -21,7 +21,7 @@
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPagesFooter">
             <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" lines="none" class="menu-labels">
-              <ion-icon slot="start" [name]="p.icon"></ion-icon>
+              <fa-icon slot="start" [icon]="['fas', p.icon]"></fa-icon>
               <ion-label>
                 {{p.title}}
               </ion-label>
