@@ -95,7 +95,7 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: './pages/settings/settings.module#SettingsPageModule'
   },
-  {
+/*  {
     path: 'buckets',
     children: [
       {
@@ -116,7 +116,7 @@ const routes: Routes = [
         ]
       }
     ],
-  },
+  },*/
 ];
 
 @NgModule({

@@ -23,12 +23,12 @@ export class AppComponent {
       icon: 'server',
       new: false,
     },
-    {
+/*    {
       title: 'Object Storage',
       url: '/buckets',
       icon: 'database',
       new: true,
-    },
+    },*/
     {
       title: 'Invoices',
       url: '/invoices',
