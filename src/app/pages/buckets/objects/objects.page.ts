@@ -32,8 +32,6 @@ export class ObjectsPage implements OnInit {
     this.currentPath = pathArray[pathArray.length - 1];
     this.fullPath = decodeURI(this.getFullPath());
 
-    console.log('FULL:', this.fullPath);
-
     this.currentRegion = this.route.snapshot.paramMap.get('region') as 'fr-par' | 'nl-ams';
     this.bucket = this.route.snapshot.paramMap.get('bucket');
 
@@ -59,7 +57,7 @@ export class ObjectsPage implements OnInit {
   private async refresh() {
     try {
       const result = await this.objectService.getAllObjects(this.bucket, this.currentRegion, this.fullPath !== '/' ? this.fullPath : null);
-      console.log(result);
+      console.log('AWS-RESULT', result);
       this.objectsList = result.ListBucketResult.Contents ? this.clean(result.ListBucketResult.Contents) : [];
       this.foldersList = result.ListBucketResult.CommonPrefixes ? this.clean(result.ListBucketResult.CommonPrefixes) : [];
     } catch (e) {
@@ -100,7 +98,6 @@ export class ObjectsPage implements OnInit {
       console.log(e);
     }
 
-    console.log(array);
     return array;
   }
 

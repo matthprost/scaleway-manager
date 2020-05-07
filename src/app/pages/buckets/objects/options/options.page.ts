@@ -19,6 +19,8 @@ export class OptionsPage implements OnInit {
   public fullPathWithoutBucket: string = null;
   public fullPathWithBucket: string = null;
 
+  private map = new Map();
+
   constructor(private navParams: NavParams, private objectService: ObjectService, private loadingCtrl: LoadingController,
               private popoverController: PopoverController, private alertCtrl: AlertController, private modalController: ModalController,
               private fileTransfer: FileTransferObject, private transfer: FileTransfer, private file: File) {
@@ -26,17 +28,35 @@ export class OptionsPage implements OnInit {
     this.object = this.navParams.get('object');
     this.region = this.navParams.get('region');
     this.bucket = this.navParams.get('bucket');
-    this.fullPathWithoutBucket = '/' + this.navParams.get('fullPath') + this.object.Key[0];
-    this.fullPathWithBucket = '/' + this.bucket + '/' + this.navParams.get('fullPath') + this.object.Key[0];
+
+    this.map.set('!', '%21').set('\'', '%27').set('(', '%28').set(')', '%29').set('*', '%2A');
+
+    let path = encodeURIComponent(this.object.Key[0]);
+
+    this.map.forEach((key, value) => {
+      path = this.replaceAll(path, value, key);
+    });
+
+    this.fullPathWithoutBucket = '/' + this.navParams.get('fullPath') + path;
+    this.fullPathWithBucket = '/' + this.bucket + '/' + this.navParams.get('fullPath') + path;
   }
 
   ngOnInit() {
   }
 
+  private escapeRegExp(str) {
+    return str.replace(/[.*+\-?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
+  }
+
+  private replaceAll(str, find, replace) {
+    return str.replace(new RegExp(this.escapeRegExp(find), 'g'), replace);
+  }
+
   private async download() {
     const fileTransfer: FileTransferObject = this.transfer.create();
     try {
-      const value = await fileTransfer.download(encodeURI('https://gravedigger.fr/images/digflix.png'), this.file.dataDirectory + 'file.png');
+      const value = await fileTransfer.download(encodeURI('https://gravedigger.fr/images/digflix.png'),
+        this.file.dataDirectory + 'file.png');
 
       console.log(value);
     } catch (e) {
@@ -89,11 +109,16 @@ export class OptionsPage implements OnInit {
               mode: 'ios'
             });
 
-            console.log('/' + this.navParams.get('fullPath') + data.name);
+            let name = encodeURIComponent(data.name);
+
+            this.map.forEach((key, value) => {
+              name = this.replaceAll(name, value, key);
+            });
 
             await loading.present();
             try {
-              await this.objectService.copyObject(this.bucket, this.region, '/' + this.navParams.get('fullPath') + encodeURIComponent(data.name),
+              await this.objectService.copyObject(this.bucket, this.region,
+                '/' + this.navParams.get('fullPath') + name,
                 this.fullPathWithBucket);
               await this.objectService.deleteObject(this.bucket, this.region, this.fullPathWithoutBucket);
             } catch (e) {

@@ -26,6 +26,7 @@ export class ObjectApiService {
   }
 
   public async request(method: HttpMethods, country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+
     const opts = {
       service: 's3',
       region: country,
@@ -34,8 +35,6 @@ export class ObjectApiService {
       headers: customHeader ? customHeader : {},
       method: HttpMethods[method.toString()]
     };
-
-    console.log('OPTS:', opts);
 
     // We get aws token in storage
     let awsToken = await this.storage.get('awsToken');
@@ -64,7 +63,7 @@ export class ObjectApiService {
     try {
       // Create AWS Signature
       aws4.sign(opts, {accessKeyId: awsToken.token.access_key, secretAccessKey: awsToken.token.secret_key});
-      console.log(opts);
+      console.log('AWS-OPTIONS', opts);
 
       let myHeaders = {...opts.headers, ...{subHost}, ...customHeader};
       let url;
