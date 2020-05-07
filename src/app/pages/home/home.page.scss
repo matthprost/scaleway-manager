@@ -158,6 +158,7 @@ ion-content {
 
 .home {
   &-header {
+    background: var(--ion-color-primary);
     background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%) no-repeat;
     padding: 1.75rem .75rem 0 .75rem;
 
