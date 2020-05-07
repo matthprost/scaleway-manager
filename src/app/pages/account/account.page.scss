@@ -2,6 +2,10 @@ ion-toolbar {
   --background: transparent;
   --ion-color-base: transparent !important;
   position: absolute;
+
+  ion-button {
+    font-size: 1.2rem;
+  }
 }
 
 .menu-button {
@@ -20,7 +24,8 @@ ion-toolbar {
 .background {
   height: 37vh;
   width: 100%;
-  background: url('/assets/imgs/background.svg'), radial-gradient(#8800C8, var(--ion-color-primary));
+  background: var(--ion-color-primary);
+  background: radial-gradient(#8800C8, var(--ion-color-primary));
 }
 
 .profile {

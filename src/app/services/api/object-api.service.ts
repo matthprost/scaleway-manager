@@ -52,9 +52,9 @@ export class ObjectApiService {
       await this.authService.getToken(awsToken.token.access_key);
     } catch (e) {
       if (e.status === 404) {
-        await this.storage.remove('awsToken');
         setTimeout(async () => {
           await this.authService.deleteToken(awsToken.token.access_key);
+          await this.storage.remove('awsToken');
         }, 3000);
         return this.request(method, country, subHost, path);
       } else {

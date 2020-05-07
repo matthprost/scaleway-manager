@@ -1,9 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {UserDto} from '../../services/user/account/account.dto';
 import {faShieldAlt, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
-import {NavController} from '@ionic/angular';
+import {AlertController, NavController} from '@ionic/angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AccountService} from '../../services/user/account/account.service';
+import {Storage} from '@ionic/storage';
+import {AuthService} from '../../services/user/auth/auth.service';
 
 @Component({
   selector: 'app-account',
@@ -17,7 +19,8 @@ export class AccountPage implements OnInit {
   public faShieldAlt = faShieldAlt;
   public danger = faExclamationCircle;
 
-  constructor(public navCtrl: NavController, public statusBar: StatusBar, private accountProvider: AccountService) {
+  constructor(public navCtrl: NavController, public statusBar: StatusBar, private accountProvider: AccountService,
+              private storage: Storage, private authService: AuthService, private alertCtrl: AlertController) {
     this.statusBar.styleLightContent();
   }
 
@@ -35,18 +38,51 @@ export class AccountPage implements OnInit {
       });
   }
 
-  public navigate(location: string) {
+  public async navigate(location: string) {
     switch (location) {
       case 'home' :
-        this.navCtrl.navigateBack(['/home']);
+        await this.navCtrl.navigateBack(['/home']);
         break;
       case 'ssh-keys' :
-        this.navCtrl.navigateForward(['/home/account/ssh-keys']);
+        await this.navCtrl.navigateForward(['/home/account/ssh-keys']);
         break;
       case 'tokens' :
-        this.navCtrl.navigateForward(['/home/account/tokens']);
+        await this.navCtrl.navigateForward(['/home/account/tokens']);
         break;
     }
+  }
+
+  public async logout() {
+    const alert = await this.alertCtrl.create({
+      header: 'Logout',
+      message: 'Are you sure you want to logout?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+        }, {
+          text: 'Yes',
+          handler: async () => {
+            await this.storage.remove('settings');
+            const AWSToken = await this.storage.get('awsToken');
+            try {
+              if (AWSToken) {
+                await this.authService.deleteToken(AWSToken.token.access_key);
+                await this.storage.remove('awsToken');
+              }
+
+              await this.authService.logout();
+              await this.navCtrl.navigateRoot(['/login']);
+            } catch (e) {
+              throw e;
+            }
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
 }

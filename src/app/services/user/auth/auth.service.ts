@@ -32,6 +32,16 @@ export class AuthService {
     });
   }
 
+  public async logout(): Promise<any> {
+    try {
+      const token = await this.storage.get('token');
+      await this.api.delete<any>(this.api.getAccountApiUrl() + '/jwt/' + token.jwt.jti);
+      await this.storage.remove('token');
+    } catch (e) {
+      throw e;
+    }
+  }
+
   public getToken(token: string): Promise<AuthTokenDto> {
 
     return new Promise((resolve, reject) => {
