@@ -34,6 +34,8 @@ This file is a personal reminder for deploy, don't mind about it :)
 
 #### Deploy
 
+<b>IMPORTANT:</b> Need to check if icon is exportable as square & round ([help link](https://stackoverflow.com/questions/47523610/android-oreo-how-do-i-set-adaptive-icons-in-cordova))
+
 1. Run `rm -rf node_modules`
 2. Run `npm install`
 3. Run `ionic cordova build android --prod --release` Then copy the .apk file
