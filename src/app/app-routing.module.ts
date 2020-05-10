@@ -95,6 +95,7 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: './pages/settings/settings.module#SettingsPageModule'
   },
+  { path: 'help', loadChildren: './pages/auth/login/help/help.module#HelpPageModule' },
 /*  {
     path: 'buckets',
     children: [

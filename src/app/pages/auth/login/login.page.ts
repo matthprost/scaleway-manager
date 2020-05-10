@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {LoadingController, MenuController, NavController, ToastController} from '@ionic/angular';
+import {LoadingController, MenuController, ModalController, NavController, ToastController} from '@ionic/angular';
 import {AuthService} from '../../../services/user/auth/auth.service';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {NavParamsService} from '../../../services/nav/nav-params.service';
+import {HelpPage} from './help/help.page';
 
 @Component({
   selector: 'app-login',
@@ -17,7 +18,7 @@ export class LoginPage implements OnInit {
 
   constructor(private router: Router, private toastCtrl: ToastController, private loadingCtrl: LoadingController,
               private auth: AuthService, private menuCtrl: MenuController, private statusBar: StatusBar, private navCtrl: NavController,
-              private navParams: NavParamsService) {
+              private navParams: NavParamsService, private modalController: ModalController) {
   }
 
   ionViewWillEnter() {
@@ -26,6 +27,14 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  public async showHelp(event: any) {
+    const modal = await this.modalController.create({
+      component: HelpPage,
+    });
+
+    await modal.present();
   }
 
   public async login() {
