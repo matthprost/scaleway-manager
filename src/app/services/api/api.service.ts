@@ -72,9 +72,9 @@ export class ApiService {
             return this.request<T>(method, url, data);
           } catch (e) {
             console.warn('DELETE JWT IN STORAGE');
-            await this.storage.remove('token');
+            await this.storage.remove('jwt');
             await this.navCtrl.navigateRoot(['/login']);
-            return;
+            throw e;
           }
         } else if (e && e.status && e.status === 504) {
           await this.navCtrl.navigateRoot(['/error/504']);
@@ -96,7 +96,7 @@ export class ApiService {
           this.httpClient.request('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
             body: {jwt_renew: token.auth.jwt_renew}
           }).toPromise().then(result => {
-            this.storage.set('token', result).then(() => {
+            this.storage.set('jwt', result).then(() => {
               console.log('JWT RENEWED!');
               resolve(result);
             });
