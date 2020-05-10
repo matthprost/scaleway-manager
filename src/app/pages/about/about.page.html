@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar mode="md">
     <ion-buttons slot="start">
       <ion-menu-button color="primary"></ion-menu-button>
@@ -11,7 +11,7 @@
 
 <ion-content>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="sendEmail()" color="secondary">
+    <ion-fab-button (click)="sendEmail()" color="secondary" mode="ios">
       <ion-icon name="ios-mail"></ion-icon>
     </ion-fab-button>
   </ion-fab>

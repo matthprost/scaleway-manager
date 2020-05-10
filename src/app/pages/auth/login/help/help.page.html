@@ -1,7 +1,7 @@
-<ion-header>
-  <ion-toolbar>
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start">
-      <ion-button (click)="close()">
+      <ion-button (click)="close()" mode="ios">
         <ion-icon name="close" mode="md"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -10,7 +10,7 @@
 
 <ion-content>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="sendEmail()" color="secondary">
+    <ion-fab-button (click)="sendEmail()" color="secondary" mode="ios">
       <ion-icon name="ios-mail"></ion-icon>
     </ion-fab-button>
   </ion-fab>

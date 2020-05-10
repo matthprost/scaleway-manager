@@ -324,6 +324,7 @@ export class DetailsPage implements OnInit {
         position: 'top',
         color: 'secondary',
         showCloseButton: true,
+        mode: 'ios',
       });
 
       await toast.present();

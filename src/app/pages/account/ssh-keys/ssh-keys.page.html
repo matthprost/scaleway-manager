@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
       <ion-back-button defaultHref="/home/account"></ion-back-button>
@@ -47,7 +47,7 @@
     </ion-list>
 
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button color="secondary" (click)="addSshKey($event)">
+      <ion-fab-button color="secondary" (click)="addSshKey($event)" mode="ios">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
     </ion-fab>

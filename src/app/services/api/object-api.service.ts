@@ -107,6 +107,7 @@ export class ObjectApiService {
         showCloseButton: true,
         duration: 8000,
         color: 'danger',
+        mode: 'ios',
         message: errorMessage ? errorMessage.Error.Message[0] : 'An error occurred'
       });
 

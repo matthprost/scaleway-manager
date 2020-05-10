@@ -56,6 +56,7 @@ export class AccountPage implements OnInit {
   public async logout() {
     const alert = await this.alertCtrl.create({
       header: 'Logout',
+      mode: 'ios',
       message: 'Are you sure you want to logout?',
       buttons: [
         {
