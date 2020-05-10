@@ -11,38 +11,33 @@
 
 <ion-content>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="sendEmail()">
+    <ion-fab-button (click)="sendEmail()" color="secondary">
       <ion-icon name="ios-mail"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 
   <div class="about-content">
-    <h5>Who created this app ?</h5>
-    <p>I am only one developer who basically wanted to create a Scaleway application for personal use and then I
-      realized that it could be useful for many other people.
-      I'm a student in France in an IT school. You can follow me on Twitter: <span class="twitter">@f7ost_</span></p>
-    <br/>
+    <h4>Welcome on Scaleway Manager!</h4>
+    <p>Here is a list of questions/answers that might help you:</p>
+
+    <h5>How to connect ?</h5>
+    <p>You need a Scaleway account.</p>
+
+    <h5>I'm having an issue, how to report it ?</h5>
+    <p>At the bottom of this page you have a mail icon, tap on it and write me what's wrong.</p>
+
     <h5>Is it an official application published by Scaleway ?</h5>
-    <p><b><u>Absolutely not !</u></b> Before creating the app I asked Scaleway if I could publish it and they give me
-      their agreement. So here we are !</p>
-    <br/>
-    <h5>Why did you created this application ?</h5>
-    <p>As Scaleway is based on time = money, I wanted an easier way to start/stop my servers to save money and I think
-      an application is the solution. You can start and stop it in just one click.</p>
-    <br/>
-    <h5>Why is this application free and without ads ?</h5>
-    <p>I'm not a big fan of advertising, I think it destroy the design of an application.</p>
-    <br/>
-    <h5>I have other questions, where can I ask ?</h5>
-    <p>From this page at the bottom you have an icon of mail, just tap on it to contact me.
-      You can also contact me on Twitter: <span class="twitter">@f7ost_</span>.
-      Don't hesitate to contact me if you have any questions!</p>
-    <br/>
+    <p><b><u>Absolutely not!</u></b> This is an Open Source Project on GitHub.</p>
+
+    <h5>Is this app free and without ads ?</h5>
+    <p>This application is totally free and without any advertising.</p>
+
+    <h5>Who created this app ?</h5>
+    <p>I'm only one developer, you can found me on Twitter: <span class="twitter">@f7ost</span></p>
+
     <h5>What about our data/privacy ?</h5>
-    <p>I do not sell or personally use your data at any moment. I just use Scaleway API to allow you to connect, get
-      your
-      servers, start them, ect. Also <b>this project is Open Source</b> that is available on GitHub.
-      If you're still worried about your account security I recommend you to activate Two-Factor Authentication.</p>
-    <br/>
+    <p>I do not sell or use your data at any moment. I just use Scaleway API to allow you to connect, get
+      your servers, start them, ect. Also <b>this project is Open Source</b> on GitHub.
+      <br/><br/>If you're still worried about your account security I recommend you to activate Two-Factor Authentication.</p>
   </div>
 </ion-content>

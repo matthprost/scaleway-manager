@@ -1,0 +1,34 @@
+.help {
+
+  &-content {
+    background: white;
+    padding: 1rem 1rem 1rem 1rem;
+  }
+}
+
+ion-content {
+  --background: white;
+}
+
+h5 {
+  font-weight: bold;
+  background: var(--ion-color-primary);
+  background: linear-gradient(141deg, #8800C8 40%, var(--ion-color-primary) 60%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+h4 {
+  font-weight: bold;
+}
+
+p {
+  font-size: .9rem;
+  margin-bottom: 2.5rem;
+  margin-top: 0;
+}
+
+.twitter {
+  color: #00acee;
+  font-weight: bold;
+}
