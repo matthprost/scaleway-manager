@@ -13,7 +13,7 @@ export class HomeGuard implements CanActivate {
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     boolean | Observable<boolean> | Promise<boolean> {
     return new Promise((resolve, reject) => {
-      this.storage.get('token').then((val) => {
+      this.storage.get('jwt').then((val) => {
         if (val === null) {
           this.router.navigate(['login']);
           resolve(false);

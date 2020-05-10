@@ -42,7 +42,7 @@
     </ion-card>
   </div>
 
-  <div class="home-page">
+  <div class="home-page" *ngIf="serversInstances && serversInstances.length > 0">
     <ion-grid class="home-page-grid">
       <div class="title-instances">
         Last {{ instancesToDisplay }} Actives Instances

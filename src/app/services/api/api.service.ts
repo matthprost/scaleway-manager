@@ -44,7 +44,7 @@ export class ApiService {
 
   private async request<T>(method: HttpMethods, url: string, data: {} = {}): Promise<T> {
 
-    const token = await this.storage.get('token');
+    const token = await this.storage.get('jwt');
     if (!token) {
       return this.httpClient.request<T>(HttpMethods[method.toString()], url, {
         headers: token ?
@@ -91,7 +91,7 @@ export class ApiService {
 
   private renewJWT(): Promise<any> {
     return new Promise((resolve, reject) => {
-      this.storage.get('token').then(token => {
+      this.storage.get('jwt').then(token => {
         if (token) {
           this.httpClient.request('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
             body: {jwt_renew: token.auth.jwt_renew}

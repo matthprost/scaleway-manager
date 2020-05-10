@@ -22,7 +22,7 @@ export class AuthService {
         '2FA_token': String(code),
       })
         .then(result => {
-          this.storage.set('token', result).then(() => {
+          this.storage.set('jwt', result).then(() => {
             resolve('ok');
           });
         })
@@ -34,9 +34,9 @@ export class AuthService {
 
   public async logout(): Promise<any> {
     try {
-      const token = await this.storage.get('token');
+      const token = await this.storage.get('jwt');
       await this.api.delete<any>(this.api.getAccountApiUrl() + '/jwt/' + token.jwt.jti);
-      await this.storage.remove('token');
+      await this.storage.remove('jwt');
     } catch (e) {
       throw e;
     }
