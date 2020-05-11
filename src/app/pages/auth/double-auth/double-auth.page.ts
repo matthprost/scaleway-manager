@@ -28,6 +28,7 @@ export class DoubleAuthPage implements OnInit {
   public async login() {
     const loader = await this.loadingCtrl.create({
       message: 'Loading...',
+      mode: 'ios',
     });
     await loader.present();
 

@@ -53,7 +53,8 @@ export class TokensPage implements OnInit {
   public async deleteToken(token: TokenDto, slidingItem: IonItemSliding) {
     await slidingItem.close();
     const loading = await this.loadingCtrl.create({
-      message: 'Loading...'
+      message: 'Loading...',
+      mode: 'ios',
     });
 
     await loading.present();

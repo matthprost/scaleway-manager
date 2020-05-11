@@ -5,7 +5,7 @@
     </div>
     <div *ngIf="this.values" class="header-right">Today
       <div class="header-right-amount">
-        {{ this.values[5] + this.currency }}
+        {{ this.values[5] ? this.values[5] + this.currency : '0.00 ' + this.currency }}
       </div>
     </div>
   </div>

@@ -1,11 +1,10 @@
 <ion-header mode="ios">
-  <ion-toolbar mode="md">
+  <ion-toolbar mode="ios">
     <ion-buttons slot="start">
-      <ion-menu-button color="primary"></ion-menu-button>
+      <ion-button (click)="close()" mode="ios">
+        <ion-icon name="close" mode="md"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title color="primary">
-      About
-    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -16,7 +15,7 @@
     </ion-fab-button>
   </ion-fab>
 
-  <div class="about-content">
+  <div class="help-content">
     <h4>Welcome on Scaleway Manager!</h4>
     <p>Here is a list of questions/answers that might help you:</p>
 

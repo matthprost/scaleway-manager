@@ -63,6 +63,7 @@ export class OptionsPage implements OnInit {
       const alert = await this.alertCtrl.create({
         header: 'Delete File',
         message: e,
+        mode: 'ios',
         buttons: [
           {
             text: 'Cancel',
@@ -97,6 +98,7 @@ export class OptionsPage implements OnInit {
   public async editName() {
     const alert = await this.alertCtrl.create({
       header: 'Edit Name',
+      mode: 'ios',
       buttons: [
         {
           text: 'Cancel',
@@ -146,6 +148,7 @@ export class OptionsPage implements OnInit {
   /*public async restore() {
     const alert = await this.alertCtrl.create({
       header: 'Restore Object',
+      mode: 'ios',
       message: 'Restoring an object can take up to 6 hours.',
       buttons: [
         {
@@ -180,6 +183,7 @@ export class OptionsPage implements OnInit {
   public async sendToGlacier() {
     const alert = await this.alertCtrl.create({
       header: 'Send to S3 Glacier',
+      mode: 'ios',
       message: 'Modifying the storage class is free of charge and the storage cost to Glacier is much lower than the standard storage ' +
         'fee. However, keep in mind that accessing an object stored in Glacier takes more time.',
       buttons: [
@@ -214,6 +218,7 @@ export class OptionsPage implements OnInit {
   public async deleteObject() {
     const alert = await this.alertCtrl.create({
       header: 'Delete File',
+      mode: 'ios',
       message: 'This will permanently delete your file. This action is irreversible.',
       buttons: [
         {

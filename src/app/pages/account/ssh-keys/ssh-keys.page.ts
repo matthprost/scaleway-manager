@@ -60,7 +60,8 @@ export class SshKeysPage implements OnInit {
     const toast = await this.toastCtrl.create({
       message: 'Text has been copied into your clipboard!',
       duration: 3000,
-      position: 'top'
+      position: 'top',
+      mode: 'ios',
     });
 
     await toast.present();

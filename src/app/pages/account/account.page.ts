@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {UserDto} from '../../services/user/account/account.dto';
 import {faShieldAlt, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
-import {AlertController, NavController} from '@ionic/angular';
+import {AlertController, NavController, ToastController} from '@ionic/angular';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AccountService} from '../../services/user/account/account.service';
 import {Storage} from '@ionic/storage';
@@ -20,7 +20,8 @@ export class AccountPage implements OnInit {
   public danger = faExclamationCircle;
 
   constructor(public navCtrl: NavController, public statusBar: StatusBar, private accountProvider: AccountService,
-              private storage: Storage, private authService: AuthService, private alertCtrl: AlertController) {
+              private storage: Storage, private authService: AuthService, private alertCtrl: AlertController,
+              private toastController: ToastController) {
     this.statusBar.styleLightContent();
   }
 
@@ -55,6 +56,7 @@ export class AccountPage implements OnInit {
   public async logout() {
     const alert = await this.alertCtrl.create({
       header: 'Logout',
+      mode: 'ios',
       message: 'Are you sure you want to logout?',
       buttons: [
         {
@@ -66,17 +68,14 @@ export class AccountPage implements OnInit {
           handler: async () => {
             await this.storage.remove('settings');
             const AWSToken = await this.storage.get('awsToken');
-            try {
-              if (AWSToken) {
-                await this.authService.deleteToken(AWSToken.token.access_key);
-                await this.storage.remove('awsToken');
-              }
 
-              await this.authService.logout();
-              await this.navCtrl.navigateRoot(['/login']);
-            } catch (e) {
-              throw e;
+            if (AWSToken) {
+              await this.authService.deleteToken(AWSToken.token.access_key);
+              await this.storage.remove('awsToken');
             }
+
+            await this.authService.logout();
+            await this.navCtrl.navigateRoot(['/login']);
           }
         }
       ]

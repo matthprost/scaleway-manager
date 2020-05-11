@@ -47,7 +47,8 @@ export class AddSshKeyPage implements OnInit {
             showCloseButton: true,
             position: 'top',
             closeButtonText: 'Close',
-            color: 'danger'
+            color: 'danger',
+            mode: 'ios',
           });
 
           await toast.present();

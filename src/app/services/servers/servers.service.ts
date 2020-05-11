@@ -110,9 +110,7 @@ export class ServersService {
     country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
 
     return new Promise((resolve, reject) => {
-      this.api.post<ActionDto>(ApiUrl + '/servers/' + serverId + '/action', {
-        'action': 'terminate'
-      })
+      this.api.delete<ActionDto>(ApiUrl + '/servers/' + serverId)
         .then(result => {
 
           if (serverIp) {

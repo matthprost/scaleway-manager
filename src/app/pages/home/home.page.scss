@@ -175,7 +175,7 @@ ion-content {
 
     &-canvas {
       padding: .5rem 0 3rem 0;
-      margin-top: 10vh;
+      margin-top: 4vh;
     }
 
     h3 {
@@ -232,6 +232,11 @@ ion-content {
     }
   }
 }
+
+.ios .home-header-canvas {
+  margin-top: 10vh;
+}
+
 
 .title-instances {
   margin-left: .75rem;

@@ -40,7 +40,7 @@ ion-list {
 }
 
 ion-content {
-  --background: url('/assets/imgs/background.svg') repeat 0 0, var(--ion-color-primary);
+  --background: url('/assets/imgs/background.svg') repeat 0 0, linear-gradient(141deg, #8800C8 20%, var(--ion-color-primary) 80%) no-repeat;
 }
 
 .login {
@@ -82,8 +82,14 @@ ion-item {
   --inner-padding-end: 0;
 }
 
-ion-icon {
+form ion-icon {
   margin: 0;
   padding: 9px;
   background: var(--ion-color-light);
+}
+
+ion-fab-button {
+  ion-icon {
+    font-size: 3rem;
+  }
 }
