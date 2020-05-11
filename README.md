@@ -1,3 +1,5 @@
+![alt text](https://github.com/F4OST/Scaleway-Manager/blob/master/resources/android/splash/drawable-land-hdpi-screen.png?raw=ture)
+
 # Scaleway-Manager
 
 Scaleway-Manager is an IONIC application that allow you to start/stop your Scaleway servers.
