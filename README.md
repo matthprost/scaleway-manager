@@ -1,4 +1,6 @@
-<img align="center" src="https://github.com/F4OST/Scaleway-Manager/blob/master/resources/android/splash/drawable-land-hdpi-screen.png?raw=ture" alt="logo">
+<div style="text-align: center">
+<img src="https://github.com/F4OST/Scaleway-Manager/blob/master/resources/android/splash/drawable-land-hdpi-screen.png?raw=ture" alt="logo">
+</div>
 
 # Scaleway-Manager
 
