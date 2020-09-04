@@ -15,7 +15,7 @@ export class AuthService {
   public login(email: string, password: string, code?: string): Promise<any> {
 
     return new Promise((resolve, reject) => {
-      this.api.post<AuthTokenDto>(this.api.getAccountApiUrl() + '/jwt', {
+      this.api.post<any>(this.api.getAccountApiUrl() + '/jwt', {
         'email': email,
         'password': password,
         'renewable': true,

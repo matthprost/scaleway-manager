@@ -249,8 +249,11 @@ ion-content {
   display: inline-block;
 }
 
-.no-data {
-  color: white;
+.no-server {
+  color: gray;
   text-align: center;
   padding: 1rem;
+  ion-icon {
+    font-size: 1.5rem;
+  }
 }

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {MenuController, NavController} from '@ionic/angular';
+import {Events, MenuController, NavController} from '@ionic/angular';
 import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
 import {BillingService} from '../../services/billing/billing.service';
@@ -55,6 +55,7 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
+    this.isLoading = true;
     this.statusBar.styleDefault();
     this.menuCtrl.enable(true);
     this.billingService.getXMonthsLastBilling(6).then(value => {
@@ -214,16 +215,16 @@ export class HomePage implements OnInit {
     }
   }
 
-  public navigate(location: string, country?: string, serverId?: string) {
+  public async navigate(location: string, country?: string, serverId?: string) {
     switch (location) {
       case 'account' :
-        this.navCtrl.navigateForward(['/home/account']);
+        await this.navCtrl.navigateForward(['/home/account']);
         break;
       case 'instances' :
-        this.navCtrl.navigateForward(['/instances']);
+        await this.navCtrl.navigateForward(['/instances']);
         break;
       case 'instancesDetails' :
-        this.navCtrl.navigateForward(['/instances/' + country + '/' + serverId]);
+        await this.navCtrl.navigateForward(['/instances/' + country + '/' + serverId]);
       /*case 'contact' :
         fab.close();
         this.navCtrl.push(ContactPage);

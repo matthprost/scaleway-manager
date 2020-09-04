@@ -5,7 +5,7 @@
     </ion-buttons>
     <ion-title color="light">Dashboard</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="navigate('account')" class="ion-float-end" color="light" fill="clear">
+      <ion-button [routerDirection]="'forward'" [routerLink]="'/home/account'" class="ion-float-end" color="light" fill="clear">
         <ion-icon name="ios-contact" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -45,12 +45,12 @@
 
   <app-error *ngIf="serverError"></app-error>
 
-  <div class="home-page" *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError">
+  <div class="home-page">
     <ion-grid class="home-page-grid">
       <div class="title-instances">
         Last {{ instancesToDisplay }} Actives Instances
       </div>
-      <ion-row>
+      <ion-row  *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError">
         <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
           <ion-slide *ngFor="let serversInstance of serversInstances">
             <ion-card mode="ios" style="width:100%">
@@ -111,5 +111,9 @@
           </button>
         </ion-fab-list>
       </ion-fab>-->
+  </div>
+  <div class="no-server" *ngIf="serversInstances.length === 0">
+    <ion-icon name="ios-information-circle-outline" slot="icon-only"></ion-icon><br/>
+    You don't have any instance
   </div>
 </ion-content>

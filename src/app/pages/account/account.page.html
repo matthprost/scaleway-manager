@@ -40,12 +40,12 @@
           </ion-label>
         </ion-chip>
       </div>
-      {{ user.email }}
     </div>
-    <div class="date">
-      <div class="date-content">
-        Member since {{ user.creation_date | date:'MMMM d, y'}}
+    <div class="current-organization">
+      <div class="current-organization-text">
+        Organization: <b>{{ currentOrganization.name }}</b>
       </div>
+      <ion-button color="tertiary" (click)="presentModal()">Change organization</ion-button>
     </div>
     <ion-grid>
       <ion-row>
