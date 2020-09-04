@@ -7,55 +7,56 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="isLoading">
-  <app-loader></app-loader>
-</ion-content>
-
-<ion-content *ngIf="!isLoading">
+<ion-content>
 
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-list *ngIf="instances !== undefined && instances.length !== 0" mode="ios">
-    <ion-item-sliding *ngFor="let server of instances; let i = index;" #item>
-      <ion-item (click)="navigateInstanceDetails(server, server.country)" lines="none" detail="true" mode="ios"
-                [ngClass]="(i % 2 == 0) ? 'background-white' : 'background-grey'">
-        <ion-note slot="start" mode="ios">
-          <div [class]='setClass(server)' [style.background]="setState(server)"></div>
-        </ion-note>
-        <ion-avatar slot="start">
-          <img class="img-os" alt="os"
-               src="{{ server.image ? (server.image.name | serverIcon) : (server.name | serverIcon) }}">
-        </ion-avatar>
-        <ion-label mode="ios">
-          <h2>{{ server.name }}</h2>
-          <p>{{ server.commercial_type }}</p>
-        </ion-label>
-        <ion-note slot="end" mode="ios">
-          <img src="{{ server.country === 'fr-par-1' ? 'assets/imgs/france.svg' : 'assets/imgs/netherlands.svg' }}"
-               alt="country" style="vertical-align: middle">
-        </ion-note>
-      </ion-item>
+  <app-loader *ngIf="isLoading"></app-loader>
+  <app-error *ngIf="serverError"></app-error>
 
-      <ion-item-options side="end" *ngIf="server.state === 'running'">
-        <ion-item-option expandable="true" color="danger"
-                         (click)="serverAction(server, 'poweroff', item, server.country)" mode="ios">
-          OFF
-        </ion-item-option>
-      </ion-item-options>
-      <ion-item-options side="end" *ngIf="server.state === 'stopped'">
-        <ion-item-option expandable="true" color="secondary"
-                         (click)="serverAction(server, 'poweron', item, server.country)" mode="ios">
-          ON
-        </ion-item-option>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <div *ngIf="!serverError && !isLoading">
+    <ion-list *ngIf="instances !== undefined && instances.length !== 0" mode="ios">
+      <ion-item-sliding *ngFor="let server of instances; let i = index;" #item>
+        <ion-item (click)="navigateInstanceDetails(server, server.country)" lines="none" detail="true" mode="ios"
+                  [ngClass]="(i % 2 == 0) ? 'background-white' : 'background-grey'">
+          <ion-note slot="start" mode="ios">
+            <div [class]='setClass(server)' [style.background]="setState(server)"></div>
+          </ion-note>
+          <ion-avatar slot="start">
+            <img class="img-os" alt="os"
+                 src="{{ server.image ? (server.image.name | serverIcon) : (server.name | serverIcon) }}">
+          </ion-avatar>
+          <ion-label mode="ios">
+            <h2>{{ server.name }}</h2>
+            <p>{{ server.commercial_type }}</p>
+          </ion-label>
+          <ion-note slot="end" mode="ios">
+            <img src="{{ server.country === 'fr-par-1' ? 'assets/imgs/france.svg' : 'assets/imgs/netherlands.svg' }}"
+                 alt="country" style="vertical-align: middle">
+          </ion-note>
+        </ion-item>
 
-  <p class="no-server ion-margin-top ion-text-center"
-     *ngIf="!isLoading && instances.length === 0">
-    <img alt="no_server" src="assets/imgs/server.svg">
-    No server available
-  </p>
+        <ion-item-options side="end" *ngIf="server.state === 'running'">
+          <ion-item-option expandable="true" color="danger"
+                           (click)="serverAction(server, 'poweroff', item, server.country)" mode="ios">
+            OFF
+          </ion-item-option>
+        </ion-item-options>
+        <ion-item-options side="end" *ngIf="server.state === 'stopped'">
+          <ion-item-option expandable="true" color="secondary"
+                           (click)="serverAction(server, 'poweron', item, server.country)" mode="ios">
+            ON
+          </ion-item-option>
+        </ion-item-options>
+      </ion-item-sliding>
+    </ion-list>
+
+    <p class="no-server ion-margin-top ion-text-center"
+       *ngIf="!isLoading && instances.length === 0">
+      <img alt="no_server" src="assets/imgs/server.svg">
+      No server available
+    </p>
+  </div>
 </ion-content>

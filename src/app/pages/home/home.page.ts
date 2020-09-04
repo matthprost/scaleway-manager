@@ -26,6 +26,9 @@ export class HomePage implements OnInit {
 
   public billings: BillingDto = null;
 
+  public billingError = false;
+  public serverError = false;
+
   slideOpts = {
     initialSlide: 0,
     slidesPerView: 2.15,
@@ -55,13 +58,15 @@ export class HomePage implements OnInit {
     this.statusBar.styleDefault();
     this.menuCtrl.enable(true);
     this.billingService.getXMonthsLastBilling(6).then(value => {
-      this.billings = value;
-      this.refresh().then(() => {
-        this.autoRefresh();
-        this.classAppear = 'card-appear';
-        this.statusBar.styleLightContent();
-        this.isLoading = false;
-      });
+      this.billings = value.invoices;
+    }).catch(() => {
+      this.billingError = true;
+    });
+    this.refresh().then(() => {
+      this.autoRefresh();
+      this.classAppear = 'card-appear';
+      this.statusBar.styleLightContent();
+      this.isLoading = false;
     });
   }
 
@@ -78,6 +83,8 @@ export class HomePage implements OnInit {
           resolve('ok');
         })
           .catch(error => {
+            this.isLoading = false;
+            this.serverError = true;
             reject(error);
           });
       });

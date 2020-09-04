@@ -1,8 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Storage} from '@ionic/storage';
 import {HttpClient} from '@angular/common/http';
-import {NavController, Platform} from '@ionic/angular';
-import {Router} from '@angular/router';
+import {NavController, Platform, ToastController} from '@ionic/angular';
 
 
 enum HttpMethods {
@@ -28,7 +27,7 @@ export class ApiService {
   private readonly billing: string = '/billing';
 
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
-              private platform: Platform, private router: Router) {
+              private platform: Platform, private apiService: ApiService, private toastCtrl: ToastController) {
     if (this.platform.is('cordova') === true) {
       // GENERAL API
       this.api = 'https://api.scaleway.com';
@@ -64,6 +63,16 @@ export class ApiService {
         }).toPromise();
       } catch (e) {
         console.log(e);
+        const toast = await this.toastCtrl.create({
+          message: `Error: ${e.error.message || 'Unknown Error'}`,
+          duration: 5000,
+          position: 'top',
+          mode: 'ios',
+          color: 'danger',
+          showCloseButton: true
+        });
+
+        await toast.present();
         if (e && e.status && e.status === 401 && e.error.type === 'invalid_auth') {
           console.warn('ERROR 401: Token might be not valid anymore, trying to renew');
 
@@ -93,13 +102,16 @@ export class ApiService {
     return new Promise((resolve, reject) => {
       this.storage.get('jwt').then(token => {
         if (token) {
-          this.httpClient.request('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
+          this.httpClient.request<any>('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
             body: {jwt_renew: token.auth.jwt_renew}
-          }).toPromise().then(result => {
-            this.storage.set('jwt', result).then(() => {
-              console.log('JWT RENEWED!');
-              resolve(result);
-            });
+          }).toPromise().then(async result => {
+            this.storage.set('jwt', result);
+            console.log('JWT RENEWED!');
+            const user = await this.apiService.get<any>(this.apiService.getAccountApiUrl() + '/users/' + result.jwt.issuer);
+            await this.storage.set('user', user);
+            const currentOrganization = user.organizations.find(organization => organization.role_name === 'owner');
+            await this.storage.set('currentOrganization', currentOrganization);
+            resolve(result);
           })
             .catch(error => {
               console.error('ERROR: JWT CANNOT BE RENEWED');

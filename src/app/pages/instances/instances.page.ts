@@ -15,6 +15,7 @@ export class InstancesPage implements OnInit {
 
   private interval;
   private intervalSet = false;
+  public serverError = false;
 
   constructor(public navCtrl: NavController, private serversProvider: ServersService,
               private statusBar: StatusBar) {
@@ -31,6 +32,8 @@ export class InstancesPage implements OnInit {
         this.autoRefresh();
       })
       .catch(error => {
+        this.serverError = true;
+        this.isLoading = false;
         console.log(error);
       });
   }
@@ -45,6 +48,8 @@ export class InstancesPage implements OnInit {
       this.serversProvider.getAllServer(100).then(result => {
         this.instances = result;
         resolve('ok');
+      }).catch(e => {
+        reject(e);
       });
     });
   }

@@ -5,6 +5,7 @@ import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import {IonicModule} from '@ionic/angular';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {ErrorComponent} from './error/error.component';
 
 
 @NgModule({
@@ -14,10 +15,11 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
     IonicModule,
     FontAwesomeModule
   ],
-  declarations: [GraphComponent, LoaderComponent],
+  declarations: [GraphComponent, LoaderComponent, ErrorComponent],
   exports: [
     LoaderComponent,
-    GraphComponent
+    GraphComponent,
+    ErrorComponent,
   ]
 })
 export class ComponentsModule {}

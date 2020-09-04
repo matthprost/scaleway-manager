@@ -1,4 +1,4 @@
-<ion-header *ngIf="!isLoading" mode="ios">
+<ion-header mode="ios">
   <ion-toolbar mode="md">
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
@@ -12,16 +12,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="isLoading">
-  <app-loader></app-loader>
-</ion-content>
-
-<ion-content *ngIf="!isLoading">
+<ion-content>
   <div class="home-header">
     <div class="home-header-canvas">
-      <app-graph [billings]="this.billings"></app-graph>
+      <app-graph [billings]="this.billings" *ngIf="!isLoading && !billingError"></app-graph>
+      <app-error *ngIf="billingError" variant="light"></app-error>
     </div>
   </div>
+
+  <ion-content *ngIf="isLoading">
+    <app-loader></app-loader>
+  </ion-content>
 
   <div class="home-middle">
     <ion-card mode="ios">
@@ -42,7 +43,9 @@
     </ion-card>
   </div>
 
-  <div class="home-page" *ngIf="serversInstances && serversInstances.length > 0">
+  <app-error *ngIf="serverError"></app-error>
+
+  <div class="home-page" *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError">
     <ion-grid class="home-page-grid">
       <div class="title-instances">
         Last {{ instancesToDisplay }} Actives Instances

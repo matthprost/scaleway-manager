@@ -21,10 +21,13 @@ export class AuthService {
         'renewable': true,
         '2FA_token': String(code),
       })
-        .then(result => {
-          this.storage.set('jwt', result).then(() => {
-            resolve('ok');
-          });
+        .then(async result => {
+          await this.storage.set('jwt', result);
+          const data = await this.api.get<any>(this.api.getAccountApiUrl() + '/users/' + result.jwt.issuer);
+          await this.storage.set('user', data.user);
+          const currentOrganization = data.user.organizations.find(organization => organization.role_name === 'owner');
+          await this.storage.set('currentOrganization', currentOrganization.id);
+          resolve('ok');
         })
         .catch(error => {
           reject(error);
@@ -37,6 +40,7 @@ export class AuthService {
       const token = await this.storage.get('jwt');
       await this.api.delete<any>(this.api.getAccountApiUrl() + '/jwt/' + token.jwt.jti);
       await this.storage.remove('jwt');
+      await this.storage.remove('user');
     } catch (e) {
       throw e;
     }

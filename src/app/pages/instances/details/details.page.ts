@@ -23,6 +23,7 @@ export class DetailsPage implements OnInit {
   public power = false;
 
   public isLoading = true;
+  public serverError = false;
 
   private interval;
   private intervalSet = false;
@@ -44,6 +45,9 @@ export class DetailsPage implements OnInit {
       this.setState();
       this.isLoading = false;
       this.autoRefresh();
+    }).catch(() => {
+      this.isLoading = false;
+      this.serverError = true;
     });
   }
 

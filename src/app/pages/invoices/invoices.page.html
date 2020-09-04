@@ -10,58 +10,61 @@
 <ion-content>
 
   <app-loader *ngIf="isLoading"></app-loader>
+  <app-error *ngIf="billingError" variant="dark"></app-error>
 
   <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <ion-item-group *ngIf="!isLoading">
-    <ion-item-divider class="title" color="secondary">
-      <div style="width: 100%">
-        <div style="float: left">Current Invoice</div>
-        <div class="last-update">Updated at <br/>{{ currentInvoice.last_update | date:'h:mm a, dd/MM/yy' }}</div>
-      </div>
-    </ion-item-divider>
-    <ion-item lines="none">
-      <div class="information-title">
-        <div class="information-title-content">
-          {{ currentInvoice.state }}
+  <div *ngIf="!isLoading && !billingError">
+    <ion-item-group>
+      <ion-item-divider class="title" color="secondary">
+        <div style="width: 100%">
+          <div style="float: left">Current Invoice</div>
+          <div class="last-update">Updated at <br/>{{ currentInvoice.last_update | date:'h:mm a, dd/MM/yy' }}</div>
         </div>
-        <div class="date">
-          {{ currentInvoice.start_date | date:'MMMM y' }}
+      </ion-item-divider>
+      <ion-item lines="none">
+        <div class="information-title">
+          <div class="information-title-content">
+            {{ currentInvoice.state }}
+          </div>
+          <div class="date">
+            {{ currentInvoice.start_date | date:'MMMM y' }}
+          </div>
         </div>
-      </div>
-      <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
-        <div class="price">
-          {{ currentInvoice.total_taxed }} {{ currentInvoice.currency }}
+        <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
+          <div class="price">
+            {{ currentInvoice.total_taxed }} {{ currentInvoice.currency }}
+          </div>
+          <div class="price-ht">
+            {{ currentInvoice.total_untaxed }} HT
+          </div>
         </div>
-        <div class="price-ht">
-          {{ currentInvoice.total_untaxed }} HT
-        </div>
-      </div>
-    </ion-item>
-  </ion-item-group>
+      </ion-item>
+    </ion-item-group>
 
-  <ion-item-group *ngIf="!isLoading">
-    <ion-item-divider class="title" color="secondary">Older Invoices</ion-item-divider>
-    <ion-item *ngFor="let invoice of invoices" lines="full">
-      <div class="information-title">
-        <div class="information-title-content">
-          {{ invoice.state }}
+    <ion-item-group>
+      <ion-item-divider class="title" color="secondary">Older Invoices</ion-item-divider>
+      <ion-item *ngFor="let invoice of invoices" lines="full">
+        <div class="information-title">
+          <div class="information-title-content">
+            {{ invoice.state }}
+          </div>
+          <div class="date">
+            {{ invoice.start_date | date:'MMMM y' }}
+          </div>
         </div>
-        <div class="date">
-          {{ invoice.start_date | date:'MMMM y' }}
+        <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
+          <div class="price">
+            {{ invoice.total_taxed }} {{ invoice.currency }}
+          </div>
+          <div class="price-ht">
+            {{ invoice.total_untaxed }} HT
+          </div>
         </div>
-      </div>
-      <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
-        <div class="price">
-          {{ invoice.total_taxed }} {{ invoice.currency }}
-        </div>
-        <div class="price-ht">
-          {{ invoice.total_untaxed }} HT
-        </div>
-      </div>
-    </ion-item>
-  </ion-item-group>
+      </ion-item>
+    </ion-item-group>
+  </div>
 
 </ion-content>

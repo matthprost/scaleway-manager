@@ -13,6 +13,7 @@ export class InvoicesPage implements OnInit {
   public invoices: Array<InvoicesDto>;
   public currentInvoice: InvoicesDto;
   public isLoading = true;
+  public billingError = false;
 
   constructor(private billingService: BillingService, private statusBar: StatusBar) {
     this.statusBar.styleDefault();
@@ -25,6 +26,9 @@ export class InvoicesPage implements OnInit {
     this.statusBar.styleDefault();
     this.refresh().then(() => {
       this.isLoading = false;
+    }).catch(() => {
+      this.isLoading = false;
+      this.billingError = true;
     });
   }
 
@@ -40,9 +44,9 @@ export class InvoicesPage implements OnInit {
   private refresh(): Promise<any> {
     return new Promise((resolve, reject) => {
         this.billingService.getBilling(10).then(result => {
-          this.invoices = result;
+          this.invoices = result.invoices;
           this.invoices = this.invoices.slice(1, this.invoices.length);
-          this.currentInvoice = result[0];
+          this.currentInvoice = result.invoices[0];
           resolve('ok');
         }).catch(error => {
           reject(error);
