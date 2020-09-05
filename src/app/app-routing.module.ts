@@ -85,39 +85,46 @@ const routes: Routes = [
   },
   {
     path: 'about',
-    loadChildren: './pages/about/about.module#AboutPageModule'
+    loadChildren: './pages/about/about.module#AboutPageModule',
+    canActivate: [HomeGuard]
   },
   {
     path: 'invoices',
-    loadChildren: './pages/invoices/invoices.module#InvoicesPageModule'
+    loadChildren: './pages/invoices/invoices.module#InvoicesPageModule',
+    canActivate: [HomeGuard]
   },
   {
     path: 'settings',
-    loadChildren: './pages/settings/settings.module#SettingsPageModule'
+    loadChildren: './pages/settings/settings.module#SettingsPageModule',
+    canActivate: [HomeGuard]
   },
-  { path: 'help', loadChildren: './pages/auth/login/help/help.module#HelpPageModule' },
-/*  {
-    path: 'buckets',
-    children: [
-      {
-        path: '',
-        loadChildren: './pages/buckets/buckets.module#ObjectsPageModule',
-      },
-      {
-        path: ':region/:bucket',
-        children: [
-          {
-            path: '',
-            loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
-          },
-          {
-            path: '**',
-            loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
-          }
-        ]
-      }
-    ],
-  },*/
+  {
+    path: 'help',
+    loadChildren: './pages/auth/login/help/help.module#HelpPageModule',
+    canActivate: [HomeGuard]
+  },
+  /*  {
+      path: 'buckets',
+      children: [
+        {
+          path: '',
+          loadChildren: './pages/buckets/buckets.module#ObjectsPageModule',
+        },
+        {
+          path: ':region/:bucket',
+          children: [
+            {
+              path: '',
+              loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
+            },
+            {
+              path: '**',
+              loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
+            }
+          ]
+        }
+      ],
+    },*/
 ];
 
 @NgModule({

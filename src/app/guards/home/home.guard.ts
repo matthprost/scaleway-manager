@@ -12,18 +12,17 @@ export class HomeGuard implements CanActivate {
 
   canActivate(next: ActivatedRouteSnapshot, state: RouterStateSnapshot):
     boolean | Observable<boolean> | Promise<boolean> {
-    return new Promise((resolve, reject) => {
-      this.storage.get('jwt').then((val) => {
-        if (val === null) {
-          this.router.navigate(['login']);
-          resolve(false);
-        } else {
-          resolve(true);
-        }
-      }).catch((error) => {
+    return new Promise(async (resolve, reject) => {
+      const jwt = await this.storage.get('jwt');
+      const currentOrganization = await this.storage.get('currentOrganization');
+      if (!jwt || !currentOrganization) {
+        await this.storage.remove('jwt');
+        await this.storage.remove('user');
+        await this.storage.remove('currentOrganization');
         this.router.navigate(['login']);
         resolve(false);
-      });
+      }
+      resolve(true);
     });
   }
 }

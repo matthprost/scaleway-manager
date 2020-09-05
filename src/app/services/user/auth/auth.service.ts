@@ -41,6 +41,7 @@ export class AuthService {
       await this.api.delete<any>(this.api.getAccountApiUrl() + '/jwt/' + token.jwt.jti);
       await this.storage.remove('jwt');
       await this.storage.remove('user');
+      await this.storage.remove('currentOrganization');
     } catch (e) {
       throw e;
     }

@@ -27,7 +27,7 @@ export class ApiService {
   private readonly billing: string = '/billing';
 
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
-              private platform: Platform, private apiService: ApiService, private toastCtrl: ToastController) {
+              private platform: Platform, private toastCtrl: ToastController) {
     if (this.platform.is('cordova') === true) {
       // GENERAL API
       this.api = 'https://api.scaleway.com';
@@ -41,7 +41,7 @@ export class ApiService {
     }
   }
 
-  private async request<T>(method: HttpMethods, url: string, data: {} = {}): Promise<T> {
+  private async request<T>(method: HttpMethods, url: string, data: {} = {}, repeatOnce = false): Promise<T> {
 
     const token = await this.storage.get('jwt');
     if (!token) {
@@ -107,10 +107,6 @@ export class ApiService {
           }).toPromise().then(async result => {
             this.storage.set('jwt', result);
             console.log('JWT RENEWED!');
-            const user = await this.apiService.get<any>(this.apiService.getAccountApiUrl() + '/users/' + result.jwt.issuer);
-            await this.storage.set('user', user);
-            const currentOrganization = user.organizations.find(organization => organization.role_name === 'owner');
-            await this.storage.set('currentOrganization', currentOrganization);
             resolve(result);
           })
             .catch(error => {
