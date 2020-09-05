@@ -42,11 +42,11 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './pages/instances/instances.module#InstancesPageModule'
+        loadChildren: './pages/products/instances/instances.module#InstancesPageModule'
       },
       {
         path: ':zone/:id',
-        loadChildren: './pages/instances/details/details.module#DetailsPageModule'
+        loadChildren: './pages/products/instances/details/details.module#DetailsPageModule'
       }
     ],
     canActivate: [HomeGuard]
@@ -108,18 +108,18 @@ const routes: Routes = [
       children: [
         {
           path: '',
-          loadChildren: './pages/buckets/buckets.module#ObjectsPageModule',
+          loadChildren: './pages/products/buckets/buckets.module#ObjectsPageModule',
         },
         {
           path: ':region/:bucket',
           children: [
             {
               path: '',
-              loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
+              loadChildren: './pages/products/buckets/objects/objects.module#ObjectsPageModule'
             },
             {
               path: '**',
-              loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
+              loadChildren: './pages/products/buckets/objects/objects.module#ObjectsPageModule'
             }
           ]
         }

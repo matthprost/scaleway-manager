@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController, NavParams, ToastController} from '@ionic/angular';
-import {ObjectService} from '../../../services/object/object.service';
+import {ObjectService} from '../../../../services/object/object.service';
 
 @Component({
   selector: 'app-add-bucket',

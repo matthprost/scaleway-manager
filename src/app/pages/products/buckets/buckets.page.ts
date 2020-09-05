@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ObjectService} from '../../services/object/object.service';
+import {ObjectService} from '../../../services/object/object.service';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {ModalController, NavController} from '@ionic/angular';
 import {AddBucketPage} from './add-bucket/add-bucket.page';

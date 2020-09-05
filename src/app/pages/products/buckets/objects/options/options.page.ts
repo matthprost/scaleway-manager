@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertController, LoadingController, ModalController, NavParams, PopoverController} from '@ionic/angular';
-import {ObjectService} from '../../../../services/object/object.service';
+import {ObjectService} from '../../../../../services/object/object.service';
 import {ObjInfosPage} from './obj-infos/obj-infos.page';
 import {FileTransfer, FileTransferObject} from '@ionic-native/file-transfer/ngx';
 import {File} from '@ionic-native/file/ngx';

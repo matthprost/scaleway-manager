@@ -6,8 +6,8 @@ import {Routes, RouterModule} from '@angular/router';
 import {IonicModule} from '@ionic/angular';
 
 import {DetailsPage} from './details.page';
-import {ComponentsModule} from '../../../components/components.module';
-import {PipesModule} from '../../../pipes/pipes.module';
+import {ComponentsModule} from '../../../../components/components.module';
+import {PipesModule} from '../../../../pipes/pipes.module';
 import {Clipboard} from '@ionic-native/clipboard/ngx';
 
 const routes: Routes = [

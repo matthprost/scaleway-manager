@@ -112,7 +112,7 @@
         </ion-fab-list>
       </ion-fab>-->
   </div>
-  <div class="no-server" *ngIf="serversInstances.length === 0">
+  <div class="no-server" *ngIf="!isLoading && serversInstances.length === 0 && !serverError">
     <ion-icon name="ios-information-circle-outline" slot="icon-only"></ion-icon><br/>
     You don't have any instance
   </div>

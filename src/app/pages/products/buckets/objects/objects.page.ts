@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ObjectService} from '../../../services/object/object.service';
+import {ObjectService} from '../../../../services/object/object.service';
 import {NavController, PopoverController} from '@ionic/angular';
 import {OptionsPage} from './options/options.page';
 import {StatusBar} from '@ionic-native/status-bar/ngx';

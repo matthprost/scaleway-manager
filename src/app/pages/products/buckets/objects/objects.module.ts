@@ -6,9 +6,9 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { ObjectsPage } from './objects.page';
-import {ComponentsModule} from '../../../components/components.module';
+import {ComponentsModule} from '../../../../components/components.module';
 import {OptionsPage} from './options/options.page';
-import {PipesModule} from '../../../pipes/pipes.module';
+import {PipesModule} from '../../../../pipes/pipes.module';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ObjInfosPage} from './options/obj-infos/obj-infos.page';
 import {FileTransfer, FileTransferObject} from '@ionic-native/file-transfer/ngx';

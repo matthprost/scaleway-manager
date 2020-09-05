@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from '@angular/router';
-import {ServerDto} from '../../../services/servers/server.dto';
-import {ServersService} from '../../../services/servers/servers.service';
+import {ServerDto} from '../../../../services/servers/server.dto';
+import {ServersService} from '../../../../services/servers/servers.service';
 import {AlertController, NavController, Platform, ToastController} from '@ionic/angular';
 import {Clipboard} from '@ionic-native/clipboard/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';

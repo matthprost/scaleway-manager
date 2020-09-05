@@ -6,7 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 
 import { BucketsPage } from './buckets.page';
-import {ComponentsModule} from '../../components/components.module';
+import {ComponentsModule} from '../../../components/components.module';
 import {AddBucketPage} from './add-bucket/add-bucket.page';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 
