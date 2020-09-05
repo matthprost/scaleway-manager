@@ -124,12 +124,12 @@ export class ApiService {
     return (this.accountApiUrl);
   }
 
-  public getParisApiUrl() {
-    return (this.api + '/instance/v1/zones/fr-par-1');
+  public getInstanceUrl() {
+    return (this.api + '/instance/v1/zones/');
   }
 
-  public getAmsterdamApiUrl() {
-    return (this.api + '/instance/v1/zones/nl-ams-1');
+  public getBmaasUrl() {
+    return (this.api + '/baremetal/v1alpha1/zones/');
   }
 
   public getBillingApiUrl() {

@@ -23,6 +23,12 @@ export class AppComponent {
       icon: 'server',
       new: false,
     },
+    {
+      title: 'Bare Metal',
+      url: '/bmaas',
+      icon: 'hdd',
+      new: false,
+    },
 /*    {
       title: 'Object Storage',
       url: '/buckets',

@@ -52,6 +52,15 @@ const routes: Routes = [
     canActivate: [HomeGuard]
   },
   {
+    path: 'bmaas',
+    children: [
+      {
+        path: '',
+        loadChildren: './pages/products/bmaas/bmaas.module#BmaasPageModule'
+      }
+    ]
+  },
+  {
     path: 'login',
     children: [
       {

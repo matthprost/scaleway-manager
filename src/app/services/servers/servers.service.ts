@@ -56,8 +56,7 @@ export class ServersService {
   }
 
   public async getAllServerByCountry(country: string, nbrOfServ = 50): Promise<any> {
-    let apiUrl: string;
-    country === 'fr-par-1' ? apiUrl = this.api.getParisApiUrl() : apiUrl = this.api.getAmsterdamApiUrl();
+    const apiUrl = `${this.api.getInstanceUrl()}${country}`;
     const organizationId = await this.storage.get('currentOrganization');
 
     const result = await this.api.get<{ servers: ServerDto[] }>(`${apiUrl}/servers?project=${organizationId}&per_page=${nbrOfServ}&page=1`);
@@ -69,11 +68,10 @@ export class ServersService {
   }
 
   public getServerById(country: string, serverId: string): Promise<any> {
-    let ApiUrl: string = null;
-    country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
+    const apiUrl = `${this.api.getInstanceUrl()}${country}`;
 
     return new Promise((resolve, reject) => {
-      this.api.get<ServerDto>(ApiUrl + '/servers/' + serverId)
+      this.api.get<ServerDto>(apiUrl + '/servers/' + serverId)
         .then(result => {
           resolve(result);
         })
@@ -84,11 +82,10 @@ export class ServersService {
   }
 
   public sendServerAction(country: string, serverId: string, action: string): Promise<any> {
-    let ApiUrl: string = null;
-    country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
+    const apiUrl = `${this.api.getInstanceUrl()}${country}`;
 
     return new Promise((resolve, reject) => {
-      this.api.post<ActionDto>(ApiUrl + '/servers/' + serverId + '/action', {
+      this.api.post<ActionDto>(apiUrl + '/servers/' + serverId + '/action', {
         'action': action
       })
         .then(result => {
@@ -101,15 +98,14 @@ export class ServersService {
   }
 
   public serverDelete(country: string, serverId: string, serverIp?: string) {
-    let ApiUrl: string = null;
-    country === 'fr-par-1' ? ApiUrl = this.api.getParisApiUrl() : ApiUrl = this.api.getAmsterdamApiUrl();
+    const apiUrl = `${this.api.getInstanceUrl()}${country}`;
 
     return new Promise((resolve, reject) => {
-      this.api.delete<ActionDto>(ApiUrl + '/servers/' + serverId)
+      this.api.delete<ActionDto>(apiUrl + '/servers/' + serverId)
         .then(result => {
 
           if (serverIp) {
-            this.api.delete(ApiUrl + '/ips/' + serverIp)
+            this.api.delete(apiUrl + '/ips/' + serverIp)
               .then(() => {
                 resolve('ok');
               })
