@@ -41,7 +41,7 @@ export class ApiService {
     }
   }
 
-  private async request<T>(method: HttpMethods, url: string, data: {} = {}, repeatOnce = false): Promise<T> {
+  private async request<T>(method: HttpMethods, url: string, data: {} = {}): Promise<T> {
 
     const token = await this.storage.get('jwt');
     if (!token) {
@@ -77,20 +77,15 @@ export class ApiService {
           console.warn('ERROR 401: Token might be not valid anymore, trying to renew');
 
           try {
-            await this.renewJWT();
-            return this.request<T>(method, url, data);
+            this.renewJWT().then(() => {
+              return this.request<T>(method, url, data);
+            });
           } catch (e) {
             console.warn('DELETE JWT IN STORAGE');
             await this.storage.remove('jwt');
             await this.navCtrl.navigateRoot(['/login']);
             throw e;
           }
-        } else if (e && e.status && e.status === 504) {
-          await this.navCtrl.navigateRoot(['/error/504']);
-          throw e;
-        } else if (e && e.status && e.status === 500) {
-          await this.navCtrl.navigateRoot(['/error/504']);
-          throw e;
         } else {
           throw e;
         }
@@ -104,10 +99,11 @@ export class ApiService {
         if (token) {
           this.httpClient.request<any>('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
             body: {jwt_renew: token.auth.jwt_renew}
-          }).toPromise().then(async result => {
-            this.storage.set('jwt', result);
-            console.log('JWT RENEWED!');
-            resolve(result);
+          }).toPromise().then(result => {
+            this.storage.set('jwt', result).then(() => {
+              console.log('JWT RENEWED!');
+              resolve(result);
+            });
           })
             .catch(error => {
               console.error('ERROR: JWT CANNOT BE RENEWED');

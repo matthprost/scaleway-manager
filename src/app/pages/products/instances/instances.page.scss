@@ -9,25 +9,6 @@ h2 {
   width: auto;
 }
 
-.no-server {
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: var(--ion-color-dark);
-  text-transform: uppercase;
-  font-weight: 600;
-
-  img {
-    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
-    filter: grayscale(100%);
-    width: 50px;
-    display: block;
-    margin: 0 auto;
-    margin-bottom: 2rem;
-  }
-}
-
 ion-note {
   img {
     width: 20px;

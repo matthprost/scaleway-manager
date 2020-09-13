@@ -56,8 +56,14 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './pages/products/bmaas/bmaas.module#BmaasPageModule'
-      }
+        loadChildren: './pages/products/bmaas/bmaas.module#BmaasPageModule',
+        canActivate: [HomeGuard]
+      },
+      {
+        path: ':zone/:id',
+        loadChildren: './pages/products/bmaas/details/details.module#DetailsPageModule',
+        canActivate: [HomeGuard]
+      },
     ]
   },
   {
@@ -74,23 +80,6 @@ const routes: Routes = [
         canActivate: [DoubleAuthGuard]
       },
     ]
-  },
-  {
-    path: 'error',
-    children: [
-      {
-        path: '504',
-        loadChildren: './pages/errors/no-internet/no-internet.module#NoInternetPageModule'
-      },
-      {
-        path: '400',
-        loadChildren: './pages/errors/bad-request/bad-request.module#BadRequestPageModule'
-      },
-      {
-        path: '404',
-        loadChildren: './pages/errors/not-found/not-found.module#NotFoundPageModule'
-      },
-    ],
   },
   {
     path: 'about',

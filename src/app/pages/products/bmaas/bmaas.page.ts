@@ -101,6 +101,10 @@ export class BmaasPage implements OnInit {
     }
   }
 
+  public navigateServerDetails(server: any, country: string) {
+    this.navCtrl.navigateForward(['/bmaas/' + country + '/' + server.id]);
+  }
+
   public setState(server): string {
     switch (server.status) {
       case 'stopped':
@@ -114,6 +118,8 @@ export class BmaasPage implements OnInit {
       case 'starting':
         return '#3F6ED8';
       case 'installing':
+        return '#3F6ED8';
+      case 'undelivered':
         return '#3F6ED8';
       default:
         return '#B2B6C3';
@@ -131,6 +137,8 @@ export class BmaasPage implements OnInit {
       case 'ready':
         return 'state';
       case 'installing':
+        return 'blinker';
+      case 'undelivered':
         return 'blinker';
       default:
         return 'state';

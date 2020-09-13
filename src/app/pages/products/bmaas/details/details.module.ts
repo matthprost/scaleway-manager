@@ -5,14 +5,15 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { BmaasPage } from './bmaas.page';
-import {ComponentsModule} from '../../../components/components.module';
-import {PipesModule} from '../../../pipes/pipes.module';
+import { DetailsPage } from './details.page';
+import {ComponentsModule} from '../../../../components/components.module';
+import {PipesModule} from '../../../../pipes/pipes.module';
+import {Clipboard} from '@ionic-native/clipboard/ngx';
 
 const routes: Routes = [
   {
     path: '',
-    component: BmaasPage
+    component: DetailsPage
   }
 ];
 
@@ -23,8 +24,11 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    PipesModule,
+    PipesModule
   ],
-  declarations: [BmaasPage]
+  declarations: [DetailsPage],
+  providers: [
+    Clipboard
+  ]
 })
-export class BmaasPageModule {}
+export class DetailsPageModule {}

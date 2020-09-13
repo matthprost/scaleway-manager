@@ -51,9 +51,6 @@ export class HomePage implements OnInit {
     clearInterval(this.interval);
   }
 
-  ionViewDidLoad() {
-  }
-
   ionViewDidEnter() {
     this.isLoading = true;
     this.statusBar.styleDefault();

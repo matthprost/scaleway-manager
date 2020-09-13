@@ -18,8 +18,8 @@
 
   <div *ngIf="!serverError && !isLoading">
     <ion-list *ngIf="servers !== undefined && servers.length !== 0" mode="ios">
-      <ion-item-sliding *ngFor="let server of servers; let i = index;" #item>
-        <ion-item lines="none" detail="true" mode="ios"
+      <ion-item-sliding *ngFor="let server of servers; let i = index;">
+        <ion-item (click)="navigateServerDetails(server, 'fr-par-2')" lines="none" detail="true" mode="ios"
                   [ngClass]="(i % 2 == 0) ? 'background-white' : 'background-grey'">
           <ion-note slot="start" mode="ios">
             <div [class]='setClass(server)' [style.background]="setState(server)"></div>

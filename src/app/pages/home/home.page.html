@@ -43,11 +43,13 @@
     </ion-card>
   </div>
 
-  <app-error *ngIf="serverError"></app-error>
+  <app-error *ngIf="serverError">
+    <p>Test1234</p>
+  </app-error>
 
   <div class="home-page">
     <ion-grid class="home-page-grid">
-      <div class="title-instances">
+      <div class="title-instances" *ngIf="!serverError">
         Last {{ instancesToDisplay }} Actives Instances
       </div>
       <ion-row  *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError">
@@ -113,7 +115,7 @@
       </ion-fab>-->
   </div>
   <div class="no-server" *ngIf="!isLoading && serversInstances.length === 0 && !serverError">
-    <ion-icon name="ios-information-circle-outline" slot="icon-only"></ion-icon><br/>
-    You don't have any instance
+    <img alt="no_server" src="../../../../assets/imgs/server.svg">
+    No server available
   </div>
 </ion-content>
