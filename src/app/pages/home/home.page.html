@@ -15,7 +15,7 @@
 <ion-content>
   <div class="home-header">
     <div class="home-header-canvas">
-      <app-graph [billings]="this.billings" *ngIf="!isLoading && !billingError"></app-graph>
+      <app-graph [billings]="this.billings" *ngIf="!isLoading && !billingError" [currentOrganization]="currentOrganization"></app-graph>
       <app-error *ngIf="billingError" variant="light"></app-error>
     </div>
   </div>
@@ -115,7 +115,7 @@
       </ion-fab>-->
   </div>
   <div class="no-server" *ngIf="!isLoading && serversInstances.length === 0 && !serverError">
-    <img alt="no_server" src="../../../../assets/imgs/server.svg">
+    <img alt="no_server" src="../../../../assets/img/server.svg">
     No server available
   </div>
 </ion-content>

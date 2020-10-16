@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {Events, MenuController, NavController} from '@ionic/angular';
+import {MenuController, NavController} from '@ionic/angular';
 import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
 import {BillingService} from '../../services/billing/billing.service';
@@ -7,6 +7,7 @@ import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {BillingDto} from '../../services/billing/billing.dto';
 import {Storage} from '@ionic/storage';
+import {AccountService} from '../../services/user/account/account.service';
 
 @Component({
   selector: 'app-home',
@@ -29,6 +30,8 @@ export class HomePage implements OnInit {
   public billingError = false;
   public serverError = false;
 
+  public currentOrganization = '';
+
   slideOpts = {
     initialSlide: 0,
     slidesPerView: 2.15,
@@ -41,7 +44,7 @@ export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController, private srvService: ServersService,
               private billingService: BillingService, private menuCtrl: MenuController,
-              private statusBar: StatusBar, private storage: Storage) {
+              private statusBar: StatusBar, private storage: Storage, private accountProvider: AccountService) {
   }
 
   ngOnInit() {
@@ -68,8 +71,10 @@ export class HomePage implements OnInit {
     });
   }
 
-  private refresh(): Promise<any> {
-
+  private async refresh(): Promise<any> {
+    const userData = await this.accountProvider.getUserData();
+    const currentOrganization = await this.storage.get('currentOrganization');
+    this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganization);
     return new Promise((resolve, reject) => {
       this.storage.get('settings').then(result => {
         if (result) {

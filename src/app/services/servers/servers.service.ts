@@ -3,6 +3,7 @@ import {ServerDto} from './server.dto';
 import {ApiService} from '../api/api.service';
 import {ActionDto} from './action.dto';
 import {Storage} from '@ionic/storage';
+import {zones} from './config';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +16,11 @@ export class ServersService {
   constructor(private api: ApiService, private storage: Storage) {
   }
 
+  private mergeZones(zonesValue: Array<any>) {
+    const valuesList = zonesValue.map(zone => zone.servers);
+    return [].concat(...valuesList);
+  }
+
   private sortServers(servers: Array<ServerDto>): Array<ServerDto> {
 
     const runningServers = servers.filter(obj => obj.state === 'running');
@@ -25,34 +31,11 @@ export class ServersService {
     return runningServers.concat(startAndStopServers, stoppedInPlaceServers, stoppedServers);
   }
 
-  public getAllServer(nbrOfServ = 6): Promise<Array<ServerDto>> {
+  public async getAllServer(nbrOfServ = 6) {
+    const promises = zones.map(zone => this.getAllServerByCountry(zone));
+    const result = await Promise.all(promises);
 
-    return new Promise((resolve, reject) => {
-      // Get all servers from PARIS
-      const paris = this.getAllServerByCountry('fr-par-1').then(result => {
-        this.parisServers = result.servers;
-      }).catch(error => {
-        reject(error);
-      });
-
-      // Get all servers from NETHERLANDS
-      const netherlands = this.getAllServerByCountry('nl-ams-1').then(result => {
-        this.netherlandsServers = result.servers;
-      }).catch(error => {
-        reject(error);
-      });
-
-      // Sync all promises, when they all finished, we display the information
-      Promise.all([paris, netherlands]).then(() => {
-        if (this.parisServers && this.netherlandsServers) {
-          resolve(this.sortServers(this.parisServers.concat(this.netherlandsServers)).slice(0, nbrOfServ));
-        } else {
-          reject('error');
-        }
-      }).catch(error => {
-        reject(error);
-      });
-    });
+    return this.sortServers(this.mergeZones(result)).slice(0, nbrOfServ);
   }
 
   public async getAllServerByCountry(country: string, nbrOfServ = 50): Promise<any> {

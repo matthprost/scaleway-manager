@@ -1,11 +1,11 @@
 <div>
   <div class="header">
     <div class="header-left">
-      Last 6 months invoices
+      Organization: <span class="header-left-organization">{{ currentOrganization.name }}</span>
     </div>
     <div *ngIf="values" class="header-right">Current
       <div class="header-right-amount">
-        {{ values[values.length - 1]  || '0.00 ' + currency }}
+        {{ values[values.length - 1] || '0.00 ' + currency }}
       </div>
     </div>
   </div>

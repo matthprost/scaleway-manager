@@ -11,6 +11,7 @@ import {BillingDto} from '../../services/billing/billing.dto';
 export class GraphComponent implements OnInit {
 
   @Input() billings: BillingDto;
+  @Input() currentOrganization = { name: '' };
 
   @ViewChild('billingCanvas') barCanvas: ElementRef;
   private barChart: Chart;

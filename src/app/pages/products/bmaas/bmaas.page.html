@@ -33,7 +33,7 @@
             <p>Created: {{ server.created_at | date:'dd/MM/yy' }}</p>
           </ion-label>
           <ion-note slot="end" mode="ios">
-            <img src="assets/imgs/france.svg"
+            <img src="assets/img/france.svg"
                  alt="country" style="vertical-align: middle">
           </ion-note>
         </ion-item>
@@ -42,7 +42,7 @@
 
     <p class="no-server ion-margin-top ion-text-center"
        *ngIf="!isLoading && servers.length === 0">
-      <img alt="no_server" src="../../../../assets/imgs/server.svg">
+      <img alt="no_server" src="../../../../assets/img/server.svg">
       No server available
     </p>
   </div>
