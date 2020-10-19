@@ -4,16 +4,16 @@ This file is a personal reminder for deploy, don't mind about it :)
 
 #### Requirements
 
-- Mac (Can be a VM with VMWare)
+- Macbook (Can be a VM with VMWare)
 - Xcode
 
 #### Deploy
 
 1. Run `rm -rf node_modules`
 2. Run `npm install`
-3. Run `npx ng build --prod` and wait till the result display "BUILD SUCCEEDED"
-4. Open `plateforms/ios/.xcodeproj` in Xcode
-5. Choose `Generic iOS Device` on the top and change `Build` and `Version`
+3. Run `ionic build --prod` then `ionic cap ` `sync` / `copy` to sync native files
+4. Run `ionic cap open ios` to open Xcode
+5. Choose `Generic/Any iOS Device` on the top and change `Build` and `Version` and verify `Signing & Capabilities`
 6. Do this: `Product > Archive` and wait till the pop-up open
 7. Then `Upload to App Store... ` and the rest is on App Store Connect
 

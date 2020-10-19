@@ -1,6 +1,6 @@
 {
-  "appId": "io.ionic.starter",
-  "appName": "Scaleway-Manager",
+  "appId": "com.matthiasprost.scalewaymanager",
+  "appName": "Scaleway Manager",
   "bundledWebRuntime": false,
   "npmClient": "npm",
   "webDir": "www",
