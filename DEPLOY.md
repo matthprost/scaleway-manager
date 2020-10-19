@@ -11,7 +11,7 @@ This file is a personal reminder for deploy, don't mind about it :)
 
 1. Run `rm -rf node_modules`
 2. Run `npm install`
-3. Run `ionic cordova build ios --prod --release` and wait till the result display "BUILD SUCCEEDED"
+3. Run `npx ng build --prod` and wait till the result display "BUILD SUCCEEDED"
 4. Open `plateforms/ios/.xcodeproj` in Xcode
 5. Choose `Generic iOS Device` on the top and change `Build` and `Version`
 6. Do this: `Product > Archive` and wait till the pop-up open
