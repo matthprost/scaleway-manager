@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {Chart} from 'chart.js';
+import {Chart} from 'chart.js/dist/Chart.bundle.js';
 import {BillingDto} from '../../services/billing/billing.dto';
 
 
