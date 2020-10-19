@@ -80,28 +80,18 @@ export class ServersService {
     });
   }
 
-  public serverDelete(country: string, serverId: string, serverIp?: string) {
+  public async serverDelete(country: string, serverId: string, serverIp?: string) {
     const apiUrl = `${this.api.getInstanceUrl()}${country}`;
 
-    return new Promise((resolve, reject) => {
-      this.api.delete<ActionDto>(apiUrl + '/servers/' + serverId)
-        .then(result => {
-
-          if (serverIp) {
-            this.api.delete(apiUrl + '/ips/' + serverIp)
-              .then(() => {
-                resolve('ok');
-              })
-              .catch(error => {
-                reject(error);
-              });
-          } else {
-            resolve('ok');
-          }
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+    try {
+      await this.api.post<ActionDto>(`${apiUrl}/servers/${serverId}/action`, {
+        action: 'terminate'
+      });
+      if (serverIp) {
+        await this.api.delete(`${apiUrl}/ips/${serverIp}`);
+      }
+    } catch (e) {
+      throw e;
+    }
   }
 }

@@ -72,7 +72,8 @@ export class ApiService {
         console.warn('ERROR 401: Token is be not valid anymore, trying to renew it.');
 
         try {
-          await this.renewJWT();
+          console.log('Token in storage:', token);
+          await this.renewJWT(token);
 
           return this.request<T>(method, url, data);
         } catch (e) {
@@ -87,8 +88,7 @@ export class ApiService {
     }
   }
 
-  private async renewJWT(): Promise<any> {
-    const token = await this.storage.get('jwt');
+  private async renewJWT(token): Promise<any> {
     if (token) {
       try {
         const result = this.httpClient.request<any>('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
@@ -97,12 +97,14 @@ export class ApiService {
 
         await this.storage.set('jwt', result);
         console.log('JWT RENEWED!');
+
+        return result;
       } catch (e) {
         console.log('Error while trying to renew token:', e);
         throw e;
       }
     } else {
-      console.log('No token found in storage.');
+      console.warn('No token found in storage.');
       throw TypeError('No token found in storage.');
     }
   }

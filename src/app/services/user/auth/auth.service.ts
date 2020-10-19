@@ -3,13 +3,14 @@ import {ApiService} from '../../api/api.service';
 import {AuthTokenDto, TokenDto} from './auth-tokens.dto';
 import {Storage} from '@ionic/storage';
 import {AccountService} from '../account/account.service';
+import {NavController} from '@ionic/angular';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private api: ApiService, private storage: Storage, private accountService: AccountService) {
+  constructor(private api: ApiService, private storage: Storage, private accountService: AccountService, private navCtrl: NavController) {
   }
 
   public login(email: string, password: string, code?: string): Promise<any> {
@@ -36,15 +37,13 @@ export class AuthService {
   }
 
   public async logout(): Promise<any> {
-    try {
-      const token = await this.storage.get('jwt');
-      await this.api.delete<any>(this.api.getAccountApiUrl() + '/jwt/' + token.jwt.jti);
-      await this.storage.remove('jwt');
-      await this.storage.remove('user');
-      await this.storage.remove('currentOrganization');
-    } catch (e) {
-      throw e;
-    }
+    console.log('LOGGING  OUT');
+    const token = await this.storage.get('jwt');
+    await this.api.delete<any>(this.api.getAccountApiUrl() + '/jwt/' + token.jwt.jti);
+    await this.storage.remove('jwt');
+    await this.storage.remove('user');
+    await this.storage.remove('currentOrganization');
+    await this.navCtrl.navigateRoot(['/login']);
   }
 
   public getToken(token: string): Promise<AuthTokenDto> {

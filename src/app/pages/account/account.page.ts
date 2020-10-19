@@ -95,7 +95,6 @@ export class AccountPage implements OnInit {
             }
 
             await this.authService.logout();
-            await this.navCtrl.navigateRoot(['/login']);
           }
         }
       ]
