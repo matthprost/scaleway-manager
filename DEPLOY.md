@@ -11,7 +11,7 @@ This file is a personal reminder for deploy, don't mind about it :)
 
 1. Run `rm -rf node_modules`
 2. Run `npm install`
-3. Run `ionic build --prod` then `ionic cap ` `sync` / `copy` to sync native files
+3. Run `ionic capacitor build ios --prod`
 4. Run `ionic cap open ios` to open Xcode
 5. Choose `Generic/Any iOS Device` on the top and change `Build` and `Version` and verify `Signing & Capabilities`
 6. Do this: `Product > Archive` and wait till the pop-up open
@@ -38,7 +38,7 @@ This file is a personal reminder for deploy, don't mind about it :)
 
 1. Run `rm -rf node_modules`
 2. Run `npm install`
-3. Run `ionic cordova build android --prod --release` Then copy the .apk file
+3. Run `ionic capacitor build android --prod` Then copy the .apk file
 4. Find the `my-release-key.jks` file and then run `jarsigner -verbose -sigalg SHA1withRSA -digestalg SHA1 -keystore my-release-key.jks app-release-unsigned.apk scaleway`
 5. Then run `zipalign -v 4 app-release-unsigned.apk Scaleway_Manager.apk`, zipalign can be found on `/opt/android-sdk/build-tools/XX.X.X/zipalign`
 6. And finally verify that the `.apk` has been signed by running `apksigner verify HelloWorld.apk`. Apksigner can be found in the same folder as zipalign.
