@@ -17,6 +17,7 @@ enum HttpMethods {
 })
 export class ApiService {
 
+  // Those routes are for proxy
   // GENERAL API
   private readonly api: string = '/api';
 
@@ -26,8 +27,18 @@ export class ApiService {
   // BILLING API
   private readonly billing: string = '/billing';
 
+  private createToastError = async (e) => await this.toastCtrl.create({
+    message: `Error: ${e.error.message || 'Unknown Error'}`,
+    duration: 5000,
+    position: 'top',
+    mode: 'ios',
+    color: 'danger',
+    showCloseButton: true
+  });
+
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
               private platform: Platform, private toastCtrl: ToastController) {
+    // If we are running on Android / iOS then lets use real routes
     if (this.platform.is('cordova') === true) {
       // GENERAL API
       this.api = 'https://api.scaleway.com';
@@ -37,83 +48,63 @@ export class ApiService {
 
       // BILLING API
       this.billing = 'https://billing.scaleway.com';
-
     }
   }
 
   private async request<T>(method: HttpMethods, url: string, data: {} = {}): Promise<T> {
-
     const token = await this.storage.get('jwt');
-    if (!token) {
-      return this.httpClient.request<T>(HttpMethods[method.toString()], url, {
-        headers: token ?
+
+    try {
+      return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
+        headers: token && token.auth && token.auth.jwt_key ?
           {
             'X-Session-Token': token.auth.jwt_key
           } : {},
         body: data
       }).toPromise();
-    } else {
-      try {
-        return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
-          headers: token ?
-            {
-              'X-Session-Token': token.auth.jwt_key
-            } : {},
-          body: data
-        }).toPromise();
-      } catch (e) {
-        console.log(e);
-        const toast = await this.toastCtrl.create({
-          message: `Error: ${e.error.message || 'Unknown Error'}`,
-          duration: 5000,
-          position: 'top',
-          mode: 'ios',
-          color: 'danger',
-          showCloseButton: true
-        });
+    } catch (e) {
+      console.log(e);
 
-        await toast.present();
-        if (e && e.status && e.status === 401 && e.error.type === 'invalid_auth') {
-          console.warn('ERROR 401: Token might be not valid anymore, trying to renew');
+      const toast = await this.createToastError(e);
+      await toast.present();
 
-          try {
-            this.renewJWT().then(() => {
-              return this.request<T>(method, url, data);
-            });
-          } catch (e) {
-            console.warn('DELETE JWT IN STORAGE');
-            await this.storage.remove('jwt');
-            await this.navCtrl.navigateRoot(['/login']);
-            throw e;
-          }
-        } else {
+      if (e && e.status && e.status === 401 && e.error.type === 'invalid_auth') {
+        console.warn('ERROR 401: Token is be not valid anymore, trying to renew it.');
+
+        try {
+          await this.renewJWT();
+
+          return this.request<T>(method, url, data);
+        } catch (e) {
+          console.warn('DELETE JWT IN STORAGE');
+          await this.storage.remove('jwt');
+          await this.navCtrl.navigateRoot(['/login']);
           throw e;
         }
+      } else {
+        throw e;
       }
     }
   }
 
-  private renewJWT(): Promise<any> {
-    return new Promise((resolve, reject) => {
-      this.storage.get('jwt').then(token => {
-        if (token) {
-          this.httpClient.request<any>('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
-            body: {jwt_renew: token.auth.jwt_renew}
-          }).toPromise().then(result => {
-            this.storage.set('jwt', result).then(() => {
-              console.log('JWT RENEWED!');
-              resolve(result);
-            });
-          })
-            .catch(error => {
-              console.error('ERROR: JWT CANNOT BE RENEWED');
-              reject(error);
-            });
-        } else {
-          reject('error');
-        }
-      });
-    });
+  private async renewJWT(): Promise<any> {
+    const token = await this.storage.get('jwt');
+    if (token) {
+      try {
+        const result = this.httpClient.request<any>('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
+          body: {jwt_renew: token.auth.jwt_renew}
+        }).toPromise();
+
+        await this.storage.set('jwt', result);
+        console.log('JWT RENEWED!');
+      } catch (e) {
+        console.log('Error while trying to renew token:', e);
+        throw e;
+      }
+    } else {
+      console.log('No token found in storage.');
+      throw TypeError('No token found in storage.');
+    }
   }
 
   public getAccountApiUrl() {
