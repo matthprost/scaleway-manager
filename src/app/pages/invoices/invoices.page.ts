@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {InvoicesDto} from '../../services/billing/billing.dto';
 import {BillingService} from '../../services/billing/billing.service';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-invoices',
@@ -15,15 +17,14 @@ export class InvoicesPage implements OnInit {
   public isLoading = true;
   public billingError = false;
 
-  constructor(private billingService: BillingService, private statusBar: StatusBar) {
-    this.statusBar.styleDefault();
+  constructor(private billingService: BillingService) {
   }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
     this.refresh().then(() => {
       this.isLoading = false;
     }).catch(() => {

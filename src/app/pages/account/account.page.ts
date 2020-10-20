@@ -2,11 +2,13 @@ import {Component, OnInit} from '@angular/core';
 import {UserDto} from '../../services/user/account/account.dto';
 import {faShieldAlt, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
 import {AlertController, ModalController, NavController} from '@ionic/angular';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {AccountService} from '../../services/user/account/account.service';
 import {Storage} from '@ionic/storage';
 import {AuthService} from '../../services/user/auth/auth.service';
 import {ChangeOrganizationPage} from './change-organization/change-organization.page';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-account',
@@ -21,17 +23,16 @@ export class AccountPage implements OnInit {
   public danger = faExclamationCircle;
   public currentOrganization;
 
-  constructor(public navCtrl: NavController, public statusBar: StatusBar, private accountProvider: AccountService,
+  constructor(public navCtrl: NavController, private accountProvider: AccountService,
               private storage: Storage, private authService: AuthService, private alertCtrl: AlertController,
               public modalController: ModalController) {
-    this.statusBar.styleLightContent();
   }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleLightContent();
+    StatusBar.setStyle({style: StatusBarStyle.Dark});
     this.refresh();
   }
 
@@ -55,6 +56,7 @@ export class AccountPage implements OnInit {
     await modal.present();
 
     await modal.onDidDismiss().then(() => {
+      StatusBar.setStyle({style: StatusBarStyle.Dark});
       this.refresh();
     });
   }

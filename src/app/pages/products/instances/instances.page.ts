@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ServersService} from '../../../services/servers/servers.service';
 import {ServerDto} from '../../../services/servers/server.dto';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {NavController} from '@ionic/angular';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
+
 @Component({
   selector: 'app-instances',
   templateUrl: './instances.page.html',
@@ -17,15 +20,14 @@ export class InstancesPage implements OnInit {
   private intervalSet = false;
   public serverError = false;
 
-  constructor(public navCtrl: NavController, private serversProvider: ServersService,
-              private statusBar: StatusBar) {
+  constructor(public navCtrl: NavController, private serversProvider: ServersService) {
   }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
     this.refreshAllServers()
       .then(() => {
         this.isLoading = false;

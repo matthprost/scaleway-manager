@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ModalController, Platform} from '@ionic/angular';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-help',
@@ -9,9 +12,14 @@ import {EmailComposer} from '@ionic-native/email-composer/ngx';
 })
 export class HelpPage implements OnInit {
 
-  constructor(private modalCtrl: ModalController, private platform: Platform, private emailComposer: EmailComposer) { }
+  constructor(private modalCtrl: ModalController, private platform: Platform, private emailComposer: EmailComposer) {
+  }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    StatusBar.setStyle({style: StatusBarStyle.Light});
   }
 
   public async close() {

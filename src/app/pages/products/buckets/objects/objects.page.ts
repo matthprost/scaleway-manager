@@ -3,7 +3,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ObjectService} from '../../../../services/object/object.service';
 import {NavController, PopoverController} from '@ionic/angular';
 import {OptionsPage} from './options/options.page';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 @Component({
   selector: 'app-objects',
@@ -26,8 +25,7 @@ export class ObjectsPage implements OnInit {
   public displayName: string = null;
 
   constructor(private route: ActivatedRoute, private router: Router, private objectService: ObjectService, private navCtrl: NavController,
-              private popoverCtrl: PopoverController, private statusBar: StatusBar) {
-    this.statusBar.styleLightContent();
+              private popoverCtrl: PopoverController) {
     const pathArray = this.router.url.split('/');
     this.currentPath = pathArray[pathArray.length - 1];
     this.fullPath = decodeURI(this.getFullPath());
@@ -42,7 +40,6 @@ export class ObjectsPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleLightContent();
   }
 
   public doRefresh(refresher) {
@@ -135,7 +132,6 @@ export class ObjectsPage implements OnInit {
 
     await popover.present();
     await popover.onDidDismiss().then(data => {
-      this.statusBar.styleLightContent();
       if (data && data.data && data.data.reload) {
         this.refresh();
       }

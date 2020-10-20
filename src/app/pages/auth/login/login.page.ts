@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {LoadingController, MenuController, ModalController, NavController, ToastController} from '@ionic/angular';
 import {AuthService} from '../../../services/user/auth/auth.service';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {NavParamsService} from '../../../services/nav/nav-params.service';
 import {HelpPage} from './help/help.page';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-login',
@@ -17,13 +19,13 @@ export class LoginPage implements OnInit {
   public password: string = null;
 
   constructor(private router: Router, private toastCtrl: ToastController, private loadingCtrl: LoadingController,
-              private auth: AuthService, private menuCtrl: MenuController, private statusBar: StatusBar, private navCtrl: NavController,
+              private auth: AuthService, private menuCtrl: MenuController, private navCtrl: NavController,
               private navParams: NavParamsService, private modalController: ModalController) {
   }
 
   ionViewWillEnter() {
+    StatusBar.setStyle({style: StatusBarStyle.Dark});
     this.menuCtrl.enable(false);
-    this.statusBar.styleLightContent();
   }
 
   ngOnInit() {

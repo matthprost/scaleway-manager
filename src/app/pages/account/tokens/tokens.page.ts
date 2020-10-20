@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {TokenDto} from '../../../services/user/auth/auth-tokens.dto';
 import {IonItemSliding, LoadingController, NavController} from '@ionic/angular';
 import {AuthService} from '../../../services/user/auth/auth.service';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-tokens',
@@ -14,16 +16,14 @@ export class TokensPage implements OnInit {
   public isLoading = true;
   public tokens: Array<TokenDto> = [];
 
-  constructor(public navCtrl: NavController, private authProvide: AuthService, private loadingCtrl: LoadingController,
-              private statusBar: StatusBar) {
-    this.statusBar.styleDefault();
+  constructor(public navCtrl: NavController, private authProvide: AuthService, private loadingCtrl: LoadingController) {
   }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
+    StatusBar.setStyle({style: StatusBarStyle.Light});
     this.refresh().then(() => {
       this.isLoading = false;
     });

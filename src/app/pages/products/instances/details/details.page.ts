@@ -4,7 +4,9 @@ import {ServerDto} from '../../../../services/servers/server.dto';
 import {ServersService} from '../../../../services/servers/servers.service';
 import {AlertController, NavController, Platform, ToastController} from '@ionic/angular';
 import {Clipboard} from '@ionic-native/clipboard/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-details',
@@ -30,7 +32,7 @@ export class DetailsPage implements OnInit {
 
   constructor(private serversProvider: ServersService,
               private toastCtrl: ToastController, private clipboard: Clipboard, private alertController: AlertController,
-              public statusBar: StatusBar, private route: ActivatedRoute, private platform: Platform,
+              private route: ActivatedRoute, private platform: Platform,
               private navCtrl: NavController) {
     this.server.id = this.route.snapshot.paramMap.get('id');
     this.serverCountry = this.route.snapshot.paramMap.get('zone');
@@ -40,7 +42,7 @@ export class DetailsPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
     this.refreshServer().then(() => {
       this.setState();
       this.isLoading = false;

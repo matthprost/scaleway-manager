@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {ObjectService} from '../../../services/object/object.service';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {ModalController, NavController} from '@ionic/angular';
 import {AddBucketPage} from './add-bucket/add-bucket.page';
 
@@ -17,9 +16,8 @@ export class BucketsPage implements OnInit {
   public error = false;
   private temp = true;
 
-  constructor(private objectService: ObjectService, private statusBar: StatusBar, private modalController: ModalController,
+  constructor(private objectService: ObjectService, private modalController: ModalController,
               private navCtrl: NavController) {
-    this.statusBar.styleDefault();
     this.temp = true;
     this.refresh(true).then(() => {
       this.temp = false;
@@ -30,7 +28,6 @@ export class BucketsPage implements OnInit {
   }
 
   async ionViewDidEnter() {
-    this.statusBar.styleDefault();
     if (!this.temp) {
       await this.refresh(false);
     }

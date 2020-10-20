@@ -4,10 +4,12 @@ import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
 import {BillingService} from '../../services/billing/billing.service';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {BillingDto} from '../../services/billing/billing.dto';
 import {Storage} from '@ionic/storage';
 import {AccountService} from '../../services/user/account/account.service';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-home',
@@ -44,7 +46,7 @@ export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController, private srvService: ServersService,
               private billingService: BillingService, private menuCtrl: MenuController,
-              private statusBar: StatusBar, private storage: Storage, private accountProvider: AccountService) {
+              private storage: Storage, private accountProvider: AccountService) {
   }
 
   ngOnInit() {
@@ -56,7 +58,7 @@ export class HomePage implements OnInit {
 
   ionViewDidEnter() {
     this.isLoading = true;
-    this.statusBar.styleDefault();
+    StatusBar.setStyle({ style: StatusBarStyle.Dark });
     this.menuCtrl.enable(true);
     this.billingService.getXMonthsLastBilling(6).then(value => {
       this.billings = value.invoices;
@@ -66,7 +68,6 @@ export class HomePage implements OnInit {
     this.refresh().then(() => {
       this.autoRefresh();
       this.classAppear = 'card-appear';
-      this.statusBar.styleLightContent();
       this.isLoading = false;
     });
   }

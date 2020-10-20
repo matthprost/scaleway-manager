@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {NavController} from '@ionic/angular';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {BmaasService} from '../../../services/bmaas/bmaas.service';
 
 @Component({
@@ -17,8 +16,7 @@ export class BmaasPage implements OnInit {
   private intervalSet = false;
   public serverError = false;
 
-  constructor(public navCtrl: NavController, private bmaasService: BmaasService,
-              private statusBar: StatusBar) {
+  constructor(public navCtrl: NavController, private bmaasService: BmaasService) {
 
   }
 
@@ -26,7 +24,6 @@ export class BmaasPage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
     this.refreshAllServers()
       .then(() => {
         this.isLoading = false;

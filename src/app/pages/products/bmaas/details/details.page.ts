@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {AlertController, NavController, Platform, ToastController} from '@ionic/angular';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {BmaasService} from '../../../../services/bmaas/bmaas.service';
 import {Clipboard} from '@ionic-native/clipboard/ngx';
 import {ActivatedRoute} from '@angular/router';
@@ -19,7 +18,7 @@ export class DetailsPage implements OnInit {
 
   constructor(private bmaasService: BmaasService,
               private toastCtrl: ToastController, private clipboard: Clipboard, private alertController: AlertController,
-              public statusBar: StatusBar, private route: ActivatedRoute, private platform: Platform,
+              private route: ActivatedRoute, private platform: Platform,
               private navCtrl: NavController) {
   }
 

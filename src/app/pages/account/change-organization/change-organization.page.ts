@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ModalController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
 import {AccountService} from '../../../services/user/account/account.service';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-change-organization',
@@ -22,6 +25,7 @@ export class ChangeOrganizationPage implements OnInit {
   }
 
   ionViewDidEnter() {
+    StatusBar.setStyle({style: StatusBarStyle.Light});
     this.storage.get('currentOrganization').then(async currentOrganization => {
       const user = await this.accountService.getUserData();
       this.organizations = user.organizations;

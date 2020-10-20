@@ -2,9 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {IonItemSliding, LoadingController, ModalController, NavController, ToastController} from '@ionic/angular';
 import {AccountService} from '../../../services/user/account/account.service';
 import {SshKeysDto} from '../../../services/user/account/account.dto';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {Clipboard} from '@ionic-native/clipboard/ngx';
 import {AddSshKeyPage} from './add-ssh-key/add-ssh-key.page';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-ssh-keys',
@@ -17,16 +19,15 @@ export class SshKeysPage implements OnInit {
   public sshKeys: Array<SshKeysDto> = [];
 
   constructor(public navCtrl: NavController, private accountProvider: AccountService,
-              public statusBar: StatusBar, private clipboard: Clipboard, private toastCtrl: ToastController,
+              private clipboard: Clipboard, private toastCtrl: ToastController,
               public modalController: ModalController, private loadingCtrl: LoadingController) {
-    this.statusBar.styleDefault();
   }
 
   ngOnInit(): void {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
+    StatusBar.setStyle({style: StatusBarStyle.Light});
     this.refresh().then(() => {
       this.isLoading = false;
     })
