@@ -10,8 +10,7 @@ import {AddBucketPage} from './add-bucket/add-bucket.page';
 })
 export class BucketsPage implements OnInit {
 
-  public bucketsPar = [];
-  public bucketsAms = [];
+  public buckets = [];
   public isLoading = true;
   public error = false;
   private temp = true;
@@ -38,12 +37,9 @@ export class BucketsPage implements OnInit {
     displayLoading ? this.isLoading = true : this.isLoading = false;
 
     try {
-      const result = await this.objectService.getAllBuckets();
+      this.buckets = await this.objectService.getAllBuckets();
 
-      console.log('RESULT:', result);
-
-      this.bucketsPar = result.s3par ? result.s3par : [];
-      this.bucketsAms = result.s3ams ? result.s3ams : [];
+      console.log('RESULT:', this.buckets);
     } catch (e) {
       this.error = true;
     } finally {
