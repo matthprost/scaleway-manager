@@ -20,6 +20,10 @@
     </ion-fab-button>
   </ion-fab>-->
 
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-grid>
     <ion-row class="align-items-center">
       <ion-col *ngFor="let bucket of buckets" size="6" style="margin: 0 auto">

@@ -47,6 +47,15 @@ export class BucketsPage implements OnInit {
     }
   }
 
+  public doRefresh(refresher) {
+    this.refresh().then(() => {
+      refresher.target.complete();
+    }).catch(error => {
+      console.log(error);
+      refresher.target.complete();
+    });
+  }
+
   public async addBucket(event: any) {
     const modal = await this.modalController.create({
       component: AddBucketPage,
