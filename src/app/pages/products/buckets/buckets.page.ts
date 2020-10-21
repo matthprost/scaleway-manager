@@ -27,9 +27,9 @@ export class BucketsPage implements OnInit {
   }
 
   async ionViewDidEnter() {
-    if (!this.temp) {
+    /*if (!this.temp) {
       await this.refresh(false);
-    }
+    }*/
   }
 
   private async refresh(displayLoading?: boolean) {
@@ -38,8 +38,6 @@ export class BucketsPage implements OnInit {
 
     try {
       this.buckets = await this.objectService.getAllBuckets();
-
-      console.log('RESULT:', this.buckets);
     } catch (e) {
       this.error = true;
     } finally {

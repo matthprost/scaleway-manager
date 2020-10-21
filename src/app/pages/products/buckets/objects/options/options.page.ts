@@ -113,21 +113,25 @@ export class OptionsPage implements OnInit {
 
             let name = encodeURIComponent(data.name);
 
-            this.map.forEach((key, value) => {
-              name = this.replaceAll(name, value, key);
-            });
+            if (data.name !== this.object.Key[0]) {
+              this.map.forEach((key, value) => {
+                name = this.replaceAll(name, value, key);
+              });
 
-            await loading.present();
-            try {
-              await this.objectService.copyObject(this.bucket, this.region,
-                '/' + this.navParams.get('fullPath') + name,
-                this.fullPathWithBucket);
-              await this.objectService.deleteObject(this.bucket, this.region, this.fullPathWithoutBucket);
-            } catch (e) {
-              console.log(e);
-            } finally {
-              await this.popoverController.dismiss({reload: true});
-              await loading.dismiss();
+              await loading.present();
+              try {
+                await this.objectService.copyObject(this.bucket, this.region,
+                  '/' + this.navParams.get('fullPath') + name,
+                  this.fullPathWithBucket);
+                await this.objectService.deleteObject(this.bucket, this.region, this.fullPathWithoutBucket);
+              } catch (e) {
+                console.log(e);
+              } finally {
+                await this.popoverController.dismiss({reload: true});
+                await loading.dismiss();
+              }
+            } else {
+              await this.popoverController.dismiss({reload: false});
             }
           }
         }
