@@ -4,9 +4,12 @@ import {ServerDto} from '../../services/servers/server.dto';
 import {ServersService} from '../../services/servers/servers.service';
 import {BillingService} from '../../services/billing/billing.service';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {BillingDto} from '../../services/billing/billing.dto';
 import {Storage} from '@ionic/storage';
+import {AccountService} from '../../services/user/account/account.service';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-home',
@@ -26,6 +29,11 @@ export class HomePage implements OnInit {
 
   public billings: BillingDto = null;
 
+  public billingError = false;
+  public serverError = false;
+
+  public currentOrganization = '';
+
   slideOpts = {
     initialSlide: 0,
     slidesPerView: 2.15,
@@ -38,7 +46,7 @@ export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController, private srvService: ServersService,
               private billingService: BillingService, private menuCtrl: MenuController,
-              private statusBar: StatusBar, private storage: Storage) {
+              private storage: Storage, private accountProvider: AccountService) {
   }
 
   ngOnInit() {
@@ -48,25 +56,26 @@ export class HomePage implements OnInit {
     clearInterval(this.interval);
   }
 
-  ionViewDidLoad() {
-  }
-
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
+    this.isLoading = true;
+    StatusBar.setStyle({ style: StatusBarStyle.Dark });
     this.menuCtrl.enable(true);
     this.billingService.getXMonthsLastBilling(6).then(value => {
-      this.billings = value;
-      this.refresh().then(() => {
-        this.autoRefresh();
-        this.classAppear = 'card-appear';
-        this.statusBar.styleLightContent();
-        this.isLoading = false;
-      });
+      this.billings = value.invoices;
+    }).catch(() => {
+      this.billingError = true;
+    });
+    this.refresh().then(() => {
+      this.autoRefresh();
+      this.classAppear = 'card-appear';
+      this.isLoading = false;
     });
   }
 
-  private refresh(): Promise<any> {
-
+  private async refresh(): Promise<any> {
+    const userData = await this.accountProvider.getUserData();
+    const currentOrganization = await this.storage.get('currentOrganization');
+    this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganization);
     return new Promise((resolve, reject) => {
       this.storage.get('settings').then(result => {
         if (result) {
@@ -78,6 +87,8 @@ export class HomePage implements OnInit {
           resolve('ok');
         })
           .catch(error => {
+            this.isLoading = false;
+            this.serverError = true;
             reject(error);
           });
       });
@@ -207,16 +218,16 @@ export class HomePage implements OnInit {
     }
   }
 
-  public navigate(location: string, country?: string, serverId?: string) {
+  public async navigate(location: string, country?: string, serverId?: string) {
     switch (location) {
       case 'account' :
-        this.navCtrl.navigateForward(['/home/account']);
+        await this.navCtrl.navigateForward(['/home/account']);
         break;
       case 'instances' :
-        this.navCtrl.navigateForward(['/instances']);
+        await this.navCtrl.navigateForward(['/instances']);
         break;
       case 'instancesDetails' :
-        this.navCtrl.navigateForward(['/instances/' + country + '/' + serverId]);
+        await this.navCtrl.navigateForward(['/instances/' + country + '/' + serverId]);
       /*case 'contact' :
         fab.close();
         this.navCtrl.push(ContactPage);

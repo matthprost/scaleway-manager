@@ -1,5 +1,5 @@
 import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
-import {Chart} from 'chart.js';
+import {Chart} from 'chart.js/dist/Chart.bundle.js';
 import {BillingDto} from '../../services/billing/billing.dto';
 
 
@@ -11,6 +11,7 @@ import {BillingDto} from '../../services/billing/billing.dto';
 export class GraphComponent implements OnInit {
 
   @Input() billings: BillingDto;
+  @Input() currentOrganization = { name: '' };
 
   @ViewChild('billingCanvas') barCanvas: ElementRef;
   private barChart: Chart;
@@ -26,6 +27,10 @@ export class GraphComponent implements OnInit {
     const values = [];
     const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    if (!data) {
+      return [];
+    }
 
     data.forEach(result => {
       const parseResult = Number(result.billing_period.slice(-2));

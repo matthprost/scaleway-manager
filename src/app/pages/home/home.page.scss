@@ -248,3 +248,12 @@ ion-content {
   border-bottom: 1px solid lightgray;
   display: inline-block;
 }
+
+.no-server {
+  color: gray;
+  text-align: center;
+  padding: 1rem;
+  ion-icon {
+    font-size: 1.5rem;
+  }
+}

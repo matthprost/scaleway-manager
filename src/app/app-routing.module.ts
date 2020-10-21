@@ -42,14 +42,29 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './pages/instances/instances.module#InstancesPageModule'
+        loadChildren: './pages/products/instances/instances.module#InstancesPageModule'
       },
       {
         path: ':zone/:id',
-        loadChildren: './pages/instances/details/details.module#DetailsPageModule'
+        loadChildren: './pages/products/instances/details/details.module#DetailsPageModule'
       }
     ],
     canActivate: [HomeGuard]
+  },
+  {
+    path: 'bmaas',
+    children: [
+      {
+        path: '',
+        loadChildren: './pages/products/bmaas/bmaas.module#BmaasPageModule',
+        canActivate: [HomeGuard]
+      },
+      {
+        path: ':zone/:id',
+        loadChildren: './pages/products/bmaas/details/details.module#DetailsPageModule',
+        canActivate: [HomeGuard]
+      },
+    ]
   },
   {
     path: 'login',
@@ -67,57 +82,47 @@ const routes: Routes = [
     ]
   },
   {
-    path: 'error',
-    children: [
-      {
-        path: '504',
-        loadChildren: './pages/errors/no-internet/no-internet.module#NoInternetPageModule'
-      },
-      {
-        path: '400',
-        loadChildren: './pages/errors/bad-request/bad-request.module#BadRequestPageModule'
-      },
-      {
-        path: '404',
-        loadChildren: './pages/errors/not-found/not-found.module#NotFoundPageModule'
-      },
-    ],
-  },
-  {
     path: 'about',
-    loadChildren: './pages/about/about.module#AboutPageModule'
+    loadChildren: './pages/about/about.module#AboutPageModule',
+    canActivate: [HomeGuard]
   },
   {
     path: 'invoices',
-    loadChildren: './pages/invoices/invoices.module#InvoicesPageModule'
+    loadChildren: './pages/invoices/invoices.module#InvoicesPageModule',
+    canActivate: [HomeGuard]
   },
   {
     path: 'settings',
-    loadChildren: './pages/settings/settings.module#SettingsPageModule'
+    loadChildren: './pages/settings/settings.module#SettingsPageModule',
+    canActivate: [HomeGuard]
   },
-  { path: 'help', loadChildren: './pages/auth/login/help/help.module#HelpPageModule' },
-/*  {
-    path: 'buckets',
-    children: [
-      {
-        path: '',
-        loadChildren: './pages/buckets/buckets.module#ObjectsPageModule',
-      },
-      {
-        path: ':region/:bucket',
-        children: [
-          {
-            path: '',
-            loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
-          },
-          {
-            path: '**',
-            loadChildren: './pages/buckets/objects/objects.module#ObjectsPageModule'
-          }
-        ]
-      }
-    ],
-  },*/
+  {
+    path: 'help',
+    loadChildren: './pages/auth/login/help/help.module#HelpPageModule',
+    canActivate: [HomeGuard]
+  },
+  /*  {
+      path: 'buckets',
+      children: [
+        {
+          path: '',
+          loadChildren: './pages/products/buckets/buckets.module#ObjectsPageModule',
+        },
+        {
+          path: ':region/:bucket',
+          children: [
+            {
+              path: '',
+              loadChildren: './pages/products/buckets/objects/objects.module#ObjectsPageModule'
+            },
+            {
+              path: '**',
+              loadChildren: './pages/products/buckets/objects/objects.module#ObjectsPageModule'
+            }
+          ]
+        }
+      ],
+    },*/
 ];
 
 @NgModule({

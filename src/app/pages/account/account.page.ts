@@ -1,11 +1,14 @@
 import {Component, OnInit} from '@angular/core';
 import {UserDto} from '../../services/user/account/account.dto';
 import {faShieldAlt, faExclamationCircle} from '@fortawesome/free-solid-svg-icons';
-import {AlertController, NavController, ToastController} from '@ionic/angular';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {AlertController, ModalController, NavController} from '@ionic/angular';
 import {AccountService} from '../../services/user/account/account.service';
 import {Storage} from '@ionic/storage';
 import {AuthService} from '../../services/user/auth/auth.service';
+import {ChangeOrganizationPage} from './change-organization/change-organization.page';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-account',
@@ -18,25 +21,44 @@ export class AccountPage implements OnInit {
   public isLoading = true;
   public faShieldAlt = faShieldAlt;
   public danger = faExclamationCircle;
+  public currentOrganization;
 
-  constructor(public navCtrl: NavController, public statusBar: StatusBar, private accountProvider: AccountService,
+  constructor(public navCtrl: NavController, private accountProvider: AccountService,
               private storage: Storage, private authService: AuthService, private alertCtrl: AlertController,
-              private toastController: ToastController) {
-    this.statusBar.styleLightContent();
+              public modalController: ModalController) {
   }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleLightContent();
-    this.accountProvider.getUserData().then(userData => {
+    StatusBar.setStyle({style: StatusBarStyle.Dark});
+    this.refresh();
+  }
+
+  private refresh() {
+    this.accountProvider.getUserData().then(async userData => {
       this.user = userData;
+      const currentOrganization = await this.storage.get('currentOrganization');
+      this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganization);
       this.isLoading = false;
     })
       .catch(error => {
         console.log(error);
       });
+  }
+
+  public async presentModal() {
+    const modal = await this.modalController.create({
+      component: ChangeOrganizationPage,
+    });
+
+    await modal.present();
+
+    await modal.onDidDismiss().then(() => {
+      StatusBar.setStyle({style: StatusBarStyle.Dark});
+      this.refresh();
+    });
   }
 
   public async navigate(location: string) {
@@ -75,7 +97,6 @@ export class AccountPage implements OnInit {
             }
 
             await this.authService.logout();
-            await this.navCtrl.navigateRoot(['/login']);
           }
         }
       ]

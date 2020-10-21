@@ -1,0 +1,50 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="primary">Bare Metal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-loader *ngIf="isLoading"></app-loader>
+  <app-error *ngIf="serverError"></app-error>
+
+  <div *ngIf="!serverError && !isLoading">
+    <ion-list *ngIf="servers !== undefined && servers.length !== 0" mode="ios">
+      <ion-item-sliding *ngFor="let server of servers; let i = index;">
+        <ion-item (click)="navigateServerDetails(server, 'fr-par-2')" lines="none" detail="true" mode="ios"
+                  [ngClass]="(i % 2 == 0) ? 'background-white' : 'background-grey'">
+          <ion-note slot="start" mode="ios">
+            <div [class]='setClass(server)' [style.background]="setState(server)"></div>
+          </ion-note>
+          <ion-avatar slot="start">
+            <img class="img-os" alt="os"
+                 src="{{ server.image ? (server.image.name | serverIcon) : (server.name | serverIcon) }}">
+          </ion-avatar>
+          <ion-label mode="ios">
+            <h2>{{ server.name }}</h2>
+            <p>Created: {{ server.created_at | date:'dd/MM/yy' }}</p>
+          </ion-label>
+          <ion-note slot="end" mode="ios">
+            <img src="assets/img/france.svg"
+                 alt="country" style="vertical-align: middle">
+          </ion-note>
+        </ion-item>
+      </ion-item-sliding>
+    </ion-list>
+
+    <p class="no-server ion-margin-top ion-text-center"
+       *ngIf="!isLoading && servers.length === 0">
+      <img alt="no_server" src="../../../../assets/img/server.svg">
+      No server available
+    </p>
+  </div>
+
+</ion-content>

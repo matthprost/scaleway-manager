@@ -1,9 +1,10 @@
 import {Component} from '@angular/core';
 
 import {Platform} from '@ionic/angular';
-import {SplashScreen} from '@ionic-native/splash-screen/ngx';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar, SplashScreen} = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -23,12 +24,18 @@ export class AppComponent {
       icon: 'server',
       new: false,
     },
-/*    {
-      title: 'Object Storage',
-      url: '/buckets',
-      icon: 'database',
-      new: true,
-    },*/
+    /*    {
+          title: 'Bare Metal',
+          url: '/bmaas',
+          icon: 'hdd',
+          new: false,
+        },*/
+    /*    {
+          title: 'Object Storage',
+          url: '/buckets',
+          icon: 'database',
+          new: true,
+        },*/
     {
       title: 'Invoices',
       url: '/invoices',
@@ -52,20 +59,20 @@ export class AppComponent {
 
   constructor(
     private platform: Platform,
-    private splashScreen: SplashScreen,
-    private statusBar: StatusBar,
-    private screenOrientation: ScreenOrientation
+    private screenOrientation: ScreenOrientation,
   ) {
     this.initializeApp();
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
+      StatusBar.setStyle({style: StatusBarStyle.Light});
+
       if (this.platform.is('cordova')) {
         this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
       }
-      this.splashScreen.hide();
+
+      SplashScreen.hide();
     });
   }
 }

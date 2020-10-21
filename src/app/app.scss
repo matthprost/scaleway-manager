@@ -78,3 +78,22 @@ ion-header {
   width: 42px !important;
   height: 42px !important;
 }
+
+.no-server {
+  position: relative;
+  color: var(--ion-color-dark);
+  text-transform: uppercase;
+  font-weight: 600;
+  opacity: .7;
+  padding: 1rem;
+
+  img {
+    -webkit-filter: grayscale(100%); /* Safari 6.0 - 9.0 */
+    filter: grayscale(100%);
+    width: 50px;
+    display: block;
+    margin: 0 auto;
+    margin-bottom: 1.5rem;
+    opacity: .7;
+  }
+}

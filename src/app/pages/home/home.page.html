@@ -1,27 +1,28 @@
-<ion-header *ngIf="!isLoading" mode="ios">
+<ion-header mode="ios">
   <ion-toolbar mode="md">
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
     <ion-title color="light">Dashboard</ion-title>
     <ion-buttons slot="end">
-      <ion-button (click)="navigate('account')" class="ion-float-end" color="light" fill="clear">
+      <ion-button [routerDirection]="'forward'" [routerLink]="'/home/account'" class="ion-float-end" color="light" fill="clear">
         <ion-icon name="ios-contact" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="isLoading">
-  <app-loader></app-loader>
-</ion-content>
-
-<ion-content *ngIf="!isLoading">
+<ion-content>
   <div class="home-header">
     <div class="home-header-canvas">
-      <app-graph [billings]="this.billings"></app-graph>
+      <app-graph [billings]="this.billings" *ngIf="!isLoading && !billingError" [currentOrganization]="currentOrganization"></app-graph>
+      <app-error *ngIf="billingError" variant="light"></app-error>
     </div>
   </div>
+
+  <ion-content *ngIf="isLoading">
+    <app-loader></app-loader>
+  </ion-content>
 
   <div class="home-middle">
     <ion-card mode="ios">
@@ -42,12 +43,16 @@
     </ion-card>
   </div>
 
-  <div class="home-page" *ngIf="serversInstances && serversInstances.length > 0">
+  <app-error *ngIf="serverError">
+    <p>Test1234</p>
+  </app-error>
+
+  <div class="home-page">
     <ion-grid class="home-page-grid">
-      <div class="title-instances">
+      <div class="title-instances" *ngIf="!serverError">
         Last {{ instancesToDisplay }} Actives Instances
       </div>
-      <ion-row>
+      <ion-row  *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError">
         <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
           <ion-slide *ngFor="let serversInstance of serversInstances">
             <ion-card mode="ios" style="width:100%">
@@ -108,5 +113,9 @@
           </button>
         </ion-fab-list>
       </ion-fab>-->
+  </div>
+  <div class="no-server" *ngIf="!isLoading && serversInstances.length === 0 && !serverError">
+    <img alt="no_server" src="../../../../assets/img/server.svg">
+    No server available
   </div>
 </ion-content>

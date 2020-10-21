@@ -8,6 +8,7 @@ import { IonicModule } from '@ionic/angular';
 import { AccountPage } from './account.page';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ComponentsModule} from '../../components/components.module';
+import {ChangeOrganizationPage} from './change-organization/change-organization.page';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
     FontAwesomeModule,
     ComponentsModule
   ],
-  declarations: [AccountPage]
+  declarations: [AccountPage, ChangeOrganizationPage],
+  entryComponents: [ChangeOrganizationPage]
 })
 export class AccountPageModule {}

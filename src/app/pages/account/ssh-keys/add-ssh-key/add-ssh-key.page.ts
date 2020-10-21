@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ModalController, NavParams, ToastController} from '@ionic/angular';
 import {AccountService} from '../../../../services/user/account/account.service';
 import {SshKeysDto} from '../../../../services/user/account/account.dto';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-add-ssh-key',
@@ -19,6 +22,10 @@ export class AddSshKeyPage implements OnInit {
   }
 
   ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    StatusBar.setStyle({style: StatusBarStyle.Light});
   }
 
   public close() {

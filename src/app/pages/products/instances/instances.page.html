@@ -1,0 +1,29 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="md">
+    <ion-buttons slot="start">
+      <ion-menu-button color="primary"></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="primary">Instances</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <app-loader *ngIf="isLoading"></app-loader>
+  <app-error *ngIf="serverError"></app-error>
+
+  <div *ngIf="!serverError && !isLoading">
+    <app-list [dataList]="instances" [title]="'name'" [subTitle]="'commercial_type'" [hasState]="true"
+              [stateVariableName]="'state'" [route]="'instances'" [hasAvatar]="true" [avatarVariableName]="'image.name'"></app-list>
+
+    <p class="no-server ion-margin-top ion-text-center"
+       *ngIf="!isLoading && instances.length === 0">
+      <img alt="no_server" src="../../../../assets/img/server.svg">
+      No server available
+    </p>
+  </div>
+</ion-content>

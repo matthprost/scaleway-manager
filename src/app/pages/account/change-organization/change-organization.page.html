@@ -1,0 +1,31 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="close" mode="md"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary">
+      Change Organization
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-loader *ngIf="isLoading"></app-loader>
+  <div *ngIf="!isLoading">
+    <ion-list>
+      <ion-radio-group value="{{ currentOrganizationId }}" (ionChange)="change($event)">
+        <div *ngFor="let organization of organizations">
+          <ion-item *ngIf="organization.name !== null">
+            <ion-label>{{ organization.name }}</ion-label>
+            <ion-radio slot="start" value="{{ organization.id }}"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+</ion-content>

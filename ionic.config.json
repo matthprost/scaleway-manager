@@ -1,7 +1,8 @@
 {
   "name": "Scaleway-Manager",
   "integrations": {
-    "cordova": {}
+    "cordova": {},
+    "capacitor": {}
   },
   "type": "angular",
   "id": "82450576"

@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Scaleway Manager</string>
+    <string name="title_activity_main">Scaleway Manager</string>
+    <string name="package_name">com.matthiasprost.scalewaymanager</string>
+    <string name="custom_url_scheme">com.matthiasprost.scalewaymanager</string>
+</resources>

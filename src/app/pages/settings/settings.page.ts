@@ -2,7 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {AppVersion} from '@ionic-native/app-version/ngx';
 import {PickerController, Platform} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-settings',
@@ -19,7 +21,7 @@ export class SettingsPage implements OnInit {
   public instancesToDisplay = 6;
 
   constructor(private appVersion: AppVersion, private platform: Platform, private storage: Storage,
-              private pickerController: PickerController, private statusBar: StatusBar) {
+              private pickerController: PickerController) {
     if (this.platform.is('cordova')) {
       this.appVersion.getVersionNumber().then(versionNumber => {
         this.version = versionNumber;
@@ -31,6 +33,13 @@ export class SettingsPage implements OnInit {
         result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : this.instancesToDisplay = 6;
       }
     });
+  }
+
+  ngOnInit() {
+  }
+
+  ionViewDidEnter() {
+    StatusBar.setStyle({style: StatusBarStyle.Light});
   }
 
   private static getColumns(numColumns, numOptions, columnOptions) {
@@ -55,13 +64,6 @@ export class SettingsPage implements OnInit {
     }
 
     return options;
-  }
-
-  ionViewDidEnter() {
-    this.statusBar.styleDefault();
-  }
-
-  ngOnInit() {
   }
 
   async openPicker() {

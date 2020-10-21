@@ -1,7 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {StatusBar} from '@ionic-native/status-bar/ngx';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
 import {Platform} from '@ionic/angular';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-about',
@@ -10,15 +12,14 @@ import {Platform} from '@ionic/angular';
 })
 export class AboutPage implements OnInit {
 
-  constructor(private statusBar: StatusBar, private emailComposer: EmailComposer, private platform: Platform) {
-    this.statusBar.styleDefault();
+  constructor(private emailComposer: EmailComposer, private platform: Platform) {
   }
 
   ngOnInit() {
   }
 
   ionViewDidEnter() {
-    this.statusBar.styleDefault();
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
   }
 
   public async sendEmail() {

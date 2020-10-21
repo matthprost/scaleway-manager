@@ -1,0 +1,27 @@
+{
+  "appId": "com.matthiasprost.scalewaymanager",
+  "appName": "Scaleway Manager",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "plugins": {
+    "SplashScreen": {
+      "launchAutoHide": false
+    }
+  },
+  "cordova": {
+    "preferences": {
+      "ScrollEnabled": "false",
+      "android-minSdkVersion": "19",
+      "BackupWebStorage": "none",
+      "SplashMaintainAspectRatio": "true",
+      "FadeSplashScreenDuration": "300",
+      "SplashShowOnlyFirstTime": "false",
+      "SplashScreen": "screen",
+      "SplashScreenDelay": "3000",
+      "StatusBarOverlaysWebView": "true",
+      "ShowSplashScreenSpinner": "false",
+      "WKWebViewOnly": "true"
+    }
+  }
+}
