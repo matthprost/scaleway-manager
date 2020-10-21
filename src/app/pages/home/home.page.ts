@@ -228,6 +228,8 @@ export class HomePage implements OnInit {
         break;
       case 'instancesDetails' :
         await this.navCtrl.navigateForward(['/instances/' + country + '/' + serverId]);
+      case 'os' :
+        await this.navCtrl.navigateForward(['/buckets/']);
       /*case 'contact' :
         fab.close();
         this.navCtrl.push(ContactPage);

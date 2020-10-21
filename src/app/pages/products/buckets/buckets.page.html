@@ -28,7 +28,7 @@
     <ion-row class="align-items-center">
       <ion-col *ngFor="let bucket of buckets" size="6" style="margin: 0 auto">
         <ion-card (click)="accessToBucket(bucket.zone, bucket.Name[0])">
-          <fa-icon slot="start" [icon]="['fas', 'database']" [mask]="['fas', 'square-full']" [size]="'2x'"></fa-icon>
+          <fa-icon slot="start" [icon]="['fas', 'database']" [mask]="['fas', 'square-full']" [size]="'2x'" style="color: white"></fa-icon>
           <ion-card-header>
             <ion-card-title color="primary">{{bucket.Name[0]}}</ion-card-title>
           </ion-card-header>

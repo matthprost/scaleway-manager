@@ -34,7 +34,7 @@ export class ObjectService {
     }
   }
 
-  public async getAllObjects(bucketName: string, region: 'fr-par' | 'nl-ams', prefix?: string) {
+  public async getAllObjects(bucketName: string, region: string, prefix?: string) {
     try {
       return this.objectApi.get(region, bucketName, prefix ? '/?delimiter=/&marker=&prefix=' + prefix : '/?delimiter=/&marker=');
     } catch (e) {
@@ -42,15 +42,15 @@ export class ObjectService {
     }
   }
 
-  public async createBucket(region: 'fr-par' | 'nl-ams', name: string) {
+  public async createBucket(region: string, name: string) {
     return this.objectApi.put(region, name);
   }
 
-  public async deleteObject(bucketName: string, region: 'fr-par' | 'nl-ams', path: string) {
+  public async deleteObject(bucketName: string, region: string, path: string) {
     return this.objectApi.delete(region, bucketName, path);
   }
 
-  public async copyObject(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
+  public async copyObject(bucketName: string, region: string, path: string, fullPath: string) {
     return this.objectApi.put(
       region,
       bucketName,
@@ -59,7 +59,7 @@ export class ObjectService {
     );
   }
 
-  public async sendToGlacierS3(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
+  public async sendToGlacierS3(bucketName: string, region: string, path: string, fullPath: string) {
     return this.objectApi.put(
       region,
       bucketName,
@@ -68,7 +68,7 @@ export class ObjectService {
     );
   }
 
-  /*public async restore(bucketName: string, region: 'fr-par' | 'nl-ams', path: string, fullPath: string) {
+  /*public async restore(bucketName: string, region: string, path: string, fullPath: string) {
     return this.objectApi.post(
       region,
       bucketName,

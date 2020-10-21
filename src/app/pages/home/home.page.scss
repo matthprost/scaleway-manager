@@ -257,3 +257,25 @@ ion-content {
     font-size: 1.5rem;
   }
 }
+
+.slide-dark {
+  background: var(--ion-color-dark);
+  .card-header-stats {
+    background: var(--ion-color-dark-tint);
+    margin-bottom: 1rem;
+  }
+  > * {
+    color: white;
+  }
+  fa-icon {
+    color: white;
+  }
+  .title {
+    font-weight: 400;
+    margin: 1rem 0 .5rem 0;
+  }
+  .subtitle {
+    font-weight: 300;
+    margin: 1rem 0 1rem 0;
+  }
+}

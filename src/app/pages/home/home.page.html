@@ -1,5 +1,5 @@
 <ion-header mode="ios">
-  <ion-toolbar mode="md">
+  <ion-toolbar mode="md" #header>
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
@@ -12,7 +12,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content scrollEvents="true" appHideHeader [header]="header">
   <div class="home-header">
     <div class="home-header-canvas">
       <app-graph [billings]="this.billings" *ngIf="!isLoading && !billingError" [currentOrganization]="currentOrganization"></app-graph>
@@ -91,6 +91,28 @@
                 </ion-row>
               </ion-card-content>
 
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-row>
+
+      <div class="title-instances">
+        Object Storage
+      </div>
+      <ion-row>
+        <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
+          <ion-slide>
+            <ion-card mode="ios" style="width:100%" (click)="navigate('os')" class="slide-dark">
+              <ion-card-header class="card-header-stats ion-text-center" mode="ios">
+                Object Storage
+              </ion-card-header>
+              <ion-card-content class="card-stat2 ion-text-center" mode="ios">
+                <fa-icon slot="start" [icon]="['fas', 'database']" [size]="'2x'"></fa-icon>
+                <div class="subtitle">
+                  Access to your buckets and files
+                </div>
+                <fa-icon slot="start" [icon]="['fas', 'chevron-right']" [size]="'1x'"></fa-icon>
+              </ion-card-content>
             </ion-card>
           </ion-slide>
         </ion-slides>

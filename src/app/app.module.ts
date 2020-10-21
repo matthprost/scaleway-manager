@@ -27,7 +27,7 @@ import {EmailComposer} from '@ionic-native/email-composer/ngx';
     IonicStorageModule.forRoot(),
     AppRoutingModule,
     NativeHttpModule,
-    FontAwesomeModule
+    FontAwesomeModule,
   ],
   providers: [
     SplashScreen,

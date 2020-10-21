@@ -14,7 +14,7 @@ export class OptionsPage implements OnInit {
 
   public type: 'folder' | 'standard' | 'glacier' = null;
   public object: any = null;
-  public region: 'fr-par' | 'nl-ams' = null;
+  public region: string = null;
   public bucket: string = null;
   public fullPathWithoutBucket: string = null;
   public fullPathWithBucket: string = null;
