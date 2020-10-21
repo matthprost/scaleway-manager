@@ -3,10 +3,13 @@
     <div class="header-left">
       Organization: <span class="header-left-organization">{{ currentOrganization.name }}</span>
     </div>
-    <div *ngIf="values" class="header-right">Current
+    <div *ngIf="values && values.length > 0" class="header-right">Current
       <div class="header-right-amount">
-        {{ values[values.length - 1] || '0.00 ' + currency }}
+        {{ (values[values.length - 1] || '0.00 ') + currency }}
       </div>
+    </div>
+    <div *ngIf="!values || values.length === 0" class="header-right">
+      No data
     </div>
   </div>
 

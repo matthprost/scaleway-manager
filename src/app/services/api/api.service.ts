@@ -65,9 +65,6 @@ export class ApiService {
     } catch (e) {
       console.log(e);
 
-      const toast = await this.createToastError(e);
-      await toast.present();
-
       if (e && e.status && e.status === 401 && e.error.type === 'invalid_auth') {
         console.warn('ERROR 401: Token is be not valid anymore, trying to renew it.');
 
@@ -82,6 +79,8 @@ export class ApiService {
           throw e;
         }
       } else {
+        const toast = await this.createToastError(e);
+        await toast.present();
         throw e;
       }
     }

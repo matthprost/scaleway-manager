@@ -11,13 +11,13 @@ import {BillingDto} from '../../services/billing/billing.dto';
 export class GraphComponent implements OnInit {
 
   @Input() billings: BillingDto;
-  @Input() currentOrganization = { name: '' };
+  @Input() currentOrganization = {name: ''};
 
   @ViewChild('billingCanvas') barCanvas: ElementRef;
   private barChart: Chart;
   private dates;
   public values;
-  private currency;
+  public currency;
 
   constructor() {
   }
@@ -46,7 +46,7 @@ export class GraphComponent implements OnInit {
 
     this.values = values.reverse();
 
-    this.currency = data[0].currency;
+    this.currency = data[0] && data[0].currency || '';
   }
 
   ngOnInit() {
@@ -73,15 +73,15 @@ export class GraphComponent implements OnInit {
           backgroundColor: 'white',
           bodyFontColor: 'black',
           callbacks: {
-            label: function (tooltipItem, data) {
+            label: function(tooltipItem, data) {
               return tooltipItem.xLabel + ': ' + tooltipItem.yLabel;
             },
             // remove title
-            title: function (tooltipItem, data) {
+            title: function(tooltipItem, data) {
               return;
             },
           },
-          custom: function (tooltip) {
+          custom: function(tooltip) {
             if (!tooltip) {
               return;
             }

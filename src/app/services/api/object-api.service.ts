@@ -36,11 +36,12 @@ export class ObjectApiService {
       method: HttpMethods[method.toString()]
     };
 
-    // We get aws token in storage
+    // We get token in storage
     let awsToken = await this.storage.get('awsToken');
+    const currentOrganizationId = await this.storage.get('currentOrganization');
 
     // If aws token doesn't exist we create new and store it
-    if (!awsToken) {
+    if (!awsToken || awsToken.organization_id !== currentOrganizationId) {
       await this.storage.set('awsToken', await this.authService.addToken());
       awsToken = await this.storage.get('awsToken');
     }

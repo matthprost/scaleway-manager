@@ -72,22 +72,16 @@ export class AuthService {
     });
   }
 
-  public addToken(): Promise<TokenDto> {
-    return new Promise((resolve, reject) => {
-      this.accountService.getUserData().then(userData => {
-        this.api.post<TokenDto>(this.api.getAccountApiUrl() + '/tokens', {
-          email: userData.email,
-          expires: false,
-          description: 'ObjS_Scaleway_Manager'
-        })
-          .then(val => {
-            resolve(val);
-          })
-          .catch(error => {
-            reject(error);
-          });
+  public async addToken(): Promise<TokenDto> {
+    try {
+      const organizationId = await this.storage.get('currentOrganization');
+
+      return this.api.post<TokenDto>(`${this.api.getAccountApiUrl()}/projects/${organizationId}/tokens`, {
+        description: 'Scaleway_Manager'
       });
-    });
+    } catch (e) {
+      throw e;
+    }
   }
 
   public deleteToken(token: string): Promise<any> {
