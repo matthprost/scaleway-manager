@@ -5,7 +5,7 @@
               [ngClass]="(i % 2 == 0) ? 'background-white' : 'background-grey'">
       <ion-note slot="start" mode="ios" *ngIf="hasState">
         <div [class]='setClass(get(data, stateVariableName))'
-             [style.background]="setState(get(data, stateVariableName))"></div>
+             [style.background]="setState(get(data, stateVariableName))" class="state"></div>
       </ion-note>
       <ion-avatar slot="start" *ngIf="hasAvatar">
         <img class="img-os" alt="os"

@@ -34,8 +34,10 @@
           </ion-card-header>
           <ion-card-content>
             <div>
-              <img src="{{ bucket.zone | zoneFlag }}" class="ion-card-content-img" alt="Paris">
-              <span style="vertical-align: text-top; text-transform: uppercase">{{ bucket.zone }}</span>
+              <div class="bucket-zone">
+                <img src="{{ bucket.zone | zoneFlag }}" class="ion-card-content-img" alt="Paris">
+                {{ bucket.zone }}
+              </div>
             </div>
           </ion-card-content>
         </ion-card>

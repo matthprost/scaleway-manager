@@ -79,3 +79,10 @@ fa-icon ::ng-deep .fa-database {
   background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
   color: white;
 }
+
+.bucket-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+}

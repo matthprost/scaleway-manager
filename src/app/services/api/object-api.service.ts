@@ -59,7 +59,7 @@ export class ObjectApiService {
       // We check if access_token is still working
       await this.authService.getToken(awsToken.token.access_key);
     } catch (e) {
-      if (e.status === 404) {
+      if (e.status === 404 || e.status === 410) {
         setTimeout(async () => {
           await this.authService.deleteToken(awsToken.token.access_key);
           await this.storage.remove('awsToken');
