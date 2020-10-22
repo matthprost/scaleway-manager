@@ -1,7 +1,6 @@
 ion-toolbar {
-  --background: transparent;
+  --background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%) no-repeat;
   --ion-color-base: transparent !important;
-  backdrop-filter: blur(10px);
   position: absolute;
 }
 
@@ -52,7 +51,7 @@ ion-title {
 }
 
 .server-img {
-  height: 50px;
+  height: 35px;
   width: auto;
   margin: 0 auto;
 }
@@ -102,6 +101,7 @@ ion-title {
   color: dimgray;
   font-size: 1rem;
   margin-top: .25rem;
+  font-weight: 300;
 }
 
 .message {
@@ -278,5 +278,31 @@ ion-content {
   .subtitle {
     font-weight: 300;
     margin: 1rem 0 1rem 0;
+  }
+}
+
+.server-indicator-state {
+
+  &-text {
+    text-transform: capitalize;
+    display: inline-block;
+    font-weight: 300;
+    font-size: .9rem;
+  }
+}
+
+.server-zone {
+  padding-top: .5rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .8rem;
+  font-weight: 300;
+
+  img {
+    height: 10px;
+    width: auto;
+    margin-right: .5rem;
   }
 }
