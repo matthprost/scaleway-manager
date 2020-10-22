@@ -2,30 +2,33 @@
   <img src="https://github.com/F4OST/Scaleway-Manager/blob/master/resources/android/splash/drawable-land-hdpi-screen.png?raw=true" alt="logo"/>
 </p>
 
-# Scaleway-Manager
+# Scaleway Manager
 
-Scaleway-Manager is an IONIC application that allow you to start/stop your Scaleway servers.
-You can also see other informations about your servers and you invoices. 
+Scaleway Manager is an open source mobile application. The application is using [Scaleway API](https://developers.scaleway.com/en/) to allow you to access to your cloud resources.
 
-Scaleway-Manager use Scaleway API to get informations about your account and to start/stop your servers.
+The main idea is to be able to monitor and do actions on cloud resources directly trough your phone.
+
+We do not sell / use your data at any moment, we only make call to Scaleway API. If you're still worried about your security please enable double authentication on Scaleway.
 
 
 ### Download
-The application is available on Apple Store and Play Store for free!
+
+The application is available on Apple Store and Play Store **for free**!
 
 **Apple Store**: https://itunes.apple.com/us/app/scaleway-manager/id1415090286?mt=8
 
-**Play Store**: https://play.google.com/store/apps/details?id=com.matthiasprost.scalewaymanager
+**Google Play Store**: https://play.google.com/store/apps/details?id=com.matthiasprost.scalewaymanager
 
 ---
 
-### Developpement
-This part is only if you want to contribute to the project.
+### Development
 
 ##### Requirements
 
+- Node.js
+- npm
 - IONIC - `npm install -g ionic`
-- Cordova - `npm install -g cordova`
+- Capacitor - `npm install -g capacitor`
 
 ##### Installation
 
