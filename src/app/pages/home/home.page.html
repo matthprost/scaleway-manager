@@ -73,14 +73,13 @@
                   </ion-row>
                   <ion-row>
                     <ion-col>
-                      <div [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"
-                           class="server-indicator-state"></div>
-                      <div class="server-indicator-state-text">
-                        {{ serversInstance.state === 'stopped in place' ? 'Standby' : serversInstance.state }}
+                      <div class="server-state">
+                        <span [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"
+                             class="server-indicator-state"></span>
+                        <small class="small-card">
+                          {{ serversInstance.public_ip ? serversInstance.public_ip.address : ' - ' }}
+                        </small>
                       </div>
-                      <small class="small-card">
-                        {{ serversInstance.public_ip ? serversInstance.public_ip.address : ' - ' }}
-                      </small>
                       <div class="server-zone">
                         <img src="{{ serversInstance.country | zoneFlag }}" alt="country">
                         {{ serversInstance.country }}

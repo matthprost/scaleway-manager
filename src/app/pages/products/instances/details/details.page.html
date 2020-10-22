@@ -24,7 +24,7 @@
               <div class="server-name">
                 {{ serverName }}
                 <div class="server-state">
-                  <div [style.background]="state" [class]="stateClass"></div>
+                  <span [style.background]="state" [class]="stateClass"></span>
                   <span class="state-text vertical-align-content">{{ server.state }}</span>
                 </div>
               </div>
@@ -49,8 +49,8 @@
         </ion-label>
         <div class="information-content" slot="end">
           <div class="server-zone">
-            {{ server.zone }}
             <img src="{{ server.zone | zoneFlag }}" alt="zone">
+            {{ server.zone }}
           </div>
         </div>
       </ion-item>

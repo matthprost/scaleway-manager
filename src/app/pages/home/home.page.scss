@@ -100,7 +100,6 @@ ion-title {
   display: block;
   color: dimgray;
   font-size: 1rem;
-  margin-top: .25rem;
   font-weight: 300;
 }
 
@@ -309,4 +308,10 @@ ion-content {
     width: auto;
     margin-right: .5rem;
   }
+}
+
+.server-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
