@@ -43,6 +43,17 @@
     </ion-row>
     <ion-item-group>
       <ion-item-divider class="information-header" color="secondary">Basic Informations</ion-item-divider>
+      <ion-item>
+        <ion-label class="information-title">
+          Zone
+        </ion-label>
+        <div class="information-content" slot="end">
+          <div class="server-zone">
+            {{ server.zone }}
+            <img src="{{ server.zone | zoneFlag }}" alt="country">
+          </div>
+        </div>
+      </ion-item>
       <ion-item (click)="server.public_ip ? copyToClipBoard(server.public_ip.address) : null">
         <ion-label class="information-title">
           Public IP

@@ -65,7 +65,7 @@ export class ApiService {
     } catch (e) {
       console.log(e);
 
-      if (e && e.status && e.status === 401 && e.error.type === 'invalid_auth') {
+      if (e && e.status && e.status === 401 && (e.error.type === 'invalid_auth' || e.error.type === 'denied_authentication')) {
         console.warn('ERROR 401: Token is be not valid anymore, trying to renew it.');
 
         try {

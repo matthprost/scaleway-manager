@@ -79,6 +79,7 @@ ion-img {
 
     &-infos {
       margin: 0 auto;
+      margin-bottom: 1rem;
     }
   }
 
@@ -155,11 +156,25 @@ ion-img {
   border-radius: 50%;
   background: white;
   vertical-align: middle;
-  width: 85px;
-  height: 85px;
+  width: 60px;
+  height: 60px;
   display: inline-block;
+  margin: 0 1rem;
   img {
     height: 100%;
     width: auto;
+  }
+}
+
+.information-content {
+
+  .server-zone {
+    display: flex;
+    text-transform: uppercase;
+
+    img {
+      width: 20px;
+      margin-left: .5rem;
+    }
   }
 }
