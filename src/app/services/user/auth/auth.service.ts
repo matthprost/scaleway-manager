@@ -40,9 +40,7 @@ export class AuthService {
     console.log('LOGGING  OUT');
     const token = await this.storage.get('jwt');
     await this.api.delete<any>(this.api.getAccountApiUrl() + '/jwt/' + token.jwt.jti);
-    await this.storage.remove('jwt');
-    await this.storage.remove('user');
-    await this.storage.remove('currentOrganization');
+    await this.storage.clear();
     await this.navCtrl.navigateRoot(['/login']);
   }
 

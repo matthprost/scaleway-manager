@@ -88,14 +88,6 @@ export class AccountPage implements OnInit {
         }, {
           text: 'Yes',
           handler: async () => {
-            await this.storage.remove('settings');
-            const AWSToken = await this.storage.get('awsToken');
-
-            if (AWSToken) {
-              await this.authService.deleteToken(AWSToken.token.access_key);
-              await this.storage.remove('awsToken');
-            }
-
             await this.authService.logout();
           }
         }
