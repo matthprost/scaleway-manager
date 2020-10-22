@@ -22,7 +22,7 @@ ion-toolbar {
 }
 
 .background {
-  height: 37vh;
+  height: 30vh;
   width: 100%;
   background: var(--ion-color-primary);
   background: radial-gradient(#8800C8, var(--ion-color-primary));
@@ -40,12 +40,24 @@ ion-toolbar {
 
 .name {
   text-align: center;
-  margin-top: 1rem;
   margin-bottom: .5rem;
+
+  .fullname {
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin: 0 0 .25rem 0;
+  }
+
+  .email {
+    margin-bottom: .5rem;
+  }
 }
 
 .two-auth-enabled {
-  margin-right: .25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem 0;
 
   ion-chip {
     --background: var(--ion-color-secondary);
@@ -63,7 +75,10 @@ ion-toolbar {
 }
 
 .two-auth-disabled {
-  margin-right: .25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: .5rem 0;
 
   ion-chip {
     --background: var(--ion-color-danger);
@@ -81,7 +96,7 @@ ion-toolbar {
 }
 
 ion-card {
-  margin: 1rem 0 0 0;
+  margin: 0;
 
   &:hover {
     -webkit-box-shadow: 0 4px 16px rgba(0,0,0,.70);
@@ -104,8 +119,12 @@ ion-card-header {
 
 ion-card-content {
   background-color: white;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   color: var(--ion-color-dark);
+  min-height: 88px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .current-organization {
@@ -113,4 +132,8 @@ ion-card-content {
   &-text {
     padding-bottom: .5rem;
   }
+}
+
+.blue-header {
+  background: var(--ion-color-tertiary);
 }
