@@ -1,6 +1,7 @@
 ion-toolbar {
   --background: transparent;
   --ion-color-base: transparent !important;
+  backdrop-filter: blur(10px);
   position: absolute;
 }
 

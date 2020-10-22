@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ObjectService} from '../../../services/object/object.service';
 import {ModalController, NavController} from '@ionic/angular';
 import {AddBucketPage} from './add-bucket/add-bucket.page';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-objects',
@@ -27,6 +30,7 @@ export class BucketsPage implements OnInit {
   }
 
   async ionViewDidEnter() {
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
     /*if (!this.temp) {
       await this.refresh(false);
     }*/

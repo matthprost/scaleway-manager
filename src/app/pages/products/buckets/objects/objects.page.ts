@@ -3,6 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ObjectService} from '../../../../services/object/object.service';
 import {NavController, PopoverController} from '@ionic/angular';
 import {OptionsPage} from './options/options.page';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-objects',
@@ -40,6 +43,7 @@ export class ObjectsPage implements OnInit {
   }
 
   ionViewDidEnter() {
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
   }
 
   public doRefresh(refresher) {

@@ -8,7 +8,6 @@ import {HomePage} from './home.page';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ComponentsModule} from '../../components/components.module';
 import {PipesModule} from '../../pipes/pipes.module';
-import {HideHeaderModule} from '../../directives/hide-header/hide-header.module';
 
 @NgModule({
   imports: [
@@ -24,7 +23,6 @@ import {HideHeaderModule} from '../../directives/hide-header/hide-header.module'
     FontAwesomeModule,
     ComponentsModule,
     PipesModule,
-    HideHeaderModule,
   ],
   declarations: [HomePage],
 })
