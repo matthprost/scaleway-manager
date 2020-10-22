@@ -64,25 +64,34 @@ ion-card {
   }
 }
 
-ion-card-title {
-  background: var(--ion-color-primary);
-  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-fa-icon ::ng-deep .fa-database {
-  font-size: 2.25rem;
-  margin-top: 1.25rem;
-  border: none;
-  background: var(--ion-color-primary);
-  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
-  color: white;
-}
-
 .bucket-zone {
   display: flex;
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
+  margin-top: .75rem;
+  img {
+    margin-right: .5rem;
+  }
+}
+
+.card-header {
+  background: var(--ion-color-primary);
+  padding: 10px;
+  text-transform: uppercase;
+  font-weight: 400;
+  font-size: .85rem;
+  color: white;
+}
+
+ion-card-content {
+  padding-bottom: 1rem;
+  padding-top: 1rem;
+  fa-icon {
+    color: var(--ion-color-medium-shade);
+    background: var(--ion-color-lighter);
+    display: inline-block;
+    border-radius: 1000px;
+    padding: 15px 17px;
+  }
 }

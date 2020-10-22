@@ -1,5 +1,5 @@
 ion-toolbar {
-  --background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%) no-repeat;
+  --background: transparent;
   --ion-color-base: transparent !important;
   position: absolute;
 }
@@ -259,7 +259,7 @@ ion-content {
   }
 }
 
-.slide-dark {
+.dark-card {
   background: var(--ion-color-dark);
   .card-header-stats {
     background: var(--ion-color-dark-tint);

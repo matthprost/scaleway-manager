@@ -35,17 +35,30 @@
   }
 
   &-content {
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
     ion-button {
       width: 8rem;
       margin: .5rem 0;
       font-size: .9rem;
       --border-radius: 6px;
     }
+
+    img {
+      width: 20px;
+      margin-right: .5rem;
+    }
   }
 }
 
-fa-icon ::ng-deep .fa-file-alt {
-  background: var(--ion-color-primary);
-  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
-  color: white;
+fa-icon {
+  color: var(--ion-color-primary-tint);
+}
+
+.icon-snow {
+  color: var(--ion-color-tertiary);
+  margin-right: .5rem;
 }

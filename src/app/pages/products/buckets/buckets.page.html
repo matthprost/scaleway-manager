@@ -28,14 +28,14 @@
     <ion-row class="align-items-center">
       <ion-col *ngFor="let bucket of buckets" size="6" style="margin: 0 auto">
         <ion-card (click)="accessToBucket(bucket.zone, bucket.Name[0])">
-          <fa-icon slot="start" [icon]="['fas', 'database']" [mask]="['fas', 'square-full']" [size]="'2x'" style="color: white"></fa-icon>
-          <ion-card-header>
-            <ion-card-title color="primary">{{bucket.Name[0]}}</ion-card-title>
+          <ion-card-header class="card-header">
+            {{bucket.Name[0]}}
           </ion-card-header>
           <ion-card-content>
-            <div>
+            <div class="bucket-content">
+              <fa-icon slot="start" [icon]="['fas', 'database']" [size]="'2x'"></fa-icon>
               <div class="bucket-zone">
-                <img src="{{ bucket.zone | zoneFlag }}" class="ion-card-content-img" alt="Paris">
+                <img src="{{ bucket.zone | zoneFlag }}" class="ion-card-content-img" alt="zone">
                 {{ bucket.zone }}
               </div>
             </div>
@@ -55,6 +55,6 @@
        *ngIf="!isLoading && error">
     <p style="margin: 1rem 0 0 0">An error occurred</p>
     <small>Please refresh</small><br/>
-    <ion-button color="secondary" (click)="refresh()" style="margin-top: 1rem;">Refresh</ion-button>
+    <ion-button color="secondary" (click)="refresh(true)" style="margin-top: 1rem;">Refresh</ion-button>
   </div>
 </ion-content>

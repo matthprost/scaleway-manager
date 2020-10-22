@@ -5,6 +5,7 @@
         <ion-icon name="close" mode="md"></ion-icon>
       </ion-button>
     </ion-buttons>
+    <ion-title color="primary">Object information</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -13,7 +14,7 @@
     <ion-row>
       <ion-col>
         <div class="file-header">
-          <fa-icon slot="start" [icon]="['fas', 'file-alt']" [mask]="['fas', 'square-full']" size="3x"></fa-icon>
+          <fa-icon slot="start" [icon]="['fas', 'file-alt']" size="3x"></fa-icon>
         </div>
         <div class="file-header-title">
           {{ object.Key[0] }}
@@ -27,7 +28,8 @@
         Region
       </ion-label>
       <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
-        {{ region === 'fr-par' ? 'Paris' : 'Amsterdam' }}
+        <img src="{{ region | zoneFlag }}" class="ion-card-content-img" alt="zone">
+        {{ region }}
       </div>
     </ion-item>
     <ion-item>
@@ -51,6 +53,7 @@
         Storage Class
       </ion-label>
       <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
+        <fa-icon *ngIf="object.StorageClass[0] === 'GLACIER'" [icon]="['fas', 'snowflake']" class="icon-snow"></fa-icon>
         {{ object.StorageClass[0] }}
       </div>
     </ion-item>
