@@ -109,11 +109,14 @@
         <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
           <ion-slide>
             <ion-card mode="ios" style="width:100%" (click)="navigate('os')" class="dark-card">
-              <ion-card-header class="card-header-stats ion-text-center" mode="ios">
+              <ion-card-header class="card-header-stats ion-text-center" mode="ios" style="margin-bottom: .25rem">
                 Object Storage
               </ion-card-header>
               <ion-card-content class="card-stat2 ion-text-center" mode="ios">
                 <fa-icon slot="start" [icon]="['fas', 'database']" [size]="'2x'"></fa-icon>
+                <div class="badge">
+                  <ion-badge color="danger" mode="ios">New</ion-badge>
+                </div>
                 <div class="subtitle">
                   Access to your buckets and files
                 </div>
