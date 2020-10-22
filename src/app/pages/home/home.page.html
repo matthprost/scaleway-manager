@@ -50,10 +50,10 @@
 
   <div class="home-page">
     <ion-grid class="home-page-grid">
-      <div class="title-instances" *ngIf="!serverError">
-        Last {{ instancesToDisplay }} Actives Instances
-      </div>
       <ion-row *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError">
+        <div class="title-instances">
+          Last {{ instancesToDisplay }} Actives Instances
+        </div>
         <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
           <ion-slide *ngFor="let serversInstance of serversInstances">
             <ion-card mode="ios" style="width:100%">
@@ -102,10 +102,10 @@
         </ion-slides>
       </ion-row>
 
-      <div class="title-instances">
-        Object Storage
-      </div>
       <ion-row>
+        <div class="title-instances">
+          Object Storage
+        </div>
         <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
           <ion-slide>
             <ion-card mode="ios" style="width:100%" (click)="navigate('os')" class="dark-card">
@@ -127,26 +127,5 @@
         </ion-slides>
       </ion-row>
     </ion-grid>
-
-    <!--  <ion-fab right bottom #fab>
-        <button ion-fab color="primary">
-          <ion-icon name="help-buoy"></ion-icon>
-        </button>
-        <ion-fab-list side="left">
-          <button ion-fab color="grey">
-            <ion-icon name="bug"></ion-icon>
-          </button>
-          <button ion-fab color="grey">
-            <ion-icon name="mail"></ion-icon>
-          </button>
-          <button ion-fab color="grey">
-            <ion-icon name="globe"></ion-icon>
-          </button>
-        </ion-fab-list>
-      </ion-fab>-->
-  </div>
-  <div class="no-server" *ngIf="!isLoading && serversInstances.length === 0 && !serverError">
-    <img alt="no_server" src="../../../../assets/img/server.svg">
-    No server available
   </div>
 </ion-content>

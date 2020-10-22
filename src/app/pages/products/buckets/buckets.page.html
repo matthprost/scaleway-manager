@@ -26,7 +26,7 @@
 
   <ion-grid>
     <ion-row class="align-items-center">
-      <ion-col *ngFor="let bucket of buckets" size="6" style="margin: 0 auto">
+      <ion-col *ngFor="let bucket of buckets" size="6">
         <ion-card (click)="accessToBucket(bucket.zone, bucket.Name[0])">
           <ion-card-header class="card-header">
             {{bucket.Name[0]}}

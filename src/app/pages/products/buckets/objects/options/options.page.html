@@ -6,14 +6,16 @@
 
 <ion-list mode="ios" style="margin: 0" *ngIf="type === 'standard'">
   <ion-item button lines="none" detail="false" (click)="fileInfos()">More info</ion-item>
+<!--
   <ion-item button lines="full" detail="false" (click)="download()">Download</ion-item>
+-->
   <ion-item button lines="full" detail="false" (click)="sendToGlacier()">Send to S3 Glacier</ion-item>
   <ion-item button lines="none" detail="false" (click)="editName()">Edit name</ion-item>
   <ion-item button lines="none" style="color: var(--ion-color-danger)" detail="false" (click)="deleteObject()">Delete</ion-item>
 </ion-list>
 
 <ion-list mode="ios" style="margin: 0" *ngIf="type === 'glacier'">
-  <ion-item button lines="none" detail="false" (click)="fileInfos()">More info</ion-item>
+  <ion-item button lines="full" detail="false" (click)="fileInfos()">More info</ion-item>
   <!--<ion-item button lines="full" detail="false" disabled="true" (click)="download()">Download</ion-item>-->
 <!--
   <ion-item button lines="full" detail="false" (click)="restore()">Restore</ion-item>

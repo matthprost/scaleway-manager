@@ -44,7 +44,7 @@ export class InvoicesPage implements OnInit {
 
   private refresh(): Promise<any> {
     return new Promise((resolve, reject) => {
-        this.billingService.getBilling(10).then(result => {
+        this.billingService.getBilling(12).then(result => {
           this.invoices = result.invoices;
           this.invoices = this.invoices.slice(1, this.invoices.length);
           this.currentInvoice = result.invoices[0];

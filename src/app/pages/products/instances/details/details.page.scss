@@ -152,12 +152,12 @@ ion-img {
 }
 
 .is-round {
-  padding: .5rem;
+  padding: 1rem;
   border-radius: 50%;
   background: white;
   vertical-align: middle;
-  width: 60px;
-  height: 60px;
+  width: 75px;
+  height: 75px;
   display: inline-block;
   margin: 0 1rem;
   img {
@@ -170,6 +170,8 @@ ion-img {
 
   .server-zone {
     display: flex;
+    align-items: center;
+    justify-content: center;
     text-transform: uppercase;
 
     img {
