@@ -101,6 +101,7 @@ ion-title {
   color: dimgray;
   font-size: 1rem;
   font-weight: 300;
+  margin-left: .5rem;
 }
 
 .message {
@@ -314,4 +315,8 @@ ion-content {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.state {
+  margin: 0;
 }

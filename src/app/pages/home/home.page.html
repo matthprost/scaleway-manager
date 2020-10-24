@@ -77,7 +77,7 @@
                         <span [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"
                              class="server-indicator-state"></span>
                         <small class="small-card">
-                          {{ serversInstance.public_ip ? serversInstance.public_ip.address : ' - ' }}
+                          {{ serversInstance.public_ip ? serversInstance.public_ip.address : '' }}
                         </small>
                       </div>
                       <div class="server-zone">
