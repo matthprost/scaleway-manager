@@ -48,7 +48,12 @@
       </div>
       <div class="current-organization">
         <div class="current-organization-text">
-          Current organization: <b>{{ currentOrganization.name }}</b>
+          Organization:
+          <ion-chip color="tertiary">
+            <ion-label color="tertiary">
+              {{ currentOrganization.name }}
+            </ion-label>
+          </ion-chip>
         </div>
       </div>
     </div>
