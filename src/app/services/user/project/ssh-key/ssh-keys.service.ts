@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ApiService} from '../../../api/api.service';
 import {ProjectService} from '../project.service';
-import {SshKeysDto} from './ssh-key.dto';
+import {SshKeysDto} from './ssh-keys.dto';
 
 @Injectable({
   providedIn: 'root'

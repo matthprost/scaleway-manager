@@ -36,7 +36,17 @@ export class ProjectService {
     }
 
     const projects = await this.getProjects(organizationId);
-    const currentProject = projects.find(project => project.id === organizationId);
+    let currentProject = projects.find(project => project.id === organizationId);
+    if (!currentProject) {
+      currentProject = {
+        id: organizationId,
+        name: 'default',
+        organization_id: organizationId,
+        created_at: '',
+        description: '',
+        updated_at: ''
+      };
+    }
     await this.setCurrentProject(currentProject);
   }
 

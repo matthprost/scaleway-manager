@@ -16,7 +16,7 @@ export class ChangeOrganizationPage implements OnInit {
 
   public isLoading = true;
   public organizations = [];
-  public currentOrganizationId;
+  public currentOrganizationId = null;
 
   constructor(private modalCtrl: ModalController, private storage: Storage, private accountService: AccountService,
               private projectService: ProjectService) {

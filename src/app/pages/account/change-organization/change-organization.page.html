@@ -8,7 +8,7 @@
     <ion-title color="primary">
       Change Organization
     </ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="currentOrganizationId">
       <ion-button (click)="save()">Save</ion-button>
     </ion-buttons>
   </ion-toolbar>

@@ -8,7 +8,7 @@
     <ion-title color="primary">
       Change Project
     </ion-title>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" *ngIf="currentProjectId">
       <ion-button (click)="save()">Save</ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -27,5 +27,10 @@
         </div>
       </ion-radio-group>
     </ion-list>
+  </div>
+
+  <div class="not-found" *ngIf="!isLoading && projects && projects.length === 0">
+    <p>Oops!</p>
+    <p>Seems like you have no permissions for projects on this organization.</p>
   </div>
 </ion-content>

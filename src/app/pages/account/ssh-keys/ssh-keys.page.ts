@@ -4,7 +4,7 @@ import {Clipboard} from '@ionic-native/clipboard/ngx';
 import {AddSshKeyPage} from './add-ssh-key/add-ssh-key.page';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
 import {SshKeysService} from '../../../services/user/project/ssh-key/ssh-keys.service';
-import {SshKeyDto} from '../../../services/user/project/ssh-key/ssh-key.dto';
+import {SshKeysDto} from '../../../services/user/project/ssh-key/ssh-keys.dto';
 
 const {StatusBar} = Plugins;
 
@@ -16,7 +16,7 @@ const {StatusBar} = Plugins;
 export class SshKeysPage implements OnInit {
 
   public isLoading = true;
-  public sshKeys: Array<SshKeyDto> = [];
+  public sshKeys: Array<SshKeysDto> = [];
 
   constructor(public navCtrl: NavController, private clipboard: Clipboard, private toastCtrl: ToastController,
               public modalController: ModalController, private loadingCtrl: LoadingController,
@@ -49,7 +49,7 @@ export class SshKeysPage implements OnInit {
     this.sshKeys = await this.sshKeyService.getSShKeys();
   }
 
-  public split(sshKey: SshKeyDto): string {
+  public split(sshKey: SshKeysDto): string {
     const splitted = sshKey.fingerprint.split(' ', 5);
 
     return (splitted[3] + ' ' + splitted[4]);

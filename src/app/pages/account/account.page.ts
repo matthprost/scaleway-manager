@@ -49,6 +49,7 @@ export class AccountPage implements OnInit {
     })
       .catch(error => {
         console.log(error);
+        this.isLoading = false;
       });
   }
 

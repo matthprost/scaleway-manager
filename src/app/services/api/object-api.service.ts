@@ -4,7 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {Storage} from '@ionic/storage';
 import {AuthService} from '../user/auth/auth.service';
 import * as xml2js from '../../../../node_modules/xml2js';
-import {AlertController, Platform, ToastController} from '@ionic/angular';
+import {Platform, ToastController} from '@ionic/angular';
+import {TokensService} from '../user/project/tokens/tokens.service';
 
 enum HttpMethods {
   GET,
@@ -22,12 +23,12 @@ enum HttpMethods {
 export class ObjectApiService {
 
   constructor(private httpClient: HttpClient, private storage: Storage, private authService: AuthService,
-              private toastController: ToastController, private platform: Platform, private alertCtrl: AlertController) {
+              private toastController: ToastController, private platform: Platform, private tokensService: TokensService) {
   }
 
   private async renewToken() {
     console.warn('RENEWING TOKEN FOR S3');
-    const newToken = await this.authService.addToken();
+    const newToken = await this.tokensService.addToken();
     await this.storage.set('awsToken', newToken);
 
     return newToken;
@@ -57,11 +58,11 @@ export class ObjectApiService {
 
     try {
       // We check if access_token is still working
-      await this.authService.getToken(awsToken.token.access_key);
+      await this.tokensService.getToken(awsToken.token.access_key);
     } catch (e) {
       if (e.status === 404 || e.status === 410) {
         setTimeout(async () => {
-          await this.authService.deleteToken(awsToken.token.access_key);
+          await this.tokensService.deleteToken(awsToken.token.access_key);
           await this.storage.remove('awsToken');
         }, 3000);
         awsToken = await this.renewToken();

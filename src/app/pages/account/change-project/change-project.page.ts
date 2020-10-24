@@ -15,7 +15,7 @@ export class ChangeProjectPage implements OnInit {
 
   public isLoading = true;
   public projects = [];
-  public currentProjectId;
+  public currentProjectId = null;
 
   constructor(private modalCtrl: ModalController, private storage: Storage, private projectService: ProjectService) {
   }

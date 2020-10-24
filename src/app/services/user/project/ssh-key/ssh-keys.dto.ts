@@ -1,8 +1,8 @@
 export interface SshKeysDto {
-  ssh_keys: Array<SshKeyDto>;
+  ssh_keys: Array<SshKeysDto>;
 }
 
-export interface SshKeyDto {
+export interface SshKeysDto {
   created_at: string;
   creation_info: {
     address: string,
