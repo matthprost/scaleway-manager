@@ -34,7 +34,7 @@ export class ApiService {
     mode: 'ios',
     color: 'danger',
     showCloseButton: true
-  });
+  })
 
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
               private platform: Platform, private toastCtrl: ToastController) {
