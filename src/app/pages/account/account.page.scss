@@ -132,6 +132,10 @@ ion-card-content {
   &-text {
     padding-bottom: .5rem;
   }
+  fa-icon {
+    color: var(--ion-color-light-shade);
+    padding: 0 .5rem;
+  }
 }
 
 .blue-header {

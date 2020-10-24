@@ -28,4 +28,14 @@ export class ProjectService {
   public getCurrentProject(): Promise<ProjectDto> {
     return this.storage.get('currentProject');
   }
+
+  public async setDefaultProject(organizationId?: string) {
+    if (!organizationId) {
+      organizationId = await this.storage.get('currentOrganization');
+    }
+
+    const projects = await this.getProjects(organizationId);
+    const currentProject = projects.find(project => project.id === organizationId);
+    await this.setCurrentProject(currentProject);
+  }
 }
