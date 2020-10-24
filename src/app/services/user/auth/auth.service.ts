@@ -34,7 +34,7 @@ export class AuthService {
 
       const projects = await this.projectService.getProjects(currentOrganization.id);
       const currentProject = projects.find(project => project.id === currentOrganization.id);
-      await this.storage.set('currentProject', currentProject);
+      await this.projectService.setCurrentProject(currentProject);
     } catch (e) {
       throw e;
     }

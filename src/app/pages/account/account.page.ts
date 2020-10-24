@@ -7,6 +7,7 @@ import {Storage} from '@ionic/storage';
 import {AuthService} from '../../services/user/auth/auth.service';
 import {ChangeOrganizationPage} from './change-organization/change-organization.page';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
+import {ProjectService} from '../../services/user/project/project.service';
 
 const {StatusBar} = Plugins;
 
@@ -22,10 +23,11 @@ export class AccountPage implements OnInit {
   public faShieldAlt = faShieldAlt;
   public danger = faExclamationCircle;
   public currentOrganization;
+  public currentProject;
 
   constructor(public navCtrl: NavController, private accountProvider: AccountService,
               private storage: Storage, private authService: AuthService, private alertCtrl: AlertController,
-              public modalController: ModalController) {
+              public modalController: ModalController, private projectService: ProjectService) {
   }
 
   ngOnInit() {
@@ -41,6 +43,7 @@ export class AccountPage implements OnInit {
       this.user = userData;
       const currentOrganization = await this.storage.get('currentOrganization');
       this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganization);
+      this.currentProject = await this.projectService.getCurrentProject();
       this.isLoading = false;
     })
       .catch(error => {
