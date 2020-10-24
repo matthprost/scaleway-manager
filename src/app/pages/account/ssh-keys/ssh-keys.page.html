@@ -31,7 +31,7 @@
               {{ sshKey.fingerprint }}
             </div>
             <div class="description-left">
-              {{ sshKey.description }}
+              {{ sshKey.name }}
             </div>
             <div class="description-right">
               {{ split(sshKey) }}
@@ -39,7 +39,7 @@
           </ion-label>
         </ion-item>
         <ion-item-options>
-          <ion-item-option expandable="true" color="danger" (click)="deleteSshKey(sshKey, item)">
+          <ion-item-option expandable="true" color="danger" (click)="deleteSshKey(sshKey.id, item)">
             DELETE
           </ion-item-option>
         </ion-item-options>
@@ -55,6 +55,6 @@
 
   <div class="no-ssh-keys" *ngIf="!isLoading && sshKeys.length === 0">
     <ion-icon name="ios-key"></ion-icon>
-    <p>No SSH Key registered on your account</p>
+    <p>No SSH Key registered on your project</p>
   </div>
 </ion-content>

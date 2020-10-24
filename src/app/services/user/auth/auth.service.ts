@@ -18,9 +18,9 @@ export class AuthService {
   public async login(email: string, password: string, code?: string): Promise<any> {
     try {
       const result = await this.api.post<any>(this.api.getAccountApiUrl() + '/jwt', {
-        'email': email,
-        'password': password,
-        'renewable': true,
+        email,
+        password,
+        renewable: true,
         '2FA_token': String(code),
       });
 
@@ -47,29 +47,19 @@ export class AuthService {
   }
 
   public getToken(token: string): Promise<AuthTokenDto> {
-
-    return new Promise((resolve, reject) => {
-      this.api.get<AuthTokenDto>(this.api.getAccountApiUrl() + '/tokens/' + token)
-        .then(result => {
-          resolve(result);
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+    try {
+      return this.api.get<AuthTokenDto>(this.api.getAccountApiUrl() + '/tokens/' + token);
+    } catch (e) {
+      throw e;
+    }
   }
 
   public getAllTokens(): Promise<{ 'tokens': Array<TokenDto> }> {
-
-    return new Promise((resolve, reject) => {
-      this.api.get<{ 'tokens': Array<TokenDto> }>(this.api.getAccountApiUrl() + '/tokens?valid_forever=&sort=-creation_date')
-        .then(val => {
-          resolve(val);
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+    try {
+      return this.api.get<{ 'tokens': Array<TokenDto> }>(this.api.getAccountApiUrl() + '/tokens?valid_forever=&sort=-creation_date');
+    } catch (e) {
+      throw e;
+    }
   }
 
   public async addToken(): Promise<TokenDto> {
@@ -85,13 +75,10 @@ export class AuthService {
   }
 
   public deleteToken(token: string): Promise<any> {
-
-    return new Promise((resolve, reject) => {
-      this.api.delete(this.api.getAccountApiUrl() + '/tokens/' + token).then(() => {
-        resolve('ok');
-      }).catch(error => {
-        reject(error);
-      });
-    });
+    try {
+      return this.api.delete(this.api.getAccountApiUrl() + '/tokens/' + token);
+    } catch (e) {
+      throw e;
+    }
   }
 }

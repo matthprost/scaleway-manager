@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {IonItemSliding, LoadingController, ModalController, NavController, ToastController} from '@ionic/angular';
-import {AccountService} from '../../../services/user/account/account.service';
-import {SshKeysDto} from '../../../services/user/account/account.dto';
 import {Clipboard} from '@ionic-native/clipboard/ngx';
 import {AddSshKeyPage} from './add-ssh-key/add-ssh-key.page';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
+import {SshKeysService} from '../../../services/user/project/ssh-key/ssh-keys.service';
+import {SshKeyDto} from '../../../services/user/project/ssh-key/ssh-key.dto';
 
 const {StatusBar} = Plugins;
 
@@ -16,11 +16,11 @@ const {StatusBar} = Plugins;
 export class SshKeysPage implements OnInit {
 
   public isLoading = true;
-  public sshKeys: Array<SshKeysDto> = [];
+  public sshKeys: Array<SshKeyDto> = [];
 
-  constructor(public navCtrl: NavController, private accountProvider: AccountService,
-              private clipboard: Clipboard, private toastCtrl: ToastController,
-              public modalController: ModalController, private loadingCtrl: LoadingController) {
+  constructor(public navCtrl: NavController, private clipboard: Clipboard, private toastCtrl: ToastController,
+              public modalController: ModalController, private loadingCtrl: LoadingController,
+              private sshKeyService: SshKeysService) {
   }
 
   ngOnInit(): void {
@@ -46,10 +46,10 @@ export class SshKeysPage implements OnInit {
   }
 
   private async refresh() {
-    this.sshKeys = (await this.accountProvider.getUserData()).ssh_public_keys;
+    this.sshKeys = await this.sshKeyService.getSShKeys();
   }
 
-  public split(sshKey: SshKeysDto): string {
+  public split(sshKey: SshKeyDto): string {
     const splitted = sshKey.fingerprint.split(' ', 5);
 
     return (splitted[3] + ' ' + splitted[4]);
@@ -68,7 +68,7 @@ export class SshKeysPage implements OnInit {
     await toast.present();
   }
 
-  public async deleteSshKey(SshKey: SshKeysDto, slidingItem: IonItemSliding) {
+  public async deleteSshKey(sshKeyId: string, slidingItem: IonItemSliding) {
     await slidingItem.close();
     const loading = await this.loadingCtrl.create({
       message: 'Loading...',
@@ -77,21 +77,9 @@ export class SshKeysPage implements OnInit {
 
     await loading.present();
 
-    const finalSshKeysArray: Array<{ 'key': string }> = [];
-    for (const sshKey of this.sshKeys) {
-      if (sshKey !== SshKey) {
-        finalSshKeysArray.push({key: sshKey.key});
-      }
-    }
-
-    this.accountProvider.patchSshKeys(finalSshKeysArray).then(result => {
-      this.sshKeys = result.ssh_public_keys;
-      loading.dismiss();
-    })
-      .catch(error => {
-        loading.dismiss();
-        console.log(error);
-      });
+    await this.sshKeyService.deleteSShKey(sshKeyId);
+    await loading.dismiss();
+    await this.refresh();
   }
 
   async addSshKey(event) {

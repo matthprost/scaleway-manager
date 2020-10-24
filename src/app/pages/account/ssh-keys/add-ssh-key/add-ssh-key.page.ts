@@ -1,8 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ModalController, NavParams, ToastController} from '@ionic/angular';
-import {AccountService} from '../../../../services/user/account/account.service';
-import {SshKeysDto} from '../../../../services/user/account/account.dto';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
+import {SshKeysService} from '../../../../services/user/project/ssh-key/ssh-keys.service';
 
 const {StatusBar} = Plugins;
 
@@ -13,11 +12,11 @@ const {StatusBar} = Plugins;
 })
 export class AddSshKeyPage implements OnInit {
 
-  private readonly keys: Array<SshKeysDto> = [];
+  private readonly keys: string;
   public key = null;
 
-  constructor(private modalCtrl: ModalController, private accountProvider: AccountService, private toastController: ToastController,
-              private navParams: NavParams) {
+  constructor(private modalCtrl: ModalController, private toastController: ToastController,
+              private navParams: NavParams, private sshKeyService: SshKeysService) {
     this.keys = navParams.get('keys');
   }
 
@@ -35,17 +34,7 @@ export class AddSshKeyPage implements OnInit {
   }
 
   public addSshKey() {
-    const finalSshKeysArray: Array<{ 'key': string }> = [];
-
-    for (const value of this.keys) {
-      finalSshKeysArray.push({key: value.key});
-    }
-    finalSshKeysArray.push({key: this.key});
-
-    this.accountProvider.patchSshKeys(finalSshKeysArray).then(result => {
-      this.close();
-    })
-      .catch(async error => {
+    this.sshKeyService.addSShKey(this.key).then(() => this.close()).catch(async error => {
         console.log(error);
         if (error.status === 400) {
           const toast = await this.toastController.create({
