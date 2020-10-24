@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {ApiService} from '../../api/api.service';
 import {Storage} from '@ionic/storage';
 import {ProjectDto, ProjectsDto} from './project.dto';
-import {TokenDto} from '../auth/auth-tokens.dto';
 
 @Injectable({
   providedIn: 'root'
@@ -26,7 +25,7 @@ export class ProjectService {
     return this.storage.set('currentProject', project);
   }
 
-  public getCurrentProject(): Promise<TokenDto> {
+  public getCurrentProject(): Promise<ProjectDto> {
     return this.storage.get('currentProject');
   }
 }

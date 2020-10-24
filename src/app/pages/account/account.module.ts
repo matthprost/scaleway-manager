@@ -9,6 +9,7 @@ import { AccountPage } from './account.page';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {ComponentsModule} from '../../components/components.module';
 import {ChangeOrganizationPage} from './change-organization/change-organization.page';
+import {ChangeProjectPage} from './change-project/change-project.page';
 
 const routes: Routes = [
   {
@@ -26,7 +27,7 @@ const routes: Routes = [
     FontAwesomeModule,
     ComponentsModule
   ],
-  declarations: [AccountPage, ChangeOrganizationPage],
-  entryComponents: [ChangeOrganizationPage]
+  declarations: [AccountPage, ChangeOrganizationPage, ChangeProjectPage],
+  entryComponents: [ChangeOrganizationPage, ChangeProjectPage]
 })
 export class AccountPageModule {}

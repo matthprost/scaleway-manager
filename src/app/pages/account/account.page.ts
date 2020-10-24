@@ -8,6 +8,7 @@ import {AuthService} from '../../services/user/auth/auth.service';
 import {ChangeOrganizationPage} from './change-organization/change-organization.page';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
 import {ProjectService} from '../../services/user/project/project.service';
+import {ChangeProjectPage} from './change-project/change-project.page';
 
 const {StatusBar} = Plugins;
 
@@ -51,9 +52,9 @@ export class AccountPage implements OnInit {
       });
   }
 
-  public async presentModal() {
+  public async presentModal(component: 'project' | 'organization') {
     const modal = await this.modalController.create({
-      component: ChangeOrganizationPage,
+      component: component === 'organization' ? ChangeOrganizationPage : ChangeProjectPage,
     });
 
     await modal.present();

@@ -1,0 +1,31 @@
+<ion-header mode="ios">
+  <ion-toolbar mode="ios">
+    <ion-buttons slot="start">
+      <ion-button (click)="close()">
+        <ion-icon name="close" mode="md"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title color="primary">
+      Change Project
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="save()">Save</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <app-loader *ngIf="isLoading"></app-loader>
+  <div *ngIf="!isLoading">
+    <ion-list>
+      <ion-radio-group value="{{ currentProjectId }}" (ionChange)="change($event)">
+        <div *ngFor="let project of projects">
+          <ion-item *ngIf="project.name !== null">
+            <ion-label>{{ project.name }}</ion-label>
+            <ion-radio slot="start" value="{{ project.id }}"></ion-radio>
+          </ion-item>
+        </div>
+      </ion-radio-group>
+    </ion-list>
+  </div>
+</ion-content>
