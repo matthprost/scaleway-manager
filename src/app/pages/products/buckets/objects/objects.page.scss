@@ -30,24 +30,17 @@ fa-icon {
   text-align: center;
 }
 
-ion-toolbar {
-  --background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
-}
-
 ion-title {
   --color: white;
 }
 
-fa-icon ::ng-deep .fa-folder {
+fa-icon {
   font-size: 1.75rem;
-  background: var(--ion-color-primary);
-  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
-  color: white;
+  color: var(--ion-color-primary-tint);
 }
 
-fa-icon ::ng-deep .fa-file-alt {
-  font-size: 1.75rem;
-  background: var(--ion-color-primary);
-  background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%);
-  color: white;
+.icon-snow {
+  color: var(--ion-color-tertiary);
+  margin-right: .5rem;
+  font-size: 1rem
 }

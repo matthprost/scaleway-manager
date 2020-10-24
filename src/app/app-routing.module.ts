@@ -51,7 +51,7 @@ const routes: Routes = [
     ],
     canActivate: [HomeGuard]
   },
-  {
+/*  {
     path: 'bmaas',
     children: [
       {
@@ -65,7 +65,7 @@ const routes: Routes = [
         canActivate: [HomeGuard]
       },
     ]
-  },
+  },*/
   {
     path: 'login',
     children: [
@@ -101,7 +101,7 @@ const routes: Routes = [
     loadChildren: './pages/auth/login/help/help.module#HelpPageModule',
     canActivate: [HomeGuard]
   },
-  /*  {
+  {
       path: 'buckets',
       children: [
         {
@@ -122,7 +122,7 @@ const routes: Routes = [
           ]
         }
       ],
-    },*/
+    },
 ];
 
 @NgModule({

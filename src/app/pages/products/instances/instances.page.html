@@ -20,10 +20,11 @@
     <app-list [dataList]="instances" [title]="'name'" [subTitle]="'commercial_type'" [hasState]="true"
               [stateVariableName]="'state'" [route]="'instances'" [hasAvatar]="true" [avatarVariableName]="'image.name'"></app-list>
 
-    <p class="no-server ion-margin-top ion-text-center"
+    <div class="not-found ion-margin-top ion-text-center"
        *ngIf="!isLoading && instances.length === 0">
-      <img alt="no_server" src="../../../../assets/img/server.svg">
-      No server available
-    </p>
+      <img alt="no-server" src="../../../../assets/img/server.svg">
+      <p>No server available</p>
+      <small>It is possible that you don't have resources permissions on this organization</small>
+    </div>
   </div>
 </ion-content>

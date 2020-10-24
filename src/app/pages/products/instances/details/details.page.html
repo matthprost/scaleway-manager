@@ -24,7 +24,7 @@
               <div class="server-name">
                 {{ serverName }}
                 <div class="server-state">
-                  <div [style.background]="state" [class]="stateClass"></div>
+                  <span [style.background]="state" [class]="stateClass"></span>
                   <span class="state-text vertical-align-content">{{ server.state }}</span>
                 </div>
               </div>
@@ -43,6 +43,17 @@
     </ion-row>
     <ion-item-group>
       <ion-item-divider class="information-header" color="secondary">Basic Informations</ion-item-divider>
+      <ion-item>
+        <ion-label class="information-title">
+          Zone
+        </ion-label>
+        <div class="information-content" slot="end">
+          <div class="server-zone">
+            <img src="{{ server.zone | zoneFlag }}" alt="zone">
+            {{ server.zone }}
+          </div>
+        </div>
+      </ion-item>
       <ion-item (click)="server.public_ip ? copyToClipBoard(server.public_ip.address) : null">
         <ion-label class="information-title">
           Public IP

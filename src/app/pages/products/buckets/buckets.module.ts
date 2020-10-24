@@ -9,6 +9,7 @@ import { BucketsPage } from './buckets.page';
 import {ComponentsModule} from '../../../components/components.module';
 import {AddBucketPage} from './add-bucket/add-bucket.page';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import {PipesModule} from '../../../pipes/pipes.module';
 
 const routes: Routes = [
   {
@@ -24,7 +25,8 @@ const routes: Routes = [
         IonicModule,
         RouterModule.forChild(routes),
         ComponentsModule,
-        FontAwesomeModule
+        FontAwesomeModule,
+        PipesModule
     ],
   declarations: [BucketsPage, AddBucketPage],
   entryComponents: [AddBucketPage]

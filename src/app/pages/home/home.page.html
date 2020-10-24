@@ -5,7 +5,8 @@
     </ion-buttons>
     <ion-title color="light">Dashboard</ion-title>
     <ion-buttons slot="end">
-      <ion-button [routerDirection]="'forward'" [routerLink]="'/home/account'" class="ion-float-end" color="light" fill="clear">
+      <ion-button [routerDirection]="'forward'" [routerLink]="'/home/account'" class="ion-float-end" color="light"
+                  fill="clear">
         <ion-icon name="ios-contact" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -15,7 +16,8 @@
 <ion-content>
   <div class="home-header">
     <div class="home-header-canvas">
-      <app-graph [billings]="this.billings" *ngIf="!isLoading && !billingError" [currentOrganization]="currentOrganization"></app-graph>
+      <app-graph [billings]="this.billings" *ngIf="!isLoading && !billingError"
+                 [currentOrganization]="currentOrganization"></app-graph>
       <app-error *ngIf="billingError" variant="light"></app-error>
     </div>
   </div>
@@ -44,15 +46,14 @@
   </div>
 
   <app-error *ngIf="serverError">
-    <p>Test1234</p>
   </app-error>
 
   <div class="home-page">
     <ion-grid class="home-page-grid">
-      <div class="title-instances" *ngIf="!serverError">
-        Last {{ instancesToDisplay }} Actives Instances
-      </div>
-      <ion-row  *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError">
+      <ion-row *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError">
+        <div class="title-instances">
+          Last {{ instancesToDisplay }} Actives Instances
+        </div>
         <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
           <ion-slide *ngFor="let serversInstance of serversInstances">
             <ion-card mode="ios" style="width:100%">
@@ -72,13 +73,17 @@
                   </ion-row>
                   <ion-row>
                     <ion-col>
-                      <div [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"></div>
-                      <div style="text-transform: capitalize; display: inline-block">
-                        {{ serversInstance.state === 'stopped in place' ? 'Standby' : serversInstance.state }}
+                      <div class="server-state">
+                        <span [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"
+                             class="server-indicator-state"></span>
+                        <small class="small-card">
+                          {{ serversInstance.public_ip ? serversInstance.public_ip.address : ' - ' }}
+                        </small>
                       </div>
-                      <small class="small-card">
-                        {{ serversInstance.public_ip ? serversInstance.public_ip.address : ' - ' }}
-                      </small>
+                      <div class="server-zone">
+                        <img src="{{ serversInstance.country | zoneFlag }}" alt="country">
+                        {{ serversInstance.country }}
+                      </div>
                     </ion-col>
                   </ion-row>
                 </div>
@@ -95,27 +100,31 @@
           </ion-slide>
         </ion-slides>
       </ion-row>
-    </ion-grid>
 
-    <!--  <ion-fab right bottom #fab>
-        <button ion-fab color="primary">
-          <ion-icon name="help-buoy"></ion-icon>
-        </button>
-        <ion-fab-list side="left">
-          <button ion-fab color="grey">
-            <ion-icon name="bug"></ion-icon>
-          </button>
-          <button ion-fab color="grey">
-            <ion-icon name="mail"></ion-icon>
-          </button>
-          <button ion-fab color="grey">
-            <ion-icon name="globe"></ion-icon>
-          </button>
-        </ion-fab-list>
-      </ion-fab>-->
-  </div>
-  <div class="no-server" *ngIf="!isLoading && serversInstances.length === 0 && !serverError">
-    <img alt="no_server" src="../../../../assets/img/server.svg">
-    No server available
+      <ion-row>
+        <div class="title-instances">
+          Object Storage
+        </div>
+        <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
+          <ion-slide>
+            <ion-card mode="ios" style="width:100%" (click)="navigate('os')" class="dark-card">
+              <ion-card-header class="card-header-stats ion-text-center" mode="ios" style="margin-bottom: .25rem">
+                Object Storage
+              </ion-card-header>
+              <ion-card-content class="card-stat2 ion-text-center" mode="ios">
+                <fa-icon slot="start" [icon]="['fas', 'database']" [size]="'2x'"></fa-icon>
+                <div class="badge">
+                  <ion-badge color="danger" mode="ios">New</ion-badge>
+                </div>
+                <div class="subtitle">
+                  Access to your buckets and files
+                </div>
+                <fa-icon slot="start" [icon]="['fas', 'arrow-right']" [size]="'1x'"></fa-icon>
+              </ion-card-content>
+            </ion-card>
+          </ion-slide>
+        </ion-slides>
+      </ion-row>
+    </ion-grid>
   </div>
 </ion-content>

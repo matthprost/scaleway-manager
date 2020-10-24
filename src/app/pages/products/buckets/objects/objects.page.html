@@ -1,7 +1,7 @@
 <ion-header mode="ios">
   <ion-toolbar mode="ios">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/buckets" color="light"></ion-back-button>
+      <ion-back-button defaultHref="/buckets"></ion-back-button>
     </ion-buttons>
     <ion-title>{{ fullPath }}</ion-title>
   </ion-toolbar>
@@ -19,7 +19,7 @@
   <ion-list>
     <!-- FOLDERS -->
     <ion-item *ngFor="let folder of foldersList" detail="false" mode="ios" (click)="goToSubFolder(folder.Prefix[0])">
-      <fa-icon slot="start" [icon]="['fas', 'folder']" [mask]="['fas', 'square-full']" size="1x"></fa-icon>
+      <fa-icon slot="start" [icon]="['fas', 'folder']" size="1x"></fa-icon>
       <ion-label>
         <h3 style="margin: 8px 0">{{ folder.Prefix[0] }}</h3>
       </ion-label>
@@ -29,12 +29,12 @@
     <!-- FILES -->
     <ion-item *ngFor="let object of objectsList" detail="false"
               mode="ios">
-      <fa-icon slot="start" [icon]="['fas', 'file-alt']" [mask]="['fas', 'square-full']" size="1x"></fa-icon>
+      <fa-icon slot="start" [icon]="['fas', 'file-alt']" size="1x"></fa-icon>
       <ion-label>
         <h3>{{ object.Key[0] }}</h3>
         <p>{{ object.LastModified[0] | date:'MMM d, y' }} {{ object.Size[0] !== '0' ? '· ' + (object.Size[0] | fileSize: 0) : null }}</p>
       </ion-label>
-      <fa-icon *ngIf="object.StorageClass[0] === 'GLACIER'" [icon]="['far', 'snowflake']" style="color: var(--ion-color-tertiary); padding: 0 .1rem"></fa-icon>
+      <fa-icon *ngIf="object.StorageClass[0] === 'GLACIER'" [icon]="['fas', 'snowflake']" class="icon-snow"></fa-icon>
       <ion-icon slot="end" name="more" mode="ios" style="color: darkgray; font-size: 1.1rem; padding: .75rem"
                 (click)="openOptions($event, object.StorageClass[0] === 'GLACIER' ? 'glacier' : 'standard', object)"></ion-icon>
     </ion-item>
@@ -43,12 +43,8 @@
   <div class="bucket-empty"
        *ngIf="!isLoading && objectsList.length === 0 && foldersList.length === 0 && fullPath.length === 0">
     <p style="margin: 0">The bucket is empty</p>
+<!--
     <small>You can add new file or create a new folder by using + button</small>
-  </div>
-
-  <div class="bucket-empty"
-       *ngIf="!isLoading && objectsList.length === 0 && foldersList.length === 0 && fullPath.length > 0">
-    <p style="margin: 0">This folder is empty</p>
-    <small>You can add new file or create a new folder by using + button</small>
+-->
   </div>
 </ion-content>

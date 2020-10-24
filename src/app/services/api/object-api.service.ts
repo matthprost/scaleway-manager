@@ -25,7 +25,15 @@ export class ObjectApiService {
               private toastController: ToastController, private platform: Platform, private alertCtrl: AlertController) {
   }
 
-  public async request(method: HttpMethods, country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+  private async renewToken() {
+    console.warn('RENEWING TOKEN FOR S3');
+    const newToken = await this.authService.addToken();
+    await this.storage.set('awsToken', newToken);
+
+    return newToken;
+  }
+
+  public async request(method: HttpMethods, country: string, subHost?: string, path?: string, customHeader?: {}) {
 
     const opts = {
       service: 's3',
@@ -36,13 +44,13 @@ export class ObjectApiService {
       method: HttpMethods[method.toString()]
     };
 
-    // We get aws token in storage
+    // We get token in storage
     let awsToken = await this.storage.get('awsToken');
+    const currentOrganizationId = await this.storage.get('currentOrganization');
 
     // If aws token doesn't exist we create new and store it
-    if (!awsToken) {
-      await this.storage.set('awsToken', await this.authService.addToken());
-      awsToken = await this.storage.get('awsToken');
+    if (!awsToken || awsToken.token.organization_id !== currentOrganizationId) {
+      awsToken = await this.renewToken();
     }
 
     console.log('AWS-TOKEN', awsToken);
@@ -51,12 +59,12 @@ export class ObjectApiService {
       // We check if access_token is still working
       await this.authService.getToken(awsToken.token.access_key);
     } catch (e) {
-      if (e.status === 404) {
+      if (e.status === 404 || e.status === 410) {
         setTimeout(async () => {
           await this.authService.deleteToken(awsToken.token.access_key);
           await this.storage.remove('awsToken');
         }, 3000);
-        return this.request(method, country, subHost, path);
+        awsToken = await this.renewToken();
       } else {
         return;
       }
@@ -74,14 +82,14 @@ export class ObjectApiService {
         url = 'https://' + (subHost ? subHost + '.' : '') + 's3.' + country + '.scw.cloud' + (path ? path : '');
       } else {
         if (path) {
-          myHeaders = {...opts.headers, ...{subHost}, ...{path}, ...customHeader};
+          myHeaders = {...opts.headers, ...{subHost}, ...{path}, ...customHeader, ...{zone: country}};
         }
-        url = country === 'fr-par' ? '/s3par' : '/s3ams';
+        url = '/s3';
       }
 
       const value = await this.httpClient.request(HttpMethods[method.toString()], url, {
         body: null,
-        headers: subHost ? myHeaders : {...opts.headers, ...customHeader},
+        headers: subHost ? myHeaders : {...opts.headers, ...customHeader, ...{zone: country}},
         responseType: 'text'
       }).toPromise();
 
@@ -117,27 +125,27 @@ export class ObjectApiService {
     }
   }
 
-  public get(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+  public get(country: string, subHost?: string, path?: string, customHeader?: {}) {
     return this.request(HttpMethods.GET, country, subHost, path, customHeader);
   }
 
-  public post(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+  public post(country: string, subHost?: string, path?: string, customHeader?: {}) {
     return this.request(HttpMethods.POST, country, subHost, path, customHeader);
   }
 
-  public put(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+  public put(country: string, subHost?: string, path?: string, customHeader?: {}) {
     return this.request(HttpMethods.PUT, country, subHost, path, customHeader);
   }
 
-  public patch(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+  public patch(country: string, subHost?: string, path?: string, customHeader?: {}) {
     return this.request(HttpMethods.PATCH, country, subHost, path, customHeader);
   }
 
-  public options(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+  public options(country: string, subHost?: string, path?: string, customHeader?: {}) {
     return this.request(HttpMethods.OPTIONS, country, subHost, path, customHeader);
   }
 
-  public delete(country: 'nl-ams' | 'fr-par', subHost?: string, path?: string, customHeader?: {}) {
+  public delete(country: string, subHost?: string, path?: string, customHeader?: {}) {
     return this.request(HttpMethods.DELETE, country, subHost, path, customHeader);
   }
 }

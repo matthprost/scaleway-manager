@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {ObjectService} from '../../../services/object/object.service';
 import {ModalController, NavController} from '@ionic/angular';
 import {AddBucketPage} from './add-bucket/add-bucket.page';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-objects',
@@ -10,8 +13,7 @@ import {AddBucketPage} from './add-bucket/add-bucket.page';
 })
 export class BucketsPage implements OnInit {
 
-  public bucketsPar = [];
-  public bucketsAms = [];
+  public buckets = [];
   public isLoading = true;
   public error = false;
   private temp = true;
@@ -28,9 +30,10 @@ export class BucketsPage implements OnInit {
   }
 
   async ionViewDidEnter() {
-    if (!this.temp) {
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
+    /*if (!this.temp) {
       await this.refresh(false);
-    }
+    }*/
   }
 
   private async refresh(displayLoading?: boolean) {
@@ -38,17 +41,21 @@ export class BucketsPage implements OnInit {
     displayLoading ? this.isLoading = true : this.isLoading = false;
 
     try {
-      const result = await this.objectService.getAllBuckets();
-
-      console.log('RESULT:', result);
-
-      this.bucketsPar = result.s3par ? result.s3par : [];
-      this.bucketsAms = result.s3ams ? result.s3ams : [];
+      this.buckets = await this.objectService.getAllBuckets();
     } catch (e) {
       this.error = true;
     } finally {
       this.isLoading = false;
     }
+  }
+
+  public doRefresh(refresher) {
+    this.refresh().then(() => {
+      refresher.target.complete();
+    }).catch(error => {
+      console.log(error);
+      refresher.target.complete();
+    });
   }
 
   public async addBucket(event: any) {

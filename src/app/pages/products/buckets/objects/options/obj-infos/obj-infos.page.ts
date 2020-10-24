@@ -9,7 +9,7 @@ import {ModalController, NavParams} from '@ionic/angular';
 export class ObjInfosPage implements OnInit {
 
   public object: any = null;
-  public region: 'fr-par' | 'nl-ams' = null;
+  public region: string = null;
 
   constructor(private modalCtrl: ModalController, private navParams: NavParams) {
     this.object = this.navParams.get('object');

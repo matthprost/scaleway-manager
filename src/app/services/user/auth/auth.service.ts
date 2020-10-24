@@ -40,9 +40,7 @@ export class AuthService {
     console.log('LOGGING  OUT');
     const token = await this.storage.get('jwt');
     await this.api.delete<any>(this.api.getAccountApiUrl() + '/jwt/' + token.jwt.jti);
-    await this.storage.remove('jwt');
-    await this.storage.remove('user');
-    await this.storage.remove('currentOrganization');
+    await this.storage.clear();
     await this.navCtrl.navigateRoot(['/login']);
   }
 
@@ -72,22 +70,16 @@ export class AuthService {
     });
   }
 
-  public addToken(): Promise<TokenDto> {
-    return new Promise((resolve, reject) => {
-      this.accountService.getUserData().then(userData => {
-        this.api.post<TokenDto>(this.api.getAccountApiUrl() + '/tokens', {
-          email: userData.email,
-          expires: false,
-          description: 'ObjS_Scaleway_Manager'
-        })
-          .then(val => {
-            resolve(val);
-          })
-          .catch(error => {
-            reject(error);
-          });
+  public async addToken(): Promise<TokenDto> {
+    try {
+      const organizationId = await this.storage.get('currentOrganization');
+
+      return this.api.post<TokenDto>(`${this.api.getAccountApiUrl()}/projects/${organizationId}/tokens`, {
+        description: 'Scaleway_Manager'
       });
-    });
+    } catch (e) {
+      throw e;
+    }
   }
 
   public deleteToken(token: string): Promise<any> {

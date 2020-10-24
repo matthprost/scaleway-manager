@@ -26,38 +26,23 @@ const PROXY_CONFIG = {
     },
     "logLevel": "debug"
   },
-  "/s3par/*": {
+  "/s3/*": {
     target: true,
     router: function (req) {
       var subhost = req.headers.subhost;
       var path = req.headers.path;
-      var target = 'https://' + (subhost ? subhost + '.' : '') + 's3.fr-par.scw.cloud' + (path ? path : '');
+      var zone = req.headers.zone;
+      var target = `https://${subhost ? subhost + '.' : ''}s3.${zone}.scw.cloud${path ? path : ''}`;
       console.log(target);
       return target;
     },
     changeOrigin: true,
     secure: false,
     "pathRewrite": {
-      "^/s3par": ""
+      "^/s3": ""
     },
     "logLevel": "debug"
   },
-  "/s3ams/*": {
-    target: true,
-    router: function (req) {
-      var subhost = req.headers.subhost;
-      var path = req.headers.path;
-      var target = 'https://' + (subhost ? subhost + '.' : '') + 's3.nl-ams.scw.cloud' + (path ? path : '');
-      console.log(target);
-      return target;
-    },
-    changeOrigin: true,
-    secure: false,
-    "pathRewrite": {
-      "^/s3ams": ""
-    },
-    "logLevel": "debug"
-  }
 };
 
 module.exports = PROXY_CONFIG;

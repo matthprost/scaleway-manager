@@ -23,6 +23,7 @@ ion-menu-toggle {
     font-size: 1.25rem;
     width: 27px;
     text-align: center;
+    color: var(--ion-color-dark);
   }
 }
 
@@ -50,10 +51,8 @@ ion-header {
   width: 9px;
   height: 9px;
   background-color: gray;
-  display: inline-block;
-  vertical-align: middle;
   border-radius: 10px;
-  margin-right: 5px;
+  margin-right: .5rem;
   margin-bottom: 1px;
 }
 
@@ -79,7 +78,7 @@ ion-header {
   height: 42px !important;
 }
 
-.no-server {
+.not-found {
   position: relative;
   color: var(--ion-color-dark);
   text-transform: uppercase;

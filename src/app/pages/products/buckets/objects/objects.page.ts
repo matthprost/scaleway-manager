@@ -3,6 +3,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {ObjectService} from '../../../../services/object/object.service';
 import {NavController, PopoverController} from '@ionic/angular';
 import {OptionsPage} from './options/options.page';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
+
+const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-objects',
@@ -14,7 +17,7 @@ export class ObjectsPage implements OnInit {
   public currentPath: string = null;
   public fullPath: string = null;
 
-  private readonly currentRegion: 'fr-par' | 'nl-ams' = null;
+  private readonly currentRegion: string = null;
   private readonly bucket: string = null;
 
   public isLoading = true;
@@ -30,7 +33,7 @@ export class ObjectsPage implements OnInit {
     this.currentPath = pathArray[pathArray.length - 1];
     this.fullPath = decodeURI(this.getFullPath());
 
-    this.currentRegion = this.route.snapshot.paramMap.get('region') as 'fr-par' | 'nl-ams';
+    this.currentRegion = this.route.snapshot.paramMap.get('region') as string;
     this.bucket = this.route.snapshot.paramMap.get('bucket');
 
     this.refresh();
@@ -40,6 +43,7 @@ export class ObjectsPage implements OnInit {
   }
 
   ionViewDidEnter() {
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
   }
 
   public doRefresh(refresher) {

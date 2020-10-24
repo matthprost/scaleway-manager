@@ -51,7 +51,7 @@ ion-title {
 }
 
 .server-img {
-  height: 50px;
+  height: 35px;
   width: auto;
   margin: 0 auto;
 }
@@ -66,7 +66,7 @@ ion-title {
     font-size: 1rem;
     font-weight: lighter;
     color: var(--ion-color-dark);
-    padding: .5rem;
+    padding: .75rem;
   }
 
   &-invoices {
@@ -100,7 +100,7 @@ ion-title {
   display: block;
   color: dimgray;
   font-size: 1rem;
-  margin-top: .25rem;
+  font-weight: 300;
 }
 
 .message {
@@ -256,4 +256,62 @@ ion-content {
   ion-icon {
     font-size: 1.5rem;
   }
+}
+
+.dark-card {
+  background: var(--ion-color-dark);
+  .card-header-stats {
+    background: var(--ion-color-dark-tint);
+    margin-bottom: 1rem;
+  }
+  > * {
+    color: white;
+  }
+  fa-icon {
+    color: white;
+  }
+  .title {
+    font-weight: 400;
+    margin: 1rem 0 .5rem 0;
+  }
+  .subtitle {
+    font-weight: 300;
+    margin: 0 0 1rem 0;
+  }
+
+  .badge {
+    margin: .75rem 0 .5rem 0;
+  }
+}
+
+.server-indicator-state {
+
+  &-text {
+    text-transform: capitalize;
+    display: inline-block;
+    font-weight: 300;
+    font-size: .9rem;
+  }
+}
+
+.server-zone {
+  padding-top: .5rem;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: .9rem;
+  font-weight: 300;
+
+  img {
+    height: 10px;
+    width: auto;
+    margin-right: .5rem;
+  }
+}
+
+.server-state {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

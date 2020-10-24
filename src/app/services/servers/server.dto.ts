@@ -19,6 +19,7 @@ export interface ServerDto {
   volumes: Array<Volume>;
   security_group: SecurityGroup;
   country: string;
+  zone: string;
 }
 
 export interface Image {

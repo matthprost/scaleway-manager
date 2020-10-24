@@ -31,3 +31,16 @@ ion-avatar {
 .background-grey {
   --background: var(--ion-color-light);
 }
+
+.note-end {
+  text-transform: uppercase;
+  font-size: .8rem;
+
+  img {
+    margin-left: .5rem;
+  }
+}
+
+.state {
+  margin-right: 0;
+}
