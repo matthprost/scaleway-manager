@@ -45,10 +45,10 @@
     </ion-row>
   </ion-grid>
 
-  <div class="no-bucket"
+  <div class="not-found"
        *ngIf="!isLoading && (!buckets) || (buckets.length === 0) && !error">
-    <p style="margin: 0">No bucket available</p>
-    <small>You can add a new one to start using object storage</small>
+    <fa-icon slot="start" [icon]="['fas', 'database']" [size]="'2x'"></fa-icon>
+    <p>No bucket available</p>
   </div>
 
   <div class="no-bucket"

@@ -1,4 +1,4 @@
-export interface ActionDto {
+export interface ActionsDto {
   task: Task;
 }
 
