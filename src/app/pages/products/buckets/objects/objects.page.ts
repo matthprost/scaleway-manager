@@ -125,13 +125,13 @@ export class ObjectsPage implements OnInit {
       componentProps: {
         type,
         region: this.currentRegion,
-        object: object,
+        object,
         bucket: this.bucket,
         fullPath: this.fullPath,
       },
       translucent: true,
       mode: 'ios',
-      event: event
+      event
     });
 
     await popover.present();
