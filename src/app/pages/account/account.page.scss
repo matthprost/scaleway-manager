@@ -22,7 +22,7 @@ ion-toolbar {
 }
 
 .background {
-  height: 30vh;
+  height: 25vh;
   width: 100%;
   background: var(--ion-color-primary);
   background: radial-gradient(#8800C8, var(--ion-color-primary));
@@ -136,4 +136,8 @@ ion-card-content {
 
 .blue-header {
   background: var(--ion-color-tertiary);
+}
+
+.secondary-header {
+  background: var(--ion-color-secondary);
 }

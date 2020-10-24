@@ -52,9 +52,19 @@ export class ApiService {
   }
 
   private async request<T>(method: HttpMethods, url: string, data: {} = {}): Promise<T> {
-    try {
-      const token = await this.storage.get('jwt');
+    const token = await this.storage.get('jwt');
 
+    // This is for login when token doesn't exist
+    if (!token) {
+      return this.httpClient.request<T>(HttpMethods[method.toString()], url, {
+        headers: token ?
+          {
+            'X-Session-Token': token.auth.jwt_key
+          } : {},
+        body: data
+      }).toPromise();
+    }
+    try {
       return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
         headers: token && token.auth && token.auth.jwt_key ?
           {

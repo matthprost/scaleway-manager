@@ -4,36 +4,40 @@ import {AuthTokenDto, TokenDto} from './auth-tokens.dto';
 import {Storage} from '@ionic/storage';
 import {AccountService} from '../account/account.service';
 import {NavController} from '@ionic/angular';
+import {ProjectService} from '../project/project.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private api: ApiService, private storage: Storage, private accountService: AccountService, private navCtrl: NavController) {
+  constructor(private api: ApiService, private storage: Storage, private accountService: AccountService, private navCtrl: NavController,
+              private projectService: ProjectService) {
   }
 
-  public login(email: string, password: string, code?: string): Promise<any> {
-
-    return new Promise((resolve, reject) => {
-      this.api.post<any>(this.api.getAccountApiUrl() + '/jwt', {
+  public async login(email: string, password: string, code?: string): Promise<any> {
+    try {
+      const result = await this.api.post<any>(this.api.getAccountApiUrl() + '/jwt', {
         'email': email,
         'password': password,
         'renewable': true,
         '2FA_token': String(code),
-      })
-        .then(async result => {
-          await this.storage.set('jwt', result);
-          const data = await this.api.get<any>(this.api.getAccountApiUrl() + '/users/' + result.jwt.issuer);
-          await this.storage.set('user', data.user);
-          const currentOrganization = data.user.organizations.find(organization => organization.role_name === 'owner');
-          await this.storage.set('currentOrganization', currentOrganization.id);
-          resolve('ok');
-        })
-        .catch(error => {
-          reject(error);
-        });
-    });
+      });
+
+      await this.storage.set('jwt', result);
+
+      const data = await this.api.get<any>(this.api.getAccountApiUrl() + '/users/' + result.jwt.issuer);
+      await this.storage.set('user', data.user);
+
+      const currentOrganization = data.user.organizations.find(organization => organization.role_name === 'owner');
+      await this.storage.set('currentOrganization', currentOrganization.id);
+
+      const projects = await this.projectService.getProjects(currentOrganization.id);
+      const currentProject = projects.find(project => project.id === currentOrganization.id);
+      await this.storage.set('currentProject', currentProject);
+    } catch (e) {
+      throw e;
+    }
   }
 
   public async logout(): Promise<any> {
