@@ -45,12 +45,12 @@ export class ChangeOrganizationPage implements OnInit {
 
   public async save() {
     await this.storage.set('currentOrganization', this.currentOrganizationId);
+    await this.projectService.setDefaultProject(this.currentOrganizationId);
     await this.close();
   }
 
   public async change(event) {
     this.currentOrganizationId = event.detail.value;
-    await this.projectService.setDefaultProject(this.currentOrganizationId);
   }
 
 }
