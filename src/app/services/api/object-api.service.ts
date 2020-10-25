@@ -29,7 +29,7 @@ export class ObjectApiService {
   private async renewToken() {
     console.warn('RENEWING TOKEN FOR S3');
     const newToken = await this.tokensService.addToken();
-    await this.storage.set('awsToken', newToken);
+    await this.storage.set('apiToken', newToken);
 
     return newToken;
   }
@@ -46,34 +46,34 @@ export class ObjectApiService {
     };
 
     // We get token in storage
-    let awsToken = await this.storage.get('awsToken');
+    let apiToken = await this.storage.get('apiToken');
     const currentOrganizationId = await this.storage.get('currentOrganization');
 
     // If aws token doesn't exist we create new and store it
-    if (!awsToken || awsToken.token.organization_id !== currentOrganizationId) {
-      awsToken = await this.renewToken();
+    if (!apiToken || apiToken.token.organization_id !== currentOrganizationId) {
+      apiToken = await this.renewToken();
     }
 
-    console.log('AWS-TOKEN', awsToken);
+    console.log('AWS-TOKEN', apiToken);
 
-    try {
-      // We check if access_token is still working
-      await this.tokensService.getToken(awsToken.token.access_key);
-    } catch (e) {
-      if (e.status === 404 || e.status === 410) {
-        setTimeout(async () => {
-          await this.tokensService.deleteToken(awsToken.token.access_key);
-          await this.storage.remove('awsToken');
-        }, 3000);
-        awsToken = await this.renewToken();
-      } else {
-        return;
-      }
-    }
+    /*    try {
+          // We check if access_token is still working
+          await this.tokensService.getToken(apiToken.token.access_key);
+        } catch (e) {
+          if (e.status === 404 || e.status === 410) {
+            setTimeout(async () => {
+              await this.tokensService.deleteToken(apiToken.token.access_key);
+              await this.storage.remove('apiToken');
+            }, 3000);
+            apiToken = await this.renewToken();
+          } else {
+            return;
+          }
+        }*/
 
     try {
       // Create AWS Signature
-      aws4.sign(opts, {accessKeyId: awsToken.token.access_key, secretAccessKey: awsToken.token.secret_key});
+      aws4.sign(opts, {accessKeyId: apiToken.token.access_key, secretAccessKey: apiToken.token.secret_key});
       console.log('AWS-OPTIONS', opts);
 
       let myHeaders = {...opts.headers, ...{subHost}, ...customHeader};
@@ -109,6 +109,13 @@ export class ObjectApiService {
       if (e.error.indexOf('<?xml') === 0) {
         errorMessage = await xml2js.parseStringPromise(e.error);
         console.log(errorMessage.Error.Message[0]);
+      }
+
+      await this.storage.remove('apiToken');
+
+      if (e.status === 403 && e.statusText === 'Forbidden') {
+        await this.renewToken();
+        return this.request(method, country, subHost, path, customHeader);
       }
 
       const toast = await this.toastController.create({

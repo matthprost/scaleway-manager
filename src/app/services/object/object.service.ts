@@ -20,8 +20,6 @@ export class ObjectService {
 
   public async getAllBuckets() {
     try {
-      const s3par = await this.objectApi.get('fr-par');
-      const s3ams = await this.objectApi.get('nl-ams');
       const result = await Promise.all(zones.map(async zone => {
         const value = await this.objectApi.get(zone);
         const buckets = value.ListAllMyBucketsResult.Buckets[0].Bucket;

@@ -17,7 +17,8 @@
   "engines": {
     "node": ">=v14.12.0",
     "npm": ">=6.14.8",
-    "ionic": ">=6.12.0"
+    "ionic": ">=6.12.0",
+    "capacitor": ">=2.42.0"
   },
   "private": true,
   "dependencies": {
