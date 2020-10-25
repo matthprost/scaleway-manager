@@ -32,15 +32,16 @@ export class ChangeProjectPage implements OnInit {
     ]).then(() => this.isLoading = false);
   }
 
-  public close() {
-    this.modalCtrl.dismiss({
-      dismissed: true
+  public async close(manualClose?: boolean) {
+    await this.modalCtrl.dismiss({
+      dismissed: true,
+      manualClose
     });
   }
 
   public async save() {
     await this.projectService.setCurrentProject(this.projects.find(project => project.id === this.currentProjectId));
-    this.close();
+    await this.close();
   }
 
   public change(event) {

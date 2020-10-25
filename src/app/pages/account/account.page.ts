@@ -42,6 +42,7 @@ export class AccountPage implements OnInit {
   private refresh() {
     this.accountProvider.getUserData().then(async userData => {
       this.user = userData;
+      await this.storage.set('user', userData);
       const currentOrganization = await this.storage.get('currentOrganization');
       this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganization);
       this.currentProject = await this.projectService.getCurrentProject();
@@ -60,9 +61,11 @@ export class AccountPage implements OnInit {
 
     await modal.present();
 
-    await modal.onDidDismiss().then(() => {
+    await modal.onDidDismiss().then(value => {
       StatusBar.setStyle({style: StatusBarStyle.Dark});
-      this.refresh();
+      if (!value.data.manualClose) {
+        this.refresh();
+      }
     });
   }
 

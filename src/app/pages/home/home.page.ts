@@ -32,7 +32,7 @@ export class HomePage implements OnInit {
   public billingError = false;
   public serverError = false;
 
-  public currentOrganization = '';
+  public currentOrganization = {};
 
   slideOpts = {
     initialSlide: 0,
@@ -44,7 +44,7 @@ export class HomePage implements OnInit {
   // STORAGE SETTINGS
   public instancesToDisplay = 6;
 
-  constructor(public navCtrl: NavController, private srvService: ServersService,
+  constructor(public navCtrl: NavController, private serversService: ServersService,
               private billingService: BillingService, private menuCtrl: MenuController,
               private storage: Storage, private accountProvider: AccountService) {
   }
@@ -57,42 +57,54 @@ export class HomePage implements OnInit {
   }
 
   ionViewDidEnter() {
-    this.isLoading = true;
-    StatusBar.setStyle({ style: StatusBarStyle.Dark });
+    StatusBar.setStyle({style: StatusBarStyle.Dark});
+
+    this.classAppear = 'no-class';
     this.menuCtrl.enable(true);
-    this.billingService.getXMonthsLastBilling(6).then(value => {
-      this.billings = value.invoices;
-    }).catch(() => {
-      this.billingError = true;
-    });
+
     this.refresh().then(() => {
       this.autoRefresh();
       this.classAppear = 'card-appear';
-      this.isLoading = false;
     });
   }
 
-  private async refresh(): Promise<any> {
-    const userData = await this.accountProvider.getUserData();
-    const currentOrganization = await this.storage.get('currentOrganization');
-    this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganization);
-    return new Promise((resolve, reject) => {
-      this.storage.get('settings').then(result => {
-        if (result) {
-          result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : this.instancesToDisplay = 6;
-        }
-        this.srvService.getAllServer(this.instancesToDisplay).then(value => {
-          this.serversInstances = value;
+  public async refreshBilling(): Promise<any> {
+    try {
+      const result = await this.billingService.getXMonthsLastBilling(6);
+      this.billings = result.invoices;
+    } catch (e) {
+      this.billingError = true;
 
-          resolve('ok');
-        })
-          .catch(error => {
-            this.isLoading = false;
-            this.serverError = true;
-            reject(error);
-          });
-      });
-    });
+      throw e;
+    } finally {
+      this.isLoading = false;
+    }
+  }
+
+  public async refreshServers(): Promise<any> {
+    try {
+      const userData = await this.storage.get('user');
+      const currentOrganizationId = await this.storage.get('currentOrganization');
+      const settings = await this.storage.get('settings');
+
+      this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganizationId);
+      this.instancesToDisplay = (settings && settings.instancesToDisplay) || 6;
+
+      this.serversInstances = await this.serversService.getAllServer(this.instancesToDisplay);
+    } catch (e) {
+      this.serverError = true;
+
+      throw e;
+    }
+  }
+
+  public async refresh(): Promise<any> {
+    try {
+      this.refreshBilling();
+      this.refreshServers();
+    } catch (e) {
+      throw e;
+    }
   }
 
   private async autoRefresh() {
@@ -136,14 +148,14 @@ export class HomePage implements OnInit {
     console.log(event.detail.checked);
 
     if (event.detail.checked === true) {
-      this.srvService.sendServerAction(server.country, server.id, 'poweron').then(() => {
+      this.serversService.sendServerAction(server.country, server.id, 'poweron').then(() => {
         this.refresh().then(() => {
           this.autoRefresh();
         });
         return;
       });
     } else if (event.detail.checked === false) {
-      this.srvService.sendServerAction(server.country, server.id, 'poweroff').then(() => {
+      this.serversService.sendServerAction(server.country, server.id, 'poweroff').then(() => {
         this.refresh().then(() => {
           this.autoRefresh();
         });
@@ -232,37 +244,7 @@ export class HomePage implements OnInit {
       case 'os' :
         await this.navCtrl.navigateForward(['/buckets/']);
         break;
-      /*case 'contact' :
-        fab.close();
-        this.navCtrl.push(ContactPage);
-        break;
-      case 'bug' :
-        fab.close();
-        this.navCtrl.push(BugReportPage);
-        break;
-      case 'billing' :
-        this.navCtrl.push(BillingPage);
-        break;
-      case 'about' :
-        this.navCtrl.push(AboutPage);
-        break;*/
     }
   }
-
-  /*public navigateServ(serverInfo: { server: ServerDto, country: string }) {
-    this.navCtrl.push(ShowServerPage, {server: serverInfo.server, serverCountry: serverInfo.country});
-  }*/
-
-  /*public openWebSite(fab: FabContainer) {
-
-    const options: InAppBrowserOptions = {
-      zoom: 'no',
-      location: 'no',
-      toolbarposition: 'top'
-    };
-
-    this.iab.create('https://matthias-prost.com',
-      '_blank', options);
-  }*/
 
 }

@@ -36,15 +36,16 @@ export class ChangeOrganizationPage implements OnInit {
     });
   }
 
-  public close() {
-    this.modalCtrl.dismiss({
-      dismissed: true
+  public async close(manualClose?: boolean) {
+    await this.modalCtrl.dismiss({
+      dismissed: true,
+      manualClose
     });
   }
 
   public async save() {
     await this.storage.set('currentOrganization', this.currentOrganizationId);
-    this.close();
+    await this.close();
   }
 
   public async change(event) {

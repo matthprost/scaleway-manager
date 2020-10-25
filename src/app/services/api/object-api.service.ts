@@ -56,21 +56,6 @@ export class ObjectApiService {
 
     console.log('AWS-TOKEN', apiToken);
 
-    /*    try {
-          // We check if access_token is still working
-          await this.tokensService.getToken(apiToken.token.access_key);
-        } catch (e) {
-          if (e.status === 404 || e.status === 410) {
-            setTimeout(async () => {
-              await this.tokensService.deleteToken(apiToken.token.access_key);
-              await this.storage.remove('apiToken');
-            }, 3000);
-            apiToken = await this.renewToken();
-          } else {
-            return;
-          }
-        }*/
-
     try {
       // Create AWS Signature
       aws4.sign(opts, {accessKeyId: apiToken.token.access_key, secretAccessKey: apiToken.token.secret_key});
@@ -94,7 +79,6 @@ export class ObjectApiService {
         responseType: 'text'
       }).toPromise();
 
-
       // Convert XML into JSON
       if (value && value.indexOf('xml') > 0) {
         return await xml2js.parseStringPromise(value);
@@ -113,7 +97,7 @@ export class ObjectApiService {
 
       await this.storage.remove('apiToken');
 
-      if (e.status === 403 && e.statusText === 'Forbidden') {
+      if (e.status === 403 && (e.statusText === 'Forbidden' || e.statusText === 'Unknown Error')) {
         await this.renewToken();
         return this.request(method, country, subHost, path, customHeader);
       }

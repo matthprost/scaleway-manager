@@ -3,7 +3,6 @@
     <ion-buttons slot="start">
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
-    <ion-title color="light">Dashboard</ion-title>
     <ion-buttons slot="end">
       <ion-button [routerDirection]="'forward'" [routerLink]="'/home/account'" class="ion-float-end" color="light"
                   fill="clear">
@@ -16,7 +15,7 @@
 <ion-content>
   <div class="home-header">
     <div class="home-header-canvas">
-      <app-graph [billings]="this.billings" *ngIf="!isLoading && !billingError"
+      <app-graph [billings]="billings" *ngIf="!isLoading && !billingError"
                  [currentOrganization]="currentOrganization"></app-graph>
       <app-error *ngIf="billingError" variant="light"></app-error>
     </div>
@@ -104,7 +103,7 @@
           <div class="title-instances">
             Object Storage
           </div>
-          <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
+          <ion-slides pager="false" [options]="slideOpts" class="card-appear">
             <ion-slide>
               <ion-card mode="ios" style="width:100%" (click)="navigate('os')" class="dark-card">
                 <ion-card-header class="card-header-stats ion-text-center" mode="ios" style="margin-bottom: .25rem">
