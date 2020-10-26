@@ -9,7 +9,8 @@
       Change Organization
     </ion-title>
     <ion-buttons slot="end" *ngIf="currentOrganizationId">
-      <ion-button (click)="save()">Save</ion-button>
+      <ion-button (click)="save()" *ngIf="!isSaving">Save</ion-button>
+      <ion-spinner name="crescent" color="primary" *ngIf="isSaving"></ion-spinner>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

@@ -15,6 +15,7 @@ const {StatusBar} = Plugins;
 export class ChangeOrganizationPage implements OnInit {
 
   public isLoading = true;
+  public isSaving = false;
   public organizations = [];
   public currentOrganizationId = null;
 
@@ -44,9 +45,11 @@ export class ChangeOrganizationPage implements OnInit {
   }
 
   public async save() {
+    this.isSaving = true;
     await this.storage.set('currentOrganization', this.currentOrganizationId);
     await this.projectService.setDefaultProject(this.currentOrganizationId);
     await this.close();
+    this.isSaving = false;
   }
 
   public async change(event) {
