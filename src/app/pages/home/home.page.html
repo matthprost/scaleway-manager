@@ -16,7 +16,7 @@
   <div class="home-header">
     <div class="home-header-canvas">
       <app-graph [billings]="billings" *ngIf="!isLoading && !billingError"
-                 [currentOrganization]="currentOrganization"></app-graph>
+                 [currentOrganization]="currentOrganization" [currentProject]="currentProject"></app-graph>
       <app-error *ngIf="billingError" variant="light"></app-error>
     </div>
   </div>

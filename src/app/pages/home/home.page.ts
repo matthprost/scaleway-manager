@@ -8,6 +8,8 @@ import {BillingDto} from '../../services/billing/billing.dto';
 import {Storage} from '@ionic/storage';
 import {AccountService} from '../../services/user/account/account.service';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
+import {ProjectService} from '../../services/user/project/project.service';
+import {ProjectDto} from '../../services/user/project/project.dto';
 
 const {StatusBar} = Plugins;
 
@@ -33,6 +35,7 @@ export class HomePage implements OnInit {
   public serverError = false;
 
   public currentOrganization = {};
+  public currentProject: ProjectDto;
 
   slideOpts = {
     initialSlide: 0,
@@ -46,7 +49,7 @@ export class HomePage implements OnInit {
 
   constructor(public navCtrl: NavController, private serversService: ServersService,
               private billingService: BillingService, private menuCtrl: MenuController,
-              private storage: Storage, private accountProvider: AccountService) {
+              private storage: Storage, private projectService: ProjectService) {
   }
 
   ngOnInit() {
@@ -85,6 +88,7 @@ export class HomePage implements OnInit {
     try {
       const userData = await this.storage.get('user');
       const currentOrganizationId = await this.storage.get('currentOrganization');
+      this.currentProject = await this.projectService.getCurrentProject();
       const settings = await this.storage.get('settings');
 
       this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganizationId);

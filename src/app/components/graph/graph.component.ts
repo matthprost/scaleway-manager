@@ -12,6 +12,7 @@ export class GraphComponent implements OnChanges {
 
   @Input() billings: BillingDto;
   @Input() currentOrganization: any;
+  @Input() currentProject: any;
 
   @ViewChild('billingCanvas') barCanvas: ElementRef;
   private barChart: Chart;
