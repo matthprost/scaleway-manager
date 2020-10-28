@@ -22,7 +22,7 @@ ion-toolbar {
 }
 
 .background {
-  height: 30vh;
+  height: 25vh;
   width: 100%;
   background: var(--ion-color-primary);
   background: radial-gradient(#8800C8, var(--ion-color-primary));
@@ -99,13 +99,13 @@ ion-card {
   margin: 0;
 
   &:hover {
-    -webkit-box-shadow: 0 4px 16px rgba(0,0,0,.70);
-    box-shadow: 0 4px 16px rgba(0,0,0,.70);
+    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
   }
 
   &:focus {
-    -webkit-box-shadow: 0 4px 16px rgba(0,0,0,.70);
-    box-shadow: 0 4px 16px rgba(0,0,0,.70);
+    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
   }
 }
 
@@ -114,6 +114,7 @@ ion-card-header {
     font-size: 2.2rem;
     color: white;
   }
+
   background-color: var(--ion-color-dark);
 }
 
@@ -129,11 +130,21 @@ ion-card-content {
 
 .current-organization {
   text-align: center;
+
   &-text {
     padding-bottom: .5rem;
   }
 }
 
+.icon-separator {
+  color: var(--ion-color-light-shade);
+  padding: 0 .5rem;
+}
+
 .blue-header {
   background: var(--ion-color-tertiary);
+}
+
+.secondary-header {
+  background: var(--ion-color-secondary);
 }

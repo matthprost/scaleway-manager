@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {ServerDto} from './server.dto';
 import {ApiService} from '../api/api.service';
-import {ActionDto} from './action.dto';
+import {ActionsDto} from './actions.dto';
 import {Storage} from '@ionic/storage';
 import {zones} from './config';
 
@@ -9,9 +9,6 @@ import {zones} from './config';
   providedIn: 'root'
 })
 export class ServersService {
-
-  private parisServers: Array<ServerDto> = null;
-  private netherlandsServers: Array<ServerDto> = null;
 
   constructor(private api: ApiService, private storage: Storage) {
   }
@@ -40,9 +37,10 @@ export class ServersService {
 
   public async getAllServerByCountry(country: string, nbrOfServ = 50): Promise<any> {
     const apiUrl = `${this.api.getInstanceUrl()}${country}`;
-    const organizationId = await this.storage.get('currentOrganization');
+    const currentProject = await this.storage.get('currentProject');
 
-    const result = await this.api.get<{ servers: ServerDto[] }>(`${apiUrl}/servers?project=${organizationId}&per_page=${nbrOfServ}&page=1`);
+    // tslint:disable-next-line:max-line-length
+    const result = await this.api.get<{ servers: ServerDto[] }>(`${apiUrl}/servers?project=${currentProject.id}&per_page=${nbrOfServ}&page=1`);
     result.servers.forEach(value => {
       value.country = country;
     });
@@ -68,8 +66,8 @@ export class ServersService {
     const apiUrl = `${this.api.getInstanceUrl()}${country}`;
 
     return new Promise((resolve, reject) => {
-      this.api.post<ActionDto>(apiUrl + '/servers/' + serverId + '/action', {
-        'action': action
+      this.api.post<ActionsDto>(apiUrl + '/servers/' + serverId + '/action', {
+        action
       })
         .then(result => {
           resolve(result);
@@ -84,7 +82,7 @@ export class ServersService {
     const apiUrl = `${this.api.getInstanceUrl()}${country}`;
 
     try {
-      await this.api.post<ActionDto>(`${apiUrl}/servers/${serverId}/action`, {
+      await this.api.post<ActionsDto>(`${apiUrl}/servers/${serverId}/action`, {
         action: 'terminate'
       });
       if (serverIp) {

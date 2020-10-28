@@ -1,15 +1,16 @@
 <ion-header mode="ios">
   <ion-toolbar mode="ios">
     <ion-buttons slot="start">
-      <ion-button (click)="close()">
+      <ion-button (click)="close(true)">
         <ion-icon name="close" mode="md"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-title color="primary">
       Change Organization
     </ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="save()">Save</ion-button>
+    <ion-buttons slot="end" *ngIf="currentOrganizationId">
+      <ion-button (click)="save()" *ngIf="!isSaving">Save</ion-button>
+      <ion-spinner name="crescent" color="primary" *ngIf="isSaving"></ion-spinner>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

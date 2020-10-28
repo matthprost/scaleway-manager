@@ -48,20 +48,54 @@
       </div>
       <div class="current-organization">
         <div class="current-organization-text">
-          Current organization: <b>{{ currentOrganization.name }}</b>
+          <ion-chip color="tertiary">
+            <ion-label color="tertiary">
+              {{ currentOrganization.name }}
+            </ion-label>
+          </ion-chip>
+          <fa-icon slot="start" [icon]="['fas', 'chevron-right']" class="icon-separator"></fa-icon>
+          <ion-chip color="secondary">
+            <ion-label color="secondary">
+              {{ currentProject.name }}
+            </ion-label>
+          </ion-chip>
         </div>
       </div>
     </div>
     <ion-grid>
       <ion-row>
         <ion-col>
-          <ion-card mode="ios" (click)="presentModal()">
+          <ion-card mode="ios" (click)="presentModal('organization')">
             <ion-card-header class="ion-text-center blue-header" mode="ios">
               <ion-icon name="swap" mode="ios"></ion-icon>
             </ion-card-header>
 
             <ion-card-content class="ion-text-center" mode="ios">
               Change organization
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+        <ion-col>
+          <ion-card mode="ios" (click)="presentModal('project')">
+            <ion-card-header class="ion-text-center secondary-header" mode="ios">
+              <ion-icon name="folder" mode="md"></ion-icon>
+            </ion-card-header>
+
+            <ion-card-content class="ion-text-center" mode="ios">
+              Change Project
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <ion-card mode="ios" (click)="navigate('tokens')">
+            <ion-card-header class="ion-text-center" mode="ios">
+              <ion-icon name="cloud" mode="ios"></ion-icon>
+            </ion-card-header>
+
+            <ion-card-content class="ion-text-center" mode="ios">
+              API Tokens
             </ion-card-content>
           </ion-card>
         </ion-col>
@@ -73,19 +107,6 @@
 
             <ion-card-content class="ion-text-center" mode="ios">
               SSH Keys
-            </ion-card-content>
-          </ion-card>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col size="6">
-          <ion-card mode="ios" (click)="navigate('tokens')">
-            <ion-card-header class="ion-text-center" mode="ios">
-              <ion-icon name="cloud" mode="ios"></ion-icon>
-            </ion-card-header>
-
-            <ion-card-content class="ion-text-center" mode="ios">
-              API Tokens
             </ion-card-content>
           </ion-card>
         </ion-col>

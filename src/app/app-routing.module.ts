@@ -123,6 +123,7 @@ const routes: Routes = [
         }
       ],
     },
+  { path: 'change-project', loadChildren: './pages/account/change-project/change-project.module#ChangeProjectPageModule' },
 ];
 
 @NgModule({

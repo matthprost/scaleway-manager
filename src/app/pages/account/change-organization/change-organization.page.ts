@@ -3,6 +3,7 @@ import {ModalController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
 import {AccountService} from '../../../services/user/account/account.service';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
+import {ProjectService} from '../../../services/user/project/project.service';
 
 const {StatusBar} = Plugins;
 
@@ -14,10 +15,12 @@ const {StatusBar} = Plugins;
 export class ChangeOrganizationPage implements OnInit {
 
   public isLoading = true;
+  public isSaving = false;
   public organizations = [];
-  public currentOrganizationId;
+  public currentOrganizationId = null;
 
-  constructor(private modalCtrl: ModalController, private storage: Storage, private accountService: AccountService) {
+  constructor(private modalCtrl: ModalController, private storage: Storage, private accountService: AccountService,
+              private projectService: ProjectService) {
 
   }
 
@@ -34,18 +37,22 @@ export class ChangeOrganizationPage implements OnInit {
     });
   }
 
-  public close() {
-    this.modalCtrl.dismiss({
-      dismissed: true
+  public async close(manualClose?: boolean) {
+    await this.modalCtrl.dismiss({
+      dismissed: true,
+      manualClose
     });
   }
 
   public async save() {
+    this.isSaving = true;
     await this.storage.set('currentOrganization', this.currentOrganizationId);
-    this.close();
+    await this.projectService.setDefaultProject(this.currentOrganizationId);
+    await this.close();
+    this.isSaving = false;
   }
 
-  public change(event) {
+  public async change(event) {
     this.currentOrganizationId = event.detail.value;
   }
 

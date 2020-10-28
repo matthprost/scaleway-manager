@@ -1,7 +1,9 @@
 <div>
   <div class="header">
     <div class="header-left">
-      Organization: <span class="header-left-organization">{{ currentOrganization.name }}</span>
+      <span class="header-left-organization">{{ currentOrganization.name }}</span>
+      <fa-icon slot="start" [icon]="['fas', 'chevron-right']" class="icon-separator"></fa-icon>
+      {{ currentProject.name }}
     </div>
     <div *ngIf="values && values.length > 0" class="header-right">Current
       <div class="header-right-amount">

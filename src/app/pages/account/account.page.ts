@@ -7,6 +7,8 @@ import {Storage} from '@ionic/storage';
 import {AuthService} from '../../services/user/auth/auth.service';
 import {ChangeOrganizationPage} from './change-organization/change-organization.page';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
+import {ProjectService} from '../../services/user/project/project.service';
+import {ChangeProjectPage} from './change-project/change-project.page';
 
 const {StatusBar} = Plugins;
 
@@ -22,10 +24,11 @@ export class AccountPage implements OnInit {
   public faShieldAlt = faShieldAlt;
   public danger = faExclamationCircle;
   public currentOrganization;
+  public currentProject;
 
   constructor(public navCtrl: NavController, private accountProvider: AccountService,
               private storage: Storage, private authService: AuthService, private alertCtrl: AlertController,
-              public modalController: ModalController) {
+              public modalController: ModalController, private projectService: ProjectService) {
   }
 
   ngOnInit() {
@@ -39,25 +42,30 @@ export class AccountPage implements OnInit {
   private refresh() {
     this.accountProvider.getUserData().then(async userData => {
       this.user = userData;
+      await this.storage.set('user', userData);
       const currentOrganization = await this.storage.get('currentOrganization');
       this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganization);
+      this.currentProject = await this.projectService.getCurrentProject();
       this.isLoading = false;
     })
       .catch(error => {
         console.log(error);
+        this.isLoading = false;
       });
   }
 
-  public async presentModal() {
+  public async presentModal(component: 'project' | 'organization') {
     const modal = await this.modalController.create({
-      component: ChangeOrganizationPage,
+      component: component === 'organization' ? ChangeOrganizationPage : ChangeProjectPage,
     });
 
     await modal.present();
 
-    await modal.onDidDismiss().then(() => {
+    await modal.onDidDismiss().then(value => {
       StatusBar.setStyle({style: StatusBarStyle.Dark});
-      this.refresh();
+      if (!value.data.manualClose) {
+        this.refresh();
+      }
     });
   }
 

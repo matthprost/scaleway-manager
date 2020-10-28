@@ -1,4 +1,4 @@
-import {Component, ElementRef, Input, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, Input, OnChanges, ViewChild} from '@angular/core';
 import {Chart} from 'chart.js/dist/Chart.bundle.js';
 import {BillingDto} from '../../services/billing/billing.dto';
 
@@ -8,10 +8,11 @@ import {BillingDto} from '../../services/billing/billing.dto';
   templateUrl: './graph.component.html',
   styleUrls: ['./graph.component.scss'],
 })
-export class GraphComponent implements OnInit {
+export class GraphComponent implements OnChanges {
 
   @Input() billings: BillingDto;
-  @Input() currentOrganization = {name: ''};
+  @Input() currentOrganization: any;
+  @Input() currentProject: any;
 
   @ViewChild('billingCanvas') barCanvas: ElementRef;
   private barChart: Chart;
@@ -22,34 +23,7 @@ export class GraphComponent implements OnInit {
   constructor() {
   }
 
-  private formatData(data) {
-    const array = [];
-    const values = [];
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
-    if (!data) {
-      return [];
-    }
-
-    data.forEach(result => {
-      const parseResult = Number(result.billing_period.slice(-2));
-      array.push(months[parseResult - 1]);
-    });
-
-
-    this.dates = array.reverse();
-
-    data.forEach(result => {
-      values.push(result.total_taxed);
-    });
-
-    this.values = values.reverse();
-
-    this.currency = data[0] && data[0].currency || '';
-  }
-
-  ngOnInit() {
+  ngOnChanges() {
     this.formatData(this.billings);
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
@@ -122,6 +96,33 @@ export class GraphComponent implements OnInit {
         }
       },
     });
+  }
+
+  private formatData(data) {
+    const array = [];
+    const values = [];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+    if (!data) {
+      return [];
+    }
+
+    data.forEach(result => {
+      const parseResult = Number(result.billing_period.slice(-2));
+      array.push(months[parseResult - 1]);
+    });
+
+
+    this.dates = array.reverse();
+
+    data.forEach(result => {
+      values.push(result.total_taxed);
+    });
+
+    this.values = values.reverse();
+
+    this.currency = data[0] && data[0].currency || '';
   }
 
 }

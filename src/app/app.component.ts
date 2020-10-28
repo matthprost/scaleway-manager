@@ -67,11 +67,6 @@ export class AppComponent {
   initializeApp() {
     this.platform.ready().then(() => {
       StatusBar.setStyle({style: StatusBarStyle.Light});
-
-      if (this.platform.is('cordova')) {
-        this.screenOrientation.lock(this.screenOrientation.ORIENTATIONS.PORTRAIT);
-      }
-
       SplashScreen.hide();
     });
   }

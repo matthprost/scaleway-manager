@@ -15,11 +15,11 @@ export class HomeGuard implements CanActivate {
     return new Promise(async (resolve, reject) => {
       const jwt = await this.storage.get('jwt');
       const currentOrganization = await this.storage.get('currentOrganization');
-      if (!jwt || !currentOrganization) {
-        await this.storage.remove('jwt');
-        await this.storage.remove('user');
-        await this.storage.remove('currentOrganization');
+      const currentProject = await this.storage.get('currentProject');
+      if (!jwt || !currentOrganization || !currentProject) {
+        await this.storage.clear();
         this.router.navigate(['login']);
+        console.warn('HOME GUARD NOT VALIDATED');
         resolve(false);
       }
       resolve(true);
