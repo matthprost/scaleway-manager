@@ -23,7 +23,7 @@ export class LoginPage implements OnInit {
               private navParams: NavParamsService, private modalController: ModalController) {
   }
 
-  ionViewWillEnter() {
+  ionViewDidEnter() {
     StatusBar.setStyle({style: StatusBarStyle.Dark});
     this.menuCtrl.enable(false);
   }
