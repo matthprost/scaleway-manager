@@ -37,6 +37,9 @@ export class LoginPage implements OnInit {
     });
 
     await modal.present();
+    await modal.onDidDismiss().then(() => {
+      StatusBar.setStyle({style: StatusBarStyle.Dark});
+    });
   }
 
   public async login() {
