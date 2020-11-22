@@ -28,7 +28,8 @@ export class AuthService {
       const data = await this.api.get<any>(this.api.getAccountApiUrl() + '/users/' + result.jwt.issuer);
       await this.storage.set('user', data.user);
 
-      const currentOrganization = data.user.organizations.find(organization => organization.role_name === 'owner');
+      const currentOrganization = data.user.organizations.find(organization => organization.role_name === 'owner')
+        || data.user.organizations[0];
       await this.storage.set('currentOrganization', currentOrganization.id);
 
       await this.projectService.setDefaultProject(currentOrganization.id);
