@@ -4,6 +4,7 @@ import {Storage} from '@ionic/storage';
 import {AccountService} from '../account/account.service';
 import {NavController} from '@ionic/angular';
 import {ProjectService} from '../project/project.service';
+import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +22,7 @@ export class AuthService {
         password,
         renewable: true,
         '2FA_token': String(code),
+        captcha: environment.captcha
       });
 
       await this.storage.set('jwt', result);
