@@ -1,10 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, NgZone, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {LoadingController, MenuController, ModalController, NavController, ToastController} from '@ionic/angular';
 import {AuthService} from '../../../services/user/auth/auth.service';
 import {NavParamsService} from '../../../services/nav/nav-params.service';
 import {HelpPage} from './help/help.page';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
+import {environment} from '../../../../environments/environment';
 
 const {StatusBar} = Plugins;
 
@@ -17,15 +18,26 @@ export class LoginPage implements OnInit {
 
   public email: string = null;
   public password: string = null;
+  private captchaPassed = false;
+  private captchaResponse: string;
+  public captchaKey = environment.captcha;
 
   constructor(private router: Router, private toastCtrl: ToastController, private loadingCtrl: LoadingController,
               private auth: AuthService, private menuCtrl: MenuController, private navCtrl: NavController,
-              private navParams: NavParamsService, private modalController: ModalController) {
+              private navParams: NavParamsService, private modalController: ModalController, private zone: NgZone) {
   }
 
   ionViewDidEnter() {
     StatusBar.setStyle({style: StatusBarStyle.Dark});
     this.menuCtrl.enable(false);
+  }
+
+  captchaResolved(response: string): void {
+    this.zone.run(() => {
+      this.captchaPassed = true;
+      this.captchaResponse = response;
+    });
+
   }
 
   ngOnInit() {
@@ -68,7 +80,7 @@ export class LoginPage implements OnInit {
 
       await loader.present();
 
-      this.auth.login(this.email, this.password).then(result => {
+      this.auth.login(this.email, this.password, this.captchaResponse).then(result => {
         loader.dismiss();
         this.router.navigate(['/home']);
       })

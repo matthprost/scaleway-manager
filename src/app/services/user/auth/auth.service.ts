@@ -15,14 +15,14 @@ export class AuthService {
               private projectService: ProjectService) {
   }
 
-  public async login(email: string, password: string, code?: string): Promise<any> {
+  public async login(email: string, password: string, captcha, code?: string): Promise<any> {
     try {
       const result = await this.api.post<any>(this.api.getAccountApiUrl() + '/jwt', {
         email,
         password,
         renewable: true,
         '2FA_token': String(code),
-        captcha: environment.captcha
+        captcha
       });
 
       await this.storage.set('jwt', result);

@@ -6,8 +6,8 @@ android {
         applicationId "com.matthiasprost.scalewaymanager"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 20202
-        versionName "2.2.2"
+        versionCode 20204
+        versionName "2.2.4"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
