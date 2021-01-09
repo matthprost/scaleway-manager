@@ -7,6 +7,7 @@ import { IonicModule } from '@ionic/angular';
 
 import { LoginPage } from './login.page';
 import {HelpPage} from './help/help.page';
+import {RecaptchaModule} from 'ng-recaptcha';
 
 const routes: Routes = [
   {
@@ -16,12 +17,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes)
-  ],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes),
+        RecaptchaModule
+    ],
   declarations: [LoginPage, HelpPage],
   entryComponents: [HelpPage]
 })

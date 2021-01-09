@@ -53,6 +53,7 @@
     "core-js": "^2.5.4",
     "ionic-native-http-connection-backend": "^5.0.4",
     "jetifier": "^1.6.6",
+    "ng-recaptcha": "^4.1.0",
     "rxjs": "^6.6.2",
     "tslib": "^1.13.0",
     "xml2js": "^0.4.23",

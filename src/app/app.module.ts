@@ -15,6 +15,7 @@ import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import {EmailComposer} from '@ionic-native/email-composer/ngx';
+import {RecaptchaModule} from 'ng-recaptcha';
 
 @NgModule({
   declarations: [AppComponent],
@@ -26,6 +27,7 @@ import {EmailComposer} from '@ionic-native/email-composer/ngx';
     AppRoutingModule,
     NativeHttpModule,
     FontAwesomeModule,
+    RecaptchaModule.forRoot(),
   ],
   providers: [
     AppVersion,
