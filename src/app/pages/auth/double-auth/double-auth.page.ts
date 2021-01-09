@@ -32,7 +32,7 @@ export class DoubleAuthPage implements OnInit {
     });
     await loader.present();
 
-    this.auth.login(this.logins.email, this.logins.password, this.code)
+    this.auth.login(this.logins.email, this.logins.password, this.logins.captcha, this.code)
       .then(() => {
         loader.dismiss();
 

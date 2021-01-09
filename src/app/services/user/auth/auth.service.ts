@@ -4,7 +4,6 @@ import {Storage} from '@ionic/storage';
 import {AccountService} from '../account/account.service';
 import {NavController} from '@ionic/angular';
 import {ProjectService} from '../project/project.service';
-import {environment} from '../../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
