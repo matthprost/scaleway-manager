@@ -1,10 +1,12 @@
-import {Injectable} from '@angular/core';
-import * as aws4 from '../../../../node_modules/aws4';
 import {HttpClient} from '@angular/common/http';
-import {Storage} from '@ionic/storage';
-import {AuthService} from '../user/auth/auth.service';
-import * as xml2js from '../../../../node_modules/xml2js';
+import {Injectable} from '@angular/core';
 import {Platform, ToastController} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
+
+import * as aws4 from '../../../../node_modules/aws4';
+import * as xml2js from '../../../../node_modules/xml2js';
+import {AuthService} from '../user/auth/auth.service';
+import {ProjectService} from '../user/project/project.service';
 import {TokensService} from '../user/project/tokens/tokens.service';
 
 enum HttpMethods {
@@ -23,13 +25,16 @@ enum HttpMethods {
 export class ObjectApiService {
 
   constructor(private httpClient: HttpClient, private storage: Storage, private authService: AuthService,
-              private toastController: ToastController, private platform: Platform, private tokensService: TokensService) {
+              private toastController: ToastController, private platform: Platform, private tokensService: TokensService,
+              private projectService: ProjectService) {
   }
 
   private async renewToken() {
     console.warn('RENEWING TOKEN FOR S3');
     const newToken = await this.tokensService.addToken();
-    await this.storage.set('apiToken', newToken);
+    const currentProjectId = await this.projectService.getCurrentProjectId();
+    const oldStorage = await this.storage.get('apiTokenByProject')
+    await this.storage.set('apiTokenByProject', { ...oldStorage, [currentProjectId]: newToken });
 
     return newToken;
   }
@@ -46,7 +51,10 @@ export class ObjectApiService {
     };
 
     // We get token in storage
-    let apiToken = await this.storage.get('apiToken');
+    const currentProject = await this.projectService.getCurrentProjectId();
+    const apiTokenStorage = await this.storage.get('apiTokenByProject');
+
+    let apiToken = apiTokenStorage && apiTokenStorage[currentProject]
     const currentOrganizationId = await this.storage.get('currentOrganization');
 
     // If aws token doesn't exist we create new and store it
