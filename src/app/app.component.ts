@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-
 import {Platform} from '@ionic/angular';
 import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
@@ -64,7 +63,7 @@ export class AppComponent {
     this.initializeApp();
   }
 
-  initializeApp() {
+  initializeApp(): void {
     this.platform.ready().then(() => {
       StatusBar.setStyle({style: StatusBarStyle.Light});
       SplashScreen.hide();

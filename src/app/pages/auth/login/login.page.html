@@ -5,7 +5,7 @@
 
 <ion-content>
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary" (click)="showHelp($event)" mode="ios">
+    <ion-fab-button color="secondary" (click)="showHelp()" mode="ios">
       <ion-icon name="ios-help"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -36,7 +36,7 @@
                       <ion-icon name="md-key" slot="start"></ion-icon>
                     </ion-item>
                     <div class="ion-no-margin ion-no-padding" style="transform:scale(0.8);transform-origin:0;">
-                      <re-captcha (resolved)="captchaResolved($event)" siteKey="{{captchaKey}}"></re-captcha>
+                      <re-captcha (resolved)="captchaResolved($event)" siteKey="{{captchaKey}}" #captchaRef="reCaptcha"></re-captcha>
                     </div>
                     <div class="ion-padding-top ion-padding-bottom">
                       <ion-button color="secondary" type="submit" expand="full" mode="ios">Log In</ion-button>
