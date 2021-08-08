@@ -21,9 +21,6 @@ export class ApiService {
   // GENERAL API
   private readonly api: string = '/api';
 
-  // ACCOUNT API
-  private readonly accountApiUrl: string = '/account';
-
   // BILLING API
   private readonly billing: string = '/billing';
 
@@ -42,9 +39,6 @@ export class ApiService {
     if (this.platform.is('cordova') === true) {
       // GENERAL API
       this.api = 'https://api.scaleway.com';
-
-      // ACCOUNT API
-      this.accountApiUrl = 'https://account.scaleway.com';
 
       // BILLING API
       this.billing = 'https://billing.scaleway.com';
@@ -101,7 +95,7 @@ export class ApiService {
       const token = await this.storage.get('jwt');
       console.log('Token in storage:', token);
 
-      const result = this.httpClient.request<any>('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
+      const result = this.httpClient.request<any>('POST', this.getAccountApiUrl() + '/jwt/' + token.jwt.jti + '/renew', {
         body: {jwt_renew: token.auth.jwt_renew}
       }).toPromise();
 
@@ -116,7 +110,7 @@ export class ApiService {
   }
 
   public getAccountApiUrl(): string {
-    return (this.accountApiUrl);
+    return (this.api + '/account/v1');
   }
 
   public getInstanceUrl(): string {

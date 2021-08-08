@@ -40,7 +40,6 @@ export class LoginPage {
       this.captchaPassed = true;
       this.captchaResponse = response;
     });
-
   }
 
   public async showHelp(): Promise<void> {
@@ -55,7 +54,6 @@ export class LoginPage {
   }
 
   public async login(): Promise<void> {
-    // Check if EMAIL and PASSWORD are valid
     if (!this.email || !this.password) {
       const toast = await this.toastCtrl.create({
         message: 'Error: Incorrect username and/or password',
@@ -83,7 +81,7 @@ export class LoginPage {
         await this.router.navigate(['/home']);
       } catch (error) {
         if (error.status === 403 && error.error.type === '2FA_error') {
-          this.navParams.setParams({email: this.email, password: this.password, captcha: this.captchaResponse});
+          this.navParams.setParams({email: this.email, password: this.password});
           await this.navCtrl.navigateForward(['/login/double-auth']);
         } else {
           this.captchaRef.reset()
