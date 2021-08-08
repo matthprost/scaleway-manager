@@ -44,11 +44,8 @@ export class BucketsPage implements OnInit {
     displayLoading ? this.isLoading = true : this.isLoading = false;
 
     try {
-      console.log('yes')
       this.buckets = await this.objectService.getAllBuckets();
-
     } catch (e) {
-      console.log('error')
       this.error = true;
     } finally {
       this.isLoading = false;
