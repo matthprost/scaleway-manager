@@ -1,8 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {ObjectService} from '../../../services/object/object.service';
-import {ModalController, NavController} from '@ionic/angular';
-import {AddBucketPage} from './add-bucket/add-bucket.page';
 import {Plugins, StatusBarStyle} from '@capacitor/core';
+import {ModalController, NavController} from '@ionic/angular';
+
+import {ObjectService} from '../../../services/object/object.service';
+
+import {AddBucketPage} from './add-bucket/add-bucket.page';
+
 
 const {StatusBar} = Plugins;
 

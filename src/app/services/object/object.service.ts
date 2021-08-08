@@ -1,5 +1,7 @@
 import {Injectable} from '@angular/core';
+
 import {ObjectApiService} from '../api/object-api.service';
+
 import {zones} from './config';
 
 
@@ -12,7 +14,7 @@ export class ObjectService {
   constructor(private objectApi: ObjectApiService) {
   }
 
-  private mergeZones(zonesValue: Array<any>) {
+  private mergeZones(zonesValue: any[]): any[] {
     // We filter array to removed undefined values
     const valuesList = zonesValue.filter(zone => zone);
     return [].concat(...valuesList);
@@ -33,11 +35,7 @@ export class ObjectService {
   }
 
   public async getAllObjects(bucketName: string, region: string, prefix?: string) {
-    try {
-      return this.objectApi.get(region, bucketName, prefix ? '/?delimiter=/&marker=&prefix=' + prefix : '/?delimiter=/&marker=');
-    } catch (e) {
-      throw e;
-    }
+    return this.objectApi.get(region, bucketName, prefix ? '/?delimiter=/&marker=&prefix=' + prefix : '/?delimiter=/&marker=');
   }
 
   public async createBucket(region: string, name: string) {

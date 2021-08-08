@@ -1,8 +1,11 @@
 import {Injectable} from '@angular/core';
-import {ApiService} from '../../api/api.service';
 import {Storage} from '@ionic/storage';
-import {ProjectDto, ProjectsDto} from './project.dto';
+
+import {ApiService} from '../../api/api.service';
 import {UserDto, UsersDto} from '../account/account.dto';
+
+import {ProjectDto, ProjectsDto} from './project.dto';
+
 
 @Injectable({
   providedIn: 'root'
@@ -30,6 +33,11 @@ export class ProjectService {
     return this.storage.get('currentProject');
   }
 
+  public async getCurrentProjectId(): Promise<string> {
+    const currentProject = await this.storage.get('currentProject')
+    return currentProject.id
+  }
+
   public async setDefaultProject(organizationId?: string) {
     if (!organizationId) {
       organizationId = await this.storage.get('currentOrganization');
@@ -50,7 +58,7 @@ export class ProjectService {
     await this.setCurrentProject(currentProject);
   }
 
-  public async patchSshKeys(keys: Array<{ 'key': string }>): Promise<UserDto> {
+  public async patchSshKeys(keys: { 'key': string }[]): Promise<UserDto> {
     try {
       const token = await this.storage.get('jwt');
       const result = await this.api.patch<UsersDto>(this.api.getAccountApiUrl() + '/users/' + token.jwt.issuer, {
