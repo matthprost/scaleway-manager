@@ -95,6 +95,8 @@ export class SshKeysPage implements OnInit {
     await modal.onDidDismiss().then(() => {
       this.refresh();
     });
+
+    if (modal && modal.present()) return null
   }
 
 }

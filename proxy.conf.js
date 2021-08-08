@@ -8,15 +8,6 @@ const PROXY_CONFIG = {
     },
     "logLevel": "debug"
   },
-  "/account/*": {
-    "target": "https://account.scaleway.com",
-    "changeOrigin": true,
-    "secure": false,
-    "pathRewrite": {
-      "^/account": ""
-    },
-    "logLevel": "debug"
-  },
   "/billing/*": {
     "target": "https://billing.scaleway.com",
     "changeOrigin": true,

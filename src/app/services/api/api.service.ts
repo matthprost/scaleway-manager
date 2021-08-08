@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {Storage} from '@ionic/storage';
 import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 import {NavController, Platform, ToastController} from '@ionic/angular';
+import {Storage} from '@ionic/storage';
 
 
 enum HttpMethods {
@@ -21,20 +21,17 @@ export class ApiService {
   // GENERAL API
   private readonly api: string = '/api';
 
-  // ACCOUNT API
-  private readonly accountApiUrl: string = '/account';
-
   // BILLING API
   private readonly billing: string = '/billing';
 
-  private createToastError = async (e) => await this.toastCtrl.create({
-    message: `Error: ${e.error.message || 'Unknown Error'}`,
+  private createToastError = async (error) => await this.toastCtrl.create({
+    message: `Error: ${error.error.message || 'Unknown Error'}`,
     duration: 5000,
     position: 'top',
     mode: 'ios',
     color: 'danger',
     showCloseButton: true
-  })
+  });
 
   constructor(private storage: Storage, private httpClient: HttpClient, private navCtrl: NavController,
               private platform: Platform, private toastCtrl: ToastController) {
@@ -43,28 +40,25 @@ export class ApiService {
       // GENERAL API
       this.api = 'https://api.scaleway.com';
 
-      // ACCOUNT API
-      this.accountApiUrl = 'https://account.scaleway.com';
-
       // BILLING API
       this.billing = 'https://billing.scaleway.com';
     }
   }
 
-  private async request<T>(method: HttpMethods, url: string, data: {} = {}): Promise<T> {
+  private async request<T>(method: HttpMethods, url: string, data: Record<string, any> = {}): Promise<T> {
     const token = await this.storage.get('jwt');
 
-    // This is for login when token doesn't exist
-    if (!token) {
-      return this.httpClient.request<T>(HttpMethods[method.toString()], url, {
-        headers: token ?
-          {
-            'X-Session-Token': token.auth.jwt_key
-          } : {},
-        body: data
-      }).toPromise();
-    }
     try {
+      // This is for login when token doesn't exist
+      if (!token) {
+        return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
+          headers: token ?
+            {
+              'X-Session-Token': token.auth.jwt_key
+            } : {},
+          body: data
+        }).toPromise();
+      }
       return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
         headers: token && token.auth && token.auth.jwt_key ?
           {
@@ -72,10 +66,10 @@ export class ApiService {
           } : {},
         body: data
       }).toPromise();
-    } catch (e) {
-      console.log(e);
+    } catch (error) {
+      console.log(error);
 
-      if (e && e.status && e.status === 401 && (e.error.type === 'invalid_auth' || e.error.type === 'denied_authentication')) {
+      if (error && error.status && error.status === 401 && (error.error.type === 'invalid_auth' || error.error.type === 'denied_authentication') && token) {
         console.warn('ERROR 401: Token is be not valid anymore, trying to renew it.');
 
         try {
@@ -89,9 +83,9 @@ export class ApiService {
           throw e;
         }
       } else {
-        const toast = await this.createToastError(e);
+        const toast = await this.createToastError(error);
         await toast.present();
-        throw e;
+        throw error;
       }
     }
   }
@@ -101,7 +95,7 @@ export class ApiService {
       const token = await this.storage.get('jwt');
       console.log('Token in storage:', token);
 
-      const result = this.httpClient.request<any>('POST', this.accountApiUrl + '/jwt/' + token.jwt.jti + '/renew', {
+      const result = this.httpClient.request<any>('POST', this.getAccountApiUrl() + '/jwt/' + token.jwt.jti + '/renew', {
         body: {jwt_renew: token.auth.jwt_renew}
       }).toPromise();
 
@@ -115,23 +109,23 @@ export class ApiService {
     }
   }
 
-  public getAccountApiUrl() {
-    return (this.accountApiUrl);
+  public getAccountApiUrl(): string {
+    return (this.api + '/account/v1');
   }
 
-  public getInstanceUrl() {
+  public getInstanceUrl(): string {
     return (this.api + '/instance/v1/zones/');
   }
 
-  public getBmaasUrl() {
+  public getBmaasUrl(): string {
     return (this.api + '/baremetal/v1alpha1/zones/');
   }
 
-  public getBillingApiUrl() {
+  public getBillingApiUrl(): string {
     return (this.billing);
   }
 
-  public getApiUrl() {
+  public getApiUrl(): string {
     return (this.api);
   }
 
@@ -139,16 +133,16 @@ export class ApiService {
     return this.request<T>(HttpMethods.GET, url);
   }
 
-  public post<T>(url: string, data?: {}): Promise<T> {
-    return this.request<T>(HttpMethods.POST, url, data ? data : null);
+  public post<T>(url: string, data?: Record<string, any>): Promise<T> {
+    return this.request<T>(HttpMethods.POST, url, data);
   }
 
-  public patch<T>(url: string, data?: {}): Promise<T> {
-    return this.request<T>(HttpMethods.PATCH, url, data ? data : null);
+  public patch<T>(url: string, data?: Record<string, any>): Promise<T> {
+    return this.request<T>(HttpMethods.PATCH, url, data);
   }
 
-  public options<T>(url: string, data?: {}): Promise<T> {
-    return this.request<T>(HttpMethods.OPTIONS, url, data ? data : null);
+  public options<T>(url: string, data?: Record<string, any>): Promise<T> {
+    return this.request<T>(HttpMethods.OPTIONS, url, data);
   }
 
   public delete<T>(url: string): Promise<T> {
