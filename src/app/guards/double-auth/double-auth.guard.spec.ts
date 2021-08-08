@@ -1,15 +1,15 @@
-import { TestBed, async, inject } from '@angular/core/testing';
+import { TestBed, async, inject } from "@angular/core/testing";
 
-import { DoubleAuthGuard } from './double-auth.guard';
+import { DoubleAuthGuard } from "./double-auth.guard";
 
-describe('DoubleAuthGuard', () => {
+describe("DoubleAuthGuard", () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DoubleAuthGuard]
+      providers: [DoubleAuthGuard],
     });
   });
 
-  it('should ...', inject([DoubleAuthGuard], (guard: DoubleAuthGuard) => {
+  it("should ...", inject([DoubleAuthGuard], (guard: DoubleAuthGuard) => {
     expect(guard).toBeTruthy();
   }));
 });

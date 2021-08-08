@@ -1,5 +1,5 @@
 export interface BillingDto {
-  invoices: Array<InvoicesDto>;
+  invoices: InvoicesDto[];
 }
 
 export interface InvoicesDto {

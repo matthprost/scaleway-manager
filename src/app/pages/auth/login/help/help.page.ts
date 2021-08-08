@@ -1,25 +1,26 @@
-import {Component, OnInit} from '@angular/core';
-import {ModalController, Platform} from '@ionic/angular';
-import {EmailComposer} from '@ionic-native/email-composer/ngx';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
+import { Component, OnInit } from "@angular/core";
+import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { EmailComposer } from "@ionic-native/email-composer/ngx";
+import { ModalController, Platform } from "@ionic/angular";
 
-const {StatusBar} = Plugins;
+const { StatusBar } = Plugins;
 
 @Component({
-  selector: 'app-help',
-  templateUrl: './help.page.html',
-  styleUrls: ['./help.page.scss'],
+  selector: "app-help",
+  templateUrl: "./help.page.html",
+  styleUrls: ["./help.page.scss"],
 })
 export class HelpPage implements OnInit {
+  constructor(
+    private modalCtrl: ModalController,
+    private platform: Platform,
+    private emailComposer: EmailComposer
+  ) {}
 
-  constructor(private modalCtrl: ModalController, private platform: Platform, private emailComposer: EmailComposer) {
-  }
-
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewDidEnter() {
-    StatusBar.setStyle({style: StatusBarStyle.Light});
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
   }
 
   public async close() {
@@ -30,22 +31,21 @@ export class HelpPage implements OnInit {
   }
 
   public async sendEmail() {
-    if (this.platform.is('cordova')) {
+    if (this.platform.is("cordova")) {
       this.emailComposer.isAvailable().then((available: boolean) => {
         if (available) {
         }
       });
 
       const email = {
-        to: 'contact@matthias-prost.com',
-        subject: '[Scaleway Manager]',
-        isHtml: true
+        to: "contact@matthias-prost.com",
+        subject: "[Scaleway Manager]",
+        isHtml: true,
       };
 
       await this.emailComposer.open(email);
     } else {
-      console.warn('Cordova not available');
+      console.warn("Cordova not available");
     }
   }
-
 }

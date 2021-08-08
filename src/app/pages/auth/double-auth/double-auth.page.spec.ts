@@ -1,18 +1,17 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { DoubleAuthPage } from './double-auth.page';
+import { DoubleAuthPage } from "./double-auth.page";
 
-describe('DoubleAuthPage', () => {
+describe("DoubleAuthPage", () => {
   let component: DoubleAuthPage;
   let fixture: ComponentFixture<DoubleAuthPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DoubleAuthPage ],
+      declarations: [DoubleAuthPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,7 +20,7 @@ describe('DoubleAuthPage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

@@ -3,9 +3,7 @@
     <ion-buttons slot="start">
       <ion-menu-button color="primary"></ion-menu-button>
     </ion-buttons>
-    <ion-title color="primary">
-      Settings
-    </ion-title>
+    <ion-title color="primary"> Settings </ion-title>
     <ion-buttons slot="end" *ngIf="changeHasBeenDone">
       <ion-button (click)="save()">Save</ion-button>
     </ion-buttons>
@@ -17,14 +15,17 @@
 
   <div class="content">
     <ion-list>
-      <ion-list-header>
-        Dashboard
-      </ion-list-header>
+      <ion-list-header> Dashboard </ion-list-header>
 
       <ion-item lines="none" (click)="openPicker()">
         <div class="item-right" slot="end">
           <ion-label class="label-right">{{ instancesToDisplay }}</ion-label>
-          <ion-icon name="arrow-down" mode="ios" color="medium" size="small"></ion-icon>
+          <ion-icon
+            name="arrow-down"
+            mode="ios"
+            color="medium"
+            size="small"
+          ></ion-icon>
         </div>
         <ion-label>Instances to display</ion-label>
       </ion-item>
@@ -32,9 +33,8 @@
   </div>
 
   <div class="footer">
-    <img src="assets/img/logo-purple.svg" alt="logo">
+    <img src="assets/img/logo-purple.svg" alt="logo" />
     <h2>Scaleway Manager</h2>
   </div>
   <small *ngIf="version">v.{{ version }}</small>
-
 </ion-content>

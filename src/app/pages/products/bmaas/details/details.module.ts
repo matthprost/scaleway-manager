@@ -1,20 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
+import { Clipboard } from "@ionic-native/clipboard/ngx";
+import { IonicModule } from "@ionic/angular";
 
-import { IonicModule } from '@ionic/angular';
+import { ComponentsModule } from "../../../../components/components.module";
+import { PipesModule } from "../../../../pipes/pipes.module";
 
-import { DetailsPage } from './details.page';
-import {ComponentsModule} from '../../../../components/components.module';
-import {PipesModule} from '../../../../pipes/pipes.module';
-import {Clipboard} from '@ionic-native/clipboard/ngx';
+import { DetailsPage } from "./details.page";
 
 const routes: Routes = [
   {
-    path: '',
-    component: DetailsPage
-  }
+    path: "",
+    component: DetailsPage,
+  },
 ];
 
 @NgModule({
@@ -24,11 +24,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     ComponentsModule,
-    PipesModule
+    PipesModule,
   ],
   declarations: [DetailsPage],
-  providers: [
-    Clipboard
-  ]
+  providers: [Clipboard],
 })
 export class DetailsPageModule {}

@@ -1,30 +1,31 @@
-import {Component, OnInit} from '@angular/core';
-import {ServersService} from '../../../services/servers/servers.service';
-import {ServerDto} from '../../../services/servers/server.dto';
-import {NavController} from '@ionic/angular';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
+import { Component, OnInit } from "@angular/core";
+import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { NavController } from "@ionic/angular";
 
-const {StatusBar} = Plugins;
+import { ServerDto } from "../../../services/servers/server.dto";
+import { ServersService } from "../../../services/servers/servers.service";
+
+const { StatusBar } = Plugins;
 
 @Component({
-  selector: 'app-instances',
-  templateUrl: './instances.page.html',
-  styleUrls: ['./instances.page.scss'],
+  selector: "app-instances",
+  templateUrl: "./instances.page.html",
+  styleUrls: ["./instances.page.scss"],
 })
 export class InstancesPage implements OnInit {
-
-  public instances: Array<ServerDto>;
+  public instances: ServerDto[];
   public isLoading = true;
 
   private interval;
   private intervalSet = false;
   public serverError = false;
 
-  constructor(public navCtrl: NavController, private serversProvider: ServersService) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    private serversProvider: ServersService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewDidEnter() {
     StatusBar.setStyle({ style: StatusBarStyle.Light });
@@ -33,7 +34,7 @@ export class InstancesPage implements OnInit {
         this.isLoading = false;
         this.autoRefresh();
       })
-      .catch(error => {
+      .catch((error) => {
         this.serverError = true;
         this.isLoading = false;
         console.log(error);
@@ -45,33 +46,37 @@ export class InstancesPage implements OnInit {
   }
 
   private refreshAllServers(): Promise<any> {
-
     return new Promise((resolve, reject) => {
-      this.serversProvider.getAllServer(100).then(result => {
-        this.instances = result;
-        resolve('ok');
-      }).catch(e => {
-        reject(e);
-      });
+      this.serversProvider
+        .getAllServer(100)
+        .then((result) => {
+          this.instances = result;
+          resolve("ok");
+        })
+        .catch((e) => {
+          reject(e);
+        });
     });
   }
 
   public doRefresh(refresher) {
-    this.refreshAllServers().then(() => {
-      refresher.target.complete();
-      this.autoRefresh();
-    }).catch(error => {
-      console.log(error);
-      refresher.target.complete();
-    });
+    this.refreshAllServers()
+      .then(() => {
+        refresher.target.complete();
+        this.autoRefresh();
+      })
+      .catch((error) => {
+        console.log(error);
+        refresher.target.complete();
+      });
   }
 
   private async autoRefresh() {
-    console.log('[AUTO REFRESH]: Entering function');
+    console.log("[AUTO REFRESH]: Entering function");
     let counter = 0;
 
-    this.instances.forEach(server => {
-      if (server.state === 'starting' || server.state === 'stopping') {
+    this.instances.forEach((server) => {
+      if (server.state === "starting" || server.state === "stopping") {
         counter++;
       }
     });
@@ -80,26 +85,25 @@ export class InstancesPage implements OnInit {
       this.intervalSet = true;
 
       this.interval = setInterval(() => {
-        console.log('[AUTO REFRESH]: Entering interval');
+        console.log("[AUTO REFRESH]: Entering interval");
 
         let newCounter = 0;
 
-        this.instances.forEach(server => {
-          if (server.state === 'starting' || server.state === 'stopping') {
+        this.instances.forEach((server) => {
+          if (server.state === "starting" || server.state === "stopping") {
             newCounter++;
           }
         });
         if (newCounter > 0) {
           this.refreshAllServers();
         } else {
-          console.log('[AUTO REFRESH]: Interval cleared!');
+          console.log("[AUTO REFRESH]: Interval cleared!");
           clearInterval(this.interval);
           this.intervalSet = false;
         }
       }, 15000);
     } else {
-      console.log('[AUTO REFRESH]: No interval needed');
+      console.log("[AUTO REFRESH]: No interval needed");
     }
   }
-
 }

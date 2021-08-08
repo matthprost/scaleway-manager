@@ -1,5 +1,5 @@
 export interface ServerDto {
-  maintenances: Array<any>;
+  maintenances: any[];
   state_detail: string;
   image: Image;
   creation_date: string;
@@ -16,7 +16,7 @@ export interface ServerDto {
   commercial_type: string;
   arch: string;
   name: string;
-  volumes: Array<Volume>;
+  volumes: Volume[];
   security_group: SecurityGroup;
   country: string;
   zone: string;
@@ -33,7 +33,7 @@ export interface Image {
   modification_date: string;
   state: string;
   organization: string;
-  extra_volumes: Array<any>;
+  extra_volumes: any[];
   public: boolean;
 }
 

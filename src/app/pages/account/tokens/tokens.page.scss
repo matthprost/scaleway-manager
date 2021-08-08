@@ -1,7 +1,7 @@
 .title {
   text-transform: uppercase;
   font-weight: 400;
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .text {
@@ -10,22 +10,22 @@
 }
 
 p {
-  font-size: .9rem;
+  font-size: 0.9rem;
 }
 
 .description {
   &-left {
     color: #868686;
-    margin-top: .2rem;
+    margin-top: 0.2rem;
     float: left;
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 
   &-right {
     color: #868686;
-    margin-top: .2rem;
+    margin-top: 0.2rem;
     float: right;
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -39,6 +39,6 @@ p {
   p {
     text-transform: uppercase;
     font-weight: bold;
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 }

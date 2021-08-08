@@ -1,25 +1,42 @@
 <ion-list *ngIf="dataList !== undefined && dataList.length !== 0" mode="ios">
-  <ion-item-sliding *ngFor="let data of dataList; let i = index;">
-    <ion-item [routerDirection]="'forward'" [routerLink]="'/' + route + '/' + data.country + '/' + data.id" lines="none"
-              detail="true" mode="ios"
-              [ngClass]="(i % 2 == 0) ? 'background-white' : 'background-grey'">
+  <ion-item-sliding *ngFor="let data of dataList; let i = index">
+    <ion-item
+      [routerDirection]="'forward'"
+      [routerLink]="'/' + route + '/' + data.country + '/' + data.id"
+      lines="none"
+      detail="true"
+      mode="ios"
+      [ngClass]="i % 2 == 0 ? 'background-white' : 'background-grey'"
+    >
       <ion-note slot="start" mode="ios" *ngIf="hasState">
-        <div [class]='setClass(get(data, stateVariableName))'
-             [style.background]="setState(get(data, stateVariableName))" class="state"></div>
+        <div
+          [class]="setClass(get(data, stateVariableName))"
+          [style.background]="setState(get(data, stateVariableName))"
+          class="state"
+        ></div>
       </ion-note>
       <ion-avatar slot="start" *ngIf="hasAvatar">
-        <img class="img-os" alt="os"
-             src="{{ (get(data, avatarVariableName) | serverIcon) || (data.id | serverIcon) }}">
+        <img
+          class="img-os"
+          alt="os"
+          src="{{
+            (get(data, avatarVariableName) | serverIcon) ||
+              (data.id | serverIcon)
+          }}"
+        />
       </ion-avatar>
       <ion-label mode="ios">
-        <h2>{{ get(data, title) || title  }}</h2>
+        <h2>{{ get(data, title) || title }}</h2>
         <p>{{ get(data, subTitle) || subTitle }}</p>
       </ion-label>
       <ion-note slot="end" mode="ios">
         <div class="note-end">
-          {{ data.country || '' }}
-          <img src="{{ data.country | zoneFlag }}"
-               alt="country" style="vertical-align: middle">
+          {{ data.country || "" }}
+          <img
+            src="{{ data.country | zoneFlag }}"
+            alt="country"
+            style="vertical-align: middle"
+          />
         </div>
       </ion-note>
     </ion-item>

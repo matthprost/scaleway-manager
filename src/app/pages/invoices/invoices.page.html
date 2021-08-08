@@ -8,7 +8,6 @@
 </ion-header>
 
 <ion-content>
-
   <app-loader *ngIf="isLoading"></app-loader>
   <app-error *ngIf="billingError" variant="dark"></app-error>
 
@@ -21,7 +20,10 @@
       <ion-item-divider class="title" color="secondary">
         <div style="width: 100%">
           <div style="float: left">Current Invoice</div>
-          <div class="last-update">Updated at <br/>{{ currentInvoice.last_update | date:'h:mm a, dd/MM/yy' }}</div>
+          <div class="last-update">
+            Updated at <br />{{ currentInvoice.last_update | date:'h:mm a,
+            dd/MM/yy' }}
+          </div>
         </div>
       </ion-item-divider>
       <ion-item lines="none">
@@ -33,43 +35,50 @@
             {{ currentInvoice.start_date | date:'MMMM y' }}
           </div>
         </div>
-        <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
+        <div
+          data-clipboard-target="#copyTarget"
+          class="information-content"
+          slot="end"
+        >
           <div class="price">
             {{ currentInvoice.total_taxed }} {{ currentInvoice.currency }}
           </div>
-          <div class="price-ht">
-            {{ currentInvoice.total_untaxed }} HT
-          </div>
+          <div class="price-ht">{{ currentInvoice.total_untaxed }} HT</div>
         </div>
       </ion-item>
     </ion-item-group>
 
     <ion-item-group>
-      <ion-item-divider class="title" color="secondary">Older Invoices</ion-item-divider>
+      <ion-item-divider class="title" color="secondary"
+        >Older Invoices</ion-item-divider
+      >
       <ion-item *ngFor="let invoice of invoices" lines="full">
         <div class="information-title">
-          <div class="information-title-content">
-            {{ invoice.state }}
-          </div>
-          <div class="date">
-            {{ invoice.start_date | date:'MMMM y' }}
-          </div>
+          <div class="information-title-content">{{ invoice.state }}</div>
+          <div class="date">{{ invoice.start_date | date:'MMMM y' }}</div>
         </div>
-        <div data-clipboard-target="#copyTarget" class="information-content" slot="end">
+        <div
+          data-clipboard-target="#copyTarget"
+          class="information-content"
+          slot="end"
+        >
           <div class="price">
             {{ invoice.total_taxed }} {{ invoice.currency }}
           </div>
-          <div class="price-ht">
-            {{ invoice.total_untaxed }} HT
-          </div>
+          <div class="price-ht">{{ invoice.total_untaxed }} HT</div>
         </div>
       </ion-item>
     </ion-item-group>
   </div>
-  <div class="not-found ion-text-center ion-margin-top"  *ngIf="invoices && invoices.length === 0">
-    <img alt="no_server" src="../../../../assets/img/invoice.svg">
+  <div
+    class="not-found ion-text-center ion-margin-top"
+    *ngIf="invoices && invoices.length === 0"
+  >
+    <img alt="no_server" src="../../../../assets/img/invoice.svg" />
     <p>No invoice available</p>
-    <small>It is possible that you don't have billing permissions on this organization</small>
+    <small
+      >It is possible that you don't have billing permissions on this
+      organization</small
+    >
   </div>
-
 </ion-content>

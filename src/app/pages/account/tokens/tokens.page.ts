@@ -1,43 +1,51 @@
-import {Component, OnInit} from '@angular/core';
-import {IonItemSliding, LoadingController, NavController} from '@ionic/angular';
-import {AuthService} from '../../../services/user/auth/auth.service';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
-import {TokenDto} from '../../../services/user/project/tokens/tokens.dto';
-import {TokensService} from '../../../services/user/project/tokens/tokens.service';
+import { Component, OnInit } from "@angular/core";
+import { Plugins, StatusBarStyle } from "@capacitor/core";
+import {
+  IonItemSliding,
+  LoadingController,
+  NavController,
+} from "@ionic/angular";
 
-const {StatusBar} = Plugins;
+import { AuthService } from "../../../services/user/auth/auth.service";
+import { TokenDto } from "../../../services/user/project/tokens/tokens.dto";
+import { TokensService } from "../../../services/user/project/tokens/tokens.service";
+
+const { StatusBar } = Plugins;
 
 @Component({
-  selector: 'app-tokens',
-  templateUrl: './tokens.page.html',
-  styleUrls: ['./tokens.page.scss'],
+  selector: "app-tokens",
+  templateUrl: "./tokens.page.html",
+  styleUrls: ["./tokens.page.scss"],
 })
 export class TokensPage implements OnInit {
-
   public isLoading = true;
-  public tokens: Array<TokenDto> = [];
+  public tokens: TokenDto[] = [];
 
-  constructor(public navCtrl: NavController, private authProvide: AuthService, private loadingCtrl: LoadingController,
-              private tokensService: TokensService) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    private authProvide: AuthService,
+    private loadingCtrl: LoadingController,
+    private tokensService: TokensService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewDidEnter() {
-    StatusBar.setStyle({style: StatusBarStyle.Light});
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
     this.refresh().then(() => {
       this.isLoading = false;
     });
   }
 
   public doRefresh(refresher) {
-    this.refresh().then(() => {
-      refresher.complete();
-    }).catch(error => {
-      console.log(error);
-      refresher.complete();
-    });
+    this.refresh()
+      .then(() => {
+        refresher.complete();
+      })
+      .catch((error) => {
+        console.log(error);
+        refresher.complete();
+      });
   }
 
   private async refresh(): Promise<any> {
@@ -47,21 +55,22 @@ export class TokensPage implements OnInit {
   public async deleteToken(token: TokenDto, slidingItem: IonItemSliding) {
     await slidingItem.close();
     const loading = await this.loadingCtrl.create({
-      message: 'Loading...',
-      mode: 'ios',
+      message: "Loading...",
+      mode: "ios",
     });
 
     await loading.present();
 
-    this.tokensService.deleteToken(token.access_key).then(() => {
-      this.refresh().then(() => {
-        loading.dismiss();
-      });
-    })
-      .catch(error => {
+    this.tokensService
+      .deleteToken(token.access_key)
+      .then(() => {
+        this.refresh().then(() => {
+          loading.dismiss();
+        });
+      })
+      .catch((error) => {
         loading.dismiss();
         console.log(error);
       });
   }
-
 }

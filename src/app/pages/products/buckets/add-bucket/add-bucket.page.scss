@@ -1,17 +1,17 @@
 ion-content {
-  --padding-start: .5rem;
-  --padding-top: .5rem;
-  --padding-end: .5rem;
-  --padding-bottom: .5rem;
+  --padding-start: 0.5rem;
+  --padding-top: 0.5rem;
+  --padding-end: 0.5rem;
+  --padding-bottom: 0.5rem;
 }
 
 ion-input {
   border: 1px solid lightgray;
   border-radius: 3px;
-  --padding-top: .75rem !important;
-  --padding-bottom: .75rem !important;
-  --padding-start: .5rem !important;
-  --padding-end: .5rem !important;
+  --padding-top: 0.75rem !important;
+  --padding-bottom: 0.75rem !important;
+  --padding-start: 0.5rem !important;
+  --padding-end: 0.5rem !important;
   --background: white;
 }
 
@@ -33,12 +33,12 @@ ion-item {
 
 ion-label {
   font-size: 1.1rem !important;
-  margin-bottom: .5rem !important;
+  margin-bottom: 0.5rem !important;
 }
 
 small {
   color: grey;
-  margin-top: .75rem;
+  margin-top: 0.75rem;
 }
 
 ion-row:not(:first-of-type) {
@@ -51,7 +51,7 @@ ion-row:not(:first-of-type) {
   border: 1px solid lightgray;
   border-radius: 3px;
   display: inline-block;
-  margin: .25rem;
+  margin: 0.25rem;
   width: 140px;
   color: grey;
 
@@ -59,7 +59,7 @@ ion-row:not(:first-of-type) {
     width: 30px;
     vertical-align: middle;
     display: inline-block;
-    margin-right: .75rem;
+    margin-right: 0.75rem;
   }
 
   ion-label {
@@ -67,7 +67,7 @@ ion-row:not(:first-of-type) {
   }
 
   div {
-    padding: .5rem .25rem;
+    padding: 0.5rem 0.25rem;
   }
 
   &-selected {
@@ -89,7 +89,7 @@ ion-row:not(:first-of-type) {
   img {
     width: 30px;
     vertical-align: middle;
-    margin-right: .5rem
+    margin-right: 0.5rem;
   }
 
   &-label-start {
@@ -123,7 +123,7 @@ ion-row:not(:first-of-type) {
     color: rgb(255, 255, 255);
     content: "1";
     border-radius: 50%;
-    margin-left: .25rem;
+    margin-left: 0.25rem;
   }
 }
 
@@ -143,7 +143,7 @@ ion-row:not(:first-of-type) {
     color: rgb(255, 255, 255);
     content: "2";
     border-radius: 50%;
-    margin-left: .25rem;
+    margin-left: 0.25rem;
   }
 }
 
@@ -163,7 +163,7 @@ ion-row:not(:first-of-type) {
     color: rgb(255, 255, 255);
     content: "3";
     border-radius: 50%;
-    margin-left: .25rem;
+    margin-left: 0.25rem;
   }
 }
 
@@ -183,6 +183,6 @@ ion-row:not(:first-of-type) {
     color: rgb(255, 255, 255);
     content: "4";
     border-radius: 50%;
-    margin-left: .25rem;
+    margin-left: 0.25rem;
   }
 }

@@ -12,20 +12,20 @@ ion-toolbar {
   position: absolute;
   top: 0;
   left: 0;
-  padding: .75rem .75rem 0 .75rem;
+  padding: 0.75rem 0.75rem 0 0.75rem;
   color: white;
   z-index: 100;
 }
 
 .ios .menu-button {
-  padding: 2rem 1rem 0 .5rem;
+  padding: 2rem 1rem 0 0.5rem;
 }
 
 .background {
   height: 25vh;
   width: 100%;
   background: var(--ion-color-primary);
-  background: radial-gradient(#8800C8, var(--ion-color-primary));
+  background: radial-gradient(#8800c8, var(--ion-color-primary));
 }
 
 .profile {
@@ -40,16 +40,16 @@ ion-toolbar {
 
 .name {
   text-align: center;
-  margin-bottom: .5rem;
+  margin-bottom: 0.5rem;
 
   .fullname {
     font-weight: 600;
     font-size: 1.1rem;
-    margin: 0 0 .25rem 0;
+    margin: 0 0 0.25rem 0;
   }
 
   .email {
-    margin-bottom: .5rem;
+    margin-bottom: 0.5rem;
   }
 }
 
@@ -57,7 +57,7 @@ ion-toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
 
   ion-chip {
     --background: var(--ion-color-secondary);
@@ -78,7 +78,7 @@ ion-toolbar {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: .5rem 0;
+  padding: 0.5rem 0;
 
   ion-chip {
     --background: var(--ion-color-danger);
@@ -99,13 +99,13 @@ ion-card {
   margin: 0;
 
   &:hover {
-    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
+    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
   }
 
   &:focus {
-    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
+    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -132,13 +132,13 @@ ion-card-content {
   text-align: center;
 
   &-text {
-    padding-bottom: .5rem;
+    padding-bottom: 0.5rem;
   }
 }
 
 .icon-separator {
   color: var(--ion-color-light-shade);
-  padding: 0 .5rem;
+  padding: 0 0.5rem;
 }
 
 .blue-header {

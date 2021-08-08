@@ -4,7 +4,7 @@
   align-items: center;
   justify-content: center;
   margin-top: 1rem;
-  opacity: .6;
+  opacity: 0.6;
   img {
     width: 25px;
   }
@@ -18,8 +18,8 @@ small {
   display: block;
   width: 100%;
   text-align: center;
-  margin-top: .5rem;
-  opacity: .6;
+  margin-top: 0.5rem;
+  opacity: 0.6;
   color: var(--ion-color-primary);
 }
 
@@ -31,6 +31,6 @@ small {
 }
 
 .label-right {
-  margin-right: .5rem;
+  margin-right: 0.5rem;
   color: var(--ion-color-medium);
 }

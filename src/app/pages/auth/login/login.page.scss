@@ -8,7 +8,8 @@ ion-toolbar {
   border: none;
 }
 
-.label-md[stacked], .label-md[floating] {
+.label-md[stacked],
+.label-md[floating] {
   margin-left: 1rem;
 }
 
@@ -40,11 +41,11 @@ ion-list {
 }
 
 ion-content {
-  --background: url('/assets/img/background.svg') repeat 0 0, linear-gradient(141deg, #8800C8 20%, var(--ion-color-primary) 80%) no-repeat;
+  --background: url("/assets/img/background.svg") repeat 0 0,
+    linear-gradient(141deg, #8800c8 20%, var(--ion-color-primary) 80%) no-repeat;
 }
 
 .login {
-
   &-header {
     display: flex;
     position: relative;
@@ -62,7 +63,7 @@ ion-content {
 }
 
 .text-input {
-  padding: .5rem 0;
+  padding: 0.5rem 0;
   border-bottom: 1px lightgrey solid;
 }
 

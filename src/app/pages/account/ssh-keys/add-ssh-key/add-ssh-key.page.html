@@ -5,21 +5,30 @@
         <ion-icon name="close" mode="md"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title color="primary">
-      Add SSH Key
-    </ion-title>
+    <ion-title color="primary"> Add SSH Key </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <ion-grid>
     <ion-item lines="none">
-      <ion-textarea rows="14" placeholder="Paste the SSH Key here..." name="message"
-                    [(ngModel)]="key"></ion-textarea>
+      <ion-textarea
+        rows="14"
+        placeholder="Paste the SSH Key here..."
+        name="message"
+        [(ngModel)]="key"
+      ></ion-textarea>
     </ion-item>
   </ion-grid>
 </ion-content>
 
 <ion-footer>
-  <ion-button class="ion-no-margin" expand="full" (click)="addSshKey()" color="secondary" mode="ios">Add SSH Key</ion-button>
+  <ion-button
+    class="ion-no-margin"
+    expand="full"
+    (click)="addSshKey()"
+    color="secondary"
+    mode="ios"
+    >Add SSH Key</ion-button
+  >
 </ion-footer>

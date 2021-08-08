@@ -4,8 +4,13 @@
       <ion-menu-button color="light"></ion-menu-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button [routerDirection]="'forward'" [routerLink]="'/home/account'" class="ion-float-end" color="light"
-                  fill="clear">
+      <ion-button
+        [routerDirection]="'forward'"
+        [routerLink]="'/home/account'"
+        class="ion-float-end"
+        color="light"
+        fill="clear"
+      >
         <ion-icon name="ios-contact" slot="icon-only"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -15,8 +20,12 @@
 <ion-content>
   <div class="home-header">
     <div class="home-header-canvas">
-      <app-graph [billings]="billings" *ngIf="!isLoading && !billingError"
-                 [currentOrganization]="currentOrganization" [currentProject]="currentProject"></app-graph>
+      <app-graph
+        [billings]="billings"
+        *ngIf="!isLoading && !billingError"
+        [currentOrganization]="currentOrganization"
+        [currentProject]="currentProject"
+      ></app-graph>
       <app-error *ngIf="billingError" variant="light"></app-error>
     </div>
   </div>
@@ -26,12 +35,14 @@
   <div *ngIf="!isLoading">
     <div class="home-middle">
       <ion-card mode="ios">
-        <ion-card-content class="servers ion-text-center ion-no-padding" mode="ios" (click)="navigate('instances')">
+        <ion-card-content
+          class="servers ion-text-center ion-no-padding"
+          mode="ios"
+          (click)="navigate('instances')"
+        >
           <ion-row>
             <ion-col class="ion-no-padding" size="9">
-              <div class="servers-left">
-                instances
-              </div>
+              <div class="servers-left">instances</div>
             </ion-col>
             <ion-col class="ion-no-padding" size="3">
               <div class="servers-right">
@@ -43,43 +54,62 @@
       </ion-card>
     </div>
 
-    <app-error *ngIf="serverError">
-    </app-error>
+    <app-error *ngIf="serverError"> </app-error>
 
     <div class="home-page">
       <ion-grid class="home-page-grid">
-        <ion-row *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError">
+        <ion-row
+          *ngIf="serversInstances && serversInstances.length > 0 && !isLoading && !serverError"
+        >
           <div class="title-instances">
             Last {{ instancesToDisplay }} Actives Instances
           </div>
-          <ion-slides pager="false" [options]="slideOpts" [ngClass]="classAppear">
+          <ion-slides
+            pager="false"
+            [options]="slideOpts"
+            [ngClass]="classAppear"
+          >
             <ion-slide *ngFor="let serversInstance of serversInstances">
-              <ion-card mode="ios" style="width:100%">
-
-                <ion-card-header class="card-header-stats ion-text-center" mode="ios"
-                                 (click)="navigate('instancesDetails', serversInstance.country, serversInstance.id)">
+              <ion-card mode="ios" style="width: 100%">
+                <ion-card-header
+                  class="card-header-stats ion-text-center"
+                  mode="ios"
+                  (click)="navigate('instancesDetails', serversInstance.country, serversInstance.id)"
+                >
                   {{ serversInstance.name | slice:0:12 }}
                 </ion-card-header>
 
                 <ion-card-content class="card-stat2 ion-text-center" mode="ios">
-                  <div (click)="navigate('instancesDetails', serversInstance.country, serversInstance.id)">
+                  <div
+                    (click)="navigate('instancesDetails', serversInstance.country, serversInstance.id)"
+                  >
                     <ion-row>
                       <ion-col>
-                        <img class="server-img ion-margin-bottom" alt="server_picture"
-                             src="{{ serversInstance.image ? (serversInstance.image.name | serverIcon) : (serversInstance.name | serverIcon) }}"/>
+                        <img
+                          class="server-img ion-margin-bottom"
+                          alt="server_picture"
+                          src="{{ serversInstance.image ? (serversInstance.image.name | serverIcon) : (serversInstance.name | serverIcon) }}"
+                        />
                       </ion-col>
                     </ion-row>
                     <ion-row>
                       <ion-col>
                         <div class="server-state">
-                        <span [ngClass]='setClass(serversInstance)' [style.background]="setState(serversInstance)"
-                              class="server-indicator-state"></span>
+                          <span
+                            [ngClass]="setClass(serversInstance)"
+                            [style.background]="setState(serversInstance)"
+                            class="server-indicator-state"
+                          ></span>
                           <small class="small-card">
-                            {{ serversInstance.public_ip ? serversInstance.public_ip.address : '' }}
+                            {{ serversInstance.public_ip ?
+                            serversInstance.public_ip.address : '' }}
                           </small>
                         </div>
                         <div class="server-zone">
-                          <img src="{{ serversInstance.country | zoneFlag }}" alt="country">
+                          <img
+                            src="{{ serversInstance.country | zoneFlag }}"
+                            alt="country"
+                          />
                           {{ serversInstance.country }}
                         </div>
                       </ion-col>
@@ -87,37 +117,53 @@
                   </div>
                   <ion-row>
                     <div class="server-toggle">
-                      <ion-toggle mode="ios" color="secondary" checked="{{ setToggle(serversInstance) }}"
-                                  disabled="{{ setDisabled(serversInstance) }}"
-                                  (ionChange)="startAndStopServers($event, serversInstance)"></ion-toggle>
+                      <ion-toggle
+                        mode="ios"
+                        color="secondary"
+                        checked="{{ setToggle(serversInstance) }}"
+                        disabled="{{ setDisabled(serversInstance) }}"
+                        (ionChange)="startAndStopServers($event, serversInstance)"
+                      ></ion-toggle>
                     </div>
                   </ion-row>
                 </ion-card-content>
-
               </ion-card>
             </ion-slide>
           </ion-slides>
         </ion-row>
 
         <ion-row>
-          <div class="title-instances">
-            Object Storage
-          </div>
+          <div class="title-instances">Object Storage</div>
           <ion-slides pager="false" [options]="slideOpts" class="card-appear">
             <ion-slide>
-              <ion-card mode="ios" style="width:100%" (click)="navigate('os')" class="dark-card">
-                <ion-card-header class="card-header-stats ion-text-center" mode="ios" style="margin-bottom: .25rem">
+              <ion-card
+                mode="ios"
+                style="width: 100%"
+                (click)="navigate('os')"
+                class="dark-card"
+              >
+                <ion-card-header
+                  class="card-header-stats ion-text-center"
+                  mode="ios"
+                  style="margin-bottom: 0.25rem"
+                >
                   Object Storage
                 </ion-card-header>
                 <ion-card-content class="card-stat2 ion-text-center" mode="ios">
-                  <fa-icon slot="start" [icon]="['fas', 'database']" [size]="'2x'"></fa-icon>
+                  <fa-icon
+                    slot="start"
+                    [icon]="['fas', 'database']"
+                    [size]="'2x'"
+                  ></fa-icon>
                   <div class="badge">
                     <ion-badge color="danger" mode="ios">New</ion-badge>
                   </div>
-                  <div class="subtitle">
-                    Access to your buckets and files
-                  </div>
-                  <fa-icon slot="start" [icon]="['fas', 'arrow-right']" [size]="'1x'"></fa-icon>
+                  <div class="subtitle">Access to your buckets and files</div>
+                  <fa-icon
+                    slot="start"
+                    [icon]="['fas', 'arrow-right']"
+                    [size]="'1x'"
+                  ></fa-icon>
                 </ion-card-content>
               </ion-card>
             </ion-slide>

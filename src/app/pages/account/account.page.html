@@ -1,18 +1,27 @@
 <ion-header mode="ios">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button class="ion-float-end" color="light" fill="clear" (click)="navigate('home')">
+      <ion-button
+        class="ion-float-end"
+        color="light"
+        fill="clear"
+        (click)="navigate('home')"
+      >
         <ion-icon name="md-close"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
-      <ion-button class="ion-float-end" color="light" fill="clear" (click)="logout()">
+      <ion-button
+        class="ion-float-end"
+        color="light"
+        fill="clear"
+        (click)="logout()"
+      >
         <ion-icon name="ios-log-out"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
-
 
 <ion-content force-overscroll="false">
   <div class="background"></div>
@@ -40,12 +49,8 @@
           </ion-label>
         </ion-chip>
       </div>
-      <div class="fullname">
-        {{ user.fullname }}
-      </div>
-      <div class="email">
-        {{ user.email }}
-      </div>
+      <div class="fullname">{{ user.fullname }}</div>
+      <div class="email">{{ user.email }}</div>
       <div class="current-organization">
         <div class="current-organization-text">
           <ion-chip color="tertiary">
@@ -53,11 +58,13 @@
               {{ currentOrganization.name }}
             </ion-label>
           </ion-chip>
-          <fa-icon slot="start" [icon]="['fas', 'chevron-right']" class="icon-separator"></fa-icon>
+          <fa-icon
+            slot="start"
+            [icon]="['fas', 'chevron-right']"
+            class="icon-separator"
+          ></fa-icon>
           <ion-chip color="secondary">
-            <ion-label color="secondary">
-              {{ currentProject.name }}
-            </ion-label>
+            <ion-label color="secondary"> {{ currentProject.name }} </ion-label>
           </ion-chip>
         </div>
       </div>
@@ -77,7 +84,10 @@
         </ion-col>
         <ion-col>
           <ion-card mode="ios" (click)="presentModal('project')">
-            <ion-card-header class="ion-text-center secondary-header" mode="ios">
+            <ion-card-header
+              class="ion-text-center secondary-header"
+              mode="ios"
+            >
               <ion-icon name="folder" mode="md"></ion-icon>
             </ion-card-header>
 
