@@ -15,7 +15,7 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
 
-  <div *ngIf="!isLoading && !billingError && invoices.length > 0">
+  <div *ngIf="!isLoading && !billingError && billings.length > 0">
     <ion-item-group>
       <ion-item-divider class="title" color="secondary">
         <div style="width: 100%">
@@ -52,10 +52,10 @@
       <ion-item-divider class="title" color="secondary"
         >Older Invoices</ion-item-divider
       >
-      <ion-item *ngFor="let invoice of invoices" lines="full">
+      <ion-item *ngFor="let billing of billings" lines="full">
         <div class="information-title">
-          <div class="information-title-content">{{ invoice.state }}</div>
-          <div class="date">{{ invoice.start_date | date:'MMMM y' }}</div>
+          <div class="information-title-content">{{ billing.state }}</div>
+          <div class="date">{{ billing.start_date | date:'MMMM y' }}</div>
         </div>
         <div
           data-clipboard-target="#copyTarget"
@@ -63,16 +63,16 @@
           slot="end"
         >
           <div class="price">
-            {{ invoice.total_taxed }} {{ invoice.currency }}
+            {{ billing.total_taxed }} {{ billing.currency }}
           </div>
-          <div class="price-ht">{{ invoice.total_untaxed }} HT</div>
+          <div class="price-ht">{{ billing.total_untaxed }} HT</div>
         </div>
       </ion-item>
     </ion-item-group>
   </div>
   <div
     class="not-found ion-text-center ion-margin-top"
-    *ngIf="invoices && invoices.length === 0"
+    *ngIf="billings && billings.length === 0"
   >
     <img alt="no_server" src="../../../../assets/img/invoice.svg" />
     <p>No invoice available</p>

@@ -102,8 +102,8 @@ export class BmaasPage implements OnInit {
     }
   }
 
-  public navigateServerDetails(server: any, country: string) {
-    this.navCtrl.navigateForward(["/bmaas/" + country + "/" + server.id]);
+  public navigateServerDetails(server: any, area: string) {
+    this.navCtrl.navigateForward(["/bmaas/" + area + "/" + server.id]);
   }
 
   public setState(server): string {

@@ -36,8 +36,8 @@ export class AppComponent {
       new: true,
     },
     {
-      title: "Invoices",
-      url: "/invoices",
+      title: "Billing",
+      url: "/billing",
       icon: "chart-line",
       new: false,
     },

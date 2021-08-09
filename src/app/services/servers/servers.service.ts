@@ -1,31 +1,28 @@
-import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
+import {Injectable} from '@angular/core';
 
-import { ApiService } from "../api/api.service";
+import {mergeZones} from '../../helpers/mergeZones';
+import {ApiService} from '../api/api.service';
+import {ProjectService} from '../user/project/project.service';
 
-import { ActionsDto } from "./actions.dto";
-import { zones } from "./config";
-import { ServerDto } from "./server.dto";
+import {ActionsDto} from './actions.dto';
+import {areas} from './config';
+import {ServerDto} from './server.dto';
 
 @Injectable({
-  providedIn: "root",
+  providedIn: 'root',
 })
 export class ServersService {
-  constructor(private api: ApiService, private storage: Storage) {}
-
-  private mergeZones(zonesValue: any[]) {
-    const valuesList = zonesValue.map((zone) => zone.servers);
-    return [].concat(...valuesList);
+  constructor(private api: ApiService, private projectService: ProjectService) {
   }
 
-  private sortServers(servers: ServerDto[]): ServerDto[] {
-    const runningServers = servers.filter((obj) => obj.state === "running");
+  private static sortServers(servers: ServerDto[]): ServerDto[] {
+    const runningServers = servers.filter((obj) => obj.state === 'running');
     const startAndStopServers = servers.filter(
-      (obj) => obj.state === "starting" || obj.state === "stopping"
+      (obj) => obj.state === 'starting' || obj.state === 'stopping'
     );
-    const stoppedServers = servers.filter((obj) => obj.state === "stopped");
+    const stoppedServers = servers.filter((obj) => obj.state === 'stopped');
     const stoppedInPlaceServers = servers.filter(
-      (obj) => obj.state === "stopped in place"
+      (obj) => obj.state === 'stopped in place'
     );
 
     return runningServers.concat(
@@ -35,83 +32,58 @@ export class ServersService {
     );
   }
 
-  public async getAllServer(nbrOfServ = 6) {
-    const promises = zones.map((zone) => this.getAllServerByCountry(zone));
+  public async getAllServer(perPage = 6, page = 1): Promise<ServerDto[]> {
+    const promises = areas.map((area) => this.getAllServerByArea(area, perPage, page));
     const result = await Promise.all(promises);
 
-    return this.sortServers(this.mergeZones(result)).slice(0, nbrOfServ);
+    return ServersService.sortServers(mergeZones(result)).slice(0, perPage);
   }
 
-  public async getAllServerByCountry(
-    country: string,
-    nbrOfServ = 50
+  public async getAllServerByArea(
+    area: string,
+    perPage = 100,
+    page = 1,
   ): Promise<any> {
-    const apiUrl = `${this.api.getInstanceUrl()}${country}`;
-    const currentProject = await this.storage.get("currentProject");
+    const apiUrl = `${this.api.getInstanceUrl()}${area}`;
+    const projectId = await this.projectService.getCurrentProjectId();
 
-    // tslint:disable-next-line:max-line-length
     const result = await this.api.get<{ servers: ServerDto[] }>(
-      `${apiUrl}/servers?project=${currentProject.id}&per_page=${nbrOfServ}&page=1`
+      `${apiUrl}/servers?project=${projectId}&per_page=${perPage}&page=${page}`
     );
-    result.servers.forEach((value) => {
-      value.country = country;
-    });
 
-    return result;
+    return result.servers.map((value) => ({
+      ...value, area
+    }));
   }
 
-  public getServerById(country: string, serverId: string): Promise<any> {
-    const apiUrl = `${this.api.getInstanceUrl()}${country}`;
+  public getServerById(area: string, serverId: string): Promise<any> {
+    const apiUrl = `${this.api.getInstanceUrl()}${area}`;
 
-    return new Promise((resolve, reject) => {
-      this.api
-        .get<ServerDto>(apiUrl + "/servers/" + serverId)
-        .then((result) => {
-          resolve(result);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    return this.api.get<ServerDto>(`${apiUrl}/servers/${serverId}`);
   }
 
   public sendServerAction(
-    country: string,
+    area: string,
     serverId: string,
     action: string
   ): Promise<any> {
-    const apiUrl = `${this.api.getInstanceUrl()}${country}`;
+    const apiUrl = `${this.api.getInstanceUrl()}${area}`;
 
-    return new Promise((resolve, reject) => {
-      this.api
-        .post<ActionsDto>(apiUrl + "/servers/" + serverId + "/action", {
-          action,
-        })
-        .then((result) => {
-          resolve(result);
-        })
-        .catch((error) => {
-          reject(error);
-        });
-    });
+    return this.api.post<ActionsDto>(`${apiUrl}/servers/${serverId}/action`, {action});
   }
 
   public async serverDelete(
-    country: string,
+    area: string,
     serverId: string,
     serverIp?: string
-  ) {
-    const apiUrl = `${this.api.getInstanceUrl()}${country}`;
+  ): Promise<void> {
+    const apiUrl = `${this.api.getInstanceUrl()}${area}`;
 
-    try {
-      await this.api.post<ActionsDto>(`${apiUrl}/servers/${serverId}/action`, {
-        action: "terminate",
-      });
-      if (serverIp) {
-        await this.api.delete(`${apiUrl}/ips/${serverIp}`);
-      }
-    } catch (e) {
-      throw e;
+    await this.api.post<ActionsDto>(`${apiUrl}/servers/${serverId}/action`, {
+      action: 'terminate',
+    });
+    if (serverIp) {
+      await this.api.delete(`${apiUrl}/ips/${serverIp}`);
     }
   }
 }

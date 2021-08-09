@@ -22,7 +22,7 @@ const { StatusBar } = Plugins;
 export class DetailsPage implements OnInit {
   public server = {} as ServerDto;
   public serverName: string;
-  public serverCountry: string;
+  public serverarea: string;
   public state: string;
   public serverLoading: boolean;
   public stateClass = "state";
@@ -44,7 +44,7 @@ export class DetailsPage implements OnInit {
     private navCtrl: NavController
   ) {
     this.server.id = this.route.snapshot.paramMap.get("id");
-    this.serverCountry = this.route.snapshot.paramMap.get("zone");
+    this.serverarea = this.route.snapshot.paramMap.get("zone");
   }
 
   ngOnInit() {}
@@ -134,7 +134,7 @@ export class DetailsPage implements OnInit {
     }
   }
 
-  public isDisabled(value) {
+  public isDisabled(value: string): boolean {
     if (value === "power") {
       switch (this.server.state) {
         case "stopped in place":
@@ -201,7 +201,7 @@ export class DetailsPage implements OnInit {
   private refreshServer(): Promise<any> {
     return new Promise((resolve, reject) => {
       this.serversProvider
-        .getServerById(this.serverCountry, this.server.id)
+        .getServerById(this.serverarea, this.server.id)
         .then((result) => {
           this.server = result.server;
           this.serverName = result.server.name;
@@ -218,7 +218,7 @@ export class DetailsPage implements OnInit {
     this.power = event;
     if (this.power === true) {
       this.serversProvider
-        .sendServerAction(this.serverCountry, this.server.id, "poweron")
+        .sendServerAction(this.serverarea, this.server.id, "poweron")
         .then(() => {
           this.refreshServer().then(() => {
             this.autoRefresh();
@@ -229,7 +229,7 @@ export class DetailsPage implements OnInit {
         });
     } else {
       this.serversProvider
-        .sendServerAction(this.serverCountry, this.server.id, "poweroff")
+        .sendServerAction(this.serverarea, this.server.id, "poweroff")
         .then(() => {
           this.refreshServer().then(() => {
             this.autoRefresh();
@@ -259,7 +259,7 @@ export class DetailsPage implements OnInit {
           handler: () => {
             this.serversProvider
               .sendServerAction(
-                this.serverCountry,
+                this.serverarea,
                 this.server.id,
                 "stop_in_place"
               )
@@ -297,7 +297,7 @@ export class DetailsPage implements OnInit {
           text: "Reboot",
           handler: () => {
             this.serversProvider
-              .sendServerAction(this.serverCountry, this.server.id, "reboot")
+              .sendServerAction(this.serverarea, this.server.id, "reboot")
               .then(() => {
                 this.refreshServer().then(() => {
                   this.autoRefresh();
@@ -340,7 +340,7 @@ export class DetailsPage implements OnInit {
           handler: (values) => {
             this.serversProvider
               .serverDelete(
-                this.serverCountry,
+                this.serverarea,
                 this.server.id,
                 values[0] ? this.server.public_ip.id : null
               )

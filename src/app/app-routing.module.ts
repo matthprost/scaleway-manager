@@ -93,8 +93,8 @@ const routes: Routes = [
     canActivate: [HomeGuard],
   },
   {
-    path: "invoices",
-    loadChildren: "./pages/invoices/invoices.module#InvoicesPageModule",
+    path: "billing",
+    loadChildren: "./pages/billing/billing.module#BillingPageModule",
     canActivate: [HomeGuard],
   },
   {

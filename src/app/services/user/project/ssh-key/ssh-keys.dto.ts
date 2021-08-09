@@ -7,7 +7,7 @@ export interface SshKeysDto {
   creation_info: {
     address: string;
     user_agent: string;
-    country_code: string;
+    area_code: string;
   };
   fingerprint: string;
   id: string;

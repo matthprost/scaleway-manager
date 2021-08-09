@@ -59,19 +59,16 @@ export class ApiService {
     try {
       // This is for login when token doesn't exist
       if (!token) {
-        return await this.httpClient
-          .request<T>(HttpMethods[method.toString()], url, {
+        return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
             headers: token
               ? {
                   "X-Session-Token": token.auth.jwt_key,
                 }
               : {},
             body: data,
-          })
-          .toPromise();
+          }).toPromise();
       }
-      return await this.httpClient
-        .request<T>(HttpMethods[method.toString()], url, {
+      return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
           headers:
             token && token.auth && token.auth.jwt_key
               ? {
@@ -79,8 +76,7 @@ export class ApiService {
                 }
               : {},
           body: data,
-        })
-        .toPromise();
+        }).toPromise();
     } catch (error) {
       console.log(error);
 
@@ -92,8 +88,8 @@ export class ApiService {
           error.error.type === "denied_authentication") &&
         token
       ) {
-        console.warn(
-          "ERROR 401: Token is be not valid anymore, trying to renew it."
+        console.log(
+          "ERROR 401: Token is be not valid anymore, trying to renew it..."
         );
 
         try {
@@ -101,7 +97,7 @@ export class ApiService {
 
           return this.request<T>(method, url, data);
         } catch (e) {
-          console.warn("DELETE JWT IN STORAGE");
+          console.log("DELETE JWT IN STORAGE");
           await this.storage.remove("jwt");
           await this.navCtrl.navigateRoot(["/login"]);
           throw e;
@@ -117,17 +113,14 @@ export class ApiService {
   private async renewJWT(): Promise<any> {
     try {
       const token = await this.storage.get("jwt");
-      console.log("Token in storage:", token);
+      console.log("Token in storage before renew:", token);
 
-      const result = this.httpClient
-        .request<any>(
+      const result = await this.httpClient.request<any>(
           "POST",
           this.getAccountApiUrl() + "/jwt/" + token.jwt.jti + "/renew",
           {
             body: { jwt_renew: token.auth.jwt_renew },
-          }
-        )
-        .toPromise();
+          }).toPromise();
 
       await this.storage.set("jwt", result);
       console.log("JWT RENEWED!");

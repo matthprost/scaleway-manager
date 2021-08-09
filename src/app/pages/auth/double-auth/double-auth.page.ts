@@ -1,4 +1,4 @@
-import { Component, NgZone } from "@angular/core";
+import {Component, NgZone, ViewChild} from '@angular/core';
 import {
   LoadingController,
   MenuController,
@@ -16,10 +16,12 @@ import { AuthService } from "../../../services/user/auth/auth.service";
   styleUrls: ["./double-auth.page.scss"],
 })
 export class DoubleAuthPage {
+  @ViewChild("captchaRef") captchaRef;
+
   public code: string = null;
   private logins;
   private captchaPassed = false;
-  private captchaResponse: string;
+  public captchaResponse: string;
   public captchaKey = environment.captcha;
 
   constructor(
@@ -59,6 +61,8 @@ export class DoubleAuthPage {
         code: this.code,
       });
       await this.navCtrl.navigateRoot(["home"]);
+    } catch (error) {
+      this.captchaRef.reset()
     } finally {
       await loader.dismiss();
     }

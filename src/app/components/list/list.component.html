@@ -2,7 +2,7 @@
   <ion-item-sliding *ngFor="let data of dataList; let i = index">
     <ion-item
       [routerDirection]="'forward'"
-      [routerLink]="'/' + route + '/' + data.country + '/' + data.id"
+      [routerLink]="'/' + route + '/' + data.area + '/' + data.id"
       lines="none"
       detail="true"
       mode="ios"
@@ -31,10 +31,10 @@
       </ion-label>
       <ion-note slot="end" mode="ios">
         <div class="note-end">
-          {{ data.country || "" }}
+          {{ data.area || "" }}
           <img
-            src="{{ data.country | zoneFlag }}"
-            alt="country"
+            src="{{ data.area | zoneFlag }}"
+            alt="area"
             style="vertical-align: middle"
           />
         </div>

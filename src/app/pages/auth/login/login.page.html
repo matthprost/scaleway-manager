@@ -1,5 +1,5 @@
 <ion-header mode="ios">
-  <ion-toolbar mode="md"> </ion-toolbar>
+  <ion-toolbar mode="md"></ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -23,9 +23,10 @@
             <ion-card mode="ios">
               <ion-card-header mode="ios">
                 <ion-card-subtitle mode="ios"
-                  >Scaleway account is needed</ion-card-subtitle
+                >Scaleway Elements Account
+                </ion-card-subtitle
                 >
-                <ion-card-title mode="ios">Login</ion-card-title>
+                <ion-card-title mode="ios">Log In</ion-card-title>
               </ion-card-header>
               <ion-card-content>
                 <form (ngSubmit)="login()" #loginForm="ngForm" class="form">
@@ -34,23 +35,25 @@
                       <ion-input
                         type="email"
                         name="email"
-                        placeholder="Email"
+                        placeholder="Email Address"
                         [(ngModel)]="email"
+                        required
                       ></ion-input>
                       <ion-icon name="ios-mail" slot="start"></ion-icon>
                     </ion-item>
-                    <ion-item class="ion-margin-top ion-no-padding" mode="md">
+                    <ion-item class="ion-margin-top ion-margin-bottom ion-no-padding" mode="md">
                       <ion-input
                         type="password"
                         name="password"
                         placeholder="Password"
                         [(ngModel)]="password"
+                        required
                       ></ion-input>
                       <ion-icon name="md-key" slot="start"></ion-icon>
                     </ion-item>
                     <div
                       class="ion-no-margin ion-no-padding"
-                      style="transform: scale(0.8); transform-origin: 0"
+                      style="transform: scale(0.8); transform-origin: 0 0"
                     >
                       <re-captcha
                         (resolved)="captchaResolved($event)"
@@ -64,7 +67,10 @@
                         type="submit"
                         expand="full"
                         mode="ios"
-                        >Log In</ion-button
+                        disabled="{{!password || !email || !captchaResponse }}"
+                      >
+                        Log In
+                      </ion-button
                       >
                     </div>
                   </ion-list>
