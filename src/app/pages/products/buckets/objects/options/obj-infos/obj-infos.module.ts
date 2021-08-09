@@ -1,18 +1,17 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { IonicModule } from "@ionic/angular";
 
-import { IonicModule } from '@ionic/angular';
-
-import { ObjInfosPage } from './obj-infos.page';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
+import { ObjInfosPage } from "./obj-infos.page";
 
 const routes: Routes = [
   {
-    path: '',
-    component: ObjInfosPage
-  }
+    path: "",
+    component: ObjInfosPage,
+  },
 ];
 
 @NgModule({
@@ -21,6 +20,6 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-  ]
+  ],
 })
 export class ObjInfosPageModule {}

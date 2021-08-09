@@ -1,18 +1,17 @@
-import {Component, OnInit} from '@angular/core';
-import {AppVersion} from '@ionic-native/app-version/ngx';
-import {PickerController, Platform} from '@ionic/angular';
-import {Storage} from '@ionic/storage';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
+import { Component, OnInit } from "@angular/core";
+import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { AppVersion } from "@ionic-native/app-version/ngx";
+import { PickerController, Platform } from "@ionic/angular";
+import { Storage } from "@ionic/storage";
 
-const {StatusBar} = Plugins;
+const { StatusBar } = Plugins;
 
 @Component({
-  selector: 'app-settings',
-  templateUrl: './settings.page.html',
-  styleUrls: ['./settings.page.scss'],
+  selector: "app-settings",
+  templateUrl: "./settings.page.html",
+  styleUrls: ["./settings.page.scss"],
 })
 export class SettingsPage implements OnInit {
-
   public version = null;
   public isLoading = false;
   public changeHasBeenDone = false;
@@ -20,26 +19,31 @@ export class SettingsPage implements OnInit {
   // DEFAULT VALUES IN CASE STORAGE IS EMPTY
   public instancesToDisplay = 6;
 
-  constructor(private appVersion: AppVersion, private platform: Platform, private storage: Storage,
-              private pickerController: PickerController) {
-    if (this.platform.is('cordova')) {
-      this.appVersion.getVersionNumber().then(versionNumber => {
+  constructor(
+    private appVersion: AppVersion,
+    private platform: Platform,
+    private storage: Storage,
+    private pickerController: PickerController
+  ) {
+    if (this.platform.is("cordova")) {
+      this.appVersion.getVersionNumber().then((versionNumber) => {
         this.version = versionNumber;
       });
     }
 
-    this.storage.get('settings').then(result => {
+    this.storage.get("settings").then((result) => {
       if (result) {
-        result.instancesToDisplay ? this.instancesToDisplay = result.instancesToDisplay : this.instancesToDisplay = 6;
+        result.instancesToDisplay
+          ? (this.instancesToDisplay = result.instancesToDisplay)
+          : (this.instancesToDisplay = 6);
       }
     });
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewDidEnter() {
-    StatusBar.setStyle({style: StatusBarStyle.Light});
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
   }
 
   private static getColumns(numColumns, numOptions, columnOptions) {
@@ -47,7 +51,7 @@ export class SettingsPage implements OnInit {
     for (let i = 0; i < numColumns; i++) {
       columns.push({
         name: `col${i}`,
-        options: SettingsPage.getColumnOptions(i, numOptions, columnOptions)
+        options: SettingsPage.getColumnOptions(i, numOptions, columnOptions),
       });
     }
 
@@ -59,7 +63,7 @@ export class SettingsPage implements OnInit {
     for (let i = 0; i < numOptions; i++) {
       options.push({
         text: columnOptions[columnIndex][i % numOptions],
-        value: i
+        value: i,
       });
     }
 
@@ -69,29 +73,32 @@ export class SettingsPage implements OnInit {
   async openPicker() {
     const defaultColumnOptions = [
       [
-        '2 Instances',
-        '4 Instances',
-        '6 Instances',
-        '8 Instances',
-        '10 Instances',
-      ]
+        "2 Instances",
+        "4 Instances",
+        "6 Instances",
+        "8 Instances",
+        "10 Instances",
+      ],
     ];
 
     const picker = await this.pickerController.create({
       columns: SettingsPage.getColumns(1, 5, defaultColumnOptions),
       buttons: [
         {
-          text: 'Cancel',
-          role: 'cancel'
+          text: "Cancel",
+          role: "cancel",
         },
         {
-          text: 'Confirm',
+          text: "Confirm",
           handler: (value) => {
             this.changeHasBeenDone = true;
-            this.instancesToDisplay = value.col0.text.substr(0, value.col0.text.indexOf(' '));
-          }
-        }
-      ]
+            this.instancesToDisplay = value.col0.text.substr(
+              0,
+              value.col0.text.indexOf(" ")
+            );
+          },
+        },
+      ],
     });
 
     await picker.present();
@@ -99,10 +106,11 @@ export class SettingsPage implements OnInit {
 
   public save() {
     this.isLoading = true;
-    this.storage.set('settings', {instancesToDisplay: this.instancesToDisplay}).then(() => {
-      this.isLoading = false;
-      this.changeHasBeenDone = false;
-    });
+    this.storage
+      .set("settings", { instancesToDisplay: this.instancesToDisplay })
+      .then(() => {
+        this.isLoading = false;
+        this.changeHasBeenDone = false;
+      });
   }
-
 }

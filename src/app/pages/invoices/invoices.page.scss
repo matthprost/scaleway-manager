@@ -1,5 +1,4 @@
 .information-title {
-
   &-content {
     text-transform: uppercase;
     font-weight: 400;
@@ -15,17 +14,16 @@ span {
 }
 
 .price-ht {
-  font-size: .9rem;
-  margin-top: .2rem;
+  font-size: 0.9rem;
+  margin-top: 0.2rem;
   color: dimgray;
   font-weight: lighter;
-
 }
 
 .date {
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: lighter;
-  margin-top: .2rem;
+  margin-top: 0.2rem;
   color: dimgray;
 }
 
@@ -36,17 +34,17 @@ span {
 .title {
   text-transform: uppercase;
   font-weight: 400;
-  font-size: .9rem;
-  padding: .5rem .75rem;
+  font-size: 0.9rem;
+  padding: 0.5rem 0.75rem;
 }
 
 .last-update {
   float: right;
-  font-size: .8rem;
+  font-size: 0.8rem;
 }
 
 ion-item {
-  --inner-padding-bottom: .75rem;
-  --inner-padding-top: .75rem;
+  --inner-padding-bottom: 0.75rem;
+  --inner-padding-top: 0.75rem;
   background: white;
 }

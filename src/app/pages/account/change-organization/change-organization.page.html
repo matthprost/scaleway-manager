@@ -5,12 +5,14 @@
         <ion-icon name="close" mode="md"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title color="primary">
-      Change Organization
-    </ion-title>
+    <ion-title color="primary"> Change Organization </ion-title>
     <ion-buttons slot="end" *ngIf="currentOrganizationId">
       <ion-button (click)="save()" *ngIf="!isSaving">Save</ion-button>
-      <ion-spinner name="crescent" color="primary" *ngIf="isSaving"></ion-spinner>
+      <ion-spinner
+        name="crescent"
+        color="primary"
+        *ngIf="isSaving"
+      ></ion-spinner>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -19,7 +21,10 @@
   <app-loader *ngIf="isLoading"></app-loader>
   <div *ngIf="!isLoading">
     <ion-list>
-      <ion-radio-group value="{{ currentOrganizationId }}" (ionChange)="change($event)">
+      <ion-radio-group
+        value="{{ currentOrganizationId }}"
+        (ionChange)="change($event)"
+      >
         <div *ngFor="let organization of organizations">
           <ion-item *ngIf="organization.name !== null">
             <ion-label>{{ organization.name }}</ion-label>

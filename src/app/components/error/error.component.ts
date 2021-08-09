@@ -1,16 +1,14 @@
-import {Component, Input, OnInit} from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-error',
-  templateUrl: './error.component.html',
-  styleUrls: ['./error.component.scss'],
+  selector: "app-error",
+  templateUrl: "./error.component.html",
+  styleUrls: ["./error.component.scss"],
 })
 export class ErrorComponent implements OnInit {
+  @Input() variant = "dark";
 
-  @Input() variant = 'dark';
-
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {}
-
 }

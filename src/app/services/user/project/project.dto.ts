@@ -1,5 +1,5 @@
 export interface ProjectsDto {
-  projects: Array<ProjectDto>;
+  projects: ProjectDto[];
 }
 
 export interface ProjectDto {

@@ -1,13 +1,14 @@
-import {NgModule} from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {FormsModule} from '@angular/forms';
-import {IonicModule} from '@ionic/angular';
-import {RouterModule} from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { RouterModule } from "@angular/router";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { IonicModule } from "@ionic/angular";
 
-import {HomePage} from './home.page';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ComponentsModule} from '../../components/components.module';
-import {PipesModule} from '../../pipes/pipes.module';
+import { ComponentsModule } from "../../components/components.module";
+import { PipesModule } from "../../pipes/pipes.module";
+
+import { HomePage } from "./home.page";
 
 @NgModule({
   imports: [
@@ -16,9 +17,9 @@ import {PipesModule} from '../../pipes/pipes.module';
     IonicModule,
     RouterModule.forChild([
       {
-        path: '',
-        component: HomePage
-      }
+        path: "",
+        component: HomePage,
+      },
     ]),
     FontAwesomeModule,
     ComponentsModule,
@@ -26,5 +27,4 @@ import {PipesModule} from '../../pipes/pipes.module';
   ],
   declarations: [HomePage],
 })
-export class HomePageModule {
-}
+export class HomePageModule {}

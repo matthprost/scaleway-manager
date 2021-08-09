@@ -1,1 +1,1 @@
-export const zones = ['fr-par', 'nl-ams', 'pl-waw'];
+export const zones = ["fr-par", "nl-ams", "pl-waw"];

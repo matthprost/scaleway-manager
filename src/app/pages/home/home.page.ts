@@ -1,27 +1,27 @@
-import {Component, OnInit} from '@angular/core';
-import {MenuController, NavController} from '@ionic/angular';
-import {ServerDto} from '../../services/servers/server.dto';
-import {ServersService} from '../../services/servers/servers.service';
-import {BillingService} from '../../services/billing/billing.service';
-import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
-import {BillingDto} from '../../services/billing/billing.dto';
-import {Storage} from '@ionic/storage';
-import {AccountService} from '../../services/user/account/account.service';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
-import {ProjectService} from '../../services/user/project/project.service';
-import {ProjectDto} from '../../services/user/project/project.dto';
+import { Component, OnInit } from "@angular/core";
+import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import { MenuController, NavController } from "@ionic/angular";
+import { Storage } from "@ionic/storage";
 
-const {StatusBar} = Plugins;
+import { BillingDto } from "../../services/billing/billing.dto";
+import { BillingService } from "../../services/billing/billing.service";
+import { ServerDto } from "../../services/servers/server.dto";
+import { ServersService } from "../../services/servers/servers.service";
+import { AccountService } from "../../services/user/account/account.service";
+import { ProjectDto } from "../../services/user/project/project.dto";
+import { ProjectService } from "../../services/user/project/project.service";
+
+const { StatusBar } = Plugins;
 
 @Component({
-  selector: 'app-home',
-  templateUrl: 'home.page.html',
-  styleUrls: ['home.page.scss'],
+  selector: "app-home",
+  templateUrl: "home.page.html",
+  styleUrls: ["home.page.scss"],
 })
 export class HomePage implements OnInit {
-
-  public classAppear = 'card-cont';
-  public serversInstances: Array<ServerDto> = [];
+  public classAppear = "card-cont";
+  public serversInstances: ServerDto[] = [];
   public isLoading = true;
 
   faRight = faChevronRight;
@@ -41,33 +41,36 @@ export class HomePage implements OnInit {
     initialSlide: 0,
     slidesPerView: 2.15,
     slidesOffsetBefore: 15,
-    slidesOffsetAfter: 15
+    slidesOffsetAfter: 15,
   };
 
   // STORAGE SETTINGS
   public instancesToDisplay = 6;
 
-  constructor(public navCtrl: NavController, private serversService: ServersService,
-              private billingService: BillingService, private menuCtrl: MenuController,
-              private storage: Storage, private projectService: ProjectService) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    private serversService: ServersService,
+    private billingService: BillingService,
+    private menuCtrl: MenuController,
+    private storage: Storage,
+    private projectService: ProjectService
+  ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewDidLeave() {
     clearInterval(this.interval);
   }
 
   ionViewDidEnter() {
-    StatusBar.setStyle({style: StatusBarStyle.Dark});
+    StatusBar.setStyle({ style: StatusBarStyle.Dark });
 
-    this.classAppear = 'no-class';
+    this.classAppear = "no-class";
     this.menuCtrl.enable(true);
 
     this.refresh().then(() => {
       this.autoRefresh();
-      this.classAppear = 'card-appear';
+      this.classAppear = "card-appear";
     });
   }
 
@@ -86,15 +89,21 @@ export class HomePage implements OnInit {
 
   public async refreshServers(): Promise<any> {
     try {
-      const userData = await this.storage.get('user');
-      const currentOrganizationId = await this.storage.get('currentOrganization');
+      const userData = await this.storage.get("user");
+      const currentOrganizationId = await this.storage.get(
+        "currentOrganization"
+      );
       this.currentProject = await this.projectService.getCurrentProject();
-      const settings = await this.storage.get('settings');
+      const settings = await this.storage.get("settings");
 
-      this.currentOrganization = userData.organizations.find(organization => organization.id === currentOrganizationId);
+      this.currentOrganization = userData.organizations.find(
+        (organization) => organization.id === currentOrganizationId
+      );
       this.instancesToDisplay = (settings && settings.instancesToDisplay) || 6;
 
-      this.serversInstances = await this.serversService.getAllServer(this.instancesToDisplay);
+      this.serversInstances = await this.serversService.getAllServer(
+        this.instancesToDisplay
+      );
     } catch (e) {
       this.serverError = true;
 
@@ -112,11 +121,11 @@ export class HomePage implements OnInit {
   }
 
   private async autoRefresh() {
-    console.log('[AUTO REFRESH]: Entering function');
+    console.log("[AUTO REFRESH]: Entering function");
     let counter = 0;
 
-    this.serversInstances.forEach(server => {
-      if (server.state === 'starting' || server.state === 'stopping') {
+    this.serversInstances.forEach((server) => {
+      if (server.state === "starting" || server.state === "stopping") {
         counter++;
       }
     });
@@ -125,77 +134,80 @@ export class HomePage implements OnInit {
       this.intervalSet = true;
 
       this.interval = setInterval(() => {
-        console.log('[AUTO REFRESH]: Entering interval');
+        console.log("[AUTO REFRESH]: Entering interval");
 
         let newCounter = 0;
 
-        this.serversInstances.forEach(server => {
-          if (server.state === 'starting' || server.state === 'stopping') {
+        this.serversInstances.forEach((server) => {
+          if (server.state === "starting" || server.state === "stopping") {
             newCounter++;
           }
         });
         if (newCounter > 0) {
           this.refresh();
         } else {
-          console.log('[AUTO REFRESH]: Interval cleared!');
+          console.log("[AUTO REFRESH]: Interval cleared!");
           clearInterval(this.interval);
           this.intervalSet = false;
         }
       }, 15000);
     } else {
-      console.log('[AUTO REFRESH]: No interval needed');
+      console.log("[AUTO REFRESH]: No interval needed");
     }
   }
 
   public startAndStopServers(event: any, server: ServerDto) {
-
     console.log(event.detail.checked);
 
     if (event.detail.checked === true) {
-      this.serversService.sendServerAction(server.country, server.id, 'poweron').then(() => {
-        this.refresh().then(() => {
-          this.autoRefresh();
+      this.serversService
+        .sendServerAction(server.country, server.id, "poweron")
+        .then(() => {
+          this.refresh().then(() => {
+            this.autoRefresh();
+          });
+          return;
         });
-        return;
-      });
     } else if (event.detail.checked === false) {
-      this.serversService.sendServerAction(server.country, server.id, 'poweroff').then(() => {
-        this.refresh().then(() => {
-          this.autoRefresh();
+      this.serversService
+        .sendServerAction(server.country, server.id, "poweroff")
+        .then(() => {
+          this.refresh().then(() => {
+            this.autoRefresh();
+          });
+          return;
         });
-        return;
-      });
     }
   }
 
   public setState(server: ServerDto): string {
     switch (server.state) {
-      case 'stopped':
-        return '#B2B6C3';
-      case 'running':
-        return '#30D1AD';
-      case 'stopping':
-        return '#3F6ED8';
-      case 'starting':
-        return '#3F6ED8';
-      case 'stopped in place':
-        return '#FF8C69';
+      case "stopped":
+        return "#B2B6C3";
+      case "running":
+        return "#30D1AD";
+      case "stopping":
+        return "#3F6ED8";
+      case "starting":
+        return "#3F6ED8";
+      case "stopped in place":
+        return "#FF8C69";
       default:
-        return '#B2B6C3';
+        return "#B2B6C3";
     }
   }
 
   public setToggle(server: ServerDto): boolean {
     switch (server.state) {
-      case 'stopped':
+      case "stopped":
         return false;
-      case 'running':
+      case "running":
         return true;
-      case 'stopping':
+      case "stopping":
         return false;
-      case 'starting':
+      case "starting":
         return true;
-      case 'stopped in place':
+      case "stopped in place":
         return true;
       default:
         return false;
@@ -204,15 +216,15 @@ export class HomePage implements OnInit {
 
   public setDisabled(server: ServerDto): boolean {
     switch (server.state) {
-      case 'stopped':
+      case "stopped":
         return false;
-      case 'running':
+      case "running":
         return false;
-      case 'stopping':
+      case "stopping":
         return true;
-      case 'starting':
+      case "starting":
         return true;
-      case 'stopped in place':
+      case "stopped in place":
         return false;
       default:
         return false;
@@ -221,34 +233,35 @@ export class HomePage implements OnInit {
 
   public setClass(server: ServerDto): string {
     switch (server.state) {
-      case 'stopped':
-        return 'state';
-      case 'running':
-        return 'state';
-      case 'stopping':
-        return 'blinker';
-      case 'starting':
-        return 'blinker';
+      case "stopped":
+        return "state";
+      case "running":
+        return "state";
+      case "stopping":
+        return "blinker";
+      case "starting":
+        return "blinker";
       default:
-        return 'state';
+        return "state";
     }
   }
 
   public async navigate(location: string, country?: string, serverId?: string) {
     switch (location) {
-      case 'account' :
-        await this.navCtrl.navigateForward(['/home/account']);
+      case "account":
+        await this.navCtrl.navigateForward(["/home/account"]);
         break;
-      case 'instances' :
-        await this.navCtrl.navigateForward(['/instances']);
+      case "instances":
+        await this.navCtrl.navigateForward(["/instances"]);
         break;
-      case 'instancesDetails' :
-        await this.navCtrl.navigateForward(['/instances/' + country + '/' + serverId]);
+      case "instancesDetails":
+        await this.navCtrl.navigateForward([
+          "/instances/" + country + "/" + serverId,
+        ]);
         break;
-      case 'os' :
-        await this.navCtrl.navigateForward(['/buckets/']);
+      case "os":
+        await this.navCtrl.navigateForward(["/buckets/"]);
         break;
     }
   }
-
 }

@@ -1,5 +1,4 @@
-<ion-header mode="ios">
-</ion-header>
+<ion-header mode="ios"> </ion-header>
 
 <ion-content forceOverscroll="false">
   <div class="content ion-text-center">
@@ -12,7 +11,9 @@
             </div>
             <ion-card mode="ios">
               <ion-card-header mode="ios">
-                <ion-card-subtitle mode="ios">Another security step</ion-card-subtitle>
+                <ion-card-subtitle mode="ios"
+                  >Another security step</ion-card-subtitle
+                >
                 <ion-card-title mode="ios">Double Auth</ion-card-title>
               </ion-card-header>
               <ion-card-content>
@@ -20,16 +21,36 @@
                   <ion-list lines="none" class="ion-no-margin ion-no-padding">
                     <ion-item class="ion-no-padding" mode="md">
                       <!--<ion-label position="floating">Double Auth Code</ion-label>-->
-                      <ion-input type="text" maxlength="6" clearInput placeholder="Code"
-                                 name="number" [(ngModel)]="code" inputmode="numeric"
-                                 pattern="[0-9]*" autocomplete="one-time-code"></ion-input>
+                      <ion-input
+                        type="text"
+                        maxlength="6"
+                        clearInput
+                        placeholder="Code"
+                        name="number"
+                        [(ngModel)]="code"
+                        inputmode="numeric"
+                        pattern="[0-9]*"
+                        autocomplete="one-time-code"
+                      ></ion-input>
                       <ion-icon name="md-keypad" slot="start"></ion-icon>
                     </ion-item>
-                    <div class="ion-no-margin ion-no-padding" style="transform:scale(0.8);transform-origin:0;">
-                      <re-captcha (resolved)="captchaResolved($event)" siteKey="{{captchaKey}}" #captchaRef="reCaptcha"></re-captcha>
+                    <div
+                      class="ion-no-margin ion-no-padding"
+                      style="transform: scale(0.8); transform-origin: 0"
+                    >
+                      <re-captcha
+                        (resolved)="captchaResolved($event)"
+                        siteKey="{{captchaKey}}"
+                        #captchaRef="reCaptcha"
+                      ></re-captcha>
                     </div>
                     <div class="ion-padding-top ion-padding-bottom">
-                      <ion-button color="secondary" type="submit" expand="full" mode="ios">
+                      <ion-button
+                        color="secondary"
+                        type="submit"
+                        expand="full"
+                        mode="ios"
+                      >
                         Log in
                       </ion-button>
                     </div>
@@ -37,10 +58,16 @@
                 </form>
               </ion-card-content>
             </ion-card>
-              <ion-button class="ion-float-left ion-margin-start" color="light" mode="ios" type="button" href="/login"
-                          routerDirection="back">
-                <ion-icon name="ios-arrow-back"></ion-icon> Back
-              </ion-button>
+            <ion-button
+              class="ion-float-left ion-margin-start"
+              color="light"
+              mode="ios"
+              type="button"
+              href="/login"
+              routerDirection="back"
+            >
+              <ion-icon name="ios-arrow-back"></ion-icon> Back
+            </ion-button>
           </div>
         </ion-col>
       </ion-row>

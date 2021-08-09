@@ -10,8 +10,8 @@
   }
 
   75% {
-    -webkit-transform: scale(.7);
-    transform: scale(.7);
+    -webkit-transform: scale(0.7);
+    transform: scale(0.7);
   }
 
   100% {
@@ -21,7 +21,6 @@
 }
 
 .login-header {
-
   ion-icon {
     font-size: 4rem;
     color: white;
@@ -31,11 +30,11 @@
 }
 
 ion-content {
-  --background: url('/assets/img/background.svg') repeat 0 0, var(--ion-color-primary);
+  --background: url("/assets/img/background.svg") repeat 0 0,
+    var(--ion-color-primary);
 }
 
 .login {
-
   &-header {
     display: flex;
     position: relative;

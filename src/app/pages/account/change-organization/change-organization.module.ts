@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
+import { IonicModule } from "@ionic/angular";
 
-import { IonicModule } from '@ionic/angular';
+import { ComponentsModule } from "../../../components/components.module";
 
-import { ChangeOrganizationPage } from './change-organization.page';
-import {ComponentsModule} from '../../../components/components.module';
+import { ChangeOrganizationPage } from "./change-organization.page";
 
 const routes: Routes = [
   {
-    path: '',
-    component: ChangeOrganizationPage
-  }
+    path: "",
+    component: ChangeOrganizationPage,
+  },
 ];
 
 @NgModule({
@@ -21,8 +21,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
   ],
-  declarations: []
+  declarations: [],
 })
 export class ChangeOrganizationPageModule {}

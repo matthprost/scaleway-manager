@@ -1,18 +1,18 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
+import { IonicModule } from "@ionic/angular";
 
-import { IonicModule } from '@ionic/angular';
+import { ComponentsModule } from "../../../components/components.module";
 
-import { TokensPage } from './tokens.page';
-import {ComponentsModule} from '../../../components/components.module';
+import { TokensPage } from "./tokens.page";
 
 const routes: Routes = [
   {
-    path: '',
-    component: TokensPage
-  }
+    path: "",
+    component: TokensPage,
+  },
 ];
 
 @NgModule({
@@ -21,8 +21,8 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
   ],
-  declarations: [TokensPage]
+  declarations: [TokensPage],
 })
 export class TokensPageModule {}

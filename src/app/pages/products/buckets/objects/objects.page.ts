@@ -1,19 +1,20 @@
-import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
-import {ObjectService} from '../../../../services/object/object.service';
-import {NavController, PopoverController} from '@ionic/angular';
-import {OptionsPage} from './options/options.page';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
+import { Component, OnInit } from "@angular/core";
+import { ActivatedRoute, Router } from "@angular/router";
+import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { NavController, PopoverController } from "@ionic/angular";
 
-const {StatusBar} = Plugins;
+import { ObjectService } from "../../../../services/object/object.service";
+
+import { OptionsPage } from "./options/options.page";
+
+const { StatusBar } = Plugins;
 
 @Component({
-  selector: 'app-objects',
-  templateUrl: './objects.page.html',
-  styleUrls: ['./objects.page.scss'],
+  selector: "app-objects",
+  templateUrl: "./objects.page.html",
+  styleUrls: ["./objects.page.scss"],
 })
 export class ObjectsPage implements OnInit {
-
   public currentPath: string = null;
   public fullPath: string = null;
 
@@ -27,40 +28,54 @@ export class ObjectsPage implements OnInit {
 
   public displayName: string = null;
 
-  constructor(private route: ActivatedRoute, private router: Router, private objectService: ObjectService, private navCtrl: NavController,
-              private popoverCtrl: PopoverController) {
-    const pathArray = this.router.url.split('/');
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private objectService: ObjectService,
+    private navCtrl: NavController,
+    private popoverCtrl: PopoverController
+  ) {
+    const pathArray = this.router.url.split("/");
     this.currentPath = pathArray[pathArray.length - 1];
     this.fullPath = decodeURI(this.getFullPath());
 
-    this.currentRegion = this.route.snapshot.paramMap.get('region') as string;
-    this.bucket = this.route.snapshot.paramMap.get('bucket');
+    this.currentRegion = this.route.snapshot.paramMap.get("region") as string;
+    this.bucket = this.route.snapshot.paramMap.get("bucket");
 
     this.refresh();
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   ionViewDidEnter() {
     StatusBar.setStyle({ style: StatusBarStyle.Light });
   }
 
   public doRefresh(refresher) {
-    this.refresh().then(() => {
-      refresher.target.complete();
-    }).catch(error => {
-      console.log(error);
-      refresher.target.complete();
-    });
+    this.refresh()
+      .then(() => {
+        refresher.target.complete();
+      })
+      .catch((error) => {
+        console.log(error);
+        refresher.target.complete();
+      });
   }
 
   private async refresh() {
     try {
-      const result = await this.objectService.getAllObjects(this.bucket, this.currentRegion, this.fullPath !== '/' ? this.fullPath : null);
-      console.log('AWS-RESULT', result);
-      this.objectsList = result.ListBucketResult.Contents ? this.clean(result.ListBucketResult.Contents) : [];
-      this.foldersList = result.ListBucketResult.CommonPrefixes ? this.clean(result.ListBucketResult.CommonPrefixes) : [];
+      const result = await this.objectService.getAllObjects(
+        this.bucket,
+        this.currentRegion,
+        this.fullPath !== "/" ? this.fullPath : null
+      );
+      console.log("AWS-RESULT", result);
+      this.objectsList = result.ListBucketResult.Contents
+        ? this.clean(result.ListBucketResult.Contents)
+        : [];
+      this.foldersList = result.ListBucketResult.CommonPrefixes
+        ? this.clean(result.ListBucketResult.CommonPrefixes)
+        : [];
     } catch (e) {
       console.log(e);
     } finally {
@@ -68,29 +83,29 @@ export class ObjectsPage implements OnInit {
     }
   }
 
-  private clean(array: Array<any>) {
+  private clean(array: any[]) {
     try {
       array.forEach((value, index, object) => {
         if (value.Key) {
-          if (this.fullPath !== '') {
-            value.Key[0] = value.Key[0].replace(this.fullPath, '');
+          if (this.fullPath !== "") {
+            value.Key[0] = value.Key[0].replace(this.fullPath, "");
           }
-          value.Key[0] = value.Key[0].replace('/', '');
+          value.Key[0] = value.Key[0].replace("/", "");
         } else {
-          if (this.fullPath !== '') {
-            value.Prefix[0] = value.Prefix[0].replace(this.fullPath, '');
+          if (this.fullPath !== "") {
+            value.Prefix[0] = value.Prefix[0].replace(this.fullPath, "");
           }
-          value.Prefix[0] = value.Prefix[0].replace('/', '');
+          value.Prefix[0] = value.Prefix[0].replace("/", "");
         }
       });
 
       array.forEach((value, index, object) => {
         if (value.Key) {
-          if (value.Key[0] === '') {
+          if (value.Key[0] === "") {
             object.splice(index, 1);
           }
         } else {
-          if (value.Prefix[0] === '') {
+          if (value.Prefix[0] === "") {
             object.splice(index, 1);
           }
         }
@@ -103,12 +118,12 @@ export class ObjectsPage implements OnInit {
   }
 
   private getFullPath() {
-    const value = this.router.url.split('/');
-    let fullPath = '';
+    const value = this.router.url.split("/");
+    let fullPath = "";
 
     value.forEach((result, index) => {
       if (index > 3) {
-        fullPath += result + '/';
+        fullPath += result + "/";
       }
     });
 
@@ -116,10 +131,14 @@ export class ObjectsPage implements OnInit {
   }
 
   public async goToSubFolder(name: string) {
-    await this.navCtrl.navigateForward([this.router.url + '/' + name]);
+    await this.navCtrl.navigateForward([this.router.url + "/" + name]);
   }
 
-  public async openOptions(event: any, type: 'folder' | 'standard' | 'glacier', object: any) {
+  public async openOptions(
+    event: any,
+    type: "folder" | "standard" | "glacier",
+    object: any
+  ) {
     const popover = await this.popoverCtrl.create({
       component: OptionsPage,
       componentProps: {
@@ -130,16 +149,15 @@ export class ObjectsPage implements OnInit {
         fullPath: this.fullPath,
       },
       translucent: true,
-      mode: 'ios',
-      event
+      mode: "ios",
+      event,
     });
 
     await popover.present();
-    await popover.onDidDismiss().then(data => {
+    await popover.onDidDismiss().then((data) => {
       if (data && data.data && data.data.reload) {
         this.refresh();
       }
     });
   }
-
 }

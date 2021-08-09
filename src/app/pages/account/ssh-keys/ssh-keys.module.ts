@@ -1,20 +1,20 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
+import { Clipboard } from "@ionic-native/clipboard/ngx";
+import { IonicModule } from "@ionic/angular";
 
-import { IonicModule } from '@ionic/angular';
+import { ComponentsModule } from "../../../components/components.module";
 
-import { SshKeysPage } from './ssh-keys.page';
-import {ComponentsModule} from '../../../components/components.module';
-import {Clipboard} from '@ionic-native/clipboard/ngx';
-import {AddSshKeyPage} from './add-ssh-key/add-ssh-key.page';
+import { AddSshKeyPage } from "./add-ssh-key/add-ssh-key.page";
+import { SshKeysPage } from "./ssh-keys.page";
 
 const routes: Routes = [
   {
-    path: '',
-    component: SshKeysPage
-  }
+    path: "",
+    component: SshKeysPage,
+  },
 ];
 
 @NgModule({
@@ -23,12 +23,10 @@ const routes: Routes = [
     FormsModule,
     IonicModule,
     RouterModule.forChild(routes),
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [SshKeysPage, AddSshKeyPage],
-  providers: [
-    Clipboard
-  ],
-  entryComponents: [AddSshKeyPage]
+  providers: [Clipboard],
+  entryComponents: [AddSshKeyPage],
 })
 export class SshKeysPageModule {}

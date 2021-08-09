@@ -1,5 +1,4 @@
 .help {
-
   &-content {
     background: white;
     padding: 1rem 1rem 1rem 1rem;
@@ -13,7 +12,11 @@ ion-content {
 h5 {
   font-weight: bold;
   background: var(--ion-color-primary);
-  background: linear-gradient(141deg, #8800C8 40%, var(--ion-color-primary) 60%);
+  background: linear-gradient(
+    141deg,
+    #8800c8 40%,
+    var(--ion-color-primary) 60%
+  );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -23,7 +26,7 @@ h4 {
 }
 
 p {
-  font-size: .9rem;
+  font-size: 0.9rem;
   margin-bottom: 2.5rem;
   margin-top: 0;
 }

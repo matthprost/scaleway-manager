@@ -1,7 +1,10 @@
 <ion-header mode="ios">
   <ion-toolbar mode="ios">
     <ion-buttons slot="start">
-      <ion-back-button defaultHref="/instances" color="primary"></ion-back-button>
+      <ion-back-button
+        defaultHref="/instances"
+        color="primary"
+      ></ion-back-button>
     </ion-buttons>
     <ion-title color="primary">Details</ion-title>
   </ion-toolbar>
@@ -10,5 +13,4 @@
 <ion-content>
   <app-loader *ngIf="isLoading"></app-loader>
   <app-error *ngIf="serverError"></app-error>
-
 </ion-content>

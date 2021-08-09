@@ -1,14 +1,12 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from "@angular/core";
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: "root",
 })
 export class NavParamsService {
-
   params: any;
 
-  constructor() {
-  }
+  constructor() {}
 
   public setParams(data) {
     this.params = data;

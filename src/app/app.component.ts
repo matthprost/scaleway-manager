@@ -1,26 +1,26 @@
-import {Component} from '@angular/core';
-import {Platform} from '@ionic/angular';
-import {ScreenOrientation} from '@ionic-native/screen-orientation/ngx';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
+import { Component } from "@angular/core";
+import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { ScreenOrientation } from "@ionic-native/screen-orientation/ngx";
+import { Platform } from "@ionic/angular";
 
-const {StatusBar, SplashScreen} = Plugins;
+const { StatusBar, SplashScreen } = Plugins;
 
 @Component({
-  selector: 'app-root',
-  templateUrl: 'app.component.html'
+  selector: "app-root",
+  templateUrl: "app.component.html",
 })
 export class AppComponent {
   public appPages = [
     {
-      title: 'Dashboard',
-      url: '/home',
-      icon: 'home',
-      new: false
+      title: "Dashboard",
+      url: "/home",
+      icon: "home",
+      new: false,
     },
     {
-      title: 'Instances',
-      url: '/instances',
-      icon: 'server',
+      title: "Instances",
+      url: "/instances",
+      icon: "server",
       new: false,
     },
     /*    {
@@ -30,42 +30,42 @@ export class AppComponent {
           new: false,
         },*/
     {
-      title: 'Object Storage',
-      url: '/buckets',
-      icon: 'database',
+      title: "Object Storage",
+      url: "/buckets",
+      icon: "database",
       new: true,
     },
     {
-      title: 'Invoices',
-      url: '/invoices',
-      icon: 'chart-line',
-      new: false
-    }
+      title: "Invoices",
+      url: "/invoices",
+      icon: "chart-line",
+      new: false,
+    },
   ];
 
   public appPagesFooter = [
     {
-      title: 'Settings',
-      url: '/settings',
-      icon: 'cog'
+      title: "Settings",
+      url: "/settings",
+      icon: "cog",
     },
     {
-      title: 'About',
-      url: '/about',
-      icon: 'life-ring'
-    }
+      title: "About",
+      url: "/about",
+      icon: "life-ring",
+    },
   ];
 
   constructor(
     private platform: Platform,
-    private screenOrientation: ScreenOrientation,
+    private screenOrientation: ScreenOrientation
   ) {
     this.initializeApp();
   }
 
   initializeApp(): void {
     this.platform.ready().then(() => {
-      StatusBar.setStyle({style: StatusBarStyle.Light});
+      StatusBar.setStyle({ style: StatusBarStyle.Light });
       SplashScreen.hide();
     });
   }

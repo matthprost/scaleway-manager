@@ -2,16 +2,23 @@
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-header mode="ios" collapse="condense">
-        <ion-toolbar>
-        </ion-toolbar>
+        <ion-toolbar> </ion-toolbar>
       </ion-header>
       <ion-content style="--background: white" forceOverscroll="false">
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" lines="none" class="menu-labels">
+            <ion-item
+              [routerDirection]="'root'"
+              [routerLink]="[p.url]"
+              lines="none"
+              class="menu-labels"
+            >
               <fa-icon slot="start" [icon]="['fas', p.icon]"></fa-icon>
               <ion-label>
-                {{p.title}} <ion-badge color="danger" *ngIf="p.new" mode="ios">New</ion-badge>
+                {{ p.title }}
+                <ion-badge color="danger" *ngIf="p.new" mode="ios"
+                  >New</ion-badge
+                >
               </ion-label>
             </ion-item>
           </ion-menu-toggle>
@@ -20,10 +27,15 @@
       <ion-footer>
         <ion-list>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPagesFooter">
-            <ion-item [routerDirection]="'root'" [routerLink]="[p.url]" lines="none" class="menu-labels">
+            <ion-item
+              [routerDirection]="'root'"
+              [routerLink]="[p.url]"
+              lines="none"
+              class="menu-labels"
+            >
               <fa-icon slot="start" [icon]="['fas', p.icon]"></fa-icon>
               <ion-label>
-                {{p.title}}
+                {{ p.title }}
               </ion-label>
             </ion-item>
           </ion-menu-toggle>

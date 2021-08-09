@@ -5,9 +5,7 @@
         <ion-icon name="close" mode="md"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title color="primary">
-      Change Project
-    </ion-title>
+    <ion-title color="primary"> Change Project </ion-title>
     <ion-buttons slot="end" *ngIf="currentProjectId">
       <ion-button (click)="save()">Save</ion-button>
     </ion-buttons>
@@ -18,7 +16,10 @@
   <app-loader *ngIf="isLoading"></app-loader>
   <div *ngIf="!isLoading">
     <ion-list>
-      <ion-radio-group value="{{ currentProjectId }}" (ionChange)="change($event)">
+      <ion-radio-group
+        value="{{ currentProjectId }}"
+        (ionChange)="change($event)"
+      >
         <div *ngFor="let project of projects">
           <ion-item *ngIf="project.name !== null">
             <ion-label>{{ project.name }}</ion-label>
@@ -29,7 +30,10 @@
     </ion-list>
   </div>
 
-  <div class="not-found" *ngIf="!isLoading && projects && projects.length === 0">
+  <div
+    class="not-found"
+    *ngIf="!isLoading && projects && projects.length === 0"
+  >
     <p>Oops!</p>
     <p>Seems like you have no permissions for projects on this organization.</p>
   </div>

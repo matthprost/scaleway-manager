@@ -1,5 +1,6 @@
 ion-content {
-  --background: linear-gradient(#FFFFFF 40%,  #eff3f6 60%) no-repeat;}
+  --background: linear-gradient(#ffffff 40%, #eff3f6 60%) no-repeat;
+}
 
 ion-card {
   background: white;
@@ -18,13 +19,13 @@ ion-card {
   }
 
   &:hover {
-    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
+    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
   }
 
   &:focus {
-    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
-    box-shadow: 0 4px 16px rgba(0, 0, 0, .70);
+    -webkit-box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -36,7 +37,7 @@ ion-card {
 
 .bucket-not-available {
   width: 90px;
-  padding: 1rem 1rem .5rem 1rem;
+  padding: 1rem 1rem 0.5rem 1rem;
   margin: 0 auto;
   filter: grayscale(100%);
 }
@@ -45,7 +46,7 @@ ion-card {
   width: 20px;
   vertical-align: middle;
   display: inline-block;
-  margin-right: .25rem;
+  margin-right: 0.25rem;
 }
 
 .bucket-zone {
@@ -53,9 +54,9 @@ ion-card {
   align-items: center;
   justify-content: center;
   text-transform: uppercase;
-  margin-top: .75rem;
+  margin-top: 0.75rem;
   img {
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 }
 
@@ -64,7 +65,7 @@ ion-card {
   padding: 10px;
   text-transform: uppercase;
   font-weight: 400;
-  font-size: .85rem;
+  font-size: 0.85rem;
   color: white;
 }
 

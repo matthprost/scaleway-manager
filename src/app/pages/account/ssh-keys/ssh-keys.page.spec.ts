@@ -1,18 +1,17 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
+import { async, ComponentFixture, TestBed } from "@angular/core/testing";
 
-import { SshKeysPage } from './ssh-keys.page';
+import { SshKeysPage } from "./ssh-keys.page";
 
-describe('SshKeysPage', () => {
+describe("SshKeysPage", () => {
   let component: SshKeysPage;
   let fixture: ComponentFixture<SshKeysPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ SshKeysPage ],
+      declarations: [SshKeysPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {
@@ -21,7 +20,7 @@ describe('SshKeysPage', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

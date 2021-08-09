@@ -31,11 +31,11 @@ ion-title {
 }
 
 .rect-scale {
-  animation: rect-scale .5s ease-in-out;
+  animation: rect-scale 0.5s ease-in-out;
 }
 
 .card-appear {
-  animation: card-appear .35s ease-in-out;
+  animation: card-appear 0.35s ease-in-out;
 }
 
 .card-cont {
@@ -66,7 +66,7 @@ ion-title {
     font-size: 1rem;
     font-weight: lighter;
     color: var(--ion-color-dark);
-    padding: .75rem;
+    padding: 0.75rem;
   }
 
   &-invoices {
@@ -77,7 +77,7 @@ ion-title {
     &-small {
       color: dimgray;
       font-size: 1.1rem;
-      margin-top: .5rem;
+      margin-top: 0.5rem;
       text-transform: capitalize;
       display: flex;
       align-items: center;
@@ -92,7 +92,7 @@ ion-title {
     padding: 10px;
     text-transform: uppercase;
     font-weight: 400;
-    font-size: .85rem;
+    font-size: 0.85rem;
   }
 }
 
@@ -101,23 +101,22 @@ ion-title {
   color: dimgray;
   font-size: 1rem;
   font-weight: 300;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 .message {
   font-weight: bold;
-  margin-top: .5rem;
+  margin-top: 0.5rem;
 }
 
 .servers {
-
   &-left {
     font-size: 1.2rem;
     color: var(--ion-color-dark);
     text-align: center;
     font-weight: 300;
     text-transform: uppercase;
-    padding: .75rem 1rem;
+    padding: 0.75rem 1rem;
     background: white;
 
     ion-badge {
@@ -142,7 +141,7 @@ ion-title {
 }
 
 ion-card {
-  margin: .1rem;
+  margin: 0.1rem;
 }
 
 /* Header */
@@ -152,7 +151,7 @@ ion-content {
 }
 
 .server-toggle {
-  margin-top: .5rem;
+  margin-top: 0.5rem;
   width: 100%;
   text-align: center;
 }
@@ -160,8 +159,13 @@ ion-content {
 .home {
   &-header {
     background: var(--ion-color-primary);
-    background: linear-gradient(141deg, #8800C8 30%, var(--ion-color-primary) 70%) no-repeat;
-    padding: 1.75rem .75rem 0 .75rem;
+    background: linear-gradient(
+        141deg,
+        #8800c8 30%,
+        var(--ion-color-primary) 70%
+      )
+      no-repeat;
+    padding: 1.75rem 0.75rem 0 0.75rem;
 
     ion-button {
       --pading-top: 0;
@@ -175,7 +179,7 @@ ion-content {
     }
 
     &-canvas {
-      padding: .5rem 0 3rem 0;
+      padding: 0.5rem 0 3rem 0;
       margin-top: 4vh;
     }
 
@@ -183,14 +187,14 @@ ion-content {
       color: white;
       display: inline-block;
       margin: 0;
-      padding-left: .25rem;
+      padding-left: 0.25rem;
       font-weight: 300;
       text-transform: inherit;
     }
   }
 
   .ios &-header {
-    padding: 1.25rem .5rem 0 .5rem;
+    padding: 1.25rem 0.5rem 0 0.5rem;
   }
 
   &-middle {
@@ -202,7 +206,7 @@ ion-content {
   &-page {
     ion-card {
       --background: white;
-      margin: 0 .25rem;
+      margin: 0 0.25rem;
       min-height: 215px;
     }
 
@@ -212,13 +216,13 @@ ion-content {
 
       ion-slides {
         padding-bottom: 1.5rem;
-        padding-top: .5rem;
+        padding-top: 0.5rem;
         width: 100%;
       }
 
       &-instances {
         width: 100%;
-        padding: .5rem 1rem;
+        padding: 0.5rem 1rem;
 
         &-title {
           &-left {
@@ -238,14 +242,13 @@ ion-content {
   margin-top: 10vh;
 }
 
-
 .title-instances {
-  margin-left: .75rem;
-  margin-bottom: .5rem;
+  margin-left: 0.75rem;
+  margin-bottom: 0.5rem;
   color: gray;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 300;
-  padding-right: .5rem;
+  padding-right: 0.5rem;
   border-bottom: 1px solid lightgray;
   display: inline-block;
 }
@@ -273,7 +276,7 @@ ion-content {
   }
   .title {
     font-weight: 400;
-    margin: 1rem 0 .5rem 0;
+    margin: 1rem 0 0.5rem 0;
   }
   .subtitle {
     font-weight: 300;
@@ -281,33 +284,32 @@ ion-content {
   }
 
   .badge {
-    margin: .75rem 0 .5rem 0;
+    margin: 0.75rem 0 0.5rem 0;
   }
 }
 
 .server-indicator-state {
-
   &-text {
     text-transform: capitalize;
     display: inline-block;
     font-weight: 300;
-    font-size: .9rem;
+    font-size: 0.9rem;
   }
 }
 
 .server-zone {
-  padding-top: .5rem;
+  padding-top: 0.5rem;
   text-transform: uppercase;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: .9rem;
+  font-size: 0.9rem;
   font-weight: 300;
 
   img {
     height: 10px;
     width: auto;
-    margin-right: .5rem;
+    margin-right: 0.5rem;
   }
 }
 

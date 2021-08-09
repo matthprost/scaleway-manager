@@ -1,21 +1,21 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
+import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { IonicModule } from "@ionic/angular";
 
-import { IonicModule } from '@ionic/angular';
+import { ComponentsModule } from "../../components/components.module";
 
-import { AccountPage } from './account.page';
-import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {ComponentsModule} from '../../components/components.module';
-import {ChangeOrganizationPage} from './change-organization/change-organization.page';
-import {ChangeProjectPage} from './change-project/change-project.page';
+import { AccountPage } from "./account.page";
+import { ChangeOrganizationPage } from "./change-organization/change-organization.page";
+import { ChangeProjectPage } from "./change-project/change-project.page";
 
 const routes: Routes = [
   {
-    path: '',
-    component: AccountPage
-  }
+    path: "",
+    component: AccountPage,
+  },
 ];
 
 @NgModule({
@@ -25,9 +25,9 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes),
     FontAwesomeModule,
-    ComponentsModule
+    ComponentsModule,
   ],
   declarations: [AccountPage, ChangeOrganizationPage, ChangeProjectPage],
-  entryComponents: [ChangeOrganizationPage, ChangeProjectPage]
+  entryComponents: [ChangeOrganizationPage, ChangeProjectPage],
 })
 export class AccountPageModule {}

@@ -1,5 +1,5 @@
 export interface TokensDto {
-  tokens: Array<TokenDto>;
+  tokens: TokenDto[];
 }
 
 export interface TokenDto {
@@ -14,7 +14,8 @@ export interface TokenDto {
   organization_id: string;
   project_id: string;
   roles: {
-    role: string, organization: string
+    role: string;
+    organization: string;
   };
   use_role_key: boolean;
   user_id: string;

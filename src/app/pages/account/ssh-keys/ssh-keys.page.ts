@@ -1,48 +1,61 @@
-import {Component, OnInit} from '@angular/core';
-import {IonItemSliding, LoadingController, ModalController, NavController, ToastController} from '@ionic/angular';
-import {Clipboard} from '@ionic-native/clipboard/ngx';
-import {AddSshKeyPage} from './add-ssh-key/add-ssh-key.page';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
-import {SshKeysService} from '../../../services/user/project/ssh-key/ssh-keys.service';
-import {SshKeysDto} from '../../../services/user/project/ssh-key/ssh-keys.dto';
+import { Component, OnInit } from "@angular/core";
+import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { Clipboard } from "@ionic-native/clipboard/ngx";
+import {
+  IonItemSliding,
+  LoadingController,
+  ModalController,
+  NavController,
+  ToastController,
+} from "@ionic/angular";
 
-const {StatusBar} = Plugins;
+import { SshKeysDto } from "../../../services/user/project/ssh-key/ssh-keys.dto";
+import { SshKeysService } from "../../../services/user/project/ssh-key/ssh-keys.service";
+
+import { AddSshKeyPage } from "./add-ssh-key/add-ssh-key.page";
+
+const { StatusBar } = Plugins;
 
 @Component({
-  selector: 'app-ssh-keys',
-  templateUrl: './ssh-keys.page.html',
-  styleUrls: ['./ssh-keys.page.scss'],
+  selector: "app-ssh-keys",
+  templateUrl: "./ssh-keys.page.html",
+  styleUrls: ["./ssh-keys.page.scss"],
 })
 export class SshKeysPage implements OnInit {
-
   public isLoading = true;
-  public sshKeys: Array<SshKeysDto> = [];
+  public sshKeys: SshKeysDto[] = [];
 
-  constructor(public navCtrl: NavController, private clipboard: Clipboard, private toastCtrl: ToastController,
-              public modalController: ModalController, private loadingCtrl: LoadingController,
-              private sshKeyService: SshKeysService) {
-  }
+  constructor(
+    public navCtrl: NavController,
+    private clipboard: Clipboard,
+    private toastCtrl: ToastController,
+    public modalController: ModalController,
+    private loadingCtrl: LoadingController,
+    private sshKeyService: SshKeysService
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   ionViewDidEnter() {
-    StatusBar.setStyle({style: StatusBarStyle.Light});
-    this.refresh().then(() => {
-      this.isLoading = false;
-    })
-      .catch(error => {
+    StatusBar.setStyle({ style: StatusBarStyle.Light });
+    this.refresh()
+      .then(() => {
+        this.isLoading = false;
+      })
+      .catch((error) => {
         console.log(error);
       });
   }
 
   public doRefresh(refresher) {
-    this.refresh().then(() => {
-      refresher.target.complete();
-    }).catch(error => {
-      console.log(error);
-      refresher.target.complete();
-    });
+    this.refresh()
+      .then(() => {
+        refresher.target.complete();
+      })
+      .catch((error) => {
+        console.log(error);
+        refresher.target.complete();
+      });
   }
 
   private async refresh() {
@@ -50,19 +63,19 @@ export class SshKeysPage implements OnInit {
   }
 
   public split(sshKey: SshKeysDto): string {
-    const splitted = sshKey.fingerprint.split(' ', 5);
+    const splitted = sshKey.fingerprint.split(" ", 5);
 
-    return (splitted[3] + ' ' + splitted[4]);
+    return splitted[3] + " " + splitted[4];
   }
 
   public async copyToClipBoard(text: string) {
     await this.clipboard.copy(text);
 
     const toast = await this.toastCtrl.create({
-      message: 'Text has been copied into your clipboard!',
+      message: "Text has been copied into your clipboard!",
       duration: 3000,
-      position: 'top',
-      mode: 'ios',
+      position: "top",
+      mode: "ios",
     });
 
     await toast.present();
@@ -71,8 +84,8 @@ export class SshKeysPage implements OnInit {
   public async deleteSshKey(sshKeyId: string, slidingItem: IonItemSliding) {
     await slidingItem.close();
     const loading = await this.loadingCtrl.create({
-      message: 'Loading...',
-      mode: 'ios'
+      message: "Loading...",
+      mode: "ios",
     });
 
     await loading.present();
@@ -86,8 +99,8 @@ export class SshKeysPage implements OnInit {
     const modal = await this.modalController.create({
       component: AddSshKeyPage,
       componentProps: {
-        keys: this.sshKeys
-      }
+        keys: this.sshKeys,
+      },
     });
 
     await modal.present();
@@ -96,7 +109,6 @@ export class SshKeysPage implements OnInit {
       this.refresh();
     });
 
-    if (modal && modal.present()) return null
+    if (modal && modal.present()) return null;
   }
-
 }

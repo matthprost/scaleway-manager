@@ -1,29 +1,29 @@
-import { CommonModule } from '@angular/common';
-import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { Routes, RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
-import {RecaptchaModule} from 'ng-recaptcha';
+import { CommonModule } from "@angular/common";
+import { NgModule } from "@angular/core";
+import { FormsModule } from "@angular/forms";
+import { Routes, RouterModule } from "@angular/router";
+import { IonicModule } from "@ionic/angular";
+import { RecaptchaModule } from "ng-recaptcha";
 
-import {HelpPage} from './help/help.page';
-import { LoginPage } from './login.page';
+import { HelpPage } from "./help/help.page";
+import { LoginPage } from "./login.page";
 
 const routes: Routes = [
   {
-    path: '',
-    component: LoginPage
-  }
+    path: "",
+    component: LoginPage,
+  },
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        RouterModule.forChild(routes),
-        RecaptchaModule
-    ],
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes),
+    RecaptchaModule,
+  ],
   declarations: [LoginPage, HelpPage],
-  entryComponents: [HelpPage]
+  entryComponents: [HelpPage],
 })
 export class LoginPageModule {}
