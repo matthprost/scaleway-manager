@@ -74,14 +74,14 @@
                 <ion-card-header
                   class="card-header-stats ion-text-center"
                   mode="ios"
-                  (click)="navigate('instancesDetails', serversInstance.country, serversInstance.id)"
+                  (click)="navigate('instancesDetails', serversInstance.area, serversInstance.id)"
                 >
                   {{ serversInstance.name | slice:0:12 }}
                 </ion-card-header>
 
                 <ion-card-content class="card-stat2 ion-text-center" mode="ios">
                   <div
-                    (click)="navigate('instancesDetails', serversInstance.country, serversInstance.id)"
+                    (click)="navigate('instancesDetails', serversInstance.area, serversInstance.id)"
                   >
                     <ion-row>
                       <ion-col>
@@ -107,10 +107,10 @@
                         </div>
                         <div class="server-zone">
                           <img
-                            src="{{ serversInstance.country | zoneFlag }}"
-                            alt="country"
+                            src="{{ serversInstance.area | zoneFlag }}"
+                            alt="area"
                           />
-                          {{ serversInstance.country }}
+                          {{ serversInstance.area }}
                         </div>
                       </ion-col>
                     </ion-row>
@@ -155,9 +155,6 @@
                     [icon]="['fas', 'database']"
                     [size]="'2x'"
                   ></fa-icon>
-                  <div class="badge">
-                    <ion-badge color="danger" mode="ios">New</ion-badge>
-                  </div>
                   <div class="subtitle">Access to your buckets and files</div>
                   <fa-icon
                     slot="start"

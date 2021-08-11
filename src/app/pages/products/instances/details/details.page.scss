@@ -67,11 +67,11 @@ ion-img {
 
   &-state {
     text-transform: uppercase;
-    text-align: center;
     color: darkgrey;
     font-size: 1rem;
     margin-top: 0.5rem;
     display: flex;
+    justify-content: center;
     align-items: center;
   }
 
@@ -132,6 +132,9 @@ ion-img {
   }
 
   &-content {
+    max-width: 50%;
+    padding: 4px 0;
+
     ion-button {
       width: 8rem;
       margin: 0.5rem 0;

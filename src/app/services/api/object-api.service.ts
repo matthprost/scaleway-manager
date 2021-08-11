@@ -47,17 +47,17 @@ export class ObjectApiService {
 
   public async request(
     method: HttpMethods,
-    country: string,
+    area: string,
     subHost?: string,
     path?: string,
     customHeader?: {}
   ) {
     const opts = {
       service: "s3",
-      region: country,
+      region: area,
       host: subHost
-        ? subHost + ".s3." + country + ".scw.cloud"
-        : "s3." + country + ".scw.cloud",
+        ? subHost + ".s3." + area + ".scw.cloud"
+        : "s3." + area + ".scw.cloud",
       path,
       headers: customHeader ? customHeader : {},
       method: HttpMethods[method.toString()],
@@ -93,7 +93,7 @@ export class ObjectApiService {
           "https://" +
           (subHost ? subHost + "." : "") +
           "s3." +
-          country +
+          area +
           ".scw.cloud" +
           (path ? path : "");
       } else {
@@ -103,7 +103,7 @@ export class ObjectApiService {
             ...{ subHost },
             ...{ path },
             ...customHeader,
-            ...{ zone: country },
+            ...{ zone: area },
           };
         }
         url = "/s3";
@@ -114,7 +114,7 @@ export class ObjectApiService {
           body: null,
           headers: subHost
             ? myHeaders
-            : { ...opts.headers, ...customHeader, ...{ zone: country } },
+            : { ...opts.headers, ...customHeader, ...{ zone: area } },
           responseType: "text",
         })
         .toPromise();
@@ -141,7 +141,7 @@ export class ObjectApiService {
         (e.statusText === "Forbidden" || e.statusText === "Unknown Error")
       ) {
         await this.renewToken();
-        return this.request(method, country, subHost, path, customHeader);
+        return this.request(method, area, subHost, path, customHeader);
       }
 
       const toast = await this.toastController.create({
@@ -162,41 +162,41 @@ export class ObjectApiService {
   }
 
   public get(
-    country: string,
+    area: string,
     subHost?: string,
     path?: string,
     customHeader?: {}
   ) {
-    return this.request(HttpMethods.GET, country, subHost, path, customHeader);
+    return this.request(HttpMethods.GET, area, subHost, path, customHeader);
   }
 
   public post(
-    country: string,
+    area: string,
     subHost?: string,
     path?: string,
     customHeader?: {}
   ) {
-    return this.request(HttpMethods.POST, country, subHost, path, customHeader);
+    return this.request(HttpMethods.POST, area, subHost, path, customHeader);
   }
 
   public put(
-    country: string,
+    area: string,
     subHost?: string,
     path?: string,
     customHeader?: {}
   ) {
-    return this.request(HttpMethods.PUT, country, subHost, path, customHeader);
+    return this.request(HttpMethods.PUT, area, subHost, path, customHeader);
   }
 
   public patch(
-    country: string,
+    area: string,
     subHost?: string,
     path?: string,
     customHeader?: {}
   ) {
     return this.request(
       HttpMethods.PATCH,
-      country,
+      area,
       subHost,
       path,
       customHeader
@@ -204,14 +204,14 @@ export class ObjectApiService {
   }
 
   public options(
-    country: string,
+    area: string,
     subHost?: string,
     path?: string,
     customHeader?: {}
   ) {
     return this.request(
       HttpMethods.OPTIONS,
-      country,
+      area,
       subHost,
       path,
       customHeader
@@ -219,14 +219,14 @@ export class ObjectApiService {
   }
 
   public delete(
-    country: string,
+    area: string,
     subHost?: string,
     path?: string,
     customHeader?: {}
   ) {
     return this.request(
       HttpMethods.DELETE,
-      country,
+      area,
       subHost,
       path,
       customHeader

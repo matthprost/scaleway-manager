@@ -1,8 +1,4 @@
 export interface BillingDto {
-  invoices: InvoicesDto[];
-}
-
-export interface InvoicesDto {
   total_untaxed: string;
   organization_name: string;
   due_date: string;

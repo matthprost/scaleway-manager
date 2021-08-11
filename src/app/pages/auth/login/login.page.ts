@@ -27,7 +27,7 @@ export class LoginPage {
   public email: string = null;
   public password: string = null;
   private captchaPassed = false;
-  private captchaResponse: string;
+  public captchaResponse: string;
   public captchaKey = environment.captcha;
 
   constructor(

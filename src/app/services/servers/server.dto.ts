@@ -18,7 +18,7 @@ export interface ServerDto {
   name: string;
   volumes: Volume[];
   security_group: SecurityGroup;
-  country: string;
+  area: string;
   zone: string;
 }
 
