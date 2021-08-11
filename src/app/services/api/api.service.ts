@@ -22,8 +22,8 @@ export class ApiService {
   // BILLING API
   private readonly billing: string = "/billing";
 
-  private createToastError = async (error) =>
-    await this.toastCtrl.create({
+  private createToastError = async (error) => {
+    const toast = await this.toastCtrl.create({
       message: `Error: ${error.error.message || "Unknown Error"}`,
       duration: 5000,
       position: "top",
@@ -31,6 +31,9 @@ export class ApiService {
       color: "danger",
       showCloseButton: true,
     });
+
+    await toast.present();
+  }
 
   constructor(
     private storage: Storage,
@@ -56,18 +59,19 @@ export class ApiService {
   ): Promise<T> {
     const token = await this.storage.get("jwt");
 
+    // This is for login when token doesn't exist
+    if (!token) {
+      return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
+        headers: token
+          ? {
+            "X-Session-Token": token.auth.jwt_key,
+          }
+          : {},
+        body: data,
+      }).toPromise();
+    }
+
     try {
-      // This is for login when token doesn't exist
-      if (!token) {
-        return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
-            headers: token
-              ? {
-                  "X-Session-Token": token.auth.jwt_key,
-                }
-              : {},
-            body: data,
-          }).toPromise();
-      }
       return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
           headers:
             token && token.auth && token.auth.jwt_key
@@ -103,8 +107,7 @@ export class ApiService {
           throw e;
         }
       } else {
-        const toast = await this.createToastError(error);
-        await toast.present();
+        await this.createToastError(error);
         throw error;
       }
     }

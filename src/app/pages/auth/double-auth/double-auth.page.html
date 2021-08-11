@@ -19,13 +19,12 @@
               <ion-card-content>
                 <form (ngSubmit)="login()">
                   <ion-list lines="none" class="ion-no-margin ion-no-padding">
-                    <ion-item class="ion-no-padding ion-margin-bottom" mode="md">
-                      <!--<ion-label position="floating">Double Auth Code</ion-label>-->
+                    <ion-item class="ion-no-padding" mode="md">
                       <ion-input
                         type="text"
                         maxlength="6"
                         clearInput
-                        placeholder="Code"
+                        placeholder="Token"
                         name="number"
                         [(ngModel)]="code"
                         inputmode="numeric"
@@ -35,23 +34,13 @@
                       ></ion-input>
                       <ion-icon name="md-keypad" slot="start"></ion-icon>
                     </ion-item>
-                    <div
-                      class="ion-no-margin ion-no-padding"
-                      style="transform: scale(0.8); transform-origin: 0 0"
-                    >
-                      <re-captcha
-                        (resolved)="captchaResolved($event)"
-                        siteKey="{{captchaKey}}"
-                        #captchaRef="reCaptcha"
-                      ></re-captcha>
-                    </div>
                     <div class="ion-padding-top ion-padding-bottom">
                       <ion-button
                         color="secondary"
                         type="submit"
                         expand="full"
                         mode="ios"
-                        disabled="{{ !code || !captchaResponse }}"
+                        disabled="{{ !code || !(code && code.length === 6) }}"
                       >
                         Log In
                       </ion-button>

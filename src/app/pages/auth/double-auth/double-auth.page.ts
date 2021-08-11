@@ -1,4 +1,4 @@
-import {Component, NgZone, ViewChild} from '@angular/core';
+import {Component, NgZone} from '@angular/core';
 import {
   LoadingController,
   MenuController,
@@ -6,7 +6,6 @@ import {
   ToastController,
 } from "@ionic/angular";
 
-import { environment } from "../../../../environments/environment";
 import { NavParamsService } from "../../../services/nav/nav-params.service";
 import { AuthService } from "../../../services/user/auth/auth.service";
 
@@ -16,13 +15,8 @@ import { AuthService } from "../../../services/user/auth/auth.service";
   styleUrls: ["./double-auth.page.scss"],
 })
 export class DoubleAuthPage {
-  @ViewChild("captchaRef") captchaRef;
-
   public code: string = null;
   private logins;
-  private captchaPassed = false;
-  public captchaResponse: string;
-  public captchaKey = environment.captcha;
 
   constructor(
     private auth: AuthService,
@@ -39,13 +33,6 @@ export class DoubleAuthPage {
     this.logins = this.navParams.getParams();
   }
 
-  captchaResolved(response: string): void {
-    this.zone.run(() => {
-      this.captchaPassed = true;
-      this.captchaResponse = response;
-    });
-  }
-
   public async login(): Promise<void> {
     const loader = await this.loadingCtrl.create({
       message: "Loading...",
@@ -57,12 +44,21 @@ export class DoubleAuthPage {
       await this.auth.login({
         email: this.logins.email,
         password: this.logins.password,
-        captcha: this.captchaResponse,
+        captcha: this.logins.captcha,
         code: this.code,
       });
       await this.navCtrl.navigateRoot(["home"]);
     } catch (error) {
-      this.captchaRef.reset()
+      const toast = await this.toastCtrl.create({
+        message: `Error: ${error.error.message || "Unknown Error"}`,
+        duration: 5000,
+        position: "top",
+        mode: "ios",
+        color: "danger",
+        showCloseButton: true,
+      });
+
+      await toast.present();
     } finally {
       await loader.dismiss();
     }
