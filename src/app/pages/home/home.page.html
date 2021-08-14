@@ -23,8 +23,8 @@
       <app-graph
         [billings]="billings"
         *ngIf="!isLoading && !billingError"
-        [currentOrganization]="currentOrganization"
-        [currentProject]="currentProject"
+        [organizationName]="currentOrganization ? currentOrganization.name: ''"
+        [projectName]="currentProject ? currentProject.name : ''"
       ></app-graph>
       <app-error *ngIf="billingError" variant="light"></app-error>
     </div>

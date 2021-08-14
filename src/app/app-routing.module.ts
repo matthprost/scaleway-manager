@@ -1,39 +1,39 @@
-import { NgModule } from "@angular/core";
-import { PreloadAllModules, RouterModule, Routes } from "@angular/router";
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 
-import { DoubleAuthGuard } from "./guards/double-auth/double-auth.guard";
-import { HomeGuard } from "./guards/home/home.guard";
-import { LoginGuard } from "./guards/login/login.guard";
+import {DoubleAuthGuard} from './guards/double-auth/double-auth.guard';
+import {HomeGuard} from './guards/home/home.guard';
+import {LoginGuard} from './guards/login/login.guard';
 
 const routes: Routes = [
   {
-    path: "",
-    redirectTo: "home",
-    pathMatch: "full",
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
   {
-    path: "home",
+    path: 'home',
     children: [
       {
-        path: "",
-        loadChildren: "./pages/home/home.module#HomePageModule",
+        path: '',
+        loadChildren: './pages/home/home.module#HomePageModule',
       },
       {
-        path: "account",
+        path: 'account',
         children: [
           {
-            path: "",
-            loadChildren: "./pages/account/account.module#AccountPageModule",
+            path: '',
+            loadChildren: './pages/account/account.module#AccountPageModule',
           },
           {
-            path: "ssh-keys",
+            path: 'ssh-keys',
             loadChildren:
-              "./pages/account/ssh-keys/ssh-keys.module#SshKeysPageModule",
+              './pages/account/ssh-keys/ssh-keys.module#SshKeysPageModule',
           },
           {
-            path: "tokens",
+            path: 'tokens',
             loadChildren:
-              "./pages/account/tokens/tokens.module#TokensPageModule",
+              './pages/account/tokens/tokens.module#TokensPageModule',
           },
         ],
       },
@@ -41,17 +41,17 @@ const routes: Routes = [
     canActivate: [HomeGuard],
   },
   {
-    path: "instances",
+    path: 'instances',
     children: [
       {
-        path: "",
+        path: '',
         loadChildren:
-          "./pages/products/instances/instances.module#InstancesPageModule",
+          './pages/products/instances/instances.module#InstancesPageModule',
       },
       {
-        path: ":zone/:id",
+        path: ':zone/:id',
         loadChildren:
-          "./pages/products/instances/details/details.module#DetailsPageModule",
+          './pages/products/instances/details/details.module#DetailsPageModule',
       },
     ],
     canActivate: [HomeGuard],
@@ -72,77 +72,78 @@ const routes: Routes = [
     ]
   },*/
   {
-    path: "login",
+    path: 'login',
     children: [
       {
-        path: "",
-        loadChildren: "./pages/auth/login/login.module#LoginPageModule",
+        path: '',
+        loadChildren: './pages/auth/login/login.module#LoginPageModule',
         canActivate: [LoginGuard],
       },
       {
-        path: "double-auth",
+        path: 'double-auth',
         loadChildren:
-          "./pages/auth/double-auth/double-auth.module#DoubleAuthPageModule",
+          './pages/auth/double-auth/double-auth.module#DoubleAuthPageModule',
         canActivate: [DoubleAuthGuard],
       },
     ],
   },
   {
-    path: "about",
-    loadChildren: "./pages/about/about.module#AboutPageModule",
+    path: 'about',
+    loadChildren: './pages/about/about.module#AboutPageModule',
     canActivate: [HomeGuard],
   },
   {
-    path: "billing",
-    loadChildren: "./pages/billing/billing.module#BillingPageModule",
+    path: 'billing',
+    loadChildren: './pages/billing/billing.module#BillingPageModule',
     canActivate: [HomeGuard],
   },
   {
-    path: "settings",
-    loadChildren: "./pages/settings/settings.module#SettingsPageModule",
+    path: 'settings',
+    loadChildren: './pages/settings/settings.module#SettingsPageModule',
     canActivate: [HomeGuard],
   },
   {
-    path: "help",
-    loadChildren: "./pages/auth/login/help/help.module#HelpPageModule",
+    path: 'help',
+    loadChildren: './pages/auth/login/help/help.module#HelpPageModule',
     canActivate: [HomeGuard],
   },
   {
-    path: "buckets",
+    path: 'buckets',
     children: [
       {
-        path: "",
+        path: '',
         loadChildren:
-          "./pages/products/buckets/buckets.module#ObjectsPageModule",
+          './pages/products/buckets/buckets.module#ObjectsPageModule',
       },
       {
-        path: ":region/:bucket",
+        path: ':region/:bucket',
         children: [
           {
-            path: "",
+            path: '',
             loadChildren:
-              "./pages/products/buckets/objects/objects.module#ObjectsPageModule",
+              './pages/products/buckets/objects/objects.module#ObjectsPageModule',
           },
           {
-            path: "**",
+            path: '**',
             loadChildren:
-              "./pages/products/buckets/objects/objects.module#ObjectsPageModule",
+              './pages/products/buckets/objects/objects.module#ObjectsPageModule',
           },
         ],
       },
     ],
   },
   {
-    path: "change-project",
+    path: 'change-project',
     loadChildren:
-      "./pages/account/change-project/change-project.module#ChangeProjectPageModule",
+      './pages/account/change-project/change-project.module#ChangeProjectPageModule',
   },
 ];
 
 @NgModule({
   imports: [
-    RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules }),
+    RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules}),
   ],
   exports: [RouterModule],
 })
-export class AppRoutingModule {}
+export class AppRoutingModule {
+}

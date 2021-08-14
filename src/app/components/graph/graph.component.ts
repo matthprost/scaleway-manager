@@ -16,8 +16,8 @@ import { BillingDto } from "../../services/billing/billing.dto";
 })
 export class GraphComponent implements OnChanges {
   @Input() billings: BillingDto;
-  @Input() currentOrganization: any;
-  @Input() currentProject: any;
+  @Input() organizationName: any;
+  @Input() projectName: any;
 
   @ViewChild("billingCanvas") barCanvas: ElementRef;
   private barChart: Chart;
@@ -25,9 +25,7 @@ export class GraphComponent implements OnChanges {
   public values;
   public currency;
 
-  constructor() {}
-
-  ngOnChanges() {
+  ngOnChanges(): void {
     this.formatData(this.billings);
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {

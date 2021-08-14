@@ -33,7 +33,7 @@ export class HomePage {
   public billingError = false;
   public serverError = false;
 
-  public currentOrganization = {};
+  public currentOrganization = { name: '' };
   public currentProject: ProjectDto;
 
   slideOpts = {
@@ -109,8 +109,7 @@ export class HomePage {
   }
 
   public async refresh(): Promise<any> {
-    await this.refreshBilling();
-    await this.refreshServers();
+    await Promise.all([this.refreshBilling(), this.refreshServers()])
   }
 
   private async autoRefresh() {
@@ -149,7 +148,7 @@ export class HomePage {
     }
   }
 
-  public startAndStopServers(event: any, server: ServerDto) {
+  public startAndStopServers(event: any, server: ServerDto): void {
     console.log(event.detail.checked);
 
     if (event.detail.checked === true) {
@@ -239,7 +238,7 @@ export class HomePage {
     }
   }
 
-  public async navigate(location: string, area?: string, serverId?: string) {
+  public async navigate(location: string, area?: string, serverId?: string): Promise<void> {
     switch (location) {
       case 'account':
         await this.navCtrl.navigateForward(['/home/account']);

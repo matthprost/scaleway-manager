@@ -2,14 +2,14 @@
   <div class="header">
     <div class="header-left">
       <span class="header-left-organization">{{
-        currentOrganization.name
+        organizationName
       }}</span>
       <fa-icon
         slot="start"
         [icon]="['fas', 'chevron-right']"
         class="icon-separator"
       ></fa-icon>
-      {{ currentProject.name }}
+      {{ projectName }}
     </div>
     <div *ngIf="values && values.length > 0" class="header-right">
       Current

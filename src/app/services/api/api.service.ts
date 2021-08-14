@@ -144,7 +144,7 @@ export class ApiService {
   }
 
   public getBmaasUrl(): string {
-    return this.api + "/baremetal/v1alpha1/zones/";
+    return this.api + "/baremetal/v1/zones/";
   }
 
   public getBillingApiUrl(): string {
