@@ -19,10 +19,9 @@
     <ion-item-group>
       <ion-item-divider class="title" color="secondary">
         <div style="width: 100%">
-          <div style="float: left">Current Invoice</div>
+          <div style="float: left">Current Consumption</div>
           <div class="last-update">
-            Updated at <br />{{ currentInvoice.last_update | date:'h:mm a,
-            dd/MM/yy' }}
+            Updated at <br />{{ currentInvoice.last_update | date:'h:mm a, dd/MM/yy' }}
           </div>
         </div>
       </ion-item-divider>
@@ -50,7 +49,7 @@
 
     <ion-item-group>
       <ion-item-divider class="title" color="secondary"
-        >Older Invoices</ion-item-divider
+        >Past Invoices</ion-item-divider
       >
       <ion-item *ngFor="let billing of billings" lines="full">
         <div class="information-title">
@@ -72,7 +71,7 @@
   </div>
   <div
     class="not-found ion-text-center ion-margin-top"
-    *ngIf="billings && billings.length === 0"
+    *ngIf="billings && billings.length === 0 && !isLoading"
   >
     <img alt="no_server" src="../../../../assets/img/invoice.svg" />
     <p>No invoice available</p>

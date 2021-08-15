@@ -75,6 +75,7 @@ export class HomePage {
   public async refreshBilling(): Promise<any> {
     try {
       this.billings = await this.billingService.getBillingList(6);
+      this.billingError = false;
     } catch (e) {
       this.billingError = true;
 
@@ -109,7 +110,8 @@ export class HomePage {
   }
 
   public async refresh(): Promise<any> {
-    await Promise.all([this.refreshBilling(), this.refreshServers()])
+    await this.refreshServers()
+    await this.refreshBilling()
   }
 
   private async autoRefresh() {

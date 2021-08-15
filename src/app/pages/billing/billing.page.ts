@@ -1,34 +1,31 @@
-import { Component } from "@angular/core";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import {Component} from '@angular/core';
+import {Plugins, StatusBarStyle} from '@capacitor/core';
 
-import { BillingDto } from "../../services/billing/billing.dto";
-import { BillingService } from "../../services/billing/billing.service";
+import {BillingDto} from '../../services/billing/billing.dto';
+import {BillingService} from '../../services/billing/billing.service';
 
-const { StatusBar } = Plugins;
+const {StatusBar} = Plugins;
 
 @Component({
-  selector: "app-billing",
-  templateUrl: "./billing.page.html",
-  styleUrls: ["./billing.page.scss"],
+  selector: 'app-billing',
+  templateUrl: './billing.page.html',
+  styleUrls: ['./billing.page.scss'],
 })
 export class BillingPage {
-  public billings: BillingDto[];
+  public billings: BillingDto[] = [];
   public currentInvoice: BillingDto;
   public isLoading = true;
   public billingError = false;
 
-  constructor(private billingService: BillingService) {}
+  constructor(private billingService: BillingService) {
+  }
 
   ionViewDidEnter(): void {
-    StatusBar.setStyle({ style: StatusBarStyle.Light });
+    StatusBar.setStyle({style: StatusBarStyle.Light});
     this.refresh()
-      .then(() => {
-        this.isLoading = false;
-      })
       .catch(() => {
-        this.isLoading = false;
         this.billingError = true;
-      });
+      }).finally(() => this.isLoading = false);
   }
 
   public doRefresh(refresher) {
@@ -43,8 +40,9 @@ export class BillingPage {
   }
 
   private async refresh(): Promise<any> {
-    this.billings = await this.billingService.getBillingList(100)
-    this.billings = this.billings.slice(1, this.billings.length);
-    this.currentInvoice = this.billings[0];
+    const billings = await this.billingService.getBillingList(100);
+    this.currentInvoice = billings[0];
+    this.billings = billings.slice(1, billings.length);
+    console.log(this.billings)
   }
 }

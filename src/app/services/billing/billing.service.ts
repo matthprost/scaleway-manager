@@ -11,12 +11,6 @@ import { BillingDto } from "./billing.dto";
 export class BillingService {
   constructor(private api: ApiService, private storage: Storage) {}
 
-  public getAllBilling(): Promise<BillingDto> {
-    const ApiUrl = this.api.getBillingApiUrl();
-
-    return this.api.get<BillingDto>(`${ApiUrl}/invoices`)
-  }
-
   public async getBillingList(value: number): Promise<any> {
     const ApiUrl = this.api.getBillingApiUrl();
 
