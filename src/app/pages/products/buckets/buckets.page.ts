@@ -1,12 +1,12 @@
 import { Component, OnInit } from "@angular/core";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { ModalController, NavController } from "@ionic/angular";
 
 import { ObjectService } from "../../../services/object/object.service";
 
 import { AddBucketPage } from "./add-bucket/add-bucket.page";
 
-const { StatusBar } = Plugins;
+
 
 @Component({
   selector: "app-objects",

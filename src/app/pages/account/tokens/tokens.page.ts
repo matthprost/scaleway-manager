@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {
   IonItemSliding,
   LoadingController,
@@ -10,7 +10,7 @@ import { AuthService } from "../../../services/user/auth/auth.service";
 import { TokenDto } from "../../../services/user/project/tokens/tokens.dto";
 import { TokensService } from "../../../services/user/project/tokens/tokens.service";
 
-const { StatusBar } = Plugins;
+
 
 @Component({
   selector: "app-tokens",

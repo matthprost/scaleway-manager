@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {MenuController, NavController} from '@ionic/angular';
 import {Storage} from '@ionic/storage';
@@ -11,7 +11,6 @@ import {ServersService} from '../../services/servers/servers.service';
 import {ProjectDto} from '../../services/user/project/project.dto';
 import {ProjectService} from '../../services/user/project/project.service';
 
-const {StatusBar} = Plugins;
 
 @Component({
   selector: 'app-home',

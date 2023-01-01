@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { ModalController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 
 import { ProjectService } from "../../../services/user/project/project.service";
 
-const { StatusBar } = Plugins;
+
 
 @Component({
   selector: "app-change-project",

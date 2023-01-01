@@ -1,8 +1,6 @@
 import {Component} from '@angular/core';
-import {Plugins, StatusBarStyle} from '@capacitor/core';
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {Platform} from '@ionic/angular';
-
-const {StatusBar, SplashScreen} = Plugins;
 
 @Component({
   selector: 'app-root',
@@ -64,7 +62,6 @@ export class AppComponent {
   initializeApp(): void {
     this.platform.ready().then(() => {
       StatusBar.setStyle({style: StatusBarStyle.Light});
-      SplashScreen.hide();
     });
   }
 }

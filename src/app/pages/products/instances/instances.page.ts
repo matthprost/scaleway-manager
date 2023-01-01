@@ -1,11 +1,11 @@
 import { Component, OnInit } from "@angular/core";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { NavController } from "@ionic/angular";
 
 import { ServerDto } from "../../../services/servers/server.dto";
 import { ServersService } from "../../../services/servers/servers.service";
 
-const { StatusBar } = Plugins;
+
 
 @Component({
   selector: "app-instances",
