@@ -1,6 +1,6 @@
 import { Component, NgZone, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {
   LoadingController,
   MenuController,
@@ -15,7 +15,7 @@ import { AuthService } from "../../../services/user/auth/auth.service";
 
 import { HelpPage } from "./help/help.page";
 
-const { StatusBar } = Plugins;
+
 
 @Component({
   selector: "app-login",

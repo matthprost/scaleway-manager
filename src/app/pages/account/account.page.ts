@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {
   faShieldAlt,
   faExclamationCircle,
@@ -19,7 +19,7 @@ import { ProjectService } from "../../services/user/project/project.service";
 import { ChangeOrganizationPage } from "./change-organization/change-organization.page";
 import { ChangeProjectPage } from "./change-project/change-project.page";
 
-const { StatusBar } = Plugins;
+
 
 @Component({
   selector: "app-account",

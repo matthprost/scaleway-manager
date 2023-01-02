@@ -1,10 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { AppVersion } from "@ionic-native/app-version/ngx";
 import { PickerController, Platform } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 
-const { StatusBar } = Plugins;
+
 
 @Component({
   selector: "app-settings",

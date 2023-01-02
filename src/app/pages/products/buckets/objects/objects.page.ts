@@ -1,13 +1,11 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { NavController, PopoverController } from "@ionic/angular";
 
 import { ObjectService } from "../../../../services/object/object.service";
 
 import { OptionsPage } from "./options/options.page";
-
-const { StatusBar } = Plugins;
 
 @Component({
   selector: "app-objects",

@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { Clipboard } from "@ionic-native/clipboard/ngx";
 import {
   AlertController,
@@ -12,7 +12,7 @@ import {
 import { ServerDto } from "../../../../services/servers/server.dto";
 import { ServersService } from "../../../../services/servers/servers.service";
 
-const { StatusBar } = Plugins;
+
 
 @Component({
   selector: "app-details",

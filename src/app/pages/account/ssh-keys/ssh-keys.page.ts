@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { Plugins, StatusBarStyle } from "@capacitor/core";
+import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { Clipboard } from "@ionic-native/clipboard/ngx";
 import {
   IonItemSliding,
@@ -14,7 +14,7 @@ import { SshKeysService } from "../../../services/user/project/ssh-key/ssh-keys.
 
 import { AddSshKeyPage } from "./add-ssh-key/add-ssh-key.page";
 
-const { StatusBar } = Plugins;
+
 
 @Component({
   selector: "app-ssh-keys",
