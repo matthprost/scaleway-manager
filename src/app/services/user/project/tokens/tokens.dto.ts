@@ -1,22 +1,16 @@
 export interface TokensDto {
-  tokens: TokenDto[];
+  api_keys: TokenDto[];
 }
 
 export interface TokenDto {
   access_key: string;
-  category: string;
-  creation_date: string;
+  application_id: string;
+  created_at: string;
   creation_ip: string;
-  deletion_date: string;
+  default_project_id: string;
   description: string;
-  expires: string;
-  inherits_user_perms: boolean;
-  organization_id: string;
-  project_id: string;
-  roles: {
-    role: string;
-    organization: string;
-  };
-  use_role_key: boolean;
-  user_id: string;
+  editable: boolean;
+  expires_at: string;
+  secret_key: string;
+  updated_at: string;
 }

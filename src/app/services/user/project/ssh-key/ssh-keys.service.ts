@@ -18,7 +18,7 @@ export class SshKeysService {
     try {
       const currentProject = await this.projectService.getCurrentProject();
       const result = await this.api.get<SshKeysDto>(
-        `${this.api.getApiUrl()}/account/v2alpha1/ssh-keys/?project_id=${
+        `${this.api.getApiUrl()}/iam/v1alpha1/ssh-keys/?project_id=${
           currentProject.id
         }`
       );
@@ -32,7 +32,7 @@ export class SshKeysService {
   public async addSShKey(sshKey: string) {
     try {
       const currentProject = await this.projectService.getCurrentProject();
-      await this.api.post(`${this.api.getApiUrl()}/account/v2alpha1/ssh-keys`, {
+      await this.api.post(`${this.api.getApiUrl()}/iam/v1alpha1/ssh-keys`, {
         project_id: currentProject.id,
         public_key: sshKey,
       });
@@ -44,7 +44,7 @@ export class SshKeysService {
   public async deleteSShKey(sshKeyId: string) {
     try {
       await this.api.delete(
-        `${this.api.getApiUrl()}/account/v2alpha1/ssh-key/${sshKeyId}`
+        `${this.api.getApiUrl()}/iam/v1alpha1/ssh-key/${sshKeyId}`
       );
     } catch (e) {
       throw e;

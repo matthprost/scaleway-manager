@@ -63,25 +63,25 @@ export class ObjectApiService {
       method: HttpMethods[method.toString()],
     };
 
+
     // We get token in storage
     const currentProject = await this.projectService.getCurrentProjectId();
     const apiTokenStorage = await this.storage.get("apiTokenByProject");
 
     let apiToken = apiTokenStorage && apiTokenStorage[currentProject];
-    const currentOrganizationId = await this.storage.get("currentOrganization");
-
     // If aws token doesn't exist we create new and store it
-    if (!apiToken || apiToken.token.organization_id !== currentOrganizationId) {
+    if (!apiToken) {
       apiToken = await this.renewToken();
     }
+
 
     console.log("AWS-TOKEN", apiToken);
 
     try {
       // Create AWS Signature
       aws4.sign(opts, {
-        accessKeyId: apiToken.token.access_key,
-        secretAccessKey: apiToken.token.secret_key,
+        accessKeyId: apiToken.access_key,
+        secretAccessKey: apiToken.secret_key,
       });
       console.log("AWS-OPTIONS", opts);
 

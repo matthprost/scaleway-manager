@@ -33,7 +33,7 @@
 
   <div *ngIf="!isLoading">
     <div class="name">
-      <div class="two-auth-enabled" *ngIf="user.double_auth_enabled">
+      <div class="two-auth-enabled" *ngIf="user.mfa_enabled">
         <ion-chip>
           <ion-label color="light">
             <fa-icon [icon]="faShieldAlt"></fa-icon>
@@ -41,7 +41,7 @@
           </ion-label>
         </ion-chip>
       </div>
-      <div class="two-auth-disabled" *ngIf="!user.double_auth_enabled">
+      <div class="two-auth-disabled" *ngIf="!user.mfa_enabled">
         <ion-chip>
           <ion-label color="light">
             <fa-icon [icon]="danger"></fa-icon>
@@ -49,7 +49,7 @@
           </ion-label>
         </ion-chip>
       </div>
-      <div class="fullname">{{ user.fullname }}</div>
+      <div class="fullname">{{ user.first_name + ' ' + user.last_name }}</div>
       <div class="email">{{ user.email }}</div>
       <div class="current-organization">
         <div class="current-organization-text">
