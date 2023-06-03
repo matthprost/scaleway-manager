@@ -120,7 +120,7 @@ export class ApiService {
 
       const result = await this.httpClient.request<any>(
           "POST",
-          this.getAccountApiUrl() + "/jwt/" + token.jwt.jti + "/renew",
+          this.getAccountApiUrlV1() + "/jwt/" + token.jwt.jti + "/renew",
           {
             body: { jwt_renew: token.auth.jwt_renew },
           }).toPromise();
@@ -135,8 +135,16 @@ export class ApiService {
     }
   }
 
-  public getAccountApiUrl(): string {
+  public getAccountApiUrlV1(): string {
     return this.api + "/account/v1";
+  }
+
+  public getAccountApiUrlV2(): string {
+    return this.api + "/account/v2";
+  }
+
+  public getIAMApiUrl(): string {
+    return this.api + "/iam/v1alpha1";
   }
 
   public getInstanceUrl(): string {

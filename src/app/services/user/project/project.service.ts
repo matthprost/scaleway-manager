@@ -19,7 +19,7 @@ export class ProjectService {
 
     // tslint:disable-next-line:max-line-length
     const result = await this.api.get<ProjectsDto>(
-      `${this.api.getApiUrl()}/account/v2/projects?organization_id=${organizationId}&page_size=50&page=1`
+      `${this.api.getAccountApiUrlV2()}/projects?organization_id=${organizationId}&page_size=50&page=1`
     );
     return result.projects;
   }
@@ -63,7 +63,7 @@ export class ProjectService {
     try {
       const token = await this.storage.get("jwt");
       const result = await this.api.patch<UsersDto>(
-        this.api.getAccountApiUrl() + "/users/" + token.jwt.issuer,
+        this.api.getAccountApiUrlV2() + "/users/" + token.jwt.issuer,
         {
           ssh_public_keys: keys,
         }

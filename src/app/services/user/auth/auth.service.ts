@@ -3,6 +3,7 @@ import { NavController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 
 import { ApiService } from "../../api/api.service";
+import {UserDto} from "../account/account.dto";
 import { AccountService } from "../account/account.service";
 import { ProjectService } from "../project/project.service";
 
@@ -34,7 +35,7 @@ export class AuthService {
     // eslint-disable-next-line no-useless-catch
     try {
       const result = await this.api.post<any>(
-        this.api.getAccountApiUrl() + "/jwt",
+        this.api.getAccountApiUrlV1() + "/jwt",
         {
           email,
           password,
@@ -46,15 +47,16 @@ export class AuthService {
 
       await this.storage.set("jwt", result);
 
-      const data = await this.api.get<any>(
-        this.api.getAccountApiUrl() + "/users/" + result.jwt.issuer
+      const data = await this.api.get<UserDto>(
+        this.api.getAccountApiUrlV2() + "/users/" + result.jwt.issuer
       );
-      await this.storage.set("user", data.user);
+
+      await this.storage.set("user", data);
 
       const currentOrganization =
-        data.user.organizations.find(
-          (organization) => organization.role_name === "owner"
-        ) || data.user.organizations[0];
+        data.organizations.find(
+          (organization) => organization.is_owner === true
+        ) || data.organizations[0];
       await this.storage.set("currentOrganization", currentOrganization.id);
 
       await this.projectService.setDefaultProject(currentOrganization.id);
@@ -67,7 +69,7 @@ export class AuthService {
     console.log("LOGGING  OUT");
     const token = await this.storage.get("jwt");
     await this.api.delete<any>(
-      this.api.getAccountApiUrl() + "/jwt/" + token.jwt.jti
+      this.api.getIAMApiUrl() + "/jwts/" + token.jwt.jti
     );
     await this.storage.clear();
     await this.navCtrl.navigateRoot(["/login"]);

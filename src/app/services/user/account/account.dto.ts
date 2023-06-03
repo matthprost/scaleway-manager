@@ -3,14 +3,13 @@ export interface UsersDto {
 }
 
 export interface UserDto {
-  creation_date: string;
-  double_auth_enabled: boolean;
+  created_at: string;
+  mfa_enabled: boolean;
   email: string;
-  firstname: string;
-  fullname: string;
-  id: string;
-  lastname: string;
-  modification_date: string;
+  first_name: string;
+  account_root_user_id: string;
+  last_name: string;
+  updated_at: string;
   organizations: any;
   phone_number: string;
   roles: any;

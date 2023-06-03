@@ -3,7 +3,7 @@ import { Storage } from "@ionic/storage";
 
 import { ApiService } from "../../api/api.service";
 
-import { UserDto, UsersDto } from "./account.dto";
+import { UserDto } from "./account.dto";
 
 @Injectable({
   providedIn: "root",
@@ -14,11 +14,11 @@ export class AccountService {
   public async getUserData(): Promise<UserDto> {
     try {
       const token = await this.storage.get("jwt");
-      const result = await this.api.get<UsersDto>(
-        this.api.getAccountApiUrl() + "/users/" + token.jwt.issuer
+      const result = await this.api.get<UserDto>(
+        this.api.getAccountApiUrlV2() + "/users/" + token.jwt.issuer
       );
 
-      return result.user;
+      return result;
     } catch (e) {
       throw e;
     }
