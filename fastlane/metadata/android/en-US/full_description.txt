@@ -1,0 +1,14 @@
+<i>Scaleway Manager</i> offers you the opportunity to save money by starting/stopping quickly your VPS hosted at Scaleway. It has never been easier to manage your servers on your phone.
+
+<b>FEATURES:</b>
+
+- See all available servers
+- Start/Stop/Delete your server in one click
+- See storage, image, instance type, public/private IP, etc...
+- Copy address ip of a server
+- See your account informations
+- View/Add/Delete a SSH Key
+- View/Delete an API Token
+- See all your billing
+
+Don't hesitate to contact us trough the application if you have any problem :)
