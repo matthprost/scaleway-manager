@@ -1,7 +1,7 @@
 {
   "name": "scaleway-manager",
   "description": "A server manager",
-  "version": "2.2.6",
+  "version": "2.3.2",
   "author": "Matthias Prost",
   "homepage": "https://matthias-prost.com/",
   "scripts": {
