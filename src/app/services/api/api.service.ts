@@ -64,7 +64,7 @@ export class ApiService {
       return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
         headers: token
           ? {
-            "X-Session-Token": token.auth.jwt_key,
+            "X-Session-Token": token.token,
           }
           : {},
         body: data,
@@ -74,9 +74,9 @@ export class ApiService {
     try {
       return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
           headers:
-            token && token.auth && token.auth.jwt_key
+            token && token.token
               ? {
-                  "X-Session-Token": token.auth.jwt_key,
+                  "X-Session-Token": token.token,
                 }
               : {},
           body: data,

@@ -35,7 +35,7 @@ export class AuthService {
     // eslint-disable-next-line no-useless-catch
     try {
       const result = await this.api.post<any>(
-        this.api.getAccountApiUrlV1() + "/jwt",
+        this.api.getAccountApiUrlV2() + "/login",
         {
           email,
           password,
@@ -47,8 +47,12 @@ export class AuthService {
 
       await this.storage.set("jwt", result);
 
+      const iamUser = await this.api.get<any>(`${this.api.getIAMApiUrl()}/users/${result.jwt.issuer_id}`)
+
+      await this.storage.set("iam", iamUser);
+
       const data = await this.api.get<UserDto>(
-        this.api.getAccountApiUrlV2() + "/users/" + result.jwt.issuer
+        this.api.getAccountApiUrlV2() + "/users/" + iamUser.account_root_user_id
       );
 
       await this.storage.set("user", data);

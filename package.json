@@ -2,7 +2,7 @@
   "name": "scaleway-manager",
   "description": "A server manager",
   "version": "2.2.6",
-  "author": "Matthias Porst",
+  "author": "Matthias Prost",
   "homepage": "https://matthias-prost.com/",
   "scripts": {
     "ng": "ng",
