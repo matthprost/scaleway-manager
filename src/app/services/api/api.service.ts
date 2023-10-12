@@ -64,7 +64,7 @@ export class ApiService {
       return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
         headers: token
           ? {
-            "X-Session-Token": token.auth.jwt_key,
+            "X-Session-Token": token.token,
           }
           : {},
         body: data,
@@ -74,9 +74,9 @@ export class ApiService {
     try {
       return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
           headers:
-            token && token.auth && token.auth.jwt_key
+            token && token.token
               ? {
-                  "X-Session-Token": token.auth.jwt_key,
+                  "X-Session-Token": token.token,
                 }
               : {},
           body: data,
@@ -120,9 +120,9 @@ export class ApiService {
 
       const result = await this.httpClient.request<any>(
           "POST",
-          this.getAccountApiUrlV1() + "/jwt/" + token.jwt.jti + "/renew",
+          this.getIAMApiUrl() + "/jwts/" + token.jwt.jti + "/renew",
           {
-            body: { jwt_renew: token.auth.jwt_renew },
+            body: { renew_token: token.renew_token },
           }).toPromise();
 
       await this.storage.set("jwt", result);
