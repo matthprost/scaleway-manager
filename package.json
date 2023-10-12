@@ -15,7 +15,7 @@
     "analyse": "ng run app:build --stats-json && npx webpack-bundle-analyzer www/stats.json"
   },
   "engines": {
-    "node": "12.22.12",
+    "node": "v16.20.2",
     "npm": ">=6.14.8"
   },
   "private": true,
@@ -29,10 +29,10 @@
     "@angular/platform-browser": "^7.2.16",
     "@angular/platform-browser-dynamic": "^7.2.16",
     "@angular/router": "^7.2.16",
-    "@capacitor/android": "^3.9.0",
-    "@capacitor/core": "^3.9.0",
-    "@capacitor/ios": "^3.9.0",
-    "@capacitor/status-bar": "^4.1.1",
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/core": "^5.0.0",
+    "@capacitor/ios": "^5.0.0",
+    "@capacitor/status-bar": "^5.0.0",
     "@fortawesome/angular-fontawesome": "0.3.0",
     "@fortawesome/fontawesome-svg-core": "1.2.30",
     "@fortawesome/free-solid-svg-icons": "5.14.0",
@@ -55,6 +55,7 @@
     "jetifier": "^2.0.0",
     "ng-recaptcha": "^4.1.0",
     "rxjs": "^6.6.2",
+    "sass": "^1.69.2",
     "tslib": "^1.13.0",
     "xml2js": "^0.4.23",
     "zone.js": "~0.8.29"
@@ -68,7 +69,7 @@
     "@angular/compiler": "^7.2.16",
     "@angular/compiler-cli": "^7.2.16",
     "@angular/language-service": "^7.2.16",
-    "@capacitor/cli": "^3.9.0",
+    "@capacitor/cli": "^5.0.0",
     "@fortawesome/fontawesome-free": "5.14.0",
     "@ionic/angular-toolkit": "~1.5.1",
     "@ionic/eslint-config": "^0.3.0",

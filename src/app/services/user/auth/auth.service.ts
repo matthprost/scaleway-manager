@@ -72,7 +72,7 @@ export class AuthService {
   public async logout(): Promise<any> {
     console.log("LOGGING  OUT");
     const token = await this.storage.get("jwt");
-    await this.api.delete<any>(
+    this.api.delete<any>(
       this.api.getIAMApiUrl() + "/jwts/" + token.jwt.jti
     );
     await this.storage.clear();
