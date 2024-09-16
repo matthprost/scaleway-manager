@@ -14,8 +14,8 @@
     "experimentalDecorators": true,
     "moduleResolution": "node",
     "importHelpers": true,
-    "target": "es5",
-    "module": "esnext",
+    "target": "es2020",
+    "module": "es2020",
     "lib": [
       "es2018",
       "dom"
