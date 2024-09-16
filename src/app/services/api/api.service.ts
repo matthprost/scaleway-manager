@@ -29,7 +29,7 @@ export class ApiService {
       position: "top",
       mode: "ios",
       color: "danger",
-      showCloseButton: true,
+      //showCloseButton: true,
     });
 
     await toast.present();

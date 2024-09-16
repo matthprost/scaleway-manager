@@ -146,7 +146,7 @@ export class ObjectApiService {
 
       const toast = await this.toastController.create({
         position: "top",
-        showCloseButton: true,
+        //showCloseButton: true,
         duration: 8000,
         color: "danger",
         mode: "ios",

@@ -100,14 +100,14 @@ export class LoginPage {
           });
           await this.navCtrl.navigateForward(["/login/double-auth"]);
         } else {
-          this.captchaRef.reset();
+          // this.captchaRef.reset();
           const toast = await this.toastCtrl.create({
             message: `Error: ${error.error.message || "Unknown Error"}`,
             duration: 5000,
             position: "top",
             mode: "ios",
             color: "danger",
-            showCloseButton: true,
+            //showCloseButton: true,
           });
 
           await toast.present();

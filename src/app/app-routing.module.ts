@@ -16,24 +16,24 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './pages/home/home.module#HomePageModule',
+        loadChildren: () => import('./pages/home/home.module').then(m => m.HomePageModule),
       },
       {
         path: 'account',
         children: [
           {
             path: '',
-            loadChildren: './pages/account/account.module#AccountPageModule',
+            loadChildren: () => import('./pages/account/account.module').then(m => m.AccountPageModule),
           },
           {
             path: 'ssh-keys',
             loadChildren:
-              './pages/account/ssh-keys/ssh-keys.module#SshKeysPageModule',
+              () => import('./pages/account/ssh-keys/ssh-keys.module').then(m => m.SshKeysPageModule),
           },
           {
             path: 'tokens',
             loadChildren:
-              './pages/account/tokens/tokens.module#TokensPageModule',
+              () => import('./pages/account/tokens/tokens.module').then(m => m.TokensPageModule),
           },
         ],
       },
@@ -46,12 +46,12 @@ const routes: Routes = [
       {
         path: '',
         loadChildren:
-          './pages/products/instances/instances.module#InstancesPageModule',
+          () => import('./pages/products/instances/instances.module').then(m => m.InstancesPageModule),
       },
       {
         path: ':zone/:id',
         loadChildren:
-          './pages/products/instances/details/details.module#DetailsPageModule',
+          () => import('./pages/products/instances/details/details.module').then(m => m.DetailsPageModule),
       },
     ],
     canActivate: [HomeGuard],
@@ -76,35 +76,35 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        loadChildren: './pages/auth/login/login.module#LoginPageModule',
+        loadChildren: () => import('./pages/auth/login/login.module').then(m => m.LoginPageModule),
         canActivate: [LoginGuard],
       },
       {
         path: 'double-auth',
         loadChildren:
-          './pages/auth/double-auth/double-auth.module#DoubleAuthPageModule',
+          () => import('./pages/auth/double-auth/double-auth.module').then(m => m.DoubleAuthPageModule),
         canActivate: [DoubleAuthGuard],
       },
     ],
   },
   {
     path: 'about',
-    loadChildren: './pages/about/about.module#AboutPageModule',
+    loadChildren: () => import('./pages/about/about.module').then(m => m.AboutPageModule),
     canActivate: [HomeGuard],
   },
   {
     path: 'billing',
-    loadChildren: './pages/billing/billing.module#BillingPageModule',
+    loadChildren: () => import('./pages/billing/billing.module').then(m => m.BillingPageModule),
     canActivate: [HomeGuard],
   },
   {
     path: 'settings',
-    loadChildren: './pages/settings/settings.module#SettingsPageModule',
+    loadChildren: () => import('./pages/settings/settings.module').then(m => m.SettingsPageModule),
     canActivate: [HomeGuard],
   },
   {
     path: 'help',
-    loadChildren: './pages/auth/login/help/help.module#HelpPageModule',
+    loadChildren: () => import('./pages/auth/login/help/help.module').then(m => m.HelpPageModule),
     canActivate: [HomeGuard],
   },
   {
@@ -113,7 +113,7 @@ const routes: Routes = [
       {
         path: '',
         loadChildren:
-          './pages/products/buckets/buckets.module#ObjectsPageModule',
+          () => import('./pages/products/buckets/buckets.module').then(m => m.ObjectsPageModule),
       },
       {
         path: ':region/:bucket',
@@ -121,12 +121,12 @@ const routes: Routes = [
           {
             path: '',
             loadChildren:
-              './pages/products/buckets/objects/objects.module#ObjectsPageModule',
+              () => import('./pages/products/buckets/objects/objects.module').then(m => m.ObjectsPageModule),
           },
           {
             path: '**',
             loadChildren:
-              './pages/products/buckets/objects/objects.module#ObjectsPageModule',
+              () => import('./pages/products/buckets/objects/objects.module').then(m => m.ObjectsPageModule),
           },
         ],
       },
@@ -135,7 +135,7 @@ const routes: Routes = [
   {
     path: 'change-project',
     loadChildren:
-      './pages/account/change-project/change-project.module#ChangeProjectPageModule',
+      () => import('./pages/account/change-project/change-project.module').then(m => m.ChangeProjectPageModule),
   },
 ];
 

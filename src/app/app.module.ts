@@ -15,7 +15,6 @@ import {
   NativeHttpFallback,
   NativeHttpModule,
 } from "ionic-native-http-connection-backend";
-import { RecaptchaModule } from "ng-recaptcha";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -30,7 +29,6 @@ import { AppComponent } from "./app.component";
     AppRoutingModule,
     NativeHttpModule,
     FontAwesomeModule,
-    RecaptchaModule,
   ],
   providers: [
     AppVersion,

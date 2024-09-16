@@ -42,7 +42,7 @@ export class DetailsPage implements OnInit {
         duration: 3000,
         position: "top",
         color: "secondary",
-        showCloseButton: true,
+        //showCloseButton: true,
         mode: "ios",
       });
 

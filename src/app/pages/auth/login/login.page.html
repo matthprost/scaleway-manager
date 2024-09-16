@@ -38,8 +38,8 @@
                         placeholder="Email Address"
                         [(ngModel)]="email"
                         required
-                      ></ion-input>
-                      <ion-icon name="ios-mail" slot="start"></ion-icon>
+                      ><ion-icon name="mail-outline" slot="start" size="small"></ion-icon></ion-input>
+
                     </ion-item>
                     <ion-item class="ion-margin-top ion-margin-bottom ion-no-padding" mode="md">
                       <ion-input
@@ -48,18 +48,18 @@
                         placeholder="Password"
                         [(ngModel)]="password"
                         required
-                      ></ion-input>
-                      <ion-icon name="md-key" slot="start"></ion-icon>
+                      ><ion-icon name="key-outline" slot="start" size="small"></ion-icon></ion-input>
+
                     </ion-item>
                     <div
                       class="ion-no-margin ion-no-padding"
                       style="transform: scale(0.8); transform-origin: 0 0"
                     >
-                      <re-captcha
+                      <!-- <re-captcha
                         (resolved)="captchaResolved($event)"
                         siteKey="{{captchaKey}}"
                         #captchaRef="reCaptcha"
-                      ></re-captcha>
+                      ></re-captcha> -->
                     </div>
                     <div class="ion-padding-top ion-padding-bottom">
                       <ion-button
@@ -67,7 +67,7 @@
                         type="submit"
                         expand="full"
                         mode="ios"
-                        disabled="{{!password || !email || !captchaResponse }}"
+                        disabled="{{!password || !email }}"
                       >
                         Log In
                       </ion-button

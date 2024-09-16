@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "aot": true,
             "outputPath": "www",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -51,11 +52,21 @@
                   "type": "initial",
                   "maximumWarning": "2mb",
                   "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
                 }
               ],
               "outputHashing": "all"
             },
             "development": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "buildOptimizer": false,
               "optimization": false,
               "vendorChunk": true,
@@ -64,21 +75,27 @@
               "namedChunks": true
             },
             "ci": {
+              "budgets": [
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb"
+                }
+              ],
               "progress": false
             }
           }
         },
         "serve": {
-          "builder": "@angular-builders/custom-webpack:dev-server",
+          "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "buildTarget": "app:build"
+            "browserTarget": "app:build"
           },
           "configurations": {
             "production": {
-              "buildTarget": "app:build:production"
+              "browserTarget": "app:build:production"
             },
             "development": {
-              "buildTarget": "app:build:development"
+              "browserTarget": "app:build:development"
             },
             "ci": {
               "progress": false
@@ -88,7 +105,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "buildTarget": "app:build"
+            "browserTarget": "app:build"
           }
         },
         "test": {
