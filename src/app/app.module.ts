@@ -1,4 +1,4 @@
-import { HttpBackend, HttpXhrBackend } from "@angular/common/http";
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { RouteReuseStrategy } from "@angular/router";
@@ -22,17 +22,13 @@ import { AppComponent } from "./app.component";
         IonicStorageModule.forRoot(),
         AppRoutingModule,
         FontAwesomeModule,
+        HttpClientModule
     ],
     providers: [
         AppVersion,
         ScreenOrientation,
         EmailComposer,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-        {
-            provide: HttpBackend,
-            useClass: null,
-            deps: [Platform, HttpXhrBackend],
-        },
     ],
     bootstrap: [AppComponent]
 })
