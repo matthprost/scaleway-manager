@@ -1,16 +1,17 @@
-import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
+import {Injectable} from "@angular/core";
+import {Storage} from "@ionic/storage";
 
-import { ApiService } from "../../api/api.service";
-import { UserDto, UsersDto } from "../account/account.dto";
+import {ApiService} from "../../api/api.service";
+import {UserDto, UsersDto} from "../account/account.dto";
 
-import { ProjectDto, ProjectsDto } from "./project.dto";
+import {ProjectDto, ProjectsDto} from "./project.dto";
 
 @Injectable({
   providedIn: "root",
 })
 export class ProjectService {
-  constructor(private api: ApiService, private storage: Storage) {}
+  constructor(private api: ApiService, private storage: Storage) {
+  }
 
   public async getProjects(organizationId?: string) {
     if (!organizationId) {
@@ -60,18 +61,14 @@ export class ProjectService {
   }
 
   public async patchSshKeys(keys: { key: string }[]): Promise<UserDto> {
-    try {
-      const token = await this.storage.get("jwt");
-      const result = await this.api.patch<UsersDto>(
-        this.api.getAccountApiUrlV2() + "/users/" + token.jwt.issuer,
-        {
-          ssh_public_keys: keys,
-        }
-      );
+    const iamUser = await this.storage.get("iam");
+    const result = await this.api.patch<UsersDto>(
+      this.api.getAccountApiUrlV2() + "/users/" + iamUser.account_root_user_id,
+      {
+        ssh_public_keys: keys,
+      }
+    );
 
-      return result.user;
-    } catch (e) {
-      throw e;
-    }
+    return result.user;
   }
 }
