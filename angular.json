@@ -33,13 +33,16 @@
             ],
             "styles": [
               {
-                "input": "src/theme/variables.scss"
+                "input": "src/theme/variables.scss",
+                "inject": true
               },
               {
-                "input": "src/global.scss"
+                "input": "src/global.scss",
+                "inject": true
               },
               {
-                "input": "src/app/app.scss"
+                "input": "src/app/app.scss",
+                "inject": true
               }
             ],
             "scripts": []

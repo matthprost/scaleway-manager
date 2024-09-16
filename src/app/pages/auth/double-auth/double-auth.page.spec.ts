@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { DoubleAuthPage } from "./double-auth.page";
 
@@ -7,7 +7,7 @@ describe("DoubleAuthPage", () => {
   let component: DoubleAuthPage;
   let fixture: ComponentFixture<DoubleAuthPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [DoubleAuthPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
