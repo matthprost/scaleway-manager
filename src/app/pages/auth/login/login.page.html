@@ -57,11 +57,9 @@
                       class="ion-no-margin ion-no-padding"
                       style="transform: scale(0.8); transform-origin: 0 0"
                     >
-                      <!-- <re-captcha
-                        (resolved)="captchaResolved($event)"
-                        siteKey="{{captchaKey}}"
-                        #captchaRef="reCaptcha"
-                      ></re-captcha> -->
+
+                    <div class="frc-captcha" data-sitekey="FCMK8RNO6OFB7JGO" data-puzzle-endpoint="https://api.friendlycaptcha.com/api/v1/puzzle, https://eu-api.friendlycaptcha.eu/api/v1/puzzle" #frccaptcha></div>
+
                     </div>
                     <div class="ion-padding-top ion-padding-bottom">
                       <ion-button
@@ -69,7 +67,7 @@
                         type="submit"
                         expand="full"
                         mode="ios"
-                        disabled="{{!password || !email }}"
+                        disabled="{{!password || !email || !captcha }}"
                       >
                         Log In
                       </ion-button

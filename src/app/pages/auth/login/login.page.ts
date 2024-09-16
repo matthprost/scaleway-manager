@@ -1,4 +1,4 @@
-import { Component, NgZone, ViewChild } from "@angular/core";
+import { Component, ElementRef, NgZone, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {
@@ -8,6 +8,8 @@ import {
   NavController,
   ToastController,
 } from "@ionic/angular";
+
+import { WidgetInstance } from 'friendly-challenge'
 
 import { environment } from "../../../../environments/environment";
 import { NavParamsService } from "../../../services/nav/nav-params.service";
@@ -24,11 +26,11 @@ import { HelpPage } from "./help/help.page";
 })
 export class LoginPage {
   @ViewChild("captchaRef") captchaRef;
+  @ViewChild('frccaptcha', { static: false })
+  friendlyCaptcha: ElementRef<HTMLElement>;
   public email: string = null;
   public password: string = null;
-  private captchaPassed = false;
-  public captchaResponse: string;
-  public captchaKey = environment.captcha;
+  public captcha = null;
 
   constructor(
     private router: Router,
@@ -42,16 +44,23 @@ export class LoginPage {
     private zone: NgZone
   ) {}
 
+  ngAfterViewInit() {
+       const widget = new WidgetInstance(this.friendlyCaptcha.nativeElement, {
+         doneCallback: (a) => {
+           console.log('DONE: ', a);
+           this.captcha = a
+         },
+         errorCallback: (b) => {
+           console.log('FAILED', b);
+         },
+       })
+
+       widget.start()
+   }
+
   ionViewDidEnter(): void {
     StatusBar.setStyle({ style: StatusBarStyle.Dark });
     this.menuCtrl.enable(false);
-  }
-
-  captchaResolved(response: string): void {
-    this.zone.run(() => {
-      this.captchaPassed = true;
-      this.captchaResponse = response;
-    });
   }
 
   public async showHelp(): Promise<void> {
@@ -67,6 +76,9 @@ export class LoginPage {
 
   public async login(): Promise<void> {
     if (!this.email || !this.password) {
+      const captchaSolution = (document.querySelector('#friendly-captcha input[name="frc-captcha-solution"]') as HTMLInputElement).value;
+      console.log('Captcha Solution:', captchaSolution);
+
       const toast = await this.toastCtrl.create({
         message: "Error: Incorrect username and/or password",
         duration: 5000,
@@ -88,15 +100,16 @@ export class LoginPage {
         await this.auth.login({
           email: this.email,
           password: this.password,
-          captcha: this.captchaResponse,
+          captcha: this.captcha
         });
         await this.router.navigate(["/home"]);
       } catch (error) {
-        if (error.status === 403 && error.error.type === "2FA_error") {
+        console.log(error.error.details[0].argument_name)
+        if (error.status === 400 && error.error.details[0].argument_name === "2FA_token") {
           this.navParams.setParams({
             email: this.email,
             password: this.password,
-            captcha: this.captchaResponse
+            captcha: this.captcha
           });
           await this.navCtrl.navigateForward(["/login/double-auth"]);
         } else {

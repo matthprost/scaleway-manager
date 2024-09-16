@@ -20,6 +20,7 @@
       "es2018",
       "dom"
     ],
+    "emitDecoratorMetadata": false,
     "useDefineForClassFields": false
   },
   "angularCompilerOptions": {

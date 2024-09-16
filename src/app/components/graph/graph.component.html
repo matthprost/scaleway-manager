@@ -3,12 +3,7 @@
     <div class="header-left">
       <span class="header-left-organization">{{
         organizationName
-      }}</span>
-      <fa-icon
-        slot="start"
-        [icon]="['fas', 'chevron-right']"
-        class="icon-separator"
-      ></fa-icon>
+      }}</span><ion-icon name="chevron-forward-outline"></ion-icon>
       {{ projectName }}
     </div>
     <div *ngIf="values && values.length > 0" class="header-right">

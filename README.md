@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/F4OST/Scaleway-Manager/blob/master/resources/android/splash/drawable-land-hdpi-screen.png?raw=true" alt="logo"/>
+  <img src="https://github.com/F4OST/Scaleway-Manager/blob/main/resources/android/splash/drawable-land-hdpi-screen.png?raw=true" alt="logo"/>
 </p>
 
 # Scaleway Manager
@@ -47,5 +47,5 @@ The application is available on Apple Store and Play Store **for free**!
 ##### Quentin Lejard - valde
 
  GitLab: [https://framagit.org/valde](https://framagit.org/valde)
- 
+
  Twitter: [https://twitter.com/__valde__](https://twitter.com/__valde__)

@@ -21,23 +21,4 @@ export class AboutPage implements OnInit {
   ionViewDidEnter() {
     StatusBar.setStyle({ style: StatusBarStyle.Light });
   }
-
-  public async sendEmail() {
-    if (this.platform.is("cordova")) {
-      this.emailComposer.isAvailable().then((available: boolean) => {
-        if (available) {
-        }
-      });
-
-      const email = {
-        to: "contact@matthias-prost.com",
-        subject: "[Scaleway Manager]",
-        isHtml: true,
-      };
-
-      await this.emailComposer.open(email);
-    } else {
-      console.warn("Cordova not available");
-    }
-  }
 }

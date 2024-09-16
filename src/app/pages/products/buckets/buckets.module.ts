@@ -2,13 +2,8 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Routes, RouterModule } from "@angular/router";
-import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { IonicModule } from "@ionic/angular";
 
-import { ComponentsModule } from "../../../components/components.module";
-import { PipesModule } from "../../../pipes/pipes.module";
-
-import { AddBucketPage } from "./add-bucket/add-bucket.page";
 import { BucketsPage } from "./buckets.page";
 
 const routes: Routes = [
@@ -19,15 +14,12 @@ const routes: Routes = [
 ];
 
 @NgModule({
-    imports: [
-        CommonModule,
-        FormsModule,
-        IonicModule,
-        RouterModule.forChild(routes),
-        ComponentsModule,
-        FontAwesomeModule,
-        PipesModule,
-    ],
-    declarations: [BucketsPage, AddBucketPage]
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonicModule,
+    RouterModule.forChild(routes),
+  ],
+  declarations: [BucketsPage],
 })
-export class ObjectsPageModule {}
+export class BucketsPageModule {}

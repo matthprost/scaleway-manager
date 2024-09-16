@@ -7,7 +7,7 @@
         fill="clear"
         (click)="navigate('home')"
       >
-        <ion-icon name="md-close"></ion-icon>
+        <ion-icon name="chevron-back-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">
@@ -17,7 +17,7 @@
         fill="clear"
         (click)="logout()"
       >
-        <ion-icon name="ios-log-out"></ion-icon>
+        <ion-icon name="log-out-outline"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -35,16 +35,22 @@
     <div class="name">
       <div class="two-auth-enabled" *ngIf="user.mfa_enabled">
         <ion-chip>
-          <ion-label color="light">
-            <fa-icon [icon]="faShieldAlt"></fa-icon>
+          <ion-label color="light" style="display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 8px;">
+            <ion-icon name="alert-circle-outline"></ion-icon>
             2FA
           </ion-label>
         </ion-chip>
       </div>
       <div class="two-auth-disabled" *ngIf="!user.mfa_enabled">
         <ion-chip>
-          <ion-label color="light">
-            <fa-icon [icon]="danger"></fa-icon>
+          <ion-label color="light" style="display: flex;
+              flex-direction: row;
+              align-items: center;
+              gap: 8px;">
+            <ion-icon name="alert-circle"></ion-icon>
             2FA
           </ion-label>
         </ion-chip>
@@ -58,11 +64,7 @@
               {{ currentOrganization.name }}
             </ion-label>
           </ion-chip>
-          <fa-icon
-            slot="start"
-            [icon]="['fas', 'chevron-right']"
-            class="icon-separator"
-          ></fa-icon>
+          <ion-icon name="chevron-forward-outline"></ion-icon>
           <ion-chip color="secondary">
             <ion-label color="secondary"> {{ currentProject.name }} </ion-label>
           </ion-chip>
@@ -73,8 +75,8 @@
       <ion-row>
         <ion-col>
           <ion-card mode="ios" (click)="presentModal('organization')">
-            <ion-card-header class="ion-text-center blue-header" mode="ios">
-              <ion-icon name="swap" mode="ios"></ion-icon>
+            <ion-card-header class="ion-text-center blue-header" mode="ios" style="align-items: center;">
+              <ion-icon name="swap-horizontal-outline"></ion-icon>
             </ion-card-header>
 
             <ion-card-content class="ion-text-center" mode="ios">
@@ -87,6 +89,7 @@
             <ion-card-header
               class="ion-text-center secondary-header"
               mode="ios"
+              style="align-items: center;"
             >
               <ion-icon name="folder" mode="md"></ion-icon>
             </ion-card-header>
@@ -100,7 +103,7 @@
       <ion-row>
         <ion-col>
           <ion-card mode="ios" (click)="navigate('tokens')">
-            <ion-card-header class="ion-text-center" mode="ios">
+            <ion-card-header class="ion-text-center" mode="ios" style="align-items: center;">
               <ion-icon name="cloud" mode="ios"></ion-icon>
             </ion-card-header>
 
@@ -111,7 +114,7 @@
         </ion-col>
         <ion-col>
           <ion-card mode="ios" (click)="navigate('ssh-keys')">
-            <ion-card-header class="ion-text-center" mode="ios">
+            <ion-card-header class="ion-text-center" mode="ios" style="align-items: center;">
               <ion-icon name="key" mode="ios"></ion-icon>
             </ion-card-header>
 

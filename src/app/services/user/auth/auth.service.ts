@@ -40,7 +40,7 @@ export class AuthService {
           email,
           password,
           renewable: true,
-          "2FA_token": code && code.toString(),
+          otp: code && code.toString(),
           captcha,
         }
       );

@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {
-  faShieldAlt,
-  faExclamationCircle,
+  faCircleExclamation,
+  faShield
 } from "@fortawesome/free-solid-svg-icons";
 import {
   AlertController,
@@ -29,8 +29,8 @@ import { ChangeProjectPage } from "./change-project/change-project.page";
 export class AccountPage implements OnInit {
   public user: UserDto;
   public isLoading = true;
-  public faShieldAlt = faShieldAlt;
-  public danger = faExclamationCircle;
+  public faShieldAlt = faShield;
+  public danger = faCircleExclamation;
   public currentOrganization;
   public currentProject;
 

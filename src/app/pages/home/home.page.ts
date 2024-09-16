@@ -11,7 +11,6 @@ import {ServersService} from '../../services/servers/servers.service';
 import {ProjectDto} from '../../services/user/project/project.dto';
 import {ProjectService} from '../../services/user/project/project.service';
 
-
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
