@@ -18,15 +18,14 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    RouterModule.forChild(routes),
-    ComponentsModule,
-  ],
-  declarations: [SshKeysPage, AddSshKeyPage],
-  providers: [Clipboard],
-  entryComponents: [AddSshKeyPage],
+    imports: [
+        CommonModule,
+        FormsModule,
+        IonicModule,
+        RouterModule.forChild(routes),
+        ComponentsModule,
+    ],
+    declarations: [SshKeysPage, AddSshKeyPage],
+    providers: [Clipboard]
 })
 export class SshKeysPageModule {}

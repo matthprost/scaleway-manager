@@ -15,27 +15,26 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
 @NgModule({
-  declarations: [AppComponent],
-  entryComponents: [],
-  imports: [
-    BrowserModule,
-    IonicModule.forRoot(),
-    IonicStorageModule.forRoot(),
-    AppRoutingModule,
-    FontAwesomeModule,
-  ],
-  providers: [
-    AppVersion,
-    ScreenOrientation,
-    EmailComposer,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    {
-      provide: HttpBackend,
-      useClass: null,
-      deps: [Platform, HttpXhrBackend],
-    },
-  ],
-  bootstrap: [AppComponent],
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        IonicModule.forRoot(),
+        IonicStorageModule.forRoot(),
+        AppRoutingModule,
+        FontAwesomeModule,
+    ],
+    providers: [
+        AppVersion,
+        ScreenOrientation,
+        EmailComposer,
+        { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+        {
+            provide: HttpBackend,
+            useClass: null,
+            deps: [Platform, HttpXhrBackend],
+        },
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
   constructor() {
