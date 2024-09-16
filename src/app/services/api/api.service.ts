@@ -20,7 +20,7 @@ export class ApiService {
   private readonly api: string = "/api";
 
   // BILLING API
-  private readonly billing: string = "/billing";
+  private readonly billing: string = "/api/billing/v1";
 
   private createToastError = async (error) => {
     const toast = await this.toastCtrl.create({

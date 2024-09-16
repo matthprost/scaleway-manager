@@ -28,10 +28,10 @@
     "@angular/platform-browser": "9.1.13",
     "@angular/platform-browser-dynamic": "9.1.13",
     "@angular/router": "9.1.13",
-    "@capacitor/android": "^6.1.2",
-    "@capacitor/core": "^6.1.2",
-    "@capacitor/ios": "^6.1.2",
-    "@capacitor/status-bar": "^6.0.1",
+    "@capacitor/android": "^5.0.0",
+    "@capacitor/core": "^5.0.0",
+    "@capacitor/ios": "^5.0.0",
+    "@capacitor/status-bar": "^5.0.0",
     "@fortawesome/angular-fontawesome": "0.6.1",
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
     "@fortawesome/free-solid-svg-icons": "^6.6.0",
@@ -123,8 +123,8 @@
     ]
   },
   "browser": {
-      "crypto": false,
-      "querystring": false,
-      "timers": false
+    "crypto": false,
+    "querystring": false,
+    "timers": false
   }
 }
