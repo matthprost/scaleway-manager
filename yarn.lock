@@ -362,13 +362,6 @@
   dependencies:
     tslib "^2.0.0"
 
-"@angular/http@7.2.16":
-  version "7.2.16"
-  resolved "https://registry.yarnpkg.com/@angular/http/-/http-7.2.16.tgz#f05337dd56faa86ce05b0dc378218a00fb337040"
-  integrity sha512-yvjbNyzFSmmz4UTjCdy5M8mk0cZqf9TvSf8yN5UVIwtw4joyuUdlgJCuin0qSbQOKIf/JjHoofpO2JkPCGSNww==
-  dependencies:
-    tslib "^1.9.0"
-
 "@angular/language-service@10.2.5":
   version "10.2.5"
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-10.2.5.tgz#dc869591684db32696f9973647f07355bdaf97ff"
@@ -394,13 +387,6 @@
   integrity sha512-AtSMB/d4V+pw/FL4G/mWWoiJJtZ/075TqsGW7uEFKgxS6Gh2kalv6BTMlXVG5GO+2oU0lsuDvguq5E7Atbak3Q==
   dependencies:
     tslib "^2.0.0"
-
-"@angular/router@^7.2.4":
-  version "7.2.16"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-7.2.16.tgz#7518a387ff959c13ba2648ce52e0bcd48f3292ca"
-  integrity sha512-SXDfkoGVUHhy83K+sR+39mmqTs4nSUh4DZbhFe4gii+mgAtBvlbeH8KBCqPNf7xq24aadyI2LCSGnGwgVKmXrA==
-  dependencies:
-    tslib "^1.9.0"
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"
@@ -1429,10 +1415,12 @@
     minimatch "^3.0.4"
     strip-json-comments "^3.1.1"
 
-"@fortawesome/angular-fontawesome@0.6.1":
-  version "0.6.1"
-  resolved "https://registry.yarnpkg.com/@fortawesome/angular-fontawesome/-/angular-fontawesome-0.6.1.tgz#1ebe5db16bfdd4be44bdde61f78c760eb4e219fa"
-  integrity sha512-ARQjtRuT+ZskzJDJKPwuiGO3+7nS0iyNLU/uHVJHfG4LwGJxwVIGldwg1SU957sra0Z0OtWEajHMhiS4vB9LwQ==
+"@fortawesome/angular-fontawesome@0.8.2":
+  version "0.8.2"
+  resolved "https://registry.yarnpkg.com/@fortawesome/angular-fontawesome/-/angular-fontawesome-0.8.2.tgz#fe0401c66dd237fd78d3f29d540ef7302bb40e5a"
+  integrity sha512-K/AiykA4YbHKE6XKEtZ0ZvVRQocUHyk+79HYWIfhGy3teHpzxsUqB/UjDaxivgBd6dF6ihlzgEbgrDMHlGNwGg==
+  dependencies:
+    tslib "^2.1.0"
 
 "@fortawesome/fontawesome-common-types@6.6.0":
   version "6.6.0"
@@ -7048,13 +7036,6 @@ invariant@^2.2.2:
   integrity sha512-phJfQVBuaJM5raOpJjSfkiD6BpbCE4Ns//LaXl6wGYtUBY83nWS6Rf9tXm2e8VaK60JEjYldbPif/A2B1C2gNA==
   dependencies:
     loose-envify "^1.0.0"
-
-ionic-native-http-connection-backend@^5.0.4:
-  version "5.0.4"
-  resolved "https://registry.yarnpkg.com/ionic-native-http-connection-backend/-/ionic-native-http-connection-backend-5.0.4.tgz#8a771f50a856e2abddcc9d37a9075c2c2c6eb94c"
-  integrity sha512-2o2A/0hm1cc1zFEdbCyeIRzGO8z5acud2wJ9euNzN8U1pBqEMzpS9okYEX7Kg0L/ZNtPhKYVaCCEOxDkDiGocg==
-  dependencies:
-    "@angular/router" "^7.2.4"
 
 ionicons@^5.5.3:
   version "5.5.4"

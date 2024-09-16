@@ -10,11 +10,6 @@ import { EmailComposer } from "@ionic-native/email-composer/ngx";
 import { ScreenOrientation } from "@ionic-native/screen-orientation/ngx";
 import { IonicModule, IonicRouteStrategy, Platform } from "@ionic/angular";
 import { IonicStorageModule } from "@ionic/storage";
-import {
-  NativeHttpBackend,
-  NativeHttpFallback,
-  NativeHttpModule,
-} from "ionic-native-http-connection-backend";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -27,7 +22,6 @@ import { AppComponent } from "./app.component";
     IonicModule.forRoot(),
     IonicStorageModule.forRoot(),
     AppRoutingModule,
-    NativeHttpModule,
     FontAwesomeModule,
   ],
   providers: [
@@ -37,8 +31,8 @@ import { AppComponent } from "./app.component";
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: HttpBackend,
-      useClass: NativeHttpFallback,
-      deps: [Platform, NativeHttpBackend, HttpXhrBackend],
+      useClass: null,
+      deps: [Platform, HttpXhrBackend],
     },
   ],
   bootstrap: [AppComponent],
