@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, type OnInit } from "@angular/core";
 import { ModalController, NavParams, ToastController } from "@ionic/angular";
 
 import { ObjectService } from "../../../../services/object/object.service";
@@ -62,7 +62,7 @@ export class AddBucketPage implements OnInit {
 
       const alert = await this.toastController.create({
         position: "top",
-        showCloseButton: true,
+        // showCloseButton: true,
         duration: 5000,
         color: "danger",
         message: "Please check form, name of the bucket might not be correct",

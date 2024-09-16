@@ -1,6 +1,8 @@
 import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
+// biome-ignore lint/style/useImportType: <explanation>
+import { Storage } from "@ionic/storage-angular";
 
+// biome-ignore lint/style/useImportType: <explanation>
 import { ApiService } from "../../../api/api.service";
 
 import { TokenDto, TokensDto } from "./tokens.dto";
@@ -47,7 +49,7 @@ export class TokensService {
       {
         description: "Scaleway_Manager",
         default_project_id: currentProject.id,
-        user_id: user.id,
+        user_id: user?.id,
       }
     );
   }

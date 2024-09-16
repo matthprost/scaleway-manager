@@ -1,12 +1,12 @@
 import { Injectable } from "@angular/core";
 import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Router,
-  RouterStateSnapshot,
+   ActivatedRouteSnapshot,
+   CanActivate,
+   Router,
+   RouterStateSnapshot,
   UrlTree,
 } from "@angular/router";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 import { Observable } from "rxjs";
 
 import { NavParamsService } from "../../services/nav/nav-params.service";

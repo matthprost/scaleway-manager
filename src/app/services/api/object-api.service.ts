@@ -1,21 +1,27 @@
+// biome-ignore lint/style/useImportType: <explanation>
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
+// biome-ignore lint/style/useImportType: <explanation>
 import { Platform, ToastController } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+// biome-ignore lint/style/useImportType: <explanation>
+import { Storage } from "@ionic/storage-angular";
 
-import * as aws4 from "../../../../node_modules/aws4";
-import * as xml2js from "../../../../node_modules/xml2js";
+import * as aws4 from "aws4";
+import * as xml2js from "xml2js";
+// biome-ignore lint/style/useImportType: <explanation>
 import { AuthService } from "../user/auth/auth.service";
+// biome-ignore lint/style/useImportType: <explanation>
 import { ProjectService } from "../user/project/project.service";
+// biome-ignore lint/style/useImportType: <explanation>
 import { TokensService } from "../user/project/tokens/tokens.service";
 
 enum HttpMethods {
-  GET,
-  POST,
-  DELETE,
-  PATCH,
-  OPTIONS,
-  PUT,
+  GET = 0,
+  POST = 1,
+  DELETE = 2,
+  PATCH = 3,
+  OPTIONS = 4,
+  PUT = 5,
 }
 
 @Injectable({
@@ -146,7 +152,7 @@ export class ObjectApiService {
 
       const toast = await this.toastController.create({
         position: "top",
-        showCloseButton: true,
+        // showCloseButton: true,
         duration: 8000,
         color: "danger",
         mode: "ios",

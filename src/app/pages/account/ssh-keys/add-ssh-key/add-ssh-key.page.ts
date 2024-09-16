@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, type OnInit } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { ModalController, NavParams, ToastController } from "@ionic/angular";
 
@@ -44,9 +44,9 @@ export class AddSshKeyPage implements OnInit {
           const toast = await this.toastController.create({
             message: "Error: Your SSH Key is invalid",
             duration: 5000,
-            showCloseButton: true,
+            // showCloseButton: true,
             position: "top",
-            closeButtonText: "Close",
+            // closeButtonText: "Close",
             color: "danger",
             mode: "ios",
           });

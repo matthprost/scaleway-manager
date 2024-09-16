@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, type OnInit } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {
   faShieldAlt,
@@ -9,7 +9,7 @@ import {
   ModalController,
   NavController,
 } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 import { UserDto } from "../../services/user/account/account.dto";
 import { AccountService } from "../../services/user/account/account.service";

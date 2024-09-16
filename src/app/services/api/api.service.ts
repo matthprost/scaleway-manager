@@ -1,14 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { NavController, Platform, ToastController } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 enum HttpMethods {
-  GET,
-  POST,
-  DELETE,
-  PATCH,
-  OPTIONS,
+  GET = 0,
+  POST = 1,
+  DELETE = 2,
+  PATCH = 3,
+  OPTIONS = 4,
 }
 
 @Injectable({
@@ -29,7 +29,7 @@ export class ApiService {
       position: "top",
       mode: "ios",
       color: "danger",
-      showCloseButton: true,
+      // showCloseButton: true,
     });
 
     await toast.present();

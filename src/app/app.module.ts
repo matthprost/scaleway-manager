@@ -6,10 +6,8 @@ import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { fas } from "@fortawesome/free-solid-svg-icons";
 import { AppVersion } from "@ionic-native/app-version/ngx";
-import { EmailComposer } from "@ionic-native/email-composer/ngx";
-import { ScreenOrientation } from "@ionic-native/screen-orientation/ngx";
 import { IonicModule, IonicRouteStrategy, Platform } from "@ionic/angular";
-import { IonicStorageModule } from "@ionic/storage";
+import { IonicStorageModule } from "@ionic/storage-angular";
 import {
   NativeHttpBackend,
   NativeHttpFallback,
@@ -22,7 +20,6 @@ import { AppComponent } from "./app.component";
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
@@ -30,12 +27,11 @@ import { AppComponent } from "./app.component";
     AppRoutingModule,
     NativeHttpModule,
     FontAwesomeModule,
-    RecaptchaModule.forRoot(),
+    RecaptchaModule,
   ],
   providers: [
     AppVersion,
     ScreenOrientation,
-    EmailComposer,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     {
       provide: HttpBackend,

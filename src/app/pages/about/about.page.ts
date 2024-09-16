@@ -1,6 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, type OnInit } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
-import { EmailComposer } from "@ionic-native/email-composer/ngx";
 import { Platform } from "@ionic/angular";
 
 
@@ -12,7 +11,6 @@ import { Platform } from "@ionic/angular";
 })
 export class AboutPage implements OnInit {
   constructor(
-    private emailComposer: EmailComposer,
     private platform: Platform
   ) {}
 
@@ -24,18 +22,18 @@ export class AboutPage implements OnInit {
 
   public async sendEmail() {
     if (this.platform.is("cordova")) {
-      this.emailComposer.isAvailable().then((available: boolean) => {
-        if (available) {
-        }
-      });
+      // this.emailComposer.isAvailable().then((available: boolean) => {
+      //   if (available) {
+      //   }
+      // });
 
-      const email = {
-        to: "contact@matthias-prost.com",
-        subject: "[Scaleway Manager]",
-        isHtml: true,
-      };
+      // const email = {
+      //   to: "contact@matthias-prost.com",
+      //   subject: "[Scaleway Manager]",
+      //   isHtml: true,
+      // };
 
-      await this.emailComposer.open(email);
+      // await this.emailComposer.open(email);
     } else {
       console.warn("Cordova not available");
     }

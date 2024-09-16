@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, type OnInit } from "@angular/core";
 import { ActivatedRoute, Router } from "@angular/router";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { NavController, PopoverController } from "@ionic/angular";

@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { Routes, RouterModule } from "@angular/router";
+import { type Routes, RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { IonicModule } from "@ionic/angular";
 
@@ -27,7 +27,6 @@ const routes: Routes = [
     FontAwesomeModule,
     ComponentsModule,
   ],
-  declarations: [AccountPage, ChangeOrganizationPage, ChangeProjectPage],
-  entryComponents: [ChangeOrganizationPage, ChangeProjectPage],
+  declarations: [AccountPage, ChangeOrganizationPage, ChangeProjectPage]
 })
 export class AccountPageModule {}

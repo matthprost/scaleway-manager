@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { NavController } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 import { ApiService } from "../../api/api.service";
 import {UserDto} from "../account/account.dto";

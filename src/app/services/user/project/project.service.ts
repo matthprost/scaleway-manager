@@ -1,6 +1,8 @@
 import {Injectable} from "@angular/core";
-import {Storage} from "@ionic/storage";
+// biome-ignore lint/style/useImportType: <explanation>
+import {Storage} from "@ionic/storage-angular";
 
+// biome-ignore lint/style/useImportType: <explanation>
 import {ApiService} from "../../api/api.service";
 import {UserDto, UsersDto} from "../account/account.dto";
 

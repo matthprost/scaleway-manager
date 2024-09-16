@@ -1,7 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
-import { Routes, RouterModule } from "@angular/router";
+import { type Routes, RouterModule } from "@angular/router";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 import { IonicModule } from "@ionic/angular";
 
@@ -29,7 +29,6 @@ const routes: Routes = [
     PipesModule,
     FontAwesomeModule,
   ],
-  declarations: [ObjectsPage, OptionsPage, ObjInfosPage],
-  entryComponents: [OptionsPage, ObjInfosPage],
+  declarations: [ObjectsPage, OptionsPage, ObjInfosPage]
 })
 export class ObjectsPageModule {}

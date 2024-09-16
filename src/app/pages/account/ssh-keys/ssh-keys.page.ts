@@ -1,6 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, type OnInit } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
-import { Clipboard } from "@ionic-native/clipboard/ngx";
 import {
   IonItemSliding,
   LoadingController,
@@ -69,16 +68,16 @@ export class SshKeysPage implements OnInit {
   }
 
   public async copyToClipBoard(text: string) {
-    await this.clipboard.copy(text);
+    // await this.clipboard.copy(text);
 
-    const toast = await this.toastCtrl.create({
-      message: "Text has been copied into your clipboard!",
-      duration: 3000,
-      position: "top",
-      mode: "ios",
-    });
+    // const toast = await this.toastCtrl.create({
+    //   message: "Text has been copied into your clipboard!",
+    //   duration: 3000,
+    //   position: "top",
+    //   mode: "ios",
+    // });
 
-    await toast.present();
+    // await toast.present();
   }
 
   public async deleteSshKey(sshKeyId: string, slidingItem: IonItemSliding) {

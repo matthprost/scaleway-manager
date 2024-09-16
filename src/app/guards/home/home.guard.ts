@@ -5,7 +5,7 @@ import {
   CanActivate,
   Router,
 } from "@angular/router";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 import { Observable } from "rxjs";
 
 @Injectable({

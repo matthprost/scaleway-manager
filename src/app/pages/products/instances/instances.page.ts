@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { NavController } from "@ionic/angular";
 
@@ -12,7 +12,7 @@ import { ServersService } from "../../../services/servers/servers.service";
   templateUrl: "./instances.page.html",
   styleUrls: ["./instances.page.scss"],
 })
-export class InstancesPage implements OnInit {
+export class InstancesPage {
   public instances: ServerDto[];
   public isLoading = true;
 
@@ -24,8 +24,6 @@ export class InstancesPage implements OnInit {
     public navCtrl: NavController,
     private serversProvider: ServersService
   ) {}
-
-  ngOnInit() {}
 
   ionViewDidEnter() {
     StatusBar.setStyle({ style: StatusBarStyle.Light });

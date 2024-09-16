@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 
+// biome-ignore lint/style/useImportType: <explanation>
 import { ObjectApiService } from "../api/object-api.service";
 
 import { zones } from "./config";

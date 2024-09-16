@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, type OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Clipboard } from "@ionic-native/clipboard/ngx";
 import {

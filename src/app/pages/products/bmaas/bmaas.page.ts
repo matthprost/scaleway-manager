@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, type OnInit } from "@angular/core";
 import { NavController } from "@ionic/angular";
 
 import { BmaasService } from "../../../services/bmaas/bmaas.service";
