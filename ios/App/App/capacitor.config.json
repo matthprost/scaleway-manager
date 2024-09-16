@@ -35,5 +35,9 @@
 			"ShowSplashScreenSpinner": "false",
 			"WKWebViewOnly": "true"
 		}
-	}
+	},
+	"packageClassList": [
+		"StatusBarPlugin",
+		"CDVPlugin"
+	]
 }
