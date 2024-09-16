@@ -30,7 +30,7 @@ import { AppComponent } from "./app.component";
     AppRoutingModule,
     NativeHttpModule,
     FontAwesomeModule,
-    RecaptchaModule.forRoot(),
+    RecaptchaModule,
   ],
   providers: [
     AppVersion,
