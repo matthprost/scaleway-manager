@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Routes, RouterModule } from "@angular/router";
-import { Clipboard } from "@ionic-native/clipboard/ngx";
 import { IonicModule } from "@ionic/angular";
 
 import { ComponentsModule } from "../../../components/components.module";
@@ -25,7 +24,6 @@ const routes: Routes = [
         RouterModule.forChild(routes),
         ComponentsModule,
     ],
-    declarations: [SshKeysPage, AddSshKeyPage],
-    providers: [Clipboard]
+    declarations: [SshKeysPage, AddSshKeyPage]
 })
 export class SshKeysPageModule {}

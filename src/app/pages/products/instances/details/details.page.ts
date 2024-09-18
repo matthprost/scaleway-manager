@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
-import { Clipboard } from "@ionic-native/clipboard/ngx";
 import {
   AlertController,
   NavController,
@@ -358,24 +357,5 @@ export class DetailsPage implements OnInit {
     });
 
     await alert.present();
-  }
-
-  public async copyToClipBoard(text: string) {
-    if (this.platform.is("cordova")) {
-      await this.clipboard.copy(text);
-
-      const toast = await this.toastCtrl.create({
-        message: "Address has been copied into your clipboard!",
-        duration: 3000,
-        position: "top",
-        color: "secondary",
-        //showCloseButton: true,
-        mode: "ios",
-      });
-
-      await toast.present();
-    } else {
-      console.warn("Feature only available on cordova");
-    }
   }
 }

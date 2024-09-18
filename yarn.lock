@@ -1499,20 +1499,6 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/object-schema/-/object-schema-1.2.1.tgz#b520529ec21d8e5945a1851dfd1c32e94e39ff45"
   integrity sha512-ZnQMnLV4e7hDlUvw8H+U8ASL02SS2Gn6+9Ac3wGGLIe7+je2AeAOxPY+izIPJDfFDb7eDjev0Us8MO1iFRN8hA==
 
-"@ionic-native/app-version@^5.36.0":
-  version "5.36.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/app-version/-/app-version-5.36.0.tgz#22015a192442c6d7414ca7342774231ddf3a3024"
-  integrity sha512-eKgLcqBHO0IDs1oRP+kQ47sztIpq8cwnyp51EGpP5xD6unGUyx/GferOz7D6KkkZGR9QbJ6ZmsKt0ImrxT5JgQ==
-  dependencies:
-    "@types/cordova" latest
-
-"@ionic-native/clipboard@^5.36.0":
-  version "5.36.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/clipboard/-/clipboard-5.36.0.tgz#1ce3dbb2ffb8b1edff66e18ea1d88fe262bc63fe"
-  integrity sha512-+i5vOTNo77y6mAZ2fLD75m9UzAST12gnSVeOqR3UKFKMZ4e3wF7r7YyJ6khbHsFAACBc51WB5U6NOuMDif5qwA==
-  dependencies:
-    "@types/cordova" latest
-
 "@ionic-native/core@^5.36.0":
   version "5.36.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/core/-/core-5.36.0.tgz#712c40a530b119b0039e8d16cb577899f50541d4"
@@ -1520,24 +1506,10 @@
   dependencies:
     "@types/cordova" latest
 
-"@ionic-native/email-composer@^5.36.0":
-  version "5.36.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/email-composer/-/email-composer-5.36.0.tgz#648351e727326273825fe59047452ef581b340ce"
-  integrity sha512-v732Jz3w4ItQqM7c2IzIxQQH+zT1DtQ7z635Fpbw4OJwpn6mImTms/F1c6hLJ50YmS/FYuI6rLbFRE/7BX1LUA==
-  dependencies:
-    "@types/cordova" latest
-
 "@ionic-native/http@^5.36.0":
   version "5.36.0"
   resolved "https://registry.yarnpkg.com/@ionic-native/http/-/http-5.36.0.tgz#1537b3df83054b616947c51e1ee214ffe3622de3"
   integrity sha512-3t7UhcqNxZuIX+HXuydlaDfA9AwDXiRFGs9GsHpJnXMTfbeKUcwzp0amqblrLslDA9tNfqSmJyFZFaMX6CRrog==
-  dependencies:
-    "@types/cordova" latest
-
-"@ionic-native/screen-orientation@^5.36.0":
-  version "5.36.0"
-  resolved "https://registry.yarnpkg.com/@ionic-native/screen-orientation/-/screen-orientation-5.36.0.tgz#940245b246b0c0253fc488daa7be4c3b9341db7b"
-  integrity sha512-+VILGrCJO76Ta6Mudd6IKc66xDek1uw5OEovFWjGCqkg0OYHFIiJFZNx4NLhF5hA1UKN2fWE6qDJaSXR+1w1Rg==
   dependencies:
     "@types/cordova" latest
 
@@ -4021,16 +3993,6 @@ copy-webpack-plugin@^6.0.3:
     serialize-javascript "^5.0.1"
     webpack-sources "^1.4.3"
 
-cordova-clipboard@^1.3.0:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/cordova-clipboard/-/cordova-clipboard-1.3.0.tgz#0911da4cbdea5df2e3a769f5b3aab00e0be0e679"
-  integrity sha512-IGk4LZm/DJ0Xk/jgakHm4wa+A/lrRP3QfzMAHDG7oWLJS4ISOpfI32Wez4ndnENItRslGyBVyJyKD83CxELCAw==
-
-cordova-plugin-advanced-http@2.4.1:
-  version "2.4.1"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-advanced-http/-/cordova-plugin-advanced-http-2.4.1.tgz#fd0e4561fdaf3b988f341cd7bb99f98016fc3fb6"
-  integrity sha512-6G8MTy/d02jE6n3Y9CVyCtD5hZGiBb+/dR2AIzhKN1RGGz38g1D2C8yE4MqHRvnmry6k/KHQWT1MsHNXrjouXQ==
-
 cordova-plugin-app-version@^0.1.9:
   version "0.1.14"
   resolved "https://registry.yarnpkg.com/cordova-plugin-app-version/-/cordova-plugin-app-version-0.1.14.tgz#a9f231d5cf7a5bfaf63a82915d42e0caef024b16"
@@ -4040,11 +4002,6 @@ cordova-plugin-email-composer@^0.9.2:
   version "0.9.2"
   resolved "https://registry.yarnpkg.com/cordova-plugin-email-composer/-/cordova-plugin-email-composer-0.9.2.tgz#264c66d45679acf2781c2cec54e32b2c1facfdb8"
   integrity sha512-w8eQZ6lbYWut13o/Cprixmacfyq5hds7DAjuTL34eQhyWWd/DA/o6ziiyY3So2ZOozeQ4DxQpyPN4BiqUKcyew==
-
-cordova-plugin-file@^6.0.2:
-  version "6.0.2"
-  resolved "https://registry.yarnpkg.com/cordova-plugin-file/-/cordova-plugin-file-6.0.2.tgz#f3911479f8357e9aacb5576674f8d95b31a1fb20"
-  integrity sha512-m7cughw327CjONN/qjzsTpSesLaeybksQh420/gRuSXJX5Zt9NfgsSbqqKDon6jnQ9Mm7h7imgyO2uJ34XMBtA==
 
 cordova-res@^0.15.1:
   version "0.15.4"
