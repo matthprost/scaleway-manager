@@ -2,24 +2,5 @@
 <widget version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <access origin="*" />
   
-  <feature name="AppVersion">
-    <param name="ios-package" value="AppVersion"/>
-  </feature>
-
-  <feature name="EmailComposer">
-    <param name="ios-package" value="APPEmailComposer"/>
-  </feature>
-
   
-  <preference name="ScrollEnabled" value="false" />
-  <preference name="android-minSdkVersion" value="19" />
-  <preference name="BackupWebStorage" value="none" />
-  <preference name="SplashMaintainAspectRatio" value="true" />
-  <preference name="FadeSplashScreenDuration" value="300" />
-  <preference name="SplashShowOnlyFirstTime" value="false" />
-  <preference name="SplashScreen" value="screen" />
-  <preference name="SplashScreenDelay" value="3000" />
-  <preference name="StatusBarOverlaysWebView" value="true" />
-  <preference name="ShowSplashScreenSpinner" value="false" />
-  <preference name="WKWebViewOnly" value="true" />
 </widget>

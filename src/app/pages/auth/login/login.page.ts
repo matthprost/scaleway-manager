@@ -1,5 +1,6 @@
 import { Component, ElementRef, NgZone, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
+import { Capacitor } from "@capacitor/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {
   LoadingController,
@@ -31,6 +32,7 @@ export class LoginPage {
   public email: string = null;
   public password: string = null;
   public captcha = null;
+  public isNative = null;
 
   constructor(
     private router: Router,
@@ -42,7 +44,9 @@ export class LoginPage {
     private navParams: NavParamsService,
     private modalController: ModalController,
     private zone: NgZone
-  ) {}
+  ) {
+    this.isNative = Capacitor.isNativePlatform()
+  }
 
   ngAfterViewInit() {
        const widget = new WidgetInstance(this.friendlyCaptcha.nativeElement, {

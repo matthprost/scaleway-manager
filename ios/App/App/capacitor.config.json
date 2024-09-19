@@ -1,43 +1,13 @@
 {
 	"appId": "com.matthiasprost.scalewaymanager",
 	"appName": "Scaleway Manager",
-	"bundledWebRuntime": false,
-	"npmClient": "yarn",
 	"webDir": "www",
 	"plugins": {
-		"SplashScreen": {
-			"launchShowDuration": 3000,
-			"launchAutoHide": true,
-			"backgroundColor": "#ffffffff",
-			"androidSplashResourceName": "splash",
-			"androidScaleType": "CENTER_CROP",
-			"showSpinner": true,
-			"androidSpinnerStyle": "large",
-			"iosSpinnerStyle": "small",
-			"spinnerColor": "#999999",
-			"splashFullScreen": true,
-			"splashImmersive": true,
-			"layoutName": "launch_screen",
-			"useDialog": true
-		}
-	},
-	"cordova": {
-		"preferences": {
-			"ScrollEnabled": "false",
-			"android-minSdkVersion": "19",
-			"BackupWebStorage": "none",
-			"SplashMaintainAspectRatio": "true",
-			"FadeSplashScreenDuration": "300",
-			"SplashShowOnlyFirstTime": "false",
-			"SplashScreen": "screen",
-			"SplashScreenDelay": "3000",
-			"StatusBarOverlaysWebView": "true",
-			"ShowSplashScreenSpinner": "false",
-			"WKWebViewOnly": "true"
+		"CapacitorHttp": {
+			"enabled": true
 		}
 	},
 	"packageClassList": [
-		"StatusBarPlugin",
-		"CDVPlugin"
+		"StatusBarPlugin"
 	]
 }

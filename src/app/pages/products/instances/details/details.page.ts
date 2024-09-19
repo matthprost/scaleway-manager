@@ -36,7 +36,6 @@ export class DetailsPage implements OnInit {
   constructor(
     private serversProvider: ServersService,
     private toastCtrl: ToastController,
-    private clipboard: Clipboard,
     private alertController: AlertController,
     private route: ActivatedRoute,
     private platform: Platform,

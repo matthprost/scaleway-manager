@@ -1,5 +1,6 @@
-import { HttpClient } from "@angular/common/http";
+import { CapacitorHttp, Capacitor } from '@capacitor/core';
 import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { NavController, Platform, ToastController } from "@ionic/angular";
 import { Storage } from "@ionic/storage";
 
@@ -8,7 +9,6 @@ enum HttpMethods {
   POST,
   DELETE,
   PATCH,
-  OPTIONS,
 }
 
 @Injectable({
@@ -17,10 +17,7 @@ enum HttpMethods {
 export class ApiService {
   // Those routes are for proxy
   // GENERAL API
-  private readonly api: string = "/api";
-
-  // BILLING API
-  private readonly billing: string = "/api/billing/v1";
+  private api = "/api";
 
   private createToastError = async (error) => {
     const toast = await this.toastCtrl.create({
@@ -29,7 +26,6 @@ export class ApiService {
       position: "top",
       mode: "ios",
       color: "danger",
-      //showCloseButton: true,
     });
 
     await toast.present();
@@ -43,12 +39,9 @@ export class ApiService {
     private toastCtrl: ToastController
   ) {
     // If we are running on Android / iOS then lets use real routes
-    if (this.platform.is("cordova") === true) {
+    if (Capacitor.isNativePlatform()) {
       // GENERAL API
       this.api = "https://api.scaleway.com";
-
-      // BILLING API
-      this.billing = "https://billing.scaleway.com";
     }
   }
 
@@ -58,58 +51,114 @@ export class ApiService {
     data: Record<string, any> = {}
   ): Promise<T> {
     const token = await this.storage.get("jwt");
+    console.log(`Is native platform: ${Capacitor.isNativePlatform()}`)
 
-    // This is for login when token doesn't exist
-    if (!token) {
-      return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
-        headers: token
-          ? {
-            "X-Session-Token": token.token,
-          }
-          : {},
-        body: data,
-      }).toPromise();
-    }
+    if (Capacitor.isNativePlatform()) {
+     // Use CapacitorHttp for native platforms
+      try {
+        const options = {
+          method: HttpMethods[method],
+          url,
+          "Content-Type": "application/json",
+          ...(token ? { "X-Session-Token": token.token } : {}),
+          data,
+        };
 
-    try {
-      return await this.httpClient.request<T>(HttpMethods[method.toString()], url, {
-          headers:
-            token && token.token
-              ? {
-                  "X-Session-Token": token.token,
-                }
-              : {},
-          body: data,
-        }).toPromise();
-    } catch (error) {
-      console.log(error);
+        console.log(`>>> Trying to make a request to: ${url} with method: ${HttpMethods[method.toString()]}. Detailed options: ${JSON.stringify(options)}`)
 
-      if (
-        error &&
-        error.status &&
-        error.status === 401 &&
-        (error.error.type === "invalid_auth" ||
-          error.error.type === "denied_authentication") &&
-        token
-      ) {
-        console.log(
-          "ERROR 401: Token is be not valid anymore, trying to renew it..."
-        );
-
-        try {
-          await this.renewJWT();
-
-          return this.request<T>(method, url, data);
-        } catch (e) {
-          console.log("DELETE JWT IN STORAGE");
-          await this.storage.remove("jwt");
-          await this.navCtrl.navigateRoot(["/login"]);
-          throw e;
+        let result: T;
+        if (method === HttpMethods.GET) {
+          result = await CapacitorHttp.get(options) as T;
+        } else if (method === HttpMethods.POST) {
+          result = await CapacitorHttp.post(options) as T;
+        } else if (method === HttpMethods.PATCH) {
+          result = await CapacitorHttp.patch(options) as T;
+        } else if (method === HttpMethods.DELETE) {
+          result = await CapacitorHttp.delete(options) as T;
+        } else {
+          throw new Error("Unsupported HTTP method");
         }
-      } else {
-        await this.createToastError(error);
-        throw error;
+
+        console.log(result)
+
+        return result;
+      } catch (error) {
+        console.log(error)
+        return await this.handleRequestError(error, method, url, data);
       }
+    } else {
+      // Use Angular HttpClient for web
+      try {
+        switch (method) {
+          case HttpMethods.GET:
+            return await this.httpClient.get<T>(url, { headers:
+              token && token.token
+                ? {
+                    "X-Session-Token": token.token,
+                  }
+                : {}, }).toPromise();
+          case HttpMethods.POST:
+            return await this.httpClient.post<T>(url, data, { headers:
+              token && token.token
+                ? {
+                    "X-Session-Token": token.token,
+                  }
+                : {}, }).toPromise();
+          case HttpMethods.PATCH:
+            return await this.httpClient.patch<T>(url, data, { headers:
+              token && token.token
+                ? {
+                    "X-Session-Token": token.token,
+                  }
+                : {}, }).toPromise();
+          case HttpMethods.DELETE:
+            return await this.httpClient.delete<T>(url, { headers:
+              token && token.token
+                ? {
+                    "X-Session-Token": token.token,
+                  }
+                : {}, }).toPromise();
+          default:
+            throw new Error("Unsupported HTTP method");
+        }
+      } catch (error) {
+        return await this.handleRequestError(error, method, url, data);
+      }
+    }
+  }
+
+  private async handleRequestError<T>(error: any, method: HttpMethods, url: string, data: Record<string, any>) {
+    console.log(error, method, url, data);
+
+    const token = await this.storage.get("jwt");
+
+    if (
+      error &&
+      error.status &&
+      error.status === 401 &&
+      (error.error.type === "invalid_auth" ||
+        error.error.type === "denied_authentication") &&
+      token
+    ) {
+      console.log(
+        "ERROR 401: Token is not valid anymore, trying to renew it..."
+      );
+
+      try {
+        await this.renewJWT();
+
+        return this.request<T>(method, url, data);
+      } catch (e) {
+        console.log("DELETE JWT IN STORAGE");
+        await this.storage.remove("jwt");
+        await this.navCtrl.navigateRoot(["/login"]);
+        throw e;
+      }
+    } else if (error.status === 400 && error.error.details[0].argument_name === "2FA_token") {
+      throw error;
+    } else {
+      await this.createToastError(error);
+      throw error;
     }
   }
 
@@ -118,17 +167,29 @@ export class ApiService {
       const token = await this.storage.get("jwt");
       console.log("Token in storage before renew:", token);
 
-      const result = await this.httpClient.request<any>(
-          "POST",
+      if (Capacitor.isNativePlatform()) {
+        // Use CapacitorHttp for native platforms
+        const result = await CapacitorHttp.post({
+          url: this.getIAMApiUrl() + "/jwts/" + token.jwt.jti + "/renew",
+          data: { renew_token: token.renew_token },
+        });
+
+        await this.storage.set("jwt", result);
+        console.log("JWT RENEWED!");
+
+        return result;
+      } else {
+        // Use Angular HttpClient for web
+        const result = await this.httpClient.post<any>(
           this.getIAMApiUrl() + "/jwts/" + token.jwt.jti + "/renew",
-          {
-            body: { renew_token: token.renew_token },
-          }).toPromise();
+          { renew_token: token.renew_token }
+        ).toPromise();
 
-      await this.storage.set("jwt", result);
-      console.log("JWT RENEWED!");
+        await this.storage.set("jwt", result);
+        console.log("JWT RENEWED!");
 
-      return result;
+        return result;
+      }
     } catch (e) {
       console.log("Error while trying to renew token:", e);
       throw e;
@@ -155,10 +216,6 @@ export class ApiService {
     return this.api + "/baremetal/v1/zones/";
   }
 
-  public getBillingApiUrl(): string {
-    return this.billing;
-  }
-
   public getApiUrl(): string {
     return this.api;
   }
@@ -173,10 +230,6 @@ export class ApiService {
 
   public patch<T>(url: string, data?: Record<string, any>): Promise<T> {
     return this.request<T>(HttpMethods.PATCH, url, data);
-  }
-
-  public options<T>(url: string, data?: Record<string, any>): Promise<T> {
-    return this.request<T>(HttpMethods.OPTIONS, url, data);
   }
 
   public delete<T>(url: string): Promise<T> {

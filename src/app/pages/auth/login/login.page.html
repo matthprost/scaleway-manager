@@ -3,12 +3,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary" (click)="showHelp()" mode="ios">
-      <ion-icon name="ios-help"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
   <div class="content ion-text-center">
     <ion-grid>
       <ion-row>
@@ -23,7 +17,7 @@
             <ion-card mode="ios">
               <ion-card-header mode="ios">
                 <ion-card-subtitle mode="ios"
-                >Scaleway Elements Account
+                >Scaleway Elements Account, is native: {{ isNative }} blabla
                 </ion-card-subtitle
                 >
                 <ion-card-title mode="ios">Log In</ion-card-title>
@@ -67,7 +61,7 @@
                         type="submit"
                         expand="full"
                         mode="ios"
-                        disabled="{{!password || !email || !captcha }}"
+                        disabled="{{!password || !email }}"
                       >
                         Log In
                       </ion-button

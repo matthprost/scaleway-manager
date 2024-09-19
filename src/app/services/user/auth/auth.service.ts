@@ -65,6 +65,7 @@ export class AuthService {
 
       await this.projectService.setDefaultProject(currentOrganization.id);
     } catch (e) {
+      console.log(e)
       throw e
     }
   }
