@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {faChevronRight} from '@fortawesome/free-solid-svg-icons';
 import {MenuController, NavController} from '@ionic/angular';
-import {Storage} from '@ionic/storage';
+import {Storage} from '@ionic/storage-angular';
 
 import {BillingDto} from '../../services/billing/billing.dto';
 import {BillingService} from '../../services/billing/billing.service';

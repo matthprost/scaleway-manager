@@ -9,7 +9,6 @@ import {
   NavController,
   ToastController,
 } from "@ionic/angular";
-
 import { WidgetInstance } from 'friendly-challenge'
 
 import { environment } from "../../../../environments/environment";

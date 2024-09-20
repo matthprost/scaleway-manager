@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Platform, ToastController } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 // import * as aws4 from "aws4";
 import * as xml2js from "xml2js";
 

@@ -1,8 +1,8 @@
-import { CapacitorHttp, Capacitor } from '@capacitor/core';
-import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Injectable } from "@angular/core";
+import { CapacitorHttp, HttpOptions, Capacitor } from '@capacitor/core';
 import { NavController, Platform, ToastController } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 enum HttpMethods {
   GET,
@@ -57,29 +57,27 @@ export class ApiService {
      // Use CapacitorHttp for native platforms
       try {
         const options = {
-          method: HttpMethods[method],
           url,
-          "Content-Type": "application/json",
-          ...(token ? { "X-Session-Token": token.token } : {}),
+          headers: (token ? { "X-Session-Token": token.token, "Content-Type": "application/json" } : {"Content-Type": "application/json"}),
           data,
-        };
+        } satisfies HttpOptions
 
         console.log(`>>> Trying to make a request to: ${url} with method: ${HttpMethods[method.toString()]}. Detailed options: ${JSON.stringify(options)}`)
 
-        let result: T;
+        let result: Promise<T>;
         if (method === HttpMethods.GET) {
-          result = await CapacitorHttp.get(options) as T;
+          result = CapacitorHttp.get(options) as Promise<T>;
         } else if (method === HttpMethods.POST) {
-          result = await CapacitorHttp.post(options) as T;
+          result = CapacitorHttp.post(options) as Promise<T>;
         } else if (method === HttpMethods.PATCH) {
-          result = await CapacitorHttp.patch(options) as T;
+          result = CapacitorHttp.patch(options) as Promise<T>;
         } else if (method === HttpMethods.DELETE) {
-          result = await CapacitorHttp.delete(options) as T;
+          result = CapacitorHttp.delete(options) as Promise<T>;
         } else {
           throw new Error("Unsupported HTTP method");
         }
 
-        console.log(result)
+        console.log(`RESULT: ${result}`)
 
         return result;
       } catch (error) {
@@ -89,38 +87,41 @@ export class ApiService {
     } else {
       // Use Angular HttpClient for web
       try {
-        switch (method) {
-          case HttpMethods.GET:
-            return await this.httpClient.get<T>(url, { headers:
+        let result: Promise<T>;
+        if (method === HttpMethods.GET) {
+            result = this.httpClient.get<T>(url, { headers:
               token && token.token
                 ? {
                     "X-Session-Token": token.token,
                   }
                 : {}, }).toPromise();
-          case HttpMethods.POST:
-            return await this.httpClient.post<T>(url, data, { headers:
+        } else if (method === HttpMethods.POST) {
+            result = this.httpClient.post<T>(url, data, { headers:
               token && token.token
                 ? {
                     "X-Session-Token": token.token,
                   }
                 : {}, }).toPromise();
-          case HttpMethods.PATCH:
-            return await this.httpClient.patch<T>(url, data, { headers:
+        } else if (method === HttpMethods.PATCH) {
+            result = this.httpClient.patch<T>(url, data, { headers:
               token && token.token
                 ? {
                     "X-Session-Token": token.token,
                   }
                 : {}, }).toPromise();
-          case HttpMethods.DELETE:
-            return await this.httpClient.delete<T>(url, { headers:
+        } else if (method === HttpMethods.DELETE) {
+            result = this.httpClient.delete<T>(url, { headers:
               token && token.token
                 ? {
                     "X-Session-Token": token.token,
                   }
                 : {}, }).toPromise();
-          default:
+        } else {
             throw new Error("Unsupported HTTP method");
         }
+
+        console.log(`RESULT: ${result}`)
+        return result;
       } catch (error) {
         return await this.handleRequestError(error, method, url, data);
       }

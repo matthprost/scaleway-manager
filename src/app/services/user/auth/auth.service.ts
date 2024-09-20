@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { NavController } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 import { ApiService } from "../../api/api.service";
 import {UserDto} from "../account/account.dto";
@@ -45,15 +45,22 @@ export class AuthService {
         }
       );
 
+      console.log('>> LOGIN RESULT', result)
+
       await this.storage.set("jwt", result);
 
       const iamUser = await this.api.get<any>(`${this.api.getIAMApiUrl()}/users/${result.jwt.issuer_id}`)
+
+      console.log('>> IAM USER', iamUser)
 
       await this.storage.set("iam", iamUser);
 
       const data = await this.api.get<UserDto>(
         this.api.getAccountApiUrlV2() + "/users/" + iamUser.account_root_user_id
       );
+
+      console.log('>> DATA', data)
+
 
       await this.storage.set("user", data);
 
@@ -64,6 +71,8 @@ export class AuthService {
       await this.storage.set("currentOrganization", currentOrganization.id);
 
       await this.projectService.setDefaultProject(currentOrganization.id);
+
+      console.log('>> LOGIN SERVICE DONE!')
     } catch (e) {
       console.log(e)
       throw e

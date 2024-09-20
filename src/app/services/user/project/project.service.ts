@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {Storage} from "@ionic/storage";
+import {Storage} from "@ionic/storage-angular";
 
 import {ApiService} from "../../api/api.service";
 import {UserDto, UsersDto} from "../account/account.dto";

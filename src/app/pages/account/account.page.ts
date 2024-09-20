@@ -9,7 +9,7 @@ import {
   ModalController,
   NavController,
 } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 import { UserDto } from "../../services/user/account/account.dto";
 import { AccountService } from "../../services/user/account/account.service";

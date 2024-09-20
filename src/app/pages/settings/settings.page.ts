@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { PickerController, Platform } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 
 

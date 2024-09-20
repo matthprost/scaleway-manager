@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { ModalController } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 import { ProjectService } from "../../../services/user/project/project.service";
 

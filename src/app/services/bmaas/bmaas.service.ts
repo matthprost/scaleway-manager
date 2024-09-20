@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 import {mergeZones} from '../../helpers/mergeZones';
 import { ApiService } from "../api/api.service";
