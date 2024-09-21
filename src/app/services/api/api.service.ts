@@ -48,7 +48,7 @@ export class ApiService {
   private async request<T>(
     method: HttpMethods,
     url: string,
-    data: Record<string, any> = {}
+    data?: Record<string, any>
   ): Promise<T> {
     const token = await this.storage.get("jwt");
     console.log(`Is native platform: ${Capacitor.isNativePlatform()}`)
@@ -56,30 +56,36 @@ export class ApiService {
     if (Capacitor.isNativePlatform()) {
      // Use CapacitorHttp for native platforms
       try {
+        const headers = token ? { "X-Session-Token": token.token } : {};
+        if (method !== HttpMethods.GET && method !== HttpMethods.DELETE) {
+          headers["Content-Type"] = "application/json";
+        }
+
         const options = {
           url,
-          headers: (token ? { "X-Session-Token": token.token, "Content-Type": "application/json" } : {"Content-Type": "application/json"}),
+          headers,
           data,
-        } satisfies HttpOptions
+        } satisfies HttpOptions;
 
-        console.log(`>>> Trying to make a request to: ${url} with method: ${HttpMethods[method.toString()]}. Detailed options: ${JSON.stringify(options)}`)
+        console.log(`>>> Trying to make a request to: ${url} with method: ${HttpMethods[method.toString()]}. Detailed options: ${JSON.stringify(options)}`);
 
-        let result: Promise<T>;
+        let result;
         if (method === HttpMethods.GET) {
-          result = CapacitorHttp.get(options) as Promise<T>;
+          result = await CapacitorHttp.get(options);
         } else if (method === HttpMethods.POST) {
-          result = CapacitorHttp.post(options) as Promise<T>;
+          result = await CapacitorHttp.post(options);
         } else if (method === HttpMethods.PATCH) {
-          result = CapacitorHttp.patch(options) as Promise<T>;
+          result = await CapacitorHttp.patch(options);
         } else if (method === HttpMethods.DELETE) {
-          result = CapacitorHttp.delete(options) as Promise<T>;
+          result = await CapacitorHttp.delete(options);
         } else {
           throw new Error("Unsupported HTTP method");
         }
 
-        console.log(`RESULT: ${result}`)
+        const finalResult = Promise.resolve<T>(result.data);
+        console.log(`RESULT: ${finalResult}`)
 
-        return result;
+        return finalResult;
       } catch (error) {
         console.log(error)
         return await this.handleRequestError(error, method, url, data);

@@ -48,6 +48,8 @@ export class AuthService {
       console.log('>> LOGIN RESULT', result)
 
       await this.storage.set("jwt", result);
+      console.log(`>>> STORAGE: ${await this.storage.get("iam")}`)
+
 
       const iamUser = await this.api.get<any>(`${this.api.getIAMApiUrl()}/users/${result.jwt.issuer_id}`)
 

@@ -105,9 +105,10 @@ export class LoginPage {
           password: this.password,
           captcha: this.captcha
         });
+        console.log("TRYING TO REDIRECT TO HOME")
         await this.router.navigate(["/home"]);
       } catch (error) {
-        console.log(error.error.details[0].argument_name)
+        console.log(error.error.details[0].argument_name, error)
         if (error.status === 400 && error.error.details[0].argument_name === "2FA_token") {
           this.navParams.setParams({
             email: this.email,

@@ -11,7 +11,9 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "analyse": "ng run app:build --stats-json && npx webpack-bundle-analyzer www/stats.json"
+    "analyse": "ng run app:build --stats-json && npx webpack-bundle-analyzer www/stats.json",
+    "build:ios": "rm -rf www && ionic build && npx cap update ios && npx cap open ios",
+    "generate:assets": "npx capacitor-assets generate"
   },
   "engines": {
     "node": ">=v18",
@@ -52,6 +54,7 @@
     "@angular/compiler": "15.2.10",
     "@angular/compiler-cli": "15.2.10",
     "@angular/language-service": "15.2.10",
+    "@capacitor/assets": "^3.0.5",
     "@capacitor/cli": "^6.0.0",
     "@fortawesome/fontawesome-free": "5.14.0",
     "@ionic/angular-toolkit": "2.3.3",
