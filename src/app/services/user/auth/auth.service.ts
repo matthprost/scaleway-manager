@@ -84,9 +84,12 @@ export class AuthService {
   public async logout(): Promise<any> {
     console.log("LOGGING  OUT");
     const token = await this.storage.get("jwt");
-    this.api.delete<any>(
-      this.api.getIAMApiUrl() + "/jwts/" + token.jwt.jti
-    );
+
+    if (token?.jwt?.jti) {
+      this.api.delete<any>(
+        this.api.getIAMApiUrl() + "/jwts/" + token.jwt.jti
+      )
+    }
     await this.storage.clear();
     await this.navCtrl.navigateRoot(["/login"]);
   }

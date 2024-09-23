@@ -12,7 +12,8 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "analyse": "ng run app:build --stats-json && npx webpack-bundle-analyzer www/stats.json",
-    "build:ios": "rm -rf www && ionic build && npx cap update ios && npx cap open ios",
+    "build:ios": "ionic build --prod && npx cap sync ios && npx cap copy ios && nr generate:assets && npx cap open ios",
+    "build:android": "ionic build --prod && npx cap copy && npx cap sync && nr generate:assets && npx cap open android",
     "generate:assets": "npx capacitor-assets generate"
   },
   "engines": {

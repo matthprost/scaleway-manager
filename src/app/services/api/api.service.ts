@@ -54,42 +54,43 @@ export class ApiService {
     console.log(`Is native platform: ${Capacitor.isNativePlatform()}`)
 
     if (Capacitor.isNativePlatform()) {
-     // Use CapacitorHttp for native platforms
-      try {
-        const headers = token ? { "X-Session-Token": token.token } : {};
-        if (method !== HttpMethods.GET && method !== HttpMethods.DELETE) {
-          headers["Content-Type"] = "application/json";
-        }
+      // Use CapacitorHttp for native platforms
 
-        const options = {
-          url,
-          headers,
-          data,
-        } satisfies HttpOptions;
-
-        console.log(`>>> Trying to make a request to: ${url} with method: ${HttpMethods[method.toString()]}. Detailed options: ${JSON.stringify(options)}`);
-
-        let result;
-        if (method === HttpMethods.GET) {
-          result = await CapacitorHttp.get(options);
-        } else if (method === HttpMethods.POST) {
-          result = await CapacitorHttp.post(options);
-        } else if (method === HttpMethods.PATCH) {
-          result = await CapacitorHttp.patch(options);
-        } else if (method === HttpMethods.DELETE) {
-          result = await CapacitorHttp.delete(options);
-        } else {
-          throw new Error("Unsupported HTTP method");
-        }
-
-        const finalResult = Promise.resolve<T>(result.data);
-        console.log(`RESULT: ${finalResult}`)
-
-        return finalResult;
-      } catch (error) {
-        console.log(error)
-        return await this.handleRequestError(error, method, url, data);
+      const headers = token ? { "X-Session-Token": token.token } : {};
+      if (method !== HttpMethods.GET && method !== HttpMethods.DELETE) {
+        headers["Content-Type"] = "application/json";
       }
+
+      const options = {
+        url,
+        headers,
+        data,
+      } satisfies HttpOptions;
+
+      console.log(`>>> Trying to make a request to: ${url} with method: ${HttpMethods[method.toString()]}. Detailed options: ${JSON.stringify(options)}`);
+
+      let result;
+      if (method === HttpMethods.GET) {
+        result = await CapacitorHttp.get(options);
+      } else if (method === HttpMethods.POST) {
+        result = await CapacitorHttp.post(options);
+      } else if (method === HttpMethods.PATCH) {
+        result = await CapacitorHttp.patch(options);
+      } else if (method === HttpMethods.DELETE) {
+        result = await CapacitorHttp.delete(options);
+      } else {
+        throw new Error("Unsupported HTTP method");
+      }
+
+      console.log(`>>> REQUEST RESULT: ${JSON.stringify(result)}`)
+
+      if (result.status === 401) {
+        console.log('>>> ERROR 401')
+        return await this.handleRequestError({ status: result.status, error: result.data, ...result.data}, method, url, data);
+      }
+
+      const finalResult = Promise.resolve<T>(result.data);
+      return finalResult;
     } else {
       // Use Angular HttpClient for web
       try {
@@ -135,7 +136,7 @@ export class ApiService {
   }
 
   private async handleRequestError<T>(error: any, method: HttpMethods, url: string, data: Record<string, any>) {
-    console.log(error, method, url, data);
+    console.log(">>> ERROR", error, HttpMethods[method.toString()], url, data);
 
     const token = await this.storage.get("jwt");
 
@@ -148,7 +149,7 @@ export class ApiService {
       token
     ) {
       console.log(
-        "ERROR 401: Token is not valid anymore, trying to renew it..."
+        ">>> ERROR 401: Token is not valid anymore, trying to renew it..."
       );
 
       try {
@@ -170,36 +171,42 @@ export class ApiService {
   }
 
   private async renewJWT(): Promise<any> {
-    try {
       const token = await this.storage.get("jwt");
       console.log("Token in storage before renew:", token);
 
       if (Capacitor.isNativePlatform()) {
-        // Use CapacitorHttp for native platforms
-        const result = await CapacitorHttp.post({
+        const data = {
+          headers: { "Content-Type": "application/json"},
           url: this.getIAMApiUrl() + "/jwts/" + token.jwt.jti + "/renew",
           data: { renew_token: token.renew_token },
-        });
+        } satisfies HttpOptions;
 
-        await this.storage.set("jwt", result);
-        console.log("JWT RENEWED!");
+        console.log(">>> TRYING TO RENEW JWT WITH CAPACITOR HTTP", JSON.stringify(data))
+
+        // Use CapacitorHttp for native platforms
+        const result = await CapacitorHttp.post(data);
+        console.log('>>> TOKEN RENEW RESULT', JSON.stringify(result))
+
+        await this.storage.set("jwt", result.data);
+        console.log(">> JWT RENEWED!");
 
         return result;
       } else {
-        // Use Angular HttpClient for web
-        const result = await this.httpClient.post<any>(
-          this.getIAMApiUrl() + "/jwts/" + token.jwt.jti + "/renew",
-          { renew_token: token.renew_token }
-        ).toPromise();
+        try {
+          // Use Angular HttpClient for web
+          const result = await this.httpClient.post<any>(
+            this.getIAMApiUrl() + "/jwts/" + token.jwt.jti + "/renew",
+            { renew_token: token.renew_token }
+          ).toPromise();
 
-        await this.storage.set("jwt", result);
-        console.log("JWT RENEWED!");
+          await this.storage.set("jwt", result);
+          console.log("JWT RENEWED!");
 
-        return result;
-      }
-    } catch (e) {
-      console.log("Error while trying to renew token:", e);
-      throw e;
+          return result;
+        } catch (e) {
+          console.log("Error while trying to renew token:", e);
+          throw e;
+        }
     }
   }
 
