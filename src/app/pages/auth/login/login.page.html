@@ -23,6 +23,12 @@
                 <ion-card-title mode="ios">Log In</ion-card-title>
               </ion-card-header>
               <ion-card-content>
+                  <div class="alert">
+                    <p>
+                        Due to security reasons, you might not be able to connect without having 2FA enabled on your account.
+                        Please enable 2FA on your account and try again.
+                    </p>
+                  </div>
                 <form (ngSubmit)="login()" #loginForm="ngForm" class="form">
                   <ion-list lines="none" class="ion-no-margin ion-no-padding">
                     <ion-item class="ion-margin-top ion-no-padding" mode="md">

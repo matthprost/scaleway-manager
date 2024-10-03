@@ -48,6 +48,7 @@ export class LoginPage {
   }
 
   ngAfterViewInit() {
+    if (this.friendlyCaptcha) {
        const widget = new WidgetInstance(this.friendlyCaptcha.nativeElement, {
          doneCallback: (a) => {
            console.log('DONE: ', a);
@@ -59,6 +60,7 @@ export class LoginPage {
        })
 
        widget.start()
+    }
    }
 
   ionViewDidEnter(): void {

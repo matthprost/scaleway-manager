@@ -1,3 +1,9 @@
+.alert {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
 ion-toolbar {
   --background: transparent;
   --ion-color-base: transparent !important;

@@ -84,8 +84,8 @@ export class ApiService {
 
       console.log(`>>> REQUEST RESULT: ${JSON.stringify(result)}`)
 
-      if (result.status === 401) {
-        console.log('>>> ERROR 401')
+      if (result.status >= 400) {
+        console.log('>>> ERROR 400/401/...')
         return await this.handleRequestError({ status: result.status, error: result.data, ...result.data}, method, url, data);
       }
 
