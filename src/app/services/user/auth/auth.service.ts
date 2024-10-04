@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { NavController } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 import { ApiService } from "../../api/api.service";
 import {UserDto} from "../account/account.dto";
@@ -40,20 +40,29 @@ export class AuthService {
           email,
           password,
           renewable: true,
-          "2FA_token": code && code.toString(),
+          otp: code && code.toString(),
           captcha,
         }
       );
 
+      console.log('>> LOGIN RESULT', result)
+
       await this.storage.set("jwt", result);
+      console.log(`>>> STORAGE: ${await this.storage.get("iam")}`)
+
 
       const iamUser = await this.api.get<any>(`${this.api.getIAMApiUrl()}/users/${result.jwt.issuer_id}`)
+
+      console.log('>> IAM USER', iamUser)
 
       await this.storage.set("iam", iamUser);
 
       const data = await this.api.get<UserDto>(
         this.api.getAccountApiUrlV2() + "/users/" + iamUser.account_root_user_id
       );
+
+      console.log('>> DATA', data)
+
 
       await this.storage.set("user", data);
 
@@ -64,7 +73,10 @@ export class AuthService {
       await this.storage.set("currentOrganization", currentOrganization.id);
 
       await this.projectService.setDefaultProject(currentOrganization.id);
+
+      console.log('>> LOGIN SERVICE DONE!')
     } catch (e) {
+      console.log(e)
       throw e
     }
   }
@@ -72,9 +84,12 @@ export class AuthService {
   public async logout(): Promise<any> {
     console.log("LOGGING  OUT");
     const token = await this.storage.get("jwt");
-    this.api.delete<any>(
-      this.api.getIAMApiUrl() + "/jwts/" + token.jwt.jti
-    );
+
+    if (token?.jwt?.jti) {
+      this.api.delete<any>(
+        this.api.getIAMApiUrl() + "/jwts/" + token.jwt.jti
+      )
+    }
     await this.storage.clear();
     await this.navCtrl.navigateRoot(["/login"]);
   }

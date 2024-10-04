@@ -1,6 +1,5 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Clipboard } from "@ionic-native/clipboard/ngx";
 import {
   AlertController,
   NavController,
@@ -24,7 +23,6 @@ export class DetailsPage implements OnInit {
   constructor(
     private bmaasService: BmaasService,
     private toastCtrl: ToastController,
-    private clipboard: Clipboard,
     private alertController: AlertController,
     private route: ActivatedRoute,
     private platform: Platform,
@@ -32,23 +30,4 @@ export class DetailsPage implements OnInit {
   ) {}
 
   ngOnInit() {}
-
-  public async copyToClipBoard(text: string) {
-    if (this.platform.is("cordova")) {
-      await this.clipboard.copy(text);
-
-      const toast = await this.toastCtrl.create({
-        message: "Address has been copied into your clipboard!",
-        duration: 3000,
-        position: "top",
-        color: "secondary",
-        showCloseButton: true,
-        mode: "ios",
-      });
-
-      await toast.present();
-    } else {
-      console.warn("Feature only available on cordova");
-    }
-  }
 }

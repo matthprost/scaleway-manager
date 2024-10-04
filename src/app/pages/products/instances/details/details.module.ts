@@ -2,7 +2,6 @@ import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { Routes, RouterModule } from "@angular/router";
-import { Clipboard } from "@ionic-native/clipboard/ngx";
 import { IonicModule } from "@ionic/angular";
 
 import { ComponentsModule } from "../../../../components/components.module";
@@ -26,7 +25,6 @@ const routes: Routes = [
     PipesModule,
     ComponentsModule,
   ],
-  declarations: [DetailsPage],
-  providers: [Clipboard],
+  declarations: [DetailsPage]
 })
 export class DetailsPageModule {}

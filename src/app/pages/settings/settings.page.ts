@@ -1,8 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
-import { AppVersion } from "@ionic-native/app-version/ngx";
 import { PickerController, Platform } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 
 
 
@@ -12,7 +11,6 @@ import { Storage } from "@ionic/storage";
   styleUrls: ["./settings.page.scss"],
 })
 export class SettingsPage implements OnInit {
-  public version = null;
   public isLoading = false;
   public changeHasBeenDone = false;
 
@@ -20,16 +18,10 @@ export class SettingsPage implements OnInit {
   public instancesToDisplay = 6;
 
   constructor(
-    private appVersion: AppVersion,
     private platform: Platform,
     private storage: Storage,
     private pickerController: PickerController
   ) {
-    if (this.platform.is("cordova")) {
-      this.appVersion.getVersionNumber().then((versionNumber) => {
-        this.version = versionNumber;
-      });
-    }
 
     this.storage.get("settings").then((result) => {
       if (result) {

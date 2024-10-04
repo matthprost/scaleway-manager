@@ -1,3 +1,9 @@
+.alert {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+}
+
 ion-toolbar {
   --background: transparent;
   --ion-color-base: transparent !important;
@@ -6,6 +12,11 @@ ion-toolbar {
 
 .list-md .item-input:last-child {
   border: none;
+}
+
+ion-icon {
+  color: gray;
+  height: 38px;
 }
 
 .label-md[stacked],

@@ -1,6 +1,8 @@
 import {Component} from '@angular/core';
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import {Platform} from '@ionic/angular';
+import { Storage } from '@ionic/storage-angular';
+
 
 @Component({
   selector: 'app-root',
@@ -26,12 +28,12 @@ export class AppComponent {
           icon: 'hdd',
           new: false,
         },*/
-    {
-      title: 'Object Storage',
-      url: '/buckets',
-      icon: 'database',
-      new: true,
-    },
+    // {
+    //   title: 'Object Storage',
+    //   url: '/buckets',
+    //   icon: 'database',
+    //   new: true,
+    // },
     {
       title: 'Billing',
       url: '/billing',
@@ -55,9 +57,14 @@ export class AppComponent {
 
   constructor(
     private platform: Platform,
+    private storage: Storage
   ) {
     this.initializeApp();
   }
+
+  async ngOnInit() {
+      await this.storage.create();
+    }
 
   initializeApp(): void {
     this.platform.ready().then(() => {

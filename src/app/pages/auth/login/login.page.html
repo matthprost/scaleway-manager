@@ -3,12 +3,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button color="secondary" (click)="showHelp()" mode="ios">
-      <ion-icon name="ios-help"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-
   <div class="content ion-text-center">
     <ion-grid>
       <ion-row>
@@ -29,6 +23,12 @@
                 <ion-card-title mode="ios">Log In</ion-card-title>
               </ion-card-header>
               <ion-card-content>
+                  <div class="alert">
+                    <p>
+                        Due to security reasons, you might not be able to connect without having 2FA enabled on your account.
+                        Please enable 2FA on your account and try again.
+                    </p>
+                  </div>
                 <form (ngSubmit)="login()" #loginForm="ngForm" class="form">
                   <ion-list lines="none" class="ion-no-margin ion-no-padding">
                     <ion-item class="ion-margin-top ion-no-padding" mode="md">
@@ -39,7 +39,8 @@
                         [(ngModel)]="email"
                         required
                       ></ion-input>
-                      <ion-icon name="ios-mail" slot="start"></ion-icon>
+                      <ion-icon name="mail-outline" slot="start"></ion-icon>
+
                     </ion-item>
                     <ion-item class="ion-margin-top ion-margin-bottom ion-no-padding" mode="md">
                       <ion-input
@@ -49,17 +50,16 @@
                         [(ngModel)]="password"
                         required
                       ></ion-input>
-                      <ion-icon name="md-key" slot="start"></ion-icon>
+                      <ion-icon name="key-outline" slot="start"></ion-icon>
+
                     </ion-item>
                     <div
                       class="ion-no-margin ion-no-padding"
                       style="transform: scale(0.8); transform-origin: 0 0"
                     >
-                      <re-captcha
-                        (resolved)="captchaResolved($event)"
-                        siteKey="{{captchaKey}}"
-                        #captchaRef="reCaptcha"
-                      ></re-captcha>
+
+                    <div class="frc-captcha" data-sitekey="FCMK8RNO6OFB7JGO" data-puzzle-endpoint="https://api.friendlycaptcha.com/api/v1/puzzle, https://eu-api.friendlycaptcha.eu/api/v1/puzzle" #frccaptcha></div>
+
                     </div>
                     <div class="ion-padding-top ion-padding-bottom">
                       <ion-button
@@ -67,7 +67,7 @@
                         type="submit"
                         expand="full"
                         mode="ios"
-                        disabled="{{!password || !email || !captchaResponse }}"
+                        disabled="{{!password || !email }}"
                       >
                         Log In
                       </ion-button

@@ -1,10 +1,10 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Platform, ToastController } from "@ionic/angular";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
+// import * as aws4 from "aws4";
+import * as xml2js from "xml2js";
 
-import * as aws4 from "../../../../node_modules/aws4";
-import * as xml2js from "../../../../node_modules/xml2js";
 import { AuthService } from "../user/auth/auth.service";
 import { ProjectService } from "../user/project/project.service";
 import { TokensService } from "../user/project/tokens/tokens.service";
@@ -79,10 +79,10 @@ export class ObjectApiService {
 
     try {
       // Create AWS Signature
-      aws4.sign(opts, {
-        accessKeyId: apiToken.access_key,
-        secretAccessKey: apiToken.secret_key,
-      });
+      // aws4.sign(opts, {
+      //   accessKeyId: apiToken.access_key,
+      //   secretAccessKey: apiToken.secret_key,
+      // });
       console.log("AWS-OPTIONS", opts);
 
       let myHeaders = { ...opts.headers, ...{ subHost }, ...customHeader };
@@ -146,7 +146,7 @@ export class ObjectApiService {
 
       const toast = await this.toastController.create({
         position: "top",
-        showCloseButton: true,
+        //showCloseButton: true,
         duration: 8000,
         color: "danger",
         mode: "ios",

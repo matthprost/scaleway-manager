@@ -6,7 +6,7 @@ import {
   RouterStateSnapshot,
   UrlTree,
 } from "@angular/router";
-import { Storage } from "@ionic/storage";
+import { Storage } from "@ionic/storage-angular";
 import { Observable } from "rxjs";
 
 import { NavParamsService } from "../../services/nav/nav-params.service";

@@ -4,6 +4,19 @@ ion-toolbar {
   position: absolute;
 }
 
+.container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 8px;
+    margin: 0 8px;
+    margin-bottom: 16px;
+
+    ion-card {
+        margin: 0 !important;
+    }
+}
+
+
 ion-title {
   background: white;
   -webkit-background-clip: text;

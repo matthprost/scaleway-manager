@@ -1,5 +1,5 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from "@angular/core";
-import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, waitForAsync } from "@angular/core/testing";
 
 import { SshKeysPage } from "./ssh-keys.page";
 
@@ -7,7 +7,7 @@ describe("SshKeysPage", () => {
   let component: SshKeysPage;
   let fixture: ComponentFixture<SshKeysPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SshKeysPage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],

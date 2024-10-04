@@ -8,15 +8,6 @@ const PROXY_CONFIG = {
     },
     "logLevel": "debug"
   },
-  "/billing/*": {
-    "target": "https://billing.scaleway.com",
-    "changeOrigin": true,
-    "secure": false,
-    "pathRewrite": {
-      "^/billing": ""
-    },
-    "logLevel": "debug"
-  },
   "/s3/*": {
     target: true,
     router: function (req) {

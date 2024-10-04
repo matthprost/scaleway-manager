@@ -4,9 +4,9 @@ import {
   Input,
   OnChanges,
   ViewChild,
+  AfterViewInit
 } from "@angular/core";
 import { Chart } from "chart.js/dist/Chart.bundle.js";
-
 import { BillingDto } from "../../services/billing/billing.dto";
 
 @Component({
@@ -14,7 +14,7 @@ import { BillingDto } from "../../services/billing/billing.dto";
   templateUrl: "./graph.component.html",
   styleUrls: ["./graph.component.scss"],
 })
-export class GraphComponent implements OnChanges {
+export class GraphComponent implements AfterViewInit {
   @Input() billings: BillingDto;
   @Input() organizationName: any;
   @Input() projectName: any;
@@ -25,7 +25,7 @@ export class GraphComponent implements OnChanges {
   public values;
   public currency;
 
-  ngOnChanges(): void {
+  ngAfterViewInit(): void {
     this.formatData(this.billings);
 
     this.barChart = new Chart(this.barCanvas.nativeElement, {
@@ -136,5 +136,7 @@ export class GraphComponent implements OnChanges {
     this.values = values.reverse();
 
     this.currency = (data[0] && data[0].currency) || "";
+
+    return []
   }
 }

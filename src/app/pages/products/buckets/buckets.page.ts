@@ -1,20 +1,15 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { StatusBar, Style as StatusBarStyle } from '@capacitor/status-bar';
 import { ModalController, NavController } from "@ionic/angular";
-
 import { ObjectService } from "../../../services/object/object.service";
 
-import { AddBucketPage } from "./add-bucket/add-bucket.page";
-
-
-
 @Component({
-  selector: "app-objects",
+  selector: "app-buckets",
   templateUrl: "./buckets.page.html",
   styleUrls: ["./buckets.page.scss"],
 })
-export class BucketsPage implements OnInit {
-  public buckets = [];
+export class BucketsPage {
+  public buckets: any[] = [];
   public isLoading = true;
   public error = false;
   private temp = true;
@@ -30,18 +25,16 @@ export class BucketsPage implements OnInit {
     });
   }
 
-  ngOnInit() {}
-
-  async ionViewDidEnter() {
+  async ionViewDidEnter(): Promise<void> {
     StatusBar.setStyle({ style: StatusBarStyle.Light });
     /*if (!this.temp) {
       await this.refresh(false);
     }*/
   }
 
-  private async refresh(displayLoading?: boolean) {
+  private async refresh(displayLoading?: boolean): Promise<void> {
     this.error = false;
-    displayLoading ? (this.isLoading = true) : (this.isLoading = false);
+    this.isLoading = displayLoading ? true : false;
 
     try {
       this.buckets = await this.objectService.getAllBuckets();
@@ -52,7 +45,7 @@ export class BucketsPage implements OnInit {
     }
   }
 
-  public doRefresh(refresher) {
+  public doRefresh(refresher: any): void {
     this.refresh()
       .then(() => {
         refresher.target.complete();
@@ -63,23 +56,23 @@ export class BucketsPage implements OnInit {
       });
   }
 
-  public async addBucket(event: any) {
-    const modal = await this.modalController.create({
-      component: AddBucketPage,
-    });
+  public async addBucket(event: Event): Promise<void> {
+    // const modal = await this.modalController.create({
+    //   component: AddBucketPage,
+    // });
 
-    await modal.present();
+    // await modal.present();
 
-    await modal.onDidDismiss().then((value) => {
-      if (!value.data.close) {
-        this.refresh();
-      }
-    });
+    // await modal.onDidDismiss().then((value) => {
+    //   if (!value.data.close) {
+    //     this.refresh();
+    //   }
+    // });
   }
 
-  public async accessToBucket(region: string, bucketName: string) {
+  public async accessToBucket(region: string, bucketName: string): Promise<void> {
     await this.navCtrl.navigateForward([
-      "/buckets/" + region + "/" + bucketName,
+      `/buckets/${region}/${bucketName}`,
     ]);
   }
 }
