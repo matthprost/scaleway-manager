@@ -218,6 +218,10 @@ export class ApiService {
     return this.api + "/account/v2";
   }
 
+  public getAccountApiUrlV3(): string {
+    return this.api + "/account/v3";
+  }
+
   public getIAMApiUrl(): string {
     return this.api + "/iam/v1alpha1";
   }

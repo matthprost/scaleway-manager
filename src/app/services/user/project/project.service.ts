@@ -20,7 +20,7 @@ export class ProjectService {
 
     // tslint:disable-next-line:max-line-length
     const result = await this.api.get<ProjectsDto>(
-      `${this.api.getAccountApiUrlV2()}/projects?organization_id=${organizationId}&page_size=50&page=1`
+      `${this.api.getAccountApiUrlV3()}/projects?organization_id=${organizationId}&page_size=50&page=1`
     );
     return result.projects;
   }
