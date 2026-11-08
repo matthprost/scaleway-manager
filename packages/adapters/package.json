@@ -1,0 +1,46 @@
+{
+  "name": "@scaleway-manager/adapters",
+  "private": true,
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    ".": "./src/index.ts",
+    "./scaleway": "./src/scaleway/index.ts",
+    "./demo": "./src/demo/index.ts",
+    "./device": "./src/device/index.ts"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "jest"
+  },
+  "dependencies": {
+    "@scaleway-manager/core": "workspace:*",
+    "@scaleway-manager/login-receiver": "workspace:*"
+  },
+  "peerDependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@react-native-community/netinfo": "12.0.1",
+    "expo-clipboard": "~58.0.4",
+    "expo-file-system": "~58.0.13",
+    "expo-local-authentication": "~58.0.2",
+    "expo-screen-capture": "~58.0.6",
+    "expo-secure-store": "~58.0.2",
+    "expo-sharing": "~58.0.22",
+    "expo-web-browser": "~58.0.7"
+  },
+  "devDependencies": {
+    "@react-native-async-storage/async-storage": "2.2.0",
+    "@react-native-community/netinfo": "12.0.1",
+    "@types/jest": "^30.0.0",
+    "expo-clipboard": "~58.0.4",
+    "expo-file-system": "~58.0.13",
+    "expo-local-authentication": "~58.0.2",
+    "expo-screen-capture": "~58.0.6",
+    "expo-secure-store": "~58.0.2",
+    "expo-sharing": "~58.0.22",
+    "expo-web-browser": "~58.0.7",
+    "jest": "^30.5.2",
+    "jest-expo": "~58.0.14",
+    "typescript": "~6.0.3"
+  }
+}
