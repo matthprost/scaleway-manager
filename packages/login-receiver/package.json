@@ -1,0 +1,23 @@
+{
+  "name": "@scaleway-manager/login-receiver",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Catches the Scaleway login redirect on 127.0.0.1 and ::1 while the user signs in.",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "expo": "~58.0.22"
+  },
+  "devDependencies": {
+    "@types/jest": "^30.0.0",
+    "@types/node": "^26.6.6",
+    "expo": "~58.0.22",
+    "jest": "^30.5.2",
+    "jest-expo": "~58.0.14",
+    "typescript": "~6.0.3"
+  }
+}

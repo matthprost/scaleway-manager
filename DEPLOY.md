@@ -1,55 +1,77 @@
-This file is a personal reminder for deploy, don't mind about it :)
+# Deploy
 
-## Prerequisite
+How to build and send Scaleway Manager to the App Store and the Play Store. Only the owner can upload.
 
-Whatever platform you're trying to test or to deploy you need your packages to be installed:
+Never write passwords, keys or key file paths in this repo. It is public.
 
-```sh
-rm -rf node_modules && npm i
+## Before you start
+
+- Node.js 24 and pnpm 10, then `pnpm install` at the repo root.
+- Xcode, signed in to the Apple developer team `8754A6XKT5` (Xcode > Settings > Accounts).
+- Android Studio (for the Android SDK) and Java 17 (for example `brew install openjdk@17`).
+- The Android upload key, set once in `~/.gradle/gradle.properties` on your Mac. Use these four names, with your own values:
+
+```
+SM_UPLOAD_STORE_FILE=<full path to your upload key file>
+SM_UPLOAD_STORE_PASSWORD=<store password>
+SM_UPLOAD_KEY_ALIAS=<key alias>
+SM_UPLOAD_KEY_PASSWORD=<key password>
 ```
 
-## iOS
+The build reads them through a small Expo plugin (`apps/mobile/plugins/withReleaseSigning.js`), so the key never touches the repo. Without them, a debug build still works, and `assembleRelease` still builds a debug-signed APK for local tests, but `bundleRelease` (the store bundle) stops with: `Release signing is not set up: add SM_UPLOAD_* to ~/.gradle/gradle.properties (see DEPLOY.md).` Never upload a debug-signed APK to a store.
 
-#### Requirements
+If you lost the upload key, ask for a reset in the Play Console (App integrity > App signing), create a new key with `keytool -genkeypair -v -keystore <file> -alias <alias> -keyalg RSA -keysize 2048 -validity 10000`, and wait for Google to confirm before uploading.
 
-- Macbook (Can be a VM with VMWare but expect it to be slow as hell)
-- Xcode
-- Ionic
-- Capacitor
+## 1. Bump the version
 
-#### Build
+Edit `apps/mobile/app.config.ts`:
 
-1. Run `yarn run build:ios`
-2. It should open xcode, you can start it on any emulator or device
+- `version`: the number people see, for example `3.0.0`.
+- `ios.buildNumber`: raise it for every new iOS upload (3.0.0 is at build `3`). iOS signing is only the team id `appleTeamId`; certificates stay in Xcode and your Keychain.
+- `android.versionCode`: raise it for every new Android upload (it is `30003` for 3.0.0; it must stay above the last one in the Play Console).
 
-#### Deploy
+Also set the same `version` in `apps/mobile/package.json`, so the two match.
 
-1. Run `yarn run build:ios`
-2. Change the version of the app + build number in xcode
-3. Click on `Product > Archive` then `Distribute App` and follow the steps
-4. That's it, it should be on App Store Connect
+## 2. Check
 
-## Android
+From the repo root:
 
-#### Requirements
-
-- Android Studio
-- Android SDK
-- Ionic
-- Capacitor
-
-#### Test
-
-1. Run `yarn run build:android`
-2. It should open Android Studio, you can start it on any emulator or device
-
-#### Deploy
-
-1. Run `yarn run build:android`
-2. Change version into `android > app > build.gradle`:
+```bash
+pnpm test
+pnpm lint
+pnpm typecheck
 ```
-versionCode 20005
-versionName "2.0.5"
+
+## 3. Build
+
+Build from a fresh terminal: `env | grep EXPO_PUBLIC` must print nothing, so no screenshot setting (`EXPO_PUBLIC_SCREENSHOTS`) gets into a store build.
+
+```bash
+cd apps/mobile
+pnpm expo prebuild --clean
+export JAVA_HOME="$(brew --prefix openjdk@17)"
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+(cd android && ./gradlew bundleRelease)
+xcodebuild -workspace ios/ScalewayManager.xcworkspace -scheme ScalewayManager -configuration Release \
+  -archivePath ~/Library/Developer/Xcode/Archives/ScalewayManager.xcarchive \
+  -destination 'generic/platform=iOS' -allowProvisioningUpdates archive
 ```
-3. Then `Build > Generate Signed Bundle / APK > Android App Bundle` choose Key Store (*/mypath/mykey.jks*) and put `scaleway` as alias
-4. Upload manually `.aab` file on Google Play Store
+
+- The Android bundle is `apps/mobile/android/app/build/outputs/bundle/release/app-release.aab`.
+- Run the Gradle build without `-q` and read the first lines: if it stops with the signing message, add the four names above.
+- To check it is signed with your upload key (the SHA1 must match "Upload key certificate" in the Play Console, App integrity > App signing): `keytool -list -v -keystore <your key file> | grep SHA1`, and then `jarsigner -verify -verbose -certs apps/mobile/android/app/build/outputs/bundle/release/app-release.aab | grep -m1 "CN="`.
+- The iOS archive appears in Xcode's Organizer (Window > Organizer) with the version and build you set.
+
+The `ios/` and `android/` folders are made by `prebuild` and are not committed.
+
+## 4. Upload
+
+Always send a test build first.
+
+- **iOS:** in the Organizer, pick the archive, then Distribute App > App Store Connect > Upload. Test it in TestFlight, then add it to a version and submit for review.
+- **Android:** in the Play Console, create a release in Internal testing and upload the `.aab`. Test it, then promote it to Production.
+
+## Store text and screenshots
+
+- The store text and screenshots aren't kept in the repo. `pnpm --filter @scaleway-manager/mobile screenshots:frame` frames the captures in `apps/mobile/store/raw/` into `apps/mobile/store/framed/` (both git-ignored), with the captions from `apps/mobile/scripts/screenshots.config.ts`.
+- The privacy policy link needs `PRIVACY.md` to be on `main` before you submit.

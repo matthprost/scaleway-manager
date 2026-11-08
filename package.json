@@ -1,90 +1,15 @@
 {
   "name": "scaleway-manager",
-  "description": "A server manager",
-  "version": "2.4.1",
-  "author": "Matthias Prost",
-  "homepage": "https://matthias-prost.com/",
-  "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "test": "ng test",
-    "lint": "ng lint",
-    "e2e": "ng e2e",
-    "analyse": "ng run app:build --stats-json && npx webpack-bundle-analyzer www/stats.json",
-    "build:ios": "ionic build --prod && npx cap sync ios && npx cap copy ios && nr generate:assets && npx cap open ios",
-    "build:android": "ionic build --prod && npx cap copy && npx cap sync && nr generate:assets && npx cap open android",
-    "generate:assets": "npx capacitor-assets generate"
-  },
-  "engines": {
-    "node": ">=v18",
-    "yarn": ">=1.22.0"
-  },
   "private": true,
-  "dependencies": {
-    "@angular-builders/custom-webpack": "15.0.0",
-    "@angular/common": "15.2.10",
-    "@angular/core": "15.2.10",
-    "@angular/forms": "15.2.10",
-    "@angular/platform-browser": "15.2.10",
-    "@angular/platform-browser-dynamic": "15.2.10",
-    "@angular/router": "15.2.10",
-    "@capacitor/android": "^6.0.0",
-    "@capacitor/core": "^6.0.0",
-    "@capacitor/ios": "^6.0.0",
-    "@capacitor/status-bar": "^6.0.0",
-    "@fortawesome/angular-fontawesome": "0.12.1",
-    "@fortawesome/fontawesome-svg-core": "^6.6.0",
-    "@fortawesome/free-solid-svg-icons": "^6.6.0",
-    "@ionic/angular": "7.5.1",
-    "@ionic/storage-angular": "^4.0.0",
-    "chart.js": "^2.8.0",
-    "friendly-challenge": "^0.9.18",
-    "rxjs": "7.5.0",
-    "sass": "^1.69.2",
-    "tslib": "^2.0.0",
-    "xml2js": "^0.4.23",
-    "zone.js": "~0.11.4"
+  "license": "LGPL-3.0-only",
+  "packageManager": "pnpm@10.23.0",
+  "scripts": {
+    "lint": "eslint .",
+    "typecheck": "pnpm -r typecheck",
+    "test": "pnpm -r test"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "0.1502.11",
-    "@angular-devkit/build-angular": "^15.2.11",
-    "@angular-devkit/core": "15.2.11",
-    "@angular-devkit/schematics": "15.2.11",
-    "@angular/cli": "15.2.11",
-    "@angular/compiler": "15.2.10",
-    "@angular/compiler-cli": "15.2.10",
-    "@angular/language-service": "15.2.10",
-    "@capacitor/assets": "^3.0.5",
-    "@capacitor/cli": "^6.0.0",
-    "@fortawesome/fontawesome-free": "5.14.0",
-    "@ionic/angular-toolkit": "2.3.3",
-    "@ionic/eslint-config": "^0.3.0",
-    "@ionic/lab": "3.1.3",
-    "@types/aws4": "^1.11.6",
-    "@types/jasmine": "~3.6.0",
-    "@types/jasminewd2": "2.0.8",
-    "@types/node": "^12.11.1",
-    "@types/xml2js": "^0.4.14",
-    "codelyzer": "^6.0.0",
-    "eslint": "^7.22.0",
-    "jasmine-core": "~3.6.0",
-    "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~6.4.4",
-    "karma-chrome-launcher": "~3.1.0",
-    "karma-coverage-istanbul-reporter": "~3.0.2",
-    "karma-jasmine": "~4.0.0",
-    "karma-jasmine-html-reporter": "^1.5.0",
-    "lint-staged": "^11.1.2",
-    "prettier": "^2.3.2",
-    "protractor": "~7.0.0",
-    "ts-node": "8.10.2",
-    "typescript": "4.9.5"
-  },
-  "lint-staged": {
-    "*.ts": [
-      "prettier --write",
-      "eslint --fix --ext ts,tsx,js"
-    ]
+    "eslint": "^9.39.5",
+    "eslint-config-expo": "~58.0.4"
   }
 }
