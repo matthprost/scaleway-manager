@@ -1,0 +1,8 @@
+{
+  "extends": "../../tsconfig.base.json",
+  "compilerOptions": {
+    // The test reads the Swift and Kotlin sources with Node's fs.
+    "types": ["jest", "node"]
+  },
+  "include": ["src"]
+}
