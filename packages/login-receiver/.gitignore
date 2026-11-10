@@ -1,0 +1,3 @@
+# Native build output (Gradle builds this module in place)
+android/build/
+android/.gradle/

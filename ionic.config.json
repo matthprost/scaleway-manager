@@ -1,8 +1,0 @@
-{
-  "name": "Scaleway-Manager",
-  "integrations": {
-    "capacitor": {}
-  },
-  "type": "angular",
-  "id": "82450576"
-}
